@@ -16,8 +16,13 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
     public float PanOffsetNormalized { get { return PanOffset / Duration; } }
     public float Zoom { get; protected set; }
 
+    public bool IsPlaying { get; protected set; }
+
+    public AudioSource source;
     public RectTransform currentTimeIndicator;
     public SimpleAudioVisualizer[] signalVisualizers;
+
+    public Button playButton;
 
     private RectTransform rect;
 
@@ -25,12 +30,37 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
     {
         this.Duration = 1f;
         this.rect = GetComponent<RectTransform>();
+        this.playButton.onClick.AddListener(OnPlayButtonClicked);
 
         Initialize();
     }
 
+    protected void OnPlayButtonClicked()
+    {
+        if (!source || !source.clip)
+            return;
+
+        if (!IsPlaying)
+            PlayTrack();
+        else
+            StopTrack();
+    }
+
+    protected void PlayTrack()
+    {
+        this.IsPlaying = true;
+        JumpToNormalizedTime(CurrentIndicatorNormalized);
+    }
+
+    protected void StopTrack()
+    {
+        this.IsPlaying = false;
+        this.source.Stop();
+    }
+
     public void Initialize()
     {
+        this.IsPlaying = false;
         this.Zoom = 1f;
         this.PanOffset = 0f;
 
@@ -42,6 +72,11 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
 
     public void Update()
     {
+        if (IsPlaying)
+        {
+            SetCurrentTimeIndicatorNormalized(source.time / source.clip.length);
+        }
+
         for (int i = 0; i < signalVisualizers.Length; i++)
         {
             signalVisualizers[i].Offset = PanOffset;
@@ -70,9 +105,9 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
         return Vector2.Scale(position, new Vector2(1f / rect.rect.width, 1f / rect.rect.height));
     }
 
-    protected void SetCurrentOffsetNormalized(float offset)
+    protected void SetCurrentTimeIndicatorNormalized(float offset)
     {
-        this.CurrentIndicator = Mathf.Clamp(offset * Duration, 0f, Duration);
+        this.CurrentIndicator = Mathf.Clamp(offset * Duration, 0f, Duration);        
     }
 
     protected void SetPanOffsetNormalized(float offset)
@@ -80,6 +115,15 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
         this.PanOffset = Mathf.Clamp(offset * Duration, 0f, Duration);
     }
 
+    public void JumpToNormalizedTime(float t)
+    {
+        this.source.time = Mathf.Clamp01(CurrentIndicatorNormalized) * source.clip.length * .99999f;
+
+        // If the track finishes but we changed the time, we need to replay it
+        if (IsPlaying && !source.isPlaying)
+            source.Play();
+    }
+    
     public void OnDrag(PointerEventData eventData)
     {
         if(IsPanning())
@@ -93,13 +137,17 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
         }
         else
         {
-            SetCurrentOffsetNormalized((ScreenToNormalizedPosition(eventData.position).x) / Zoom + PanOffset);
+            SetCurrentTimeIndicatorNormalized((ScreenToNormalizedPosition(eventData.position).x) / Zoom + PanOffset);
+            JumpToNormalizedTime(this.CurrentIndicatorNormalized);
         }
     }
     
     public void OnPointerDown(PointerEventData eventData)
     {
         if (!IsPanning() && !IsZooming())
-            SetCurrentOffsetNormalized((ScreenToNormalizedPosition(eventData.position).x) / Zoom + PanOffset);
+        {
+            SetCurrentTimeIndicatorNormalized((ScreenToNormalizedPosition(eventData.position).x) / Zoom + PanOffset);
+            JumpToNormalizedTime(this.CurrentIndicatorNormalized);
+        }
     }
 }
