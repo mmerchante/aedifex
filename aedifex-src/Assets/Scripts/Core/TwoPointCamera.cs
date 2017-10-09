@@ -33,8 +33,8 @@ public class TwoPointCamera : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-		
-	}
+        zoomFactor = 1f;
+    }
 
 	protected void UpdateTransform() {
 		this.transform.position = targetPosition;

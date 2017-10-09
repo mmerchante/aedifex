@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 [RequireComponent (typeof(RectTransform))]
 public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
 {
+    private const float MIN_ZOOM = .1f;
+
     // In seconds
     public float CurrentIndicator { get; protected set; }
     public float Duration { get; protected set; }
@@ -17,6 +19,8 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
     public float Zoom { get; protected set; }
 
     public bool IsPlaying { get; protected set; }
+
+    public TimeSlider timeSlider;
 
     public AudioSource source;
     public RectTransform currentTimeIndicator;
@@ -64,6 +68,8 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
         this.Zoom = 1f;
         this.PanOffset = 0f;
 
+        timeSlider.Initialize(source.clip.length);
+
         // Add a blank image
         Image image = this.gameObject.AddComponent<Image>();
         image.color = new Color(1f, 1f, 1f, 0f);
@@ -72,10 +78,10 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
 
     public void Update()
     {
+        UpdateZoom();
+
         if (IsPlaying)
-        {
             SetCurrentTimeIndicatorNormalized(source.time / source.clip.length);
-        }
 
         for (int i = 0; i < signalVisualizers.Length; i++)
         {
@@ -84,18 +90,26 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
             signalVisualizers[i].uiRect = new Rect(rect.anchoredPosition.x, (i+1) * 150f, rect.rect.width, 120f);
         }
 
+        timeSlider.Zoom = Zoom;
+        timeSlider.Offset = PanOffsetNormalized;
+
         float indicatorOffset = (CurrentIndicatorNormalized - PanOffset) * Zoom;
         currentTimeIndicator.anchoredPosition = new Vector2(indicatorOffset * rect.rect.width, 0f);
     }
 
+    protected void UpdateZoom()
+    {
+        this.Zoom = Mathf.Max(MIN_ZOOM, Zoom + Input.GetAxis("Mouse ScrollWheel"));
+    }
+
     public bool IsPanning()
     {
-        return Input.GetKey(KeyCode.Space) && Input.GetMouseButton(0);
+        return (Input.GetKey(KeyCode.Space) && Input.GetMouseButton(0)) || Input.GetMouseButton(2);
     }
 
     public bool IsZooming()
     {
-        return Input.GetKey(KeyCode.LeftAlt) && Input.GetMouseButton(0);
+        return (Input.GetKey(KeyCode.LeftAlt) && Input.GetMouseButton(0)) || Mathf.Abs(Input.GetAxis("Mouse ScrollWheel")) > 0f;
     }
 
     protected Vector2 ScreenToNormalizedPosition(Vector2 position, bool delta = false)
@@ -133,7 +147,7 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
         }
         else if(IsZooming())
         {
-            this.Zoom = Mathf.Max(0.000001f, Zoom +  ScreenToNormalizedPosition(eventData.delta, true).x);
+            this.Zoom = Mathf.Max(MIN_ZOOM, Zoom +  ScreenToNormalizedPosition(eventData.delta, true).x);
         }
         else
         {

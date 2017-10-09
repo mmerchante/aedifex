@@ -61,7 +61,7 @@ public class BeatDetector : MonoBehaviour
         int startOffset = (localEnergyPersistenceSamples / instantEnergySamples) / 2;
         int endOffset = instantEnergySampleCount - startOffset;
 
-        Debug.Log(startOffset + ", " + endOffset + ", " + instantEnergySampleCount);
+        //Debug.Log(startOffset + ", " + endOffset + ", " + instantEnergySampleCount);
 
         for (int i = startOffset; i < endOffset - 1; ++i)
         {
