@@ -65,8 +65,21 @@ public class TimeSlider : MonoBehaviour
 
         while (currentIndicators.Count < accents)
             currentIndicators.Add(indicatorPool.Retrieve());
-        
-        for (int i = 0; i < currentIndicators.Count; i++)
+
+        if (currentIndicators.Count >= accents)
+        {
+            List<TimeSliderIndicator> toReturn = new List<TimeSliderIndicator>();
+            int toRemove = currentIndicators.Count - accents;
+
+            for (int i = 0; i < toRemove; ++i)
+            {
+                toReturn.Add(currentIndicators[currentIndicators.Count - 1]);
+                indicatorPool.Return(currentIndicators[currentIndicators.Count - 1]);
+                currentIndicators.RemoveAt(currentIndicators.Count - 1);
+            }
+        }
+
+        for (int i = 0; i < currentIndicators.Count; ++i)
         {
             TimeSliderIndicator indicator = currentIndicators[i];
             float t = Mathf.Clamp01(i / (float)accents);

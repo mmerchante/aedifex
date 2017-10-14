@@ -20,11 +20,12 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
 
     public bool IsPlaying { get; protected set; }
 
+    public BeatDetector audioEngine;
     public TimeSlider timeSlider;
+    public TrackEditor trackEditor;
 
     public AudioSource source;
     public RectTransform currentTimeIndicator;
-    public SimpleAudioVisualizer[] signalVisualizers;
 
     public Button playButton;
 
@@ -68,7 +69,12 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
         this.Zoom = 1f;
         this.PanOffset = 0f;
 
+        audioEngine.Initialize();
         timeSlider.Initialize(source.clip.length);
+        trackEditor.Initialize(source.clip.length);
+        
+        trackEditor.InstantiateWaveformTrack(audioEngine.Samples, 1024 * 4);
+        trackEditor.InstantiateWaveformTrack(audioEngine.BeatSamples, 1);
 
         // Add a blank image
         Image image = this.gameObject.AddComponent<Image>();
@@ -82,13 +88,8 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
 
         if (IsPlaying)
             SetCurrentTimeIndicatorNormalized(source.time / source.clip.length);
-
-        for (int i = 0; i < signalVisualizers.Length; i++)
-        {
-            signalVisualizers[i].Offset = PanOffset;
-            signalVisualizers[i].Zoom = Zoom;
-            signalVisualizers[i].uiRect = new Rect(rect.anchoredPosition.x, (i+1) * 150f, rect.rect.width, 120f);
-        }
+        
+        trackEditor.UpdateTracks(Zoom, PanOffset);
 
         timeSlider.Zoom = Zoom;
         timeSlider.Offset = PanOffsetNormalized;

@@ -9,23 +9,17 @@ public class BeatDetector : MonoBehaviour
     public int localEnergyPersistenceSamples = 44032;
     public AudioClip clip;
 
-    public SimpleAudioVisualizer waveform;
-    public SimpleAudioVisualizer beats;
-
     // Expose signals for UI
     public float[] Samples { get; protected set; }
     public float[] BeatSamples { get; protected set; }
 
-    public void Start()
+    public void Initialize()
     {
         if (!clip)
             Debug.LogError("No clip assigned!", this);
 
         LoadData();
         Analyze();
-        
-        waveform.Initialize(Samples, 1024);
-        beats.Initialize(BeatSamples, 1);
     }
 
     protected void LoadData()

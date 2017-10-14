@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SimpleAudioVisualizer : MonoBehaviour
 {
-    public Color lineColor;
+    public Color lineColor = Color.yellow;
     public Rect uiRect;
 
     [Range (0f, 1f)]
