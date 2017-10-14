@@ -11,8 +11,8 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
 
     // In seconds
     public float CurrentIndicator { get; protected set; }
-    public float Duration { get; protected set; }
     public float CurrentIndicatorNormalized { get { return CurrentIndicator / Duration; } }
+    public float Duration { get; protected set; }
     
     public float PanOffset { get; protected set; }
     public float PanOffsetNormalized { get { return PanOffset / Duration; } }
@@ -116,6 +116,7 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
     {
         if(!delta)
             position -= rect.anchoredPosition;
+
         return Vector2.Scale(position, new Vector2(1f / rect.rect.width, 1f / rect.rect.height));
     }
 

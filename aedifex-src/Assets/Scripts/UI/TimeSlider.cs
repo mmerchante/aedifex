@@ -11,16 +11,25 @@ public class TimeSlider : MonoBehaviour
     public float Zoom { get; set; }
     public float BaseDuration { get; protected set; }
 
+    public RectTransform indicatorContainer;
+    public TimeSliderIndicator timeIndicatorPrefab;
+
     private Material lineMaterial;
     private RectTransform rect;
 
     private Vector3[] corners = new Vector3[4];
+    private ExtendablePool<TimeSliderIndicator> indicatorPool;
+
+    private List<TimeSliderIndicator> currentIndicators = new List<TimeSliderIndicator>();
 
     protected void Awake()
     {
         this.lineMaterial = new Material(Shader.Find("Unlit/Color"));
         this.lineMaterial.color = Color.gray;
         this.rect = GetComponent<RectTransform>();
+
+        indicatorPool = new ExtendablePool<TimeSliderIndicator>(timeIndicatorPrefab, indicatorContainer);
+        indicatorPool.SetInitialSize(30);
     }
 
     public void Initialize(float baseDuration)
@@ -38,7 +47,35 @@ public class TimeSlider : MonoBehaviour
         DrawSlider(new Rect(corners[0].x, corners[0].y + 2f, rect.rect.width, rect.rect.height - 2f));
     }
 
-    public void DrawSlider(Rect container)
+    public void Update()
+    {
+        rect.GetWorldCorners(corners);
+        DrawTimeIndicators(new Rect(corners[0].x, corners[0].y + 2f, rect.rect.width, rect.rect.height - 2f));
+    }
+
+    protected void DrawTimeIndicators(Rect container)
+    {
+        float z = Mathf.Max(1f, Zoom);
+        int zoomScaling = (int)((int)(z / secondsPerTick) * secondsPerTick) + 1;
+
+        int ticks = (int)((BaseDuration) / secondsPerTick) * zoomScaling;
+        float offset = Offset * container.width * Zoom;
+
+        int accents = ticks / ticksPerAccent;
+
+        while (currentIndicators.Count < accents)
+            currentIndicators.Add(indicatorPool.Retrieve());
+        
+        for (int i = 0; i < currentIndicators.Count; i++)
+        {
+            TimeSliderIndicator indicator = currentIndicators[i];
+            float t = Mathf.Clamp01(i / (float)accents);
+            float x = t * container.width * Zoom - offset;
+            indicator.UpdateData(BaseDuration * t, x);
+        }
+    }
+
+    protected void DrawSlider(Rect container)
     {
         GL.PushMatrix();
         lineMaterial.SetPass(0);
