@@ -13,18 +13,23 @@ public class WaveformTrack : AbstractTrack
         this.visualizer = this.gameObject.AddComponent<SimpleAudioVisualizer>();
     }
 
-    public void Initialize(float[] waveform, int downsample)
+    public void Initialize(float[] waveform, int downsample, Color trackColor)
     {
         this.waveform = waveform;
-        this.visualizer.Initialize(waveform, downsample);
+        this.visualizer.Initialize(this.waveform, downsample);
+        this.trackColor = trackColor;
     }
 
     protected override void OnUpdateTrack()
     {
         this.visualizer.Zoom = zoom;
         this.visualizer.Offset = offset;
+    }
 
+    public void Update()
+    {
         rect.GetWorldCorners(corners);
-        this.visualizer.uiRect = new Rect(corners[0].x, corners[0].y + rect.rect.height * .5f, rect.rect.width, rect.rect.height * .85f);
+        this.visualizer.uiRect = new Rect(corners[0].x + 2.5f, corners[0].y + rect.rect.height * .5f, rect.rect.width - 5f, rect.rect.height * .85f);
+        this.visualizer.lineColor = trackColor;
     }
 }

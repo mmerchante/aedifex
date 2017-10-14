@@ -4,8 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// The timeline coordinates all user interaction with the UI,
+/// and handles all UI events.
+/// </summary>
 [RequireComponent (typeof(RectTransform))]
-public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
+public class UITimeline : MonoBehaviour
 {
     private const float MIN_ZOOM = .1f;
 
@@ -23,6 +27,8 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
     public BeatDetector audioEngine;
     public TimeSlider timeSlider;
     public TrackEditor trackEditor;
+
+    public WaveformTrack minimapTrack;
 
     public AudioSource source;
     public RectTransform currentTimeIndicator;
@@ -71,10 +77,17 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
 
         audioEngine.Initialize();
         timeSlider.Initialize(source.clip.length);
-        trackEditor.Initialize(source.clip.length);
-        
-        trackEditor.InstantiateWaveformTrack(audioEngine.Samples, 1024 * 4);
-        trackEditor.InstantiateWaveformTrack(audioEngine.BeatSamples, 1);
+        trackEditor.Initialize(this, source.clip.length);
+
+        minimapTrack.Initialize(audioEngine.Samples, 1024 * 8, Color.white);
+        trackEditor.InstantiateWaveformTrack(audioEngine.Samples, 1024 * 4, Color.yellow);
+        trackEditor.InstantiateWaveformTrack(audioEngine.BeatSamples, 1, Color.red);
+
+        // Testing
+        trackEditor.InstantiateEmotionTrack();
+        trackEditor.InstantiateEmotionTrack();
+        trackEditor.InstantiateEmotionTrack();
+        trackEditor.InstantiateEmotionTrack();
 
         // Add a blank image
         Image image = this.gameObject.AddComponent<Image>();
@@ -113,7 +126,7 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
         return (Input.GetKey(KeyCode.LeftAlt) && Input.GetMouseButton(0)) || Mathf.Abs(Input.GetAxis("Mouse ScrollWheel")) > 0f;
     }
 
-    protected Vector2 ScreenToNormalizedPosition(Vector2 position, bool delta = false)
+    public Vector2 ScreenToNormalizedPosition(Vector2 position, bool delta = false)
     {
         if(!delta)
             position -= rect.anchoredPosition;
@@ -140,7 +153,7 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
             source.Play();
     }
     
-    public void OnDrag(PointerEventData eventData)
+    public void OnTimelineDrag(PointerEventData eventData)
     {
         if(IsPanning())
         {
@@ -158,7 +171,7 @@ public class UITimeline : MonoBehaviour, IDragHandler, IPointerDownHandler
         }
     }
     
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnTimelinePointerDown(PointerEventData eventData)
     {
         if (!IsPanning() && !IsZooming())
         {

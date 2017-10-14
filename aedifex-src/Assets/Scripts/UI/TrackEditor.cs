@@ -5,19 +5,22 @@ using UnityEngine;
 public class TrackEditor : MonoBehaviour
 {
     public WaveformTrack waveformTrackPrefab;
-    public AbstractTrack emotionTrackPrefab;
+    public EmotionTrack emotionTrackPrefab;
 
     private List<AbstractTrack> tracks = new List<AbstractTrack>();
     private RectTransform rect;
     private float duration;
+
+    private UITimeline timeline;
 
     public void Awake()
     {
         this.rect = GetComponent<RectTransform>();
     }
 
-    public void Initialize(float baseDuration)
+    public void Initialize(UITimeline timeline, float baseDuration)
     {
+        this.timeline = timeline;
         this.duration = baseDuration;
     }
 
@@ -27,10 +30,17 @@ public class TrackEditor : MonoBehaviour
             track.UpdateTrack(zoom, offset);
     }
 
-    public WaveformTrack InstantiateWaveformTrack(float[] samples, int downsample)
+    public EmotionTrack InstantiateEmotionTrack()
+    {
+        EmotionTrack track = InstantiateTrack<EmotionTrack>(emotionTrackPrefab);
+        track.Initialize(timeline);
+        return track;
+    }
+
+    public WaveformTrack InstantiateWaveformTrack(float[] samples, int downsample, Color trackColor)
     {
         WaveformTrack track = InstantiateTrack<WaveformTrack>(waveformTrackPrefab);
-        track.Initialize(samples, downsample);
+        track.Initialize(samples, downsample, trackColor);
         return track;
     }
 

@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class AbstractTrack : MonoBehaviour
 {
-    public string Name { get; set; }
+    public string TrackName { get; set; }
 
+    protected Color trackColor;
     protected RectTransform rect;
     protected float trackDuration;
     protected float zoom;
@@ -15,9 +16,10 @@ public class AbstractTrack : MonoBehaviour
     public void Awake()
     {
         this.rect = GetComponent<RectTransform>();
-        this.name = "AbstractTrack";
+        this.TrackName = "AbstractTrack";
         this.zoom = 1f;
         this.offset = 0f;
+        this.trackColor = Color.white;
         OnAwake();
     }
 
