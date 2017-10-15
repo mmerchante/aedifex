@@ -16,7 +16,7 @@ public class AbstractTrack : MonoBehaviour
     public void Awake()
     {
         this.rect = GetComponent<RectTransform>();
-        this.TrackName = "AbstractTrack";
+        this.TrackName = "New track";
         this.zoom = 1f;
         this.offset = 0f;
         this.TrackColor = Color.white;
@@ -25,6 +25,11 @@ public class AbstractTrack : MonoBehaviour
 
     protected virtual void OnAwake()
     {
+    }
+
+    public float GetTrackHeight()
+    {
+        return rect.rect.height;
     }
     
     public void UpdateTrack(float zoom, float offset)

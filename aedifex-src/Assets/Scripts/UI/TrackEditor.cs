@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TrackEditor : MonoBehaviour
 {
+    public Button addTrackButton;
+
+    public TrackHeader headerPrefab;
     public WaveformTrack waveformTrackPrefab;
     public EmotionTrack emotionTrackPrefab;
+
+    public RectTransform headerContainer;
 
     private List<AbstractTrack> tracks = new List<AbstractTrack>();
     private RectTransform rect;
@@ -16,6 +22,12 @@ public class TrackEditor : MonoBehaviour
     public void Awake()
     {
         this.rect = GetComponent<RectTransform>();
+        this.addTrackButton.onClick.AddListener(OnAddTrackButtonClicked);
+    }
+
+    protected void OnAddTrackButtonClicked()
+    {
+        InstantiateEmotionTrack();
     }
 
     public void Initialize(UITimeline timeline, float baseDuration)
@@ -32,24 +44,36 @@ public class TrackEditor : MonoBehaviour
 
     public EmotionTrack InstantiateEmotionTrack()
     {
-        EmotionTrack track = InstantiateTrack<EmotionTrack>(emotionTrackPrefab);
+        EmotionTrack track = InstantiateTrack<EmotionTrack>(emotionTrackPrefab, "New track");
         track.Initialize(timeline);
         return track;
     }
 
-    public WaveformTrack InstantiateWaveformTrack(float[] samples, int downsample, Color trackColor)
+    public WaveformTrack InstantiateWaveformTrack(float[] samples, int downsample, Color trackColor, string name)
     {
-        WaveformTrack track = InstantiateTrack<WaveformTrack>(waveformTrackPrefab);
+        WaveformTrack track = InstantiateTrack<WaveformTrack>(waveformTrackPrefab, name);
         track.Initialize(samples, downsample, trackColor);
         return track;
     }
 
     // Note: it doesn't initialize it!
-    public T InstantiateTrack<T>(T trackPrefab) where T: AbstractTrack
+    public T InstantiateTrack<T>(T trackPrefab, string name) where T: AbstractTrack
     {
         T track = GameObject.Instantiate<T>(trackPrefab);
         tracks.Add(track);
         track.transform.SetParent(this.transform);
+        track.TrackName = name;
+
+        TrackHeader header = InstantiateHeader();
+        header.Initialize(track);
+
         return track;
+    }
+
+    private TrackHeader InstantiateHeader()
+    {
+        TrackHeader h = GameObject.Instantiate<TrackHeader>(headerPrefab);
+        h.transform.SetParent(headerContainer);
+        return h;
     }
 }

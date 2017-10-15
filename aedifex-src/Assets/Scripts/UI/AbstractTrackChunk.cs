@@ -42,11 +42,11 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         OnInitialize();
         UpdatePosition();
 
-        SetChunkName(track.TrackName);
+        UpdateChunkName(track.TrackName);
         chunkBackground.color = track.TrackColor;
     }
 
-    public void SetChunkName(string name)
+    public void UpdateChunkName(string name)
     {
         this.Name = name;
         text.text = name;
@@ -57,7 +57,6 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         float height = textGen.GetPreferredHeight(name, generationSettings);
 
         textContainer.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
-        //textBackground.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
     }
 
     protected virtual void OnInitialize()
@@ -80,6 +79,7 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
     public void Update()
     {
         UpdatePosition();
+        UpdateChunkName(track.TrackName);
     }
 
     public Vector2 ScreenToNormalizedPosition(Vector2 position, bool delta = false)
