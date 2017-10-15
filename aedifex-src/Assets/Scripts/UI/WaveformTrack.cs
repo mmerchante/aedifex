@@ -17,7 +17,7 @@ public class WaveformTrack : AbstractTrack
     {
         this.waveform = waveform;
         this.visualizer.Initialize(this.waveform, downsample);
-        this.trackColor = trackColor;
+        this.TrackColor = trackColor;
     }
 
     protected override void OnUpdateTrack()
@@ -30,6 +30,6 @@ public class WaveformTrack : AbstractTrack
     {
         rect.GetWorldCorners(corners);
         this.visualizer.uiRect = new Rect(corners[0].x + 2.5f, corners[0].y + rect.rect.height * .5f, rect.rect.width - 5f, rect.rect.height * .85f);
-        this.visualizer.lineColor = trackColor;
+        this.visualizer.lineColor = TrackColor;
     }
 }

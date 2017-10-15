@@ -80,7 +80,7 @@ public class UITimeline : MonoBehaviour
         trackEditor.Initialize(this, source.clip.length);
 
         minimapTrack.Initialize(audioEngine.Samples, 1024 * 8, Color.white);
-        trackEditor.InstantiateWaveformTrack(audioEngine.Samples, 1024 * 4, Color.yellow);
+        trackEditor.InstantiateWaveformTrack(audioEngine.Samples, 1024, Color.yellow);
         trackEditor.InstantiateWaveformTrack(audioEngine.BeatSamples, 1, Color.red);
 
         // Testing
@@ -109,6 +109,11 @@ public class UITimeline : MonoBehaviour
 
         float indicatorOffset = (CurrentIndicatorNormalized - PanOffset) * Zoom;
         currentTimeIndicator.anchoredPosition = new Vector2(indicatorOffset * rect.rect.width, 0f);
+    }
+
+    public Rect GetTimelineRect()
+    {
+        return new Rect(rect.anchoredPosition, rect.rect.size);
     }
 
     protected void UpdateZoom()
