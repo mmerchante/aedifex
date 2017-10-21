@@ -176,6 +176,7 @@ public class UITimeline : MonoBehaviour
         {
             SetCurrentTimeIndicatorNormalized((ScreenToNormalizedPosition(eventData.position).x) / Zoom + PanOffset);
             JumpToNormalizedTime(this.CurrentIndicatorNormalized);
+            trackEditor.emotionChunkEditor.Hide();
         }
     }
 }

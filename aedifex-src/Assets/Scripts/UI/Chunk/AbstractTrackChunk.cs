@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
+public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
     public string Name { get; set; } // By default, track name
     public float Position { get; set; }
@@ -17,7 +17,7 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
 
     private float zoom;
     private float offset;
-    private RectTransform rect;
+    public RectTransform RectTransform { get; protected set; }
     private Rect container;
     private UITimeline timeline;
     private AbstractDataTrack<T> track; // TODO: refactor to something less specific
@@ -28,7 +28,7 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
 
     public void Awake()
     {
-        this.rect = GetComponent<RectTransform>();
+        this.RectTransform = GetComponent<RectTransform>();
     }
 
     public void Initialize(UITimeline timeline, AbstractDataTrack<T> track, T data, Rect container, float position, float width)
@@ -72,8 +72,8 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
 
     protected void UpdatePosition()
     {
-        this.rect.anchoredPosition = new Vector2((Position - offset) * zoom * container.width, 0f);
-        this.rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Width * zoom * container.width);
+        this.RectTransform.anchoredPosition = new Vector2((Position - offset) * zoom * container.width, 0f);
+        this.RectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Width * zoom * container.width);
     }
 
     public void Update()
@@ -128,5 +128,13 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
     public void OnPointerUp(PointerEventData eventData)
     {
         resizing = false;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        ITrackChunkEditor<T> editor = timeline.trackEditor.GetChunkEditor<T>();
+
+        if(editor != null)
+            editor.Initialize(this);
     }
 }

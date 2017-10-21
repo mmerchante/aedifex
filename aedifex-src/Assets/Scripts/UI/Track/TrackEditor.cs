@@ -7,6 +7,8 @@ public class TrackEditor : MonoBehaviour
 {
     public Button addTrackButton;
 
+    public EmotionChunkEditor emotionChunkEditor;
+
     public TrackHeader headerPrefab;
     public WaveformTrack waveformTrackPrefab;
     public EmotionTrack emotionTrackPrefab;
@@ -75,5 +77,13 @@ public class TrackEditor : MonoBehaviour
         TrackHeader h = GameObject.Instantiate<TrackHeader>(headerPrefab);
         h.transform.SetParent(headerContainer);
         return h;
+    }
+
+    public ITrackChunkEditor<T> GetChunkEditor<T>()
+    {
+        if (typeof(T).IsAssignableFrom(typeof(EmotionData)))
+            return (ITrackChunkEditor<T>) emotionChunkEditor;
+
+        return null;
     }
 }
