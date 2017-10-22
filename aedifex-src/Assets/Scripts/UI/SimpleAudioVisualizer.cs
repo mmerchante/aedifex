@@ -68,10 +68,11 @@ public class SimpleAudioVisualizer : MonoBehaviour
 
     public static void DrawGraph(Material lineMaterial, Rect container, float[] keyframes, float offset, float zoom)
     {
+        
         GL.PushMatrix();
         lineMaterial.SetPass(0);
         GL.LoadOrtho();
-        GL.Begin(GL.LINES);
+        GL.Begin(GL.LINE_STRIP);
 
         // Transform container
         container.x /= Screen.width;
@@ -84,17 +85,12 @@ public class SimpleAudioVisualizer : MonoBehaviour
         
         for (int i = keyframeOffset + 1; i < keyframes.Length; i++)
         {
-            float prevX = ((i - 1) / (float)keyframes.Length) * container.width * zoom + container.x;
-            float x = (i / (float)keyframes.Length) * container.width * zoom + container.x;
-
-            prevX -= lineOffset;
-            x -= lineOffset;
+            float x = (i / (float)keyframes.Length) * container.width * zoom + container.x - lineOffset;
 
             // Stop if we draw outside bounds (TODO: find the index...)
             if (x > container.width + container.x)
                 break;
 
-            GL.Vertex(new Vector3(prevX, keyframes[i - 1] * .5f * container.height + container.y, 0f));
             GL.Vertex(new Vector3(x, keyframes[i] * .5f * container.height + container.y, 0f));
         }
 

@@ -12,6 +12,7 @@ public abstract class AbstractDataTrack<T> : AbstractTrack, IPointerClickHandler
     // Abstract methods
     protected abstract AbstractTrackChunk<T> InstanceChunk();
     protected abstract T GetDefaultData();
+    protected abstract T CopyData(T data);
 
     public void Initialize(UITimeline timeline)
     {
@@ -42,8 +43,12 @@ public abstract class AbstractDataTrack<T> : AbstractTrack, IPointerClickHandler
 
         if (CanPlaceTrackChunk(position.x, width))
         {
+            T lastData = GetDefaultData();
+            if (chunks.Count > 0)
+                lastData = CopyData(chunks[chunks.Count - 1].Data);
+
             AbstractTrackChunk<T> chunk = InstanceChunk();
-            chunk.Initialize(timeline, this, GetDefaultData(), timeline.GetTimelineRect(), position.x, width);
+            chunk.Initialize(timeline, this, lastData, timeline.GetTimelineRect(), position.x, width);
             chunk.UpdateTrackChunk(zoom, offset);
             this.chunks.Add(chunk);
         }

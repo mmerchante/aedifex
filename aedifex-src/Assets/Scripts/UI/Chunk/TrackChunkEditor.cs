@@ -27,6 +27,11 @@ public class TrackChunkEditor<T> : MonoBehaviour, ITrackChunkEditor<T>
     {
         this.Chunk = chunk;
         this.Show();
+        OnInitialize();
+    }
+
+    protected virtual void OnInitialize()
+    {
     }
 
     public void UpdatePosition()

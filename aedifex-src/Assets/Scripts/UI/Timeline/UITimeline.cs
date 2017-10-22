@@ -89,8 +89,15 @@ public class UITimeline : MonoBehaviour
         image.raycastTarget = true;
     }
 
+    private void UpdateInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            OnPlayButtonClicked();
+    }
+
     public void Update()
     {
+        UpdateInput();
         UpdateZoom();
 
         if (IsPlaying)

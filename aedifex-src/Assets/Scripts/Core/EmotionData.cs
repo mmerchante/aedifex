@@ -17,17 +17,17 @@ public class EmotionVector
     {
     }
     
-    // A simple gaussian centered over _angle_ for now
+    // Triple evaluation is for the wrap-around of the function
     public float Evaluate(float t)
     {
-        // Wrap around
-        if (angle > Mathf.PI && t < Mathf.PI)
-            t += Mathf.PI * 2f;
-        else if(angle < Mathf.PI && t > Mathf.PI)
-            t = (t - Mathf.PI * 2f);
+        return EvaluateG(t) + EvaluateG(t - 2f * Mathf.PI) + EvaluateG(t + 2f * Mathf.PI);
+    }
 
-        float sigma = Mathf.PI / 10f;
-        return intensity * Mathf.Exp(-Mathf.Pow(t - angle, 2f) / (2f * sigma * sigma)) / (sigma *  Mathf.Sqrt(2f * Mathf.PI));
+    // A simple gaussian centered over _angle_ for now
+    protected float EvaluateG(float t)
+    {
+        float sigma = Mathf.PI / 20f;
+        return intensity * Mathf.Exp(-Mathf.Pow(t - angle, 2f) / (2f * sigma * sigma)) / (sigma * Mathf.Sqrt(2f * Mathf.PI));
     }
 }
 
@@ -37,9 +37,23 @@ public class EmotionData
 {
     public List<EmotionVector> vectors = new List<EmotionVector>();
 
+    public EmotionData()
+    {
+    }
+
+    public EmotionData(EmotionData other)
+    {
+        this.vectors.AddRange(other.vectors);
+    }
+
     public void AddVector(EmotionVector v)
     {
         this.vectors.Add(v);
+    }
+
+    public void Clear()
+    {
+        this.vectors.Clear();
     }
 
     public void RemoveVector(EmotionVector v)
@@ -52,6 +66,7 @@ public class EmotionData
         float result = 0f;
         float normalization = 0f;
 
+        // The triple evaluation is for the wrap-around
         foreach (EmotionVector v in vectors)
         {
             normalization += v.intensity;

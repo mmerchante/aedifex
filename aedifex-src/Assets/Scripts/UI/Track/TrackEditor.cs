@@ -46,7 +46,7 @@ public class TrackEditor : MonoBehaviour
 
     public EmotionTrack InstantiateEmotionTrack()
     {
-        EmotionTrack track = InstantiateTrack<EmotionTrack>(emotionTrackPrefab, "New track");
+        EmotionTrack track = InstantiateTrack<EmotionTrack>(emotionTrackPrefab, "Emotion track");
         track.Initialize(timeline);
         return track;
     }
