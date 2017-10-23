@@ -30,4 +30,11 @@ public class EmotionTrack : AbstractDataTrack<EmotionData>
         this.chunkPool = new ExtendablePool<EmotionTrackChunk>(emotionChunkPrefab, this.transform);
         this.chunkPool.SetInitialSize(15);
     }
+
+    public override TrackData GetTrackData()
+    {
+        TrackData d = base.GetTrackData();
+        d.trackType = TrackType.Emotion;
+        return d;
+    }
 }

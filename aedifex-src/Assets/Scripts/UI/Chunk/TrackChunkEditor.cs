@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public interface ITrackChunkEditor<T>
 {
-    void Initialize(AbstractTrackChunk<T> chunk);
+    void Initialize(AbstractDataTrack<T> track, AbstractTrackChunk<T> chunk);
 }
 
 public class TrackChunkEditor<T> : MonoBehaviour, ITrackChunkEditor<T>
 {
     public Text titleText;
     public AbstractTrackChunk<T> Chunk { get; protected set; }
+    public AbstractDataTrack<T> Track { get; protected set; }
 
     protected RectTransform rect;
 
@@ -23,8 +24,9 @@ public class TrackChunkEditor<T> : MonoBehaviour, ITrackChunkEditor<T>
         Hide();
     }
 
-    public void Initialize(AbstractTrackChunk<T> chunk)
+    public void Initialize(AbstractDataTrack<T> track, AbstractTrackChunk<T> chunk)
     {
+        this.Track = track;
         this.Chunk = chunk;
         this.Show();
         OnInitialize();

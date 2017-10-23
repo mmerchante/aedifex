@@ -33,6 +33,8 @@ public class UITimeline : MonoBehaviour
     public AudioSource source;
     public RectTransform currentTimeIndicator;
 
+    public Button saveButton;
+    public Button loadButton;
     public Button playButton;
 
     private RectTransform rect;
@@ -42,8 +44,40 @@ public class UITimeline : MonoBehaviour
         this.Duration = 1f;
         this.rect = GetComponent<RectTransform>();
         this.playButton.onClick.AddListener(OnPlayButtonClicked);
+        this.saveButton.onClick.AddListener(Save);
+        this.loadButton.onClick.AddListener(Load);
 
         Initialize();
+    }
+
+    public void Load()
+    {
+        string[] files = SFB.StandaloneFileBrowser.OpenFilePanel("Open File", Application.dataPath, "json", false);
+
+        if(files.Length == 1)
+        {
+            string path = files[0];
+            string json = System.IO.File.ReadAllText(path);
+
+            DataContainer container = JsonUtility.FromJson<DataContainer>(json);
+
+            if (container != null)
+                trackEditor.LoadFromTrackData(container.tracks);
+        }
+    }
+
+    public void Save()
+    {
+        string path = SFB.StandaloneFileBrowser.SaveFilePanel("Open File", Application.dataPath, "song", "json");
+
+        DataContainer container = new DataContainer();
+        container.tracks = trackEditor.GetAllTrackData();
+
+        if(!string.IsNullOrEmpty(path))
+        {
+            string json = JsonUtility.ToJson(container, true);
+            System.IO.File.WriteAllText(path, json);
+        }
     }
 
     protected void OnPlayButtonClicked()

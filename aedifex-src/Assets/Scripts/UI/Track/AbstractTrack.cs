@@ -42,4 +42,16 @@ public class AbstractTrack : MonoBehaviour
     protected virtual void OnUpdateTrack()
     {
     }
+
+    public virtual TrackData GetTrackData()
+    {
+        TrackData d = new TrackData();
+        d.trackId = TrackName;
+        d.trackType = TrackType.None;
+        return d;
+    }
+
+    public virtual void LoadFromData(TrackData data)
+    {
+    }
 }

@@ -44,9 +44,9 @@ public class TrackEditor : MonoBehaviour
             track.UpdateTrack(zoom, offset);
     }
 
-    public EmotionTrack InstantiateEmotionTrack()
+    public EmotionTrack InstantiateEmotionTrack(string name = "Emotion Track")
     {
-        EmotionTrack track = InstantiateTrack<EmotionTrack>(emotionTrackPrefab, "Emotion track");
+        EmotionTrack track = InstantiateTrack<EmotionTrack>(emotionTrackPrefab, name);
         track.Initialize(timeline);
         return track;
     }
@@ -85,5 +85,28 @@ public class TrackEditor : MonoBehaviour
             return (ITrackChunkEditor<T>) emotionChunkEditor;
 
         return null;
+    }
+
+    // TODO: Clean everything before... no time for that! Just reset the app
+    public void LoadFromTrackData(List<TrackData> data)
+    {
+        foreach(TrackData t in data)
+        {
+            if(t.trackType == TrackType.Emotion)
+            {
+                EmotionTrack track = InstantiateEmotionTrack(t.trackId);
+                track.LoadFromData(t);
+            }
+        }
+    }
+
+    public List<TrackData> GetAllTrackData ()
+    {
+        List<TrackData> list = new List<TrackData>();
+
+        foreach (AbstractTrack t in tracks)
+            list.Add(t.GetTrackData());
+
+        return list;
     }
 }

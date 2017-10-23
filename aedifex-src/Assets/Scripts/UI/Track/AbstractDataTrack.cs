@@ -77,4 +77,27 @@ public abstract class AbstractDataTrack<T> : AbstractTrack, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Middle)
             timeline.OnTimelineDrag(eventData);
     }
+
+    public override TrackData GetTrackData()
+    {
+        TrackData d = base.GetTrackData();
+
+        foreach (AbstractTrackChunk<T> chunk in chunks)
+            d.chunks.Add(chunk.GetChunkData());
+
+        return d;
+    }
+
+    public override void LoadFromData(TrackData data)
+    {
+        base.LoadFromData(data);
+
+        foreach (TrackChunkData c in data.chunks)
+        {
+            AbstractTrackChunk<T> chunk = InstanceChunk();
+            chunk.Initialize(timeline, this, timeline.GetTimelineRect(), c);
+            chunk.UpdateTrackChunk(zoom, offset);
+            this.chunks.Add(chunk);
+        }
+    }
 }

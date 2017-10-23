@@ -11,4 +11,19 @@ public class EmotionTrackChunk : AbstractTrackChunk<EmotionData>, PoolableObject
     public void OnReturn()
     {
     }
+
+    public override TrackChunkData GetChunkData()
+    {
+        TrackChunkData d = base.GetChunkData();
+        d.startData = Data;
+        d.endData = Data;
+        d.type = ChunkType.Emotion;
+        return d;
+    }
+
+    public override void Initialize(UITimeline timeline, AbstractDataTrack<EmotionData> track, Rect container, TrackChunkData chunk)
+    {
+        base.Initialize(timeline, track, container, chunk);
+        this.Data = chunk.startData;
+    }
 }

@@ -26,9 +26,31 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
 
     private bool resizing = false;
 
+    public virtual TrackChunkData GetChunkData()
+    {
+        TrackChunkData d = new TrackChunkData();
+        d.type = ChunkType.None;
+        d.start = Position;
+        d.end = Position + Width;
+        return d;
+    }
+
     public void Awake()
     {
         this.RectTransform = GetComponent<RectTransform>();
+    }
+
+    public virtual void Initialize(UITimeline timeline, AbstractDataTrack<T> track, Rect container, TrackChunkData chunk)
+    {
+        this.track = track;
+        this.timeline = timeline;
+        this.container = container;
+        this.Position = chunk.start;
+        this.Width = chunk.end - chunk.start;
+        UpdatePosition();
+
+        UpdateChunkName(track.TrackName);
+        chunkBackground.color = track.TrackColor;
     }
 
     public void Initialize(UITimeline timeline, AbstractDataTrack<T> track, T data, Rect container, float position, float width)
@@ -39,7 +61,6 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         this.Position = position;
         this.Width = width;
         this.Data = data;
-        OnInitialize();
         UpdatePosition();
 
         UpdateChunkName(track.TrackName);
@@ -54,15 +75,9 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         TextGenerator textGen = new TextGenerator();
         TextGenerationSettings generationSettings = text.GetGenerationSettings(text.rectTransform.rect.size);
         float width = textGen.GetPreferredWidth(name, generationSettings);
-        float height = textGen.GetPreferredHeight(name, generationSettings);
-
         textContainer.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
     }
-
-    protected virtual void OnInitialize()
-    {
-    }
-
+    
     public void UpdateTrackChunk(float zoom, float offset)
     {
         this.zoom = zoom;
@@ -135,6 +150,6 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         ITrackChunkEditor<T> editor = timeline.trackEditor.GetChunkEditor<T>();
 
         if(editor != null)
-            editor.Initialize(this);
+            editor.Initialize(track, this);
     }
 }

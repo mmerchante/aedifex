@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class EmotionVector
 {
     public float angle;
     public float intensity;
+
+    public static Color GetColorForAngle(float angle)
+    {
+        return Color.HSVToRGB(Mathf.Repeat(angle * .5f / Mathf.PI, 1f), 1f, 1f);
+    }
 
     public EmotionVector(float angle, float intensity)
     {
@@ -16,7 +22,7 @@ public class EmotionVector
     public EmotionVector() : this(0f, 0f)
     {
     }
-    
+
     // Triple evaluation is for the wrap-around of the function
     public float Evaluate(float t)
     {
@@ -33,6 +39,7 @@ public class EmotionVector
 
 // For now, a dummy container -- I added methods in case we change
 // the inner structure later
+[System.Serializable]
 public class EmotionData
 {
     public List<EmotionVector> vectors = new List<EmotionVector>();

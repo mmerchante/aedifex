@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class EmotionChunkEditor : TrackChunkEditor<EmotionData>, IPointerClickHandler
 {
+    public Button clearButton;
+    public Button closeButton;
+
+    public Image trackColorImage;
     public EmotionVectorHandle emotionHandlePrefab;
     public RectTransform emotionShapeRect;
     public float innerRadius = .1f;
@@ -18,14 +23,21 @@ public class EmotionChunkEditor : TrackChunkEditor<EmotionData>, IPointerClickHa
     {
         base.Awake();
         this.lineMaterial = new Material(Shader.Find("Unlit/LineShader"));
+        this.closeButton.onClick.AddListener(Hide);
+        this.clearButton.onClick.AddListener(ClearAllHandles);
     }
 
-    protected override void OnInitialize()
+    protected void ClearAllHandles()
     {
         foreach (EmotionVectorHandle h in handles)
             GameObject.Destroy(h.gameObject);
 
         handles.Clear();
+    }
+
+    protected override void OnInitialize()
+    {
+        ClearAllHandles();
 
         foreach(EmotionVector v in Chunk.Data.vectors)
         {
@@ -38,6 +50,7 @@ public class EmotionChunkEditor : TrackChunkEditor<EmotionData>, IPointerClickHa
     {
         base.Update();
 
+        trackColorImage.color = Track.TrackColor;
         Chunk.Data.Clear();
 
         foreach (EmotionVectorHandle h in handles)
@@ -76,7 +89,7 @@ public class EmotionChunkEditor : TrackChunkEditor<EmotionData>, IPointerClickHa
             float angle = t * Mathf.PI * 2f;
             float r = Chunk.Data.Evaluate(angle) * width + innerRadius;
 
-            GL.Color(Color.HSVToRGB(t, 1f, 1f));
+            GL.Color(EmotionVector.GetColorForAngle(angle));
             
             Vector3 point = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * r;
             GL.Vertex(Vector3.Scale(point, scale) + offset);
