@@ -174,6 +174,11 @@ public class EmotionSpectrum
         }
     }
 
+    public static EmotionSpectrum Lerp(EmotionSpectrum a, EmotionSpectrum b, float t)
+    {
+        return a * (1f - t) + b * t;
+    }
+
     // Basically the integral
     public float GetTotalEnergy()
     {

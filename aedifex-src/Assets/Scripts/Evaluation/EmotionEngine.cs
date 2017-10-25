@@ -40,6 +40,12 @@ public class EmotionEngine
         this.audioSignal = audioSignal;
     }
 
+    public EmotionSpectrum GetSpectrum(float normalizedT)
+    {
+        int index = Mathf.Clamp((int) (normalizedT * emotionalSignal.Length), 0, emotionalSignal.Length);
+        return emotionalSignal[index];
+    }
+
     // This is very expensive!
     // I'm not worrying about performance right now
     public void Precompute()
@@ -68,7 +74,7 @@ public class EmotionEngine
         float dt = 1f / (float)sampleCount;
         for (int i = 0; i < sampleCount; ++i)
         {
-            emotionalSignal[i] = Evaluate(i * dt);
+            emotionalSignal[i] = Compute(i * dt);
 
             if (i == 0)
                 emotionalDerivativeSignal[i] = new EmotionSpectrum();
@@ -113,7 +119,7 @@ public class EmotionEngine
     {
     }
     
-    public EmotionSpectrum Evaluate(float normalizedTime)
+    public EmotionSpectrum Compute(float normalizedTime)
     {
         List<TrackChunkData> chunks = GetChunksAtTime(normalizedTime);
         EmotionSpectrum result = new EmotionSpectrum();

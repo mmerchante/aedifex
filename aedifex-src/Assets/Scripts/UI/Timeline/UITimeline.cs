@@ -27,6 +27,7 @@ public class UITimeline : MonoBehaviour
     public BeatDetector audioEngine;
     public TimeSlider timeSlider;
     public TrackEditor trackEditor;
+    public EmotionVisualizer emotionVisualizer;
 
     public WaveformTrack minimapTrack;
 
@@ -36,6 +37,7 @@ public class UITimeline : MonoBehaviour
     public Button saveButton;
     public Button loadButton;
     public Button playButton;
+    public Button precomputeButton;
 
     private RectTransform rect;
 
@@ -46,8 +48,17 @@ public class UITimeline : MonoBehaviour
         this.playButton.onClick.AddListener(OnPlayButtonClicked);
         this.saveButton.onClick.AddListener(Save);
         this.loadButton.onClick.AddListener(Load);
+        this.precomputeButton.onClick.AddListener(Precompute);
 
         Initialize();
+    }
+
+    public void Precompute()
+    {
+        // This is expensive, TODO: update on another thread :)
+        DataContainer container = new DataContainer();
+        container.tracks = trackEditor.GetAllTrackData();
+        emotionVisualizer.Initialize(this, audioEngine.Samples, container);
     }
 
     public void Load()
