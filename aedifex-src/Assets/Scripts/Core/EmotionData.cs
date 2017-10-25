@@ -29,11 +29,24 @@ public class EmotionVector
         return EvaluateG(t) + EvaluateG(t - 2f * Mathf.PI) + EvaluateG(t + 2f * Mathf.PI);
     }
 
+    // Note that this is dG/dTheta, not dG/dTime
+    public float EvaluateDerivative(float t)
+    {
+        return EvaluateDG(t) + EvaluateDG(t - 2f * Mathf.PI) + EvaluateDG(t + 2f * Mathf.PI);
+    }
+
     // A simple gaussian centered over _angle_ for now
     protected float EvaluateG(float t)
     {
         float sigma = Mathf.PI / 20f;
         return intensity * Mathf.Exp(-Mathf.Pow(t - angle, 2f) / (2f * sigma * sigma)) / (sigma * Mathf.Sqrt(2f * Mathf.PI));
+    }
+
+    protected float EvaluateDG(float t)
+    {
+        float sigma = Mathf.PI / 20f;
+        float x = t - angle;
+        return intensity * x * (-1f / (sigma * sigma * sigma * Mathf.Sqrt(2f * Mathf.PI))) * Mathf.Exp(-1f * Mathf.Pow(x, 2f) / (2f * sigma * sigma));
     }
 }
 
@@ -67,13 +80,40 @@ public class EmotionData
     {
         this.vectors.Remove(v);
     }
+
+    // TODO: Think about the integral instead...
+    public float GetIntensity()
+    {
+        float result = 0f; // TODO: what about a min intensity?
+
+        foreach (EmotionVector v in vectors)
+            result += v.intensity;
+
+        return result;
+    }
+
+    public float EvaluateDerivative(float t)
+    {
+        float result = 0f;
+        float normalization = 0f;
+
+        foreach (EmotionVector v in vectors)
+        {
+            normalization += v.intensity;
+            result += v.EvaluateDerivative(t);
+        }
+
+        if (normalization == 0f)
+            normalization = 1f;
+
+        return result / normalization;
+    }
     
     public float Evaluate(float t)
     {
         float result = 0f;
         float normalization = 0f;
 
-        // The triple evaluation is for the wrap-around
         foreach (EmotionVector v in vectors)
         {
             normalization += v.intensity;
@@ -84,5 +124,135 @@ public class EmotionData
             normalization = 1f;
 
         return result / normalization;
+    }
+
+    public EmotionSpectrum GetSpectrum()
+    {
+        return new EmotionSpectrum(this);
+    }
+}
+
+/// <summary>
+/// A histogram of the emotion wheel. Has arithmetic operations to simplify math and compose results.
+/// Note that this container is heavy and any big operations will take some time.
+/// </summary>
+public class EmotionSpectrum
+{
+    public const int SAMPLE_COUNT = 180;
+
+    private float[] samples = new float[SAMPLE_COUNT];
+
+    public EmotionSpectrum()
+    {
+    }
+
+    // This is the evaluated result of the sum of a set of gaussians.
+    public EmotionSpectrum(EmotionData gaussians)
+    {
+        for (int i = 0; i < SAMPLE_COUNT; ++i)
+        {
+            float t = i / (float)SAMPLE_COUNT;
+            samples[i] = gaussians.Evaluate(t * 2f * Mathf.PI);
+        }
+    }
+
+    public float this[float angle]
+    {
+        get
+        {
+            angle = Mathf.Repeat(angle, 2f * Mathf.PI);
+            int i = Mathf.FloorToInt((angle / (2f * Mathf.PI)) * SAMPLE_COUNT);
+            i = Mathf.Clamp(i, 0, SAMPLE_COUNT);
+            return samples[i];
+        }
+        set
+        {
+            angle = Mathf.Repeat(angle, 2f * Mathf.PI);
+            int i = Mathf.FloorToInt((angle / (2f * Mathf.PI)) * SAMPLE_COUNT);
+            i = Mathf.Clamp(i, 0, SAMPLE_COUNT);
+            samples[i] = value;
+        }
+    }
+
+    // Basically the integral
+    public float GetTotalEnergy()
+    {
+        float r = 0f;
+        float binLength = 2f * Mathf.PI / (float)SAMPLE_COUNT;
+
+        for (int i = 0; i < SAMPLE_COUNT; ++i)
+            r += samples[i];
+
+        return r * binLength;
+    }
+    
+    public float Dot(EmotionSpectrum s)
+    {
+        float r = 0f;
+
+        for (int i = 0; i < SAMPLE_COUNT; ++i)
+            r += samples[i] * s.samples[i];
+
+        return r;
+    }
+
+    public static EmotionSpectrum operator +(EmotionSpectrum a, EmotionSpectrum b)
+    {
+        EmotionSpectrum r = new EmotionSpectrum();
+
+        for (int i = 0; i < SAMPLE_COUNT; ++i)
+            r.samples[i] = a.samples[i] + b.samples[i];
+
+        return r;
+    }
+
+    public static EmotionSpectrum operator -(EmotionSpectrum a, EmotionSpectrum b)
+    {
+        EmotionSpectrum r = new EmotionSpectrum();
+
+        for (int i = 0; i < SAMPLE_COUNT; ++i)
+            r.samples[i] = a.samples[i] - b.samples[i];
+
+        return r;
+    }
+
+    public static EmotionSpectrum operator *(EmotionSpectrum a, float scalar)
+    {
+        EmotionSpectrum r = new EmotionSpectrum();
+
+        for (int i = 0; i < SAMPLE_COUNT; ++i)
+            r.samples[i] = a.samples[i] * scalar;
+
+        return r;
+    }
+
+    public static EmotionSpectrum operator /(EmotionSpectrum a, float scalar)
+    {
+        EmotionSpectrum r = new EmotionSpectrum();
+
+        for (int i = 0; i < SAMPLE_COUNT; ++i)
+            r.samples[i] = a.samples[i] / scalar;
+
+        return r;
+    }
+
+    public static EmotionSpectrum operator *(EmotionSpectrum a, EmotionSpectrum b)
+    {
+        EmotionSpectrum r = new EmotionSpectrum();
+
+        for (int i = 0; i < SAMPLE_COUNT; ++i)
+            r.samples[i] = a.samples[i] * b.samples[i];
+
+        return r;
+    }
+
+    public static EmotionSpectrum operator /(EmotionSpectrum a, EmotionSpectrum b)
+    {
+        EmotionSpectrum r = new EmotionSpectrum();
+
+        for (int i = 0; i < SAMPLE_COUNT; ++i)
+            r.samples[i] = a.samples[i] / b.samples[i];
+
+        return r;
     }
 }
