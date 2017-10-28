@@ -519,28 +519,58 @@ Prefab:
     - target: {fileID: 224409439372171502, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224409439372171502, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224550682759705204, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224550682759705204, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224550682759705204, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114494876827064162, guid: e1884e9119c470249a730e4c246b27bf,
+        type: 2}
+      propertyPath: m_ContentType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114494876827064162, guid: e1884e9119c470249a730e4c246b27bf,
+        type: 2}
+      propertyPath: m_KeyboardType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114494876827064162, guid: e1884e9119c470249a730e4c246b27bf,
+        type: 2}
+      propertyPath: m_CharacterValidation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114494876827064162, guid: e1884e9119c470249a730e4c246b27bf,
+        type: 2}
+      propertyPath: m_CharacterLimit
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114208001056014074, guid: e1884e9119c470249a730e4c246b27bf,
+        type: 2}
+      propertyPath: clip
+      value: 
+      objectReference: {fileID: 8300000, guid: af423b56d68c5e342baafeb2e640f57f, type: 3}
+    - target: {fileID: 82551787736749350, guid: e1884e9119c470249a730e4c246b27bf,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: af423b56d68c5e342baafeb2e640f57f, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e1884e9119c470249a730e4c246b27bf, type: 2}
   m_IsPrefabParent: 0

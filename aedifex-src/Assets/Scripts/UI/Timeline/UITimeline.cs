@@ -60,11 +60,20 @@ public class UITimeline : MonoBehaviour
         Initialize();
     }
 
-    public void Precompute()
+    public DataContainer SerializeAllTimeline()
     {
-        // This is expensive, TODO: update on another thread :)
         DataContainer container = new DataContainer();
         container.tracks = trackEditor.GetAllTrackData();
+        container.beatsPerMeasure = CurrentBPB;
+        container.beatsPerMinute = CurrentBPM;
+
+        return container;
+    }
+
+    public void Precompute()
+    {
+        DataContainer container = SerializeAllTimeline();
+        // This is expensive, TODO: update on another thread :)
         emotionVisualizer.Initialize(this, audioEngine.Samples, container);
     }
 
@@ -81,6 +90,9 @@ public class UITimeline : MonoBehaviour
 
             if (container != null)
                 trackEditor.LoadFromTrackData(container.tracks);
+
+            bpmField.text = container.beatsPerMinute.ToString();
+            beatsPerMeasureField.text = container.beatsPerMeasure.ToString();
         }
     }
 
@@ -88,8 +100,7 @@ public class UITimeline : MonoBehaviour
     {
         string path = SFB.StandaloneFileBrowser.SaveFilePanel("Open File", Application.dataPath, "song", "json");
 
-        DataContainer container = new DataContainer();
-        container.tracks = trackEditor.GetAllTrackData();
+        DataContainer container = SerializeAllTimeline();
 
         if(!string.IsNullOrEmpty(path))
         {
@@ -150,6 +161,19 @@ public class UITimeline : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
             OnPlayButtonClicked();
+
+        // Jump to the start of the screen offset
+        if (Input.GetKeyDown(KeyCode.Home))
+        {
+            SetCurrentTimeIndicatorNormalized(PanOffsetNormalized);
+            JumpToNormalizedTime(PanOffsetNormalized);
+        }
+
+        if (Input.GetKeyDown(KeyCode.End))
+        {
+            SetCurrentTimeIndicatorNormalized(1f);
+            JumpToNormalizedTime(1f);
+        }
     }
 
     private void UpdateTempoUI()
@@ -235,7 +259,7 @@ public class UITimeline : MonoBehaviour
 
     public void JumpToNormalizedTime(float t)
     {
-        this.source.time = Mathf.Clamp01(CurrentIndicatorNormalized) * source.clip.length * .99999f;
+        this.source.time = Mathf.Clamp01(t) * source.clip.length * .99999f;
 
         // If the track finishes but we changed the time, we need to replay it
         if (IsPlaying && !source.isPlaying)

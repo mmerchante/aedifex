@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 
 public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
+    public const int MIN_SNAPPING_NOTE = 8; // Eighth is the minimum note
+
     public string Name { get; set; } // By default, track name
     public float Position { get; set; }
     public float Width { get; set; }
@@ -81,11 +83,17 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         textContainer.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
     }
 
-    public float GetSnappedPosition(float position)
+    public float GetSnappingResolution()
+    {
+        return 4f / (float)MIN_SNAPPING_NOTE;
+    }
+
+    // Snapping can work at the 1/8th resolution
+    public float GetSnappedPosition(double position)
     {
         int bpm = timeline.CurrentBPM;
-        float secondsPerBeat = 60f / (float)bpm;
-        return Mathf.Round(position * timeline.Duration / secondsPerBeat) * secondsPerBeat / timeline.Duration;
+        double secondsPerBeat = (60.0 / (double)bpm) * GetSnappingResolution();
+        return (float) (System.Math.Round(position * timeline.Duration / secondsPerBeat) * secondsPerBeat / timeline.Duration);
     }
 
     public void UpdateTrackChunk(float zoom, float offset)
@@ -140,7 +148,7 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
             if(Snap)
             {
                 int bpm = timeline.CurrentBPM;
-                float secondsPerBeat = 60f / (float)bpm;
+                float secondsPerBeat = (60f / (float)bpm) * GetSnappingResolution();
                 minWidth = secondsPerBeat / timeline.Duration; // One beat minimum if it is snapped
             }
 

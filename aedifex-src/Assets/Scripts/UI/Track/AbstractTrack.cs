@@ -86,7 +86,7 @@ public class AbstractTrack : MonoBehaviour
         container.y /= Screen.height;
         container.height /= Screen.height;
 
-        float secondsPerTick = 60f / bpm;
+        double secondsPerTick = 60.0 / bpm;
 
         int ticks = (int)((trackDuration) / secondsPerTick);
         float scaledOffset = offset * container.width * zoom;
