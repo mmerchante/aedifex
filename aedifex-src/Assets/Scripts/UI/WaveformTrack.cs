@@ -6,7 +6,6 @@ public class WaveformTrack : AbstractTrack
 {
     private SimpleAudioVisualizer visualizer;
     private float[] waveform;
-    private Vector3[] corners = new Vector3[4];
 
     protected override void OnAwake()
     {

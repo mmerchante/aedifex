@@ -15,14 +15,17 @@ public class UITimeline : MonoBehaviour
 
     // In seconds
     public float CurrentIndicator { get; protected set; }
-    public float CurrentIndicatorNormalized { get { return CurrentIndicator / Duration; } }
+    public float CurrentIndicatorNormalized { get { return CurrentIndicator; } }
     public float Duration { get; protected set; }
     
     public float PanOffset { get; protected set; }
-    public float PanOffsetNormalized { get { return PanOffset / Duration; } }
+    public float PanOffsetNormalized { get { return PanOffset; } }
     public float Zoom { get; protected set; }
 
     public bool IsPlaying { get; protected set; }
+
+    public int CurrentBPM { get; protected set; } // Beats per minute
+    public int CurrentBPB { get; protected set; } // Beats per bar (measure)
 
     public BeatDetector audioEngine;
     public TimeSlider timeSlider;
@@ -33,6 +36,10 @@ public class UITimeline : MonoBehaviour
 
     public AudioSource source;
     public RectTransform currentTimeIndicator;
+
+    public Slider speedSlider;
+    public InputField bpmField;
+    public InputField beatsPerMeasureField;
 
     public Button saveButton;
     public Button loadButton;
@@ -120,6 +127,9 @@ public class UITimeline : MonoBehaviour
         this.Zoom = 1f;
         this.PanOffset = 0f;
 
+        this.beatsPerMeasureField.text = "4";
+        this.bpmField.text = "80";
+
         audioEngine.Initialize();
         timeSlider.Initialize(source.clip.length);
         trackEditor.Initialize(this, source.clip.length);
@@ -127,6 +137,8 @@ public class UITimeline : MonoBehaviour
         minimapTrack.Initialize(audioEngine.Samples, 1024 * 8, Color.white);
         trackEditor.InstantiateWaveformTrack(audioEngine.Samples, 1024, Color.yellow, "Waveform");
         trackEditor.InstantiateWaveformTrack(audioEngine.BeatSamples, 1, Color.red, "Beat");
+
+        Duration = source.clip.length;
         
         // Add a blank image
         Image image = this.gameObject.AddComponent<Image>();
@@ -140,15 +152,39 @@ public class UITimeline : MonoBehaviour
             OnPlayButtonClicked();
     }
 
+    private void UpdateTempoUI()
+    {
+        this.source.pitch = Mathf.Lerp(0f, 1f, speedSlider.value);
+
+        int bpm = -1;
+        int.TryParse(bpmField.text, out bpm);
+
+        if (bpm != -1)
+        {
+            CurrentBPM = Mathf.Clamp(bpm, 1, 200);
+            bpmField.text = CurrentBPM.ToString();
+        }
+
+        int beatsPerMeasure = -1;
+        int.TryParse(beatsPerMeasureField.text, out beatsPerMeasure);
+
+        if (beatsPerMeasure != -1)
+        {
+            CurrentBPB = Mathf.Clamp(beatsPerMeasure, 1, 8);
+            beatsPerMeasureField.text = CurrentBPB.ToString();
+        }
+    }
+
     public void Update()
     {
         UpdateInput();
         UpdateZoom();
+        UpdateTempoUI();
 
         if (IsPlaying)
             SetCurrentTimeIndicatorNormalized(source.time / source.clip.length);
         
-        trackEditor.UpdateTracks(Zoom, PanOffset);
+        trackEditor.UpdateTracks(Zoom, PanOffset, CurrentBPM, CurrentBPB);
 
         timeSlider.Zoom = Zoom;
         timeSlider.Offset = PanOffsetNormalized;
@@ -164,7 +200,9 @@ public class UITimeline : MonoBehaviour
 
     protected void UpdateZoom()
     {
-        this.Zoom = Mathf.Max(MIN_ZOOM, Zoom + Input.GetAxis("Mouse ScrollWheel"));
+        float zoomDelta = Input.GetAxis("Mouse ScrollWheel");
+        zoomDelta *= Mathf.Clamp(Zoom, 1f, 10f); // Scale the delta so its easier to zoom a lot
+        this.Zoom = Mathf.Max(MIN_ZOOM, Zoom + zoomDelta);
     }
 
     public bool IsPanning()
@@ -187,12 +225,12 @@ public class UITimeline : MonoBehaviour
 
     protected void SetCurrentTimeIndicatorNormalized(float offset)
     {
-        this.CurrentIndicator = Mathf.Clamp(offset * Duration, 0f, Duration);        
+        this.CurrentIndicator = Mathf.Clamp(offset, 0f, 1f);        
     }
 
     protected void SetPanOffsetNormalized(float offset)
     {
-        this.PanOffset = Mathf.Clamp(offset * Duration, 0f, Duration);
+        this.PanOffset = Mathf.Clamp(offset, 0f, 1f);
     }
 
     public void JumpToNormalizedTime(float t)

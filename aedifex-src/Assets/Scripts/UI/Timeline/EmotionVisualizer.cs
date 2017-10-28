@@ -31,7 +31,10 @@ public class EmotionVisualizer : MonoBehaviour
 
     public void OnGUI()
     {
-        if(engine != null)
+        if (Event.current.type != EventType.Repaint)
+            return;
+
+        if (engine != null)
         {
             EmotionSpectrum spectrum = engine.GetSpectrum(timeline.CurrentIndicatorNormalized);
             currentSpectrum = EmotionSpectrum.Lerp(currentSpectrum, spectrum, .1f);

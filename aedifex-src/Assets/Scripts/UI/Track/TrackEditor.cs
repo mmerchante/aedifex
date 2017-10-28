@@ -38,10 +38,10 @@ public class TrackEditor : MonoBehaviour
         this.duration = baseDuration;
     }
 
-    public void UpdateTracks(float zoom, float offset)
+    public void UpdateTracks(float zoom, float offset, int bpm, int bpb)
     {
         foreach (AbstractTrack track in tracks)
-            track.UpdateTrack(zoom, offset);
+            track.UpdateTrack(zoom, offset, bpm, bpb);
     }
 
     public EmotionTrack InstantiateEmotionTrack(string name = "Emotion Track")

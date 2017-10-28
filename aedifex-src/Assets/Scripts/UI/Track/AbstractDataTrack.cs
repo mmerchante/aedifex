@@ -7,23 +7,12 @@ using UnityEngine.EventSystems;
 public abstract class AbstractDataTrack<T> : AbstractTrack, IPointerClickHandler, IDragHandler
 {
     protected List<AbstractTrackChunk<T>> chunks = new List<AbstractTrackChunk<T>>();
-    private UITimeline timeline;
+
 
     // Abstract methods
     protected abstract AbstractTrackChunk<T> InstanceChunk();
     protected abstract T GetDefaultData();
     protected abstract T CopyData(T data);
-
-    public void Initialize(UITimeline timeline)
-    {
-        this.timeline = timeline;
-        this.TrackColor = Random.ColorHSV(0f, 1f, 1f, 1f, .75f, 1f);
-        OnInitialize();
-    }
-    
-    protected virtual void OnInitialize()
-    {
-    }
 
     protected override void OnUpdateTrack()
     {

@@ -9,6 +9,7 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
     public string Name { get; set; } // By default, track name
     public float Position { get; set; }
     public float Width { get; set; }
+    public bool Snap { get; set; }
 
     public Text text;
     public RectTransform textContainer;
@@ -30,8 +31,8 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
     {
         TrackChunkData d = new TrackChunkData();
         d.type = ChunkType.None;
-        d.start = Position;
-        d.end = Position + Width;
+        d.start = Snap ? GetSnappedPosition(Position) : Position;
+        d.end = Snap ? GetSnappedPosition(Position + Width) : (Position + Width);
         return d;
     }
 
@@ -47,6 +48,7 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         this.container = container;
         this.Position = chunk.start;
         this.Width = chunk.end - chunk.start;
+        this.Snap = true; // For now...
         UpdatePosition();
 
         UpdateChunkName(track.TrackName);
@@ -61,6 +63,7 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         this.Position = position;
         this.Width = width;
         this.Data = data;
+        this.Snap = true; // For now...
         UpdatePosition();
 
         UpdateChunkName(track.TrackName);
@@ -77,9 +80,16 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         float width = textGen.GetPreferredWidth(name, generationSettings);
         textContainer.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
     }
-    
-    public void UpdateTrackChunk(float zoom, float offset)
+
+    public float GetSnappedPosition(float position)
     {
+        int bpm = timeline.CurrentBPM;
+        float secondsPerBeat = 60f / (float)bpm;
+        return Mathf.Round(position * timeline.Duration / secondsPerBeat) * secondsPerBeat / timeline.Duration;
+    }
+
+    public void UpdateTrackChunk(float zoom, float offset)
+    {      
         this.zoom = zoom;
         this.offset = offset;
         UpdatePosition();
@@ -87,8 +97,17 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
 
     protected void UpdatePosition()
     {
-        this.RectTransform.anchoredPosition = new Vector2((Position - offset) * zoom * container.width, 0f);
-        this.RectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Width * zoom * container.width);
+        float effectivePosition = Position;
+        float effectiveWidth = Width;
+
+        if (Snap)
+        {
+            effectivePosition = GetSnappedPosition(Position);
+            effectiveWidth = GetSnappedPosition(Position + Width) - effectivePosition;
+        }
+
+        this.RectTransform.anchoredPosition = new Vector2((effectivePosition - offset) * zoom * container.width, 0f);
+        this.RectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, effectiveWidth * zoom * container.width);
     }
 
     public void Update()
@@ -116,9 +135,17 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         if (resizing)
         {
             float nextWidth = Mathf.Clamp01(this.Width + ScreenToNormalizedPosition(eventData.delta, true).x / zoom);
+            float minWidth = .001f;
+
+            if(Snap)
+            {
+                int bpm = timeline.CurrentBPM;
+                float secondsPerBeat = 60f / (float)bpm;
+                minWidth = secondsPerBeat / timeline.Duration; // One beat minimum if it is snapped
+            }
 
             // Min size is 1/1000th
-            if (nextWidth > .001f && track.CanPlaceTrackChunk(Position, nextWidth, this))
+            if (nextWidth > minWidth && track.CanPlaceTrackChunk(Position, nextWidth, this))
                 this.Width = nextWidth;
         }
         else

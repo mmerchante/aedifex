@@ -37,4 +37,6 @@ public class TrackData
 public class DataContainer
 {
     public List<TrackData> tracks = new List<TrackData>();
+    public int songBPM = 100;
+    public int beatsPerMeasure = 4;
 }
