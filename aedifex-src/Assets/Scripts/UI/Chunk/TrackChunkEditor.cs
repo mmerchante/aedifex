@@ -45,6 +45,12 @@ public class TrackChunkEditor<T> : MonoBehaviour, ITrackChunkEditor<T>
 
     public virtual void Update()
     {
+        if(!Chunk)
+        {
+            Hide();
+            return;
+        }
+
         this.titleText.text = Chunk.Name;
         UpdatePosition();
     }

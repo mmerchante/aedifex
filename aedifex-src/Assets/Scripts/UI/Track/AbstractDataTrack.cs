@@ -20,6 +20,12 @@ public abstract class AbstractDataTrack<T> : AbstractTrack, IPointerClickHandler
             c.UpdateTrackChunk(zoom, offset);
     }
 
+    public void RemoveChunk(AbstractTrackChunk<T> chunk)
+    {
+        chunks.Remove(chunk);
+        GameObject.Destroy(chunk.gameObject);
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Middle)

@@ -182,9 +182,16 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        ITrackChunkEditor<T> editor = timeline.trackEditor.GetChunkEditor<T>();
+        if (eventData.button == PointerEventData.InputButton.Middle)
+        {
+            track.RemoveChunk(this);
+        }
+        else
+        {
+            ITrackChunkEditor<T> editor = timeline.trackEditor.GetChunkEditor<T>();
 
-        if(editor != null)
-            editor.Initialize(track, this);
+            if (editor != null)
+                editor.Initialize(track, this);
+        }
     }
 }
