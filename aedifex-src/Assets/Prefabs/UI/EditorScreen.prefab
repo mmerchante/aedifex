@@ -1572,6 +1572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758ff19bc06f6274ba4f0ee8187af2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timelineContainerMask: {fileID: 224273586157300424}
   audioEngine: {fileID: 114208001056014074}
   timeSlider: {fileID: 114317886933807464}
   trackEditor: {fileID: 114431500617208692}

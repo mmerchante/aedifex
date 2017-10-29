@@ -12,6 +12,8 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
     public float Position { get; set; }
     public float Width { get; set; }
     public bool Snap { get; set; }
+    public bool IsVariation { get; set; }
+    public int HarmonySequenceNumber { get; set; }
 
     public Text text;
     public RectTransform textContainer;
@@ -35,6 +37,9 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         d.type = ChunkType.None;
         d.start = Snap ? GetSnappedPosition(Position) : Position;
         d.end = Snap ? GetSnappedPosition(Position + Width) : (Position + Width);
+        d.curve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+        d.harmonySequenceNumber = HarmonySequenceNumber;
+        d.isVariation = IsVariation;
         return d;
     }
 
@@ -43,7 +48,7 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         this.RectTransform = GetComponent<RectTransform>();
     }
 
-    public virtual void Initialize(UITimeline timeline, AbstractDataTrack<T> track, Rect container, TrackChunkData chunk)
+    public virtual void InitializeFromSerializedData(UITimeline timeline, AbstractDataTrack<T> track, Rect container, TrackChunkData chunk)
     {
         this.track = track;
         this.timeline = timeline;
@@ -51,6 +56,8 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         this.Position = chunk.start;
         this.Width = chunk.end - chunk.start;
         this.Snap = true; // For now...
+        this.HarmonySequenceNumber = chunk.harmonySequenceNumber;
+        this.IsVariation = chunk.isVariation;
         UpdatePosition();
 
         UpdateChunkName(track.TrackName);
@@ -66,6 +73,8 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         this.Width = width;
         this.Data = data;
         this.Snap = true; // For now...
+        this.HarmonySequenceNumber = 1;
+        this.IsVariation = false;
         UpdatePosition();
 
         UpdateChunkName(track.TrackName);

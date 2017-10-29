@@ -23,6 +23,9 @@ public class TrackChunkData
     public float end;
     public EmotionData startData; // Eh, no time for abstraction
     public EmotionData endData;
+    public AnimationCurve curve; // It is a bit wasteful in terms of size, but it is more flexible
+    public bool isVariation;
+    public int harmonySequenceNumber;
 }
 
 [System.Serializable]

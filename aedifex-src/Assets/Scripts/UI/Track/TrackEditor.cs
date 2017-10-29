@@ -54,7 +54,8 @@ public class TrackEditor : MonoBehaviour
     public WaveformTrack InstantiateWaveformTrack(float[] samples, int downsample, Color trackColor, string name)
     {
         WaveformTrack track = InstantiateTrack<WaveformTrack>(waveformTrackPrefab, name);
-        track.Initialize(samples, downsample, trackColor);
+        track.Initialize(timeline);
+        track.InitializeWaveData(samples, downsample, trackColor);
         return track;
     }
 

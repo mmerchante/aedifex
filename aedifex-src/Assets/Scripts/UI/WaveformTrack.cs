@@ -12,7 +12,7 @@ public class WaveformTrack : AbstractTrack
         this.visualizer = this.gameObject.AddComponent<SimpleAudioVisualizer>();
     }
 
-    public void Initialize(float[] waveform, int downsample, Color trackColor)
+    public void InitializeWaveData(float[] waveform, int downsample, Color trackColor)
     {
         this.waveform = waveform;
         this.visualizer.Initialize(this.waveform, downsample);
@@ -27,8 +27,29 @@ public class WaveformTrack : AbstractTrack
 
     public void Update()
     {
+        if (!timeline)
+            return;
+
         rect.GetWorldCorners(corners);
-        this.visualizer.uiRect = new Rect(corners[0].x + 2.5f, corners[0].y + rect.rect.height * .5f, rect.rect.width - 5f, rect.rect.height * .85f);
+        Rect container = new Rect(corners[0].x + 2.5f, corners[0].y + rect.rect.height * .5f, rect.rect.width - 5f, rect.rect.height * .85f);
+
+        timeline.timelineContainerMask.GetWorldCorners(corners);
+        Rect timelineRect = new Rect(corners[0].x, corners[0].y, timeline.timelineContainerMask.rect.width, timeline.timelineContainerMask.rect.height);
+
+        bool hideWave = container.y + container.height < timelineRect.y || container.y > timelineRect.height + timelineRect.y;
+        this.visualizer.enabled = !hideWave;
+
+        if (container.y < timelineRect.y)
+        {
+            container.height -= timelineRect.y - container.y;
+            container.y = timelineRect.y;
+        }
+        else
+        {
+            container.height = Mathf.Clamp(container.height, 0, Mathf.Abs(timelineRect.y + timelineRect.height - container.y));
+        }
+
+        this.visualizer.uiRect = container;
         this.visualizer.lineColor = TrackColor;
     }
 }

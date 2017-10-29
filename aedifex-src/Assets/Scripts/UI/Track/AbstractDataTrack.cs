@@ -8,7 +8,6 @@ public abstract class AbstractDataTrack<T> : AbstractTrack, IPointerClickHandler
 {
     protected List<AbstractTrackChunk<T>> chunks = new List<AbstractTrackChunk<T>>();
 
-
     // Abstract methods
     protected abstract AbstractTrackChunk<T> InstanceChunk();
     protected abstract T GetDefaultData();
@@ -90,7 +89,7 @@ public abstract class AbstractDataTrack<T> : AbstractTrack, IPointerClickHandler
         foreach (TrackChunkData c in data.chunks)
         {
             AbstractTrackChunk<T> chunk = InstanceChunk();
-            chunk.Initialize(timeline, this, timeline.GetTimelineRect(), c);
+            chunk.InitializeFromSerializedData(timeline, this, timeline.GetTimelineRect(), c);
             chunk.UpdateTrackChunk(zoom, offset);
             this.chunks.Add(chunk);
         }

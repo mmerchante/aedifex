@@ -75,11 +75,30 @@ public class AbstractTrack : MonoBehaviour
 
     protected void DrawBeatLines(Rect container)
     {
+        if (!timeline)
+            return;
+
+        timeline.timelineContainerMask.GetWorldCorners(corners);
+        Rect timelineRect = new Rect(corners[0].x, corners[0].y, timeline.timelineContainerMask.rect.width, timeline.timelineContainerMask.rect.height);
+
+        if (container.y + container.height < timelineRect.y || container.y > timelineRect.height + timelineRect.y)
+            return;
+
+        if (container.y < timelineRect.y)
+        {
+            container.height -= timelineRect.y - container.y;
+            container.y = timelineRect.y;
+        }
+        else
+        {
+            container.height = Mathf.Clamp(container.height, 0, Mathf.Abs(timelineRect.y + timelineRect.height - container.y));
+        }
+            
         GL.PushMatrix();
         lineMaterial.SetPass(0);
         GL.LoadOrtho();
         GL.Begin(GL.LINES);
-
+        
         // Transform container
         container.x /= Screen.width;
         container.width /= Screen.width;
@@ -90,7 +109,7 @@ public class AbstractTrack : MonoBehaviour
 
         int ticks = (int)((trackDuration) / secondsPerTick);
         float scaledOffset = offset * container.width * zoom;
-        
+
         for (int i = 0; i < ticks; ++i)
         {
             float t = (i / (float)ticks);

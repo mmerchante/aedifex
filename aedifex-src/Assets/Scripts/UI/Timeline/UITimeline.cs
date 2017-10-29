@@ -27,6 +27,8 @@ public class UITimeline : MonoBehaviour
     public int CurrentBPM { get; protected set; } // Beats per minute
     public int CurrentBPB { get; protected set; } // Beats per bar (measure)
 
+    public RectTransform timelineContainerMask;
+
     public BeatDetector audioEngine;
     public TimeSlider timeSlider;
     public TrackEditor trackEditor;
@@ -145,7 +147,8 @@ public class UITimeline : MonoBehaviour
         timeSlider.Initialize(source.clip.length);
         trackEditor.Initialize(this, source.clip.length);
 
-        minimapTrack.Initialize(audioEngine.Samples, 1024 * 8, Color.white);
+        minimapTrack.Initialize(this);
+        minimapTrack.InitializeWaveData(audioEngine.Samples, 1024 * 8, Color.white);
         trackEditor.InstantiateWaveformTrack(audioEngine.Samples, 1024, Color.yellow, "Waveform");
         trackEditor.InstantiateWaveformTrack(audioEngine.BeatSamples, 1, Color.red, "Beat");
 
