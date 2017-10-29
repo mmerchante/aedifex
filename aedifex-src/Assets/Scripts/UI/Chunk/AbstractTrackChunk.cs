@@ -14,6 +14,7 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
     public bool Snap { get; set; }
     public bool IsVariation { get; set; }
     public int HarmonySequenceNumber { get; set; }
+    public IntensityCurve IntensityCurveType { get; set; }
 
     public Text text;
     public RectTransform textContainer;
@@ -37,7 +38,7 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         d.type = ChunkType.None;
         d.start = Snap ? GetSnappedPosition(Position) : Position;
         d.end = Snap ? GetSnappedPosition(Position + Width) : (Position + Width);
-        d.curve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+        d.intensityCurve = IntensityCurveType;
         d.harmonySequenceNumber = HarmonySequenceNumber;
         d.isVariation = IsVariation;
         return d;
@@ -46,6 +47,15 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
     public void Awake()
     {
         this.RectTransform = GetComponent<RectTransform>();
+    }
+
+    public void CopyFromChunk(AbstractTrackChunk<T> other)
+    {
+        this.Snap = other.Snap;
+        this.HarmonySequenceNumber = other.HarmonySequenceNumber;
+        this.IsVariation = other.IsVariation;
+        this.IntensityCurveType = other.IntensityCurveType;
+        this.Data = track.CopyData(other.Data);
     }
 
     public virtual void InitializeFromSerializedData(UITimeline timeline, AbstractDataTrack<T> track, Rect container, TrackChunkData chunk)
@@ -58,6 +68,7 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         this.Snap = true; // For now...
         this.HarmonySequenceNumber = chunk.harmonySequenceNumber;
         this.IsVariation = chunk.isVariation;
+        this.IntensityCurveType = chunk.intensityCurve;
         UpdatePosition();
 
         UpdateChunkName(track.TrackName);
@@ -75,6 +86,7 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         this.Snap = true; // For now...
         this.HarmonySequenceNumber = 1;
         this.IsVariation = false;
+        this.IntensityCurveType = IntensityCurve.Invariant;
         UpdatePosition();
 
         UpdateChunkName(track.TrackName);
@@ -84,11 +96,14 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
     public void UpdateChunkName(string name)
     {
         this.Name = name;
-        text.text = name;
+        text.text = name + "-" + HarmonySequenceNumber.ToString();
+
+        if (IsVariation)
+            text.text += "[ALT]";
 
         TextGenerator textGen = new TextGenerator();
         TextGenerationSettings generationSettings = text.GetGenerationSettings(text.rectTransform.rect.size);
-        float width = textGen.GetPreferredWidth(name, generationSettings);
+        float width = textGen.GetPreferredWidth(text.text, generationSettings);
         textContainer.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
     }
 
@@ -127,8 +142,17 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
         this.RectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, effectiveWidth * zoom * container.width);
     }
 
+    protected void UpdateColors()
+    {
+        if (IsVariation)
+            chunkBackground.color = (track.TrackColor + Color.white * .3f) * 1.75f;
+        else
+            chunkBackground.color = track.TrackColor;
+    }
+
     public void Update()
     {
+        UpdateColors();
         UpdatePosition();
         UpdateChunkName(track.TrackName);
     }

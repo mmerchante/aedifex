@@ -11,17 +11,46 @@ public interface ITrackChunkEditor<T>
 public class TrackChunkEditor<T> : MonoBehaviour, ITrackChunkEditor<T>
 {
     public Text titleText;
+    public Button copyChunkButton;
+    public Button pasteChunkButton;
+    public Button pasteAllChunksButton;
+
     public AbstractTrackChunk<T> Chunk { get; protected set; }
     public AbstractDataTrack<T> Track { get; protected set; }
 
     protected RectTransform rect;
 
     private Vector3[] corners = new Vector3[4];
-    
+
+    private AbstractTrackChunk<T> ClipboardChunk = null;
+
     protected virtual void Awake()
     {
         this.rect = GetComponent<RectTransform>();
+        this.copyChunkButton.onClick.AddListener(OnCopyChunk);
+        this.pasteChunkButton.onClick.AddListener(OnPasteChunk);
+        this.pasteAllChunksButton.onClick.AddListener(OnOverwriteAllChunks);
         Hide();
+    }
+
+    private void OnCopyChunk()
+    {
+        ClipboardChunk = Chunk;
+    }
+
+    private void OnPasteChunk()
+    {
+        if (Chunk != null && ClipboardChunk != null)
+        {
+            Chunk.CopyFromChunk(ClipboardChunk);
+            OnInitialize();
+        }
+    }
+
+    private void OnOverwriteAllChunks()
+    {
+        if (Chunk != null)
+            Track.OverwriteAllChunks(Chunk);
     }
 
     public void Initialize(AbstractDataTrack<T> track, AbstractTrackChunk<T> chunk)

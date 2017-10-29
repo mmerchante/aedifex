@@ -9,6 +9,11 @@ public class EmotionChunkEditor : TrackChunkEditor<EmotionData>, IPointerClickHa
     public Button clearButton;
     public Button closeButton;
 
+    public Toggle variantToggle;
+    public InputField harmonySequenceInputField;
+    public Dropdown curveDropdown;
+    public RectTransform curveContainer;
+
     public Image trackColorImage;
     public EmotionVectorHandle emotionHandlePrefab;
     public RectTransform emotionShapeRect;
@@ -25,6 +30,8 @@ public class EmotionChunkEditor : TrackChunkEditor<EmotionData>, IPointerClickHa
         this.lineMaterial = new Material(Shader.Find("Unlit/LineShader"));
         this.closeButton.onClick.AddListener(Hide);
         this.clearButton.onClick.AddListener(ClearAllHandles);
+
+        InitializeDropdown();
     }
 
     protected void ClearAllHandles()
@@ -35,8 +42,22 @@ public class EmotionChunkEditor : TrackChunkEditor<EmotionData>, IPointerClickHa
         handles.Clear();
     }
 
+    private void InitializeDropdown()
+    {
+        List <Dropdown.OptionData> options = new List<Dropdown.OptionData>();
+
+        foreach (string n in System.Enum.GetNames(typeof(IntensityCurve)))
+            options.Add(new Dropdown.OptionData(n));
+
+        curveDropdown.options = options;
+    }
+
     protected override void OnInitialize()
     {
+        variantToggle.isOn = Chunk.IsVariation;
+        harmonySequenceInputField.text = Chunk.HarmonySequenceNumber.ToString();
+        curveDropdown.value = (int) Chunk.IntensityCurveType;
+
         ClearAllHandles();
 
         foreach(EmotionVector v in Chunk.Data.vectors)
@@ -50,6 +71,14 @@ public class EmotionChunkEditor : TrackChunkEditor<EmotionData>, IPointerClickHa
     {
         base.Update();
 
+        Chunk.IsVariation = variantToggle.isOn;
+        Chunk.IntensityCurveType = (IntensityCurve) curveDropdown.value;
+
+        int harmony = -1;
+        int.TryParse(harmonySequenceInputField.text, out harmony);
+        if (harmony != -1)
+            Chunk.HarmonySequenceNumber = harmony;        
+
         trackColorImage.color = Track.TrackColor;
         Chunk.Data.Clear();
 
@@ -60,10 +89,46 @@ public class EmotionChunkEditor : TrackChunkEditor<EmotionData>, IPointerClickHa
     public void OnGUI()
     {
         emotionShapeRect.GetWorldCorners(shapeCorners);
-        DrawEmotionShape(new Rect(shapeCorners[0], shapeCorners[2] - shapeCorners[0]), Color.magenta);
+        DrawEmotionShape(new Rect(shapeCorners[0], shapeCorners[2] - shapeCorners[0]));
+
+        curveContainer.GetWorldCorners(shapeCorners);
+        DrawIntensityCurve(new Rect(shapeCorners[0], shapeCorners[2] - shapeCorners[0]));
     }
 
-    protected void DrawEmotionShape(Rect container, Color color)
+    protected void DrawIntensityCurve(Rect container)
+    {
+        AnimationCurve curve = TrackChunkData.GetAnimationCurve(Chunk.IntensityCurveType);
+
+        GL.PushMatrix();
+        lineMaterial.SetPass(0);
+        GL.LoadOrtho();
+        GL.Begin(GL.LINE_STRIP);
+
+        container.y += 2f;
+        container.height -= 2f;
+
+        // Transform container
+        container.x /= Screen.width;
+        container.width /= Screen.width;
+        container.y /= Screen.height;
+        container.height /= Screen.height;
+
+        int subdivisions = 32;
+
+        for (int i = 0; i < subdivisions; ++i)
+        {
+            float t = (i / (float)subdivisions);
+            float y = container.y + curve.Evaluate(t) * container.height;
+            float x = container.x + t * container.width;
+
+            GL.Vertex(new Vector3(x, y, 0f));
+        }
+
+        GL.End();
+        GL.PopMatrix();
+    }
+
+    protected void DrawEmotionShape(Rect container)
     {
         GL.PushMatrix();
         lineMaterial.SetPass(0);

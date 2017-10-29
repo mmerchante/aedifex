@@ -46,10 +46,18 @@ public class EmotionEngine
         return emotionalSignal[index];
     }
 
+    protected void PreloadChunks()
+    {
+        foreach (TrackData track in container.tracks)
+             foreach (TrackChunkData chunk in track.chunks)
+                chunk.Preload();
+    }
+
     // This is very expensive!
     // I'm not worrying about performance right now
     public void Precompute()
     {
+        PreloadChunks();
         CacheEmotionSignal();
         // TODO:
         // - Find recurring patterns
@@ -125,7 +133,7 @@ public class EmotionEngine
         EmotionSpectrum result = new EmotionSpectrum();
 
         foreach (TrackChunkData chunk in chunks)
-            result += chunk.startData.GetSpectrum();
+            result += chunk.Evaluate(normalizedTime);
 
         foreach (EmotionFilter f in filters)
             result = f.Filter(normalizedTime, result);

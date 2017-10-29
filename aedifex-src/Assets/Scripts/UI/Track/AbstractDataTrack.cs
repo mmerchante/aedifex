@@ -11,7 +11,7 @@ public abstract class AbstractDataTrack<T> : AbstractTrack, IPointerClickHandler
     // Abstract methods
     protected abstract AbstractTrackChunk<T> InstanceChunk();
     protected abstract T GetDefaultData();
-    protected abstract T CopyData(T data);
+    public abstract T CopyData(T data);
 
     protected override void OnUpdateTrack()
     {
@@ -23,6 +23,12 @@ public abstract class AbstractDataTrack<T> : AbstractTrack, IPointerClickHandler
     {
         chunks.Remove(chunk);
         GameObject.Destroy(chunk.gameObject);
+    }
+
+    public void OverwriteAllChunks(AbstractTrackChunk<T> chunk)
+    {
+        foreach (AbstractTrackChunk<T> c in chunks)
+            c.CopyFromChunk(chunk);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -38,11 +44,13 @@ public abstract class AbstractDataTrack<T> : AbstractTrack, IPointerClickHandler
         if (CanPlaceTrackChunk(position.x, width))
         {
             T lastData = GetDefaultData();
-            if (chunks.Count > 0)
-                lastData = CopyData(chunks[chunks.Count - 1].Data);
 
             AbstractTrackChunk<T> chunk = InstanceChunk();
             chunk.Initialize(timeline, this, lastData, timeline.GetTimelineRect(), position.x, width);
+
+            if (chunks.Count > 0)
+                chunk.CopyFromChunk(chunks[chunks.Count - 1]);
+
             chunk.UpdateTrackChunk(zoom, offset);
             this.chunks.Add(chunk);
         }

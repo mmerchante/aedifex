@@ -10,7 +10,7 @@ public class EmotionTrack : AbstractDataTrack<EmotionData>
 
     private ExtendablePool<EmotionTrackChunk> chunkPool;
 
-    protected override EmotionData CopyData(EmotionData data)
+    public override EmotionData CopyData(EmotionData data)
     {
         return new EmotionData(data);
     }
