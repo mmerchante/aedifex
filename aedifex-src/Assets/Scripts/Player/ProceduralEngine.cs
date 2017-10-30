@@ -9,10 +9,12 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
     private AudioSource musicSource;
     private AudioClip musicTrack;
     private float[] audioSignal;
-    private EmotionEngine emotionEngine;
 
+    public ProceduralEventDispatcher EventDispatcher { get; protected set; }
+    public EmotionEngine EmotionEngine { get; protected set; }
     public float CurrentTime { get; protected set; }
-
+    public float CurrentTimeNormalized { get { return CurrentTime / musicTrack.length; } }
+    public float Duration { get { return musicTrack.length; } }
     public bool Running { get; protected set; }
 
     private Queue<EmotionEvent> eventQueue = new Queue<EmotionEvent>();
@@ -33,7 +35,7 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
 
     protected void RunSimulationInternal(DataContainer data)
     {
-        this.emotionEngine = new EmotionEngine();
+        this.EmotionEngine = new EmotionEngine();
 
         if (data != null)
         {
@@ -42,9 +44,12 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
             this.musicSource.clip = musicTrack;
             this.musicSource.Play();
 
-            emotionEngine.Initialize(musicTrack.length, audioSignal, data, 1024);
-            emotionEngine.Precompute();
-            eventQueue = emotionEngine.BuildEventQueue();
+            EmotionEngine.Initialize(musicTrack.length, audioSignal, data, 1024);
+            EmotionEngine.Precompute();
+            eventQueue = EmotionEngine.BuildEventQueue();
+
+            this.EventDispatcher = gameObject.AddComponent<ProceduralEventDispatcher>();
+            this.EventDispatcher.Initialize();
 
             debugPanel.ShowPanel();
         }
@@ -64,19 +69,6 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
         RunSimulationInternal(container);
     }
 
-    public List<EmotionEvent> AccumulateCloseEvents()
-    {
-        float threshold = emotionEngine.BeatDurationNormalized * .25f;
-        List <EmotionEvent> list = new List<EmotionEvent>();
-
-        float timeNormalized = Mathf.Clamp01(CurrentTime / musicTrack.length);
-
-        while (eventQueue.Count > 0 && eventQueue.Peek().timestamp <= timeNormalized + threshold )
-            list.Add(eventQueue.Dequeue());
-
-        return list;
-    }
-
     private float beatCounter = 0f;
 
     public void Update()
@@ -86,27 +78,6 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
 
         // We need the time to be synchronized!
         CurrentTime = musicSource.time;
-
-        // Minimum time resolution for events? TODO: gather and dispatch
-        if (beatCounter >= emotionEngine.BeatDuration * .25f)
-        {
-            beatCounter = 0f;
-            List<EmotionEvent> eventGroup = AccumulateCloseEvents();
-
-            if (eventGroup.Count > 0)
-            {
-                string debugText = "Total events: " + eventGroup.Count + "\n";
-                foreach (EmotionEvent e in eventGroup)
-                    debugText += e.ToString() + "-" + e.timestamp + "\n";
-
-                debugPanel.DebugText(debugText);
-
-                Debug.Log(debugText);
-            }
-        }
-        else
-        {
-            beatCounter += Time.deltaTime;
-        }
+        EventDispatcher.UpdateEvents(CurrentTimeNormalized);
     }
 }
