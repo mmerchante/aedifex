@@ -25,7 +25,7 @@ public class EmotionVisualizer : MonoBehaviour
     {
         this.timeline = timeline;
         engine = new EmotionEngine();
-        engine.Initialize(samples, container, 1024 * 10);
+        engine.Initialize(timeline.Duration, samples, container, 1024 * 10);
         engine.Precompute();
     }
 

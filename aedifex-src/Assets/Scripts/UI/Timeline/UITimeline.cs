@@ -13,6 +13,9 @@ public class UITimeline : MonoBehaviour
 {
     private const float MIN_ZOOM = .1f;
 
+    public UIEditorScreen editorScreen;
+    public ProceduralEngine proceduralEngine;
+
     // In seconds
     public float CurrentIndicator { get; protected set; }
     public float CurrentIndicatorNormalized { get { return CurrentIndicator; } }
@@ -47,6 +50,7 @@ public class UITimeline : MonoBehaviour
     public Button loadButton;
     public Button playButton;
     public Button precomputeButton;
+    public Button runSimulationButton;
 
     private RectTransform rect;
 
@@ -58,6 +62,7 @@ public class UITimeline : MonoBehaviour
         this.saveButton.onClick.AddListener(Save);
         this.loadButton.onClick.AddListener(Load);
         this.precomputeButton.onClick.AddListener(Precompute);
+        this.runSimulationButton.onClick.AddListener(RunSimulation);
 
         Initialize();
     }
@@ -70,6 +75,12 @@ public class UITimeline : MonoBehaviour
         container.beatsPerMinute = CurrentBPM;
 
         return container;
+    }
+
+    public void RunSimulation()
+    {
+        editorScreen.HideEditorScreen();
+        proceduralEngine.RunSimulation(source.clip, SerializeAllTimeline());
     }
 
     public void Precompute()

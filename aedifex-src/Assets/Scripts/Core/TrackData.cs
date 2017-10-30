@@ -31,7 +31,7 @@ public class TrackChunkData
     public float end;
     public EmotionData startData; // Eh, no time for abstraction
     public EmotionData endData;
-    public IntensityCurve intensityCurve; // A bit rigid, 
+    public IntensityCurve intensityCurve; // A bit rigid
     public bool isVariation;
     public int harmonySequenceNumber;
 
@@ -43,10 +43,15 @@ public class TrackChunkData
         effectiveIntensityCurve = GetAnimationCurve(intensityCurve);
     }
 
+    public float GetIntensity(float normalizedTime)
+    {
+        float localTime = Mathf.Clamp01((normalizedTime - start) / (end - start));
+        return effectiveIntensityCurve.Evaluate(localTime);
+    }
+
     public EmotionSpectrum Evaluate(float normalizedTime)
     {
-        float localTime = Mathf.Clamp01((normalizedTime - start) / (end-start));
-        return startData.GetSpectrum() * effectiveIntensityCurve.Evaluate(localTime);
+        return startData.GetSpectrum() * GetIntensity(normalizedTime);
     }
 
     public static AnimationCurve GetAnimationCurve(IntensityCurve type)
