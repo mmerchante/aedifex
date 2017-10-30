@@ -9,11 +9,15 @@ public class WaveformTrack : AbstractTrack
 
     protected override void OnAwake()
     {
-        this.visualizer = this.gameObject.AddComponent<SimpleAudioVisualizer>();
+        if(!visualizer)
+            visualizer = this.gameObject.AddComponent<SimpleAudioVisualizer>();
     }
 
     public void InitializeWaveData(float[] waveform, int downsample, Color trackColor)
     {
+        if (!visualizer)
+            visualizer = this.gameObject.AddComponent<SimpleAudioVisualizer>();
+
         this.waveform = waveform;
         this.visualizer.Initialize(this.waveform, downsample);
         this.TrackColor = trackColor;

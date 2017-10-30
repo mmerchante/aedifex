@@ -43,7 +43,7 @@ public class TrackChunkEditor<T> : MonoBehaviour, ITrackChunkEditor<T>
         if (Chunk != null && ClipboardChunk != null)
         {
             Chunk.CopyFromChunk(ClipboardChunk);
-            OnInitialize();
+            OnInitialize(); 
         }
     }
 
