@@ -67,9 +67,9 @@ public class TrackChunkEditor<T> : MonoBehaviour, ITrackChunkEditor<T>
 
     public void UpdatePosition()
     {
-        Chunk.RectTransform.GetWorldCorners(corners);
-        Vector2 chunkPosition = corners[0];
-        this.rect.anchoredPosition = chunkPosition - Vector2.up * 10f;
+        //Chunk.RectTransform.GetWorldCorners(corners);
+        //Vector2 chunkPosition = corners[0];
+        //this.rect.anchoredPosition = chunkPosition - Vector2.up * 10f;
     }
 
     public virtual void Update()

@@ -7,6 +7,7 @@ public class AbstractTrack : MonoBehaviour
 {
     public string TrackName { get; set; }
     public Color TrackColor { get; protected set; }
+    public TrackCategory TrackCategory { get; set; }
 
     protected UITimeline timeline;
     protected RectTransform rect;
@@ -136,10 +137,12 @@ public class AbstractTrack : MonoBehaviour
         TrackData d = new TrackData();
         d.trackId = TrackName;
         d.trackType = TrackType.None;
+        d.category = TrackCategory;
         return d;
     }
 
     public virtual void LoadFromData(TrackData data)
     {
+        TrackCategory = data.category;
     }
 }

@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TrackCategory
+{
+    None = 0,
+    MainMelody = 1,     // Anything that is core to the song
+    Rythm = 2,          // Rythmic tracks are good for camera cuts
+    Support = 3,        // Harmonic progressions, etc.
+    Misc = 4,           // Noises, specific events, etc
+}
+
 public enum IntensityCurve
 {
     Invariant = 0,
@@ -81,6 +90,7 @@ public class TrackData
 {
     public string trackId;
     public TrackType trackType;
+    public TrackCategory category;
     public List<TrackChunkData> chunks = new List<TrackChunkData>();
 }
 

@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class TrackEditor : MonoBehaviour
 {
     public Button addTrackButton;
+    public GameObject trackInfoContainer;
+    public Text selectedTrackNameLabel;
+    public Dropdown selectedTrackCategoryDropdown;
 
     public EmotionChunkEditor emotionChunkEditor;
 
@@ -20,11 +23,30 @@ public class TrackEditor : MonoBehaviour
     private float duration;
 
     private UITimeline timeline;
+    private AbstractTrack selectedTrack;
 
     public void Awake()
     {
         this.rect = GetComponent<RectTransform>();
         this.addTrackButton.onClick.AddListener(OnAddTrackButtonClicked);
+
+        List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();
+
+        foreach (string n in System.Enum.GetNames(typeof(TrackCategory)))
+            options.Add(new Dropdown.OptionData(n));
+
+        selectedTrackCategoryDropdown.options = options;
+    }
+
+    public void Update()
+    {
+        trackInfoContainer.SetActive(selectedTrack != null);
+
+        if(selectedTrack != null)
+        {
+            selectedTrackNameLabel.text = selectedTrack.TrackName;
+            selectedTrack.TrackCategory = (TrackCategory)selectedTrackCategoryDropdown.value;
+        }
     }
 
     protected void OnAddTrackButtonClicked()
@@ -68,7 +90,7 @@ public class TrackEditor : MonoBehaviour
         track.TrackName = name;
 
         TrackHeader header = InstantiateHeader();
-        header.Initialize(track);
+        header.Initialize(this, track);
 
         return track;
     }
@@ -109,5 +131,11 @@ public class TrackEditor : MonoBehaviour
             list.Add(t.GetTrackData());
 
         return list;
+    }
+
+    public void SelectTrack(AbstractTrack track)
+    {
+        this.selectedTrack = track;
+        this.selectedTrackCategoryDropdown.value = (int)selectedTrack.TrackCategory;
     }
 }
