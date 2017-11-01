@@ -1,0 +1,280 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Linq;
+
+public interface ProceduralCameraStrategy
+{
+}
+
+/// <summary>
+/// The director will consume emotion events and choose the specific camera cut/blends and behaviours.
+/// Note that it cannot precompute all shots because the procedural scene may change.
+/// </summary>
+public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDirector>, ProceduralEventListener
+{
+    public enum TransitionType
+    {
+        Cut = 0,
+        Blend = 1,
+        // TODO: Fades, swipes, etc
+    }
+
+    public struct CutRange
+    {
+        public float minCutTime;
+        public float maxCutTime;
+    }
+
+    public struct ShotInformation
+    {
+        // Is it complete?
+        public bool valid;
+
+        // The duration of this potential shot
+        // TODO: think about using CutRange instead, assume the maxCut as ending but let the director cut before
+        public float duration;
+
+        // In current+duration time (+- some margin), this event is the one that will be used for the next shot
+        public EmotionEvent selectedNextEventTrigger;
+        
+        // Straight cut or blend, etc
+        public TransitionType type;
+
+        // The specific camera that will be used
+        public ProceduralCamera selectedCamera;
+
+        // The camera behaviour, which knows about interest points etc.
+        public ProceduralCameraStrategy strategy;
+    }
+
+    public ProceduralCamera[] cameras;
+
+    private ProceduralCamera currentCamera;
+
+    private ShotInformation currentCut;
+    private ShotInformation nextCut;
+
+    private float currentCutTime = 0f;
+
+    private SmoothVector3 smoothPosition;
+    private SmoothQuaternion smoothRotation;
+
+    private EmotionEngine emotionEngine;
+
+    public void InitializeDirector(EmotionEngine engine)
+    {
+        this.emotionEngine = engine;
+        this.currentCut = new ShotInformation();
+        this.nextCut = new ShotInformation();
+
+        ProceduralEngine.Instance.EventDispatcher.AddListener(this);
+    }
+
+    protected void StartTransition(ShotInformation cut)
+    {
+        if(cut.valid)
+        {
+            this.currentCut = cut;
+            this.currentCamera = cut.selectedCamera;
+            this.currentCutTime = 0f;
+            this.nextCut = new ShotInformation();
+        }
+    }
+
+    protected float GetEventPriority(EmotionEvent e)
+    {
+        float p = e.intensity;
+
+        if (e.type == EmotionEvent.EmotionEventType.LocalMaximum || e.type == EmotionEvent.EmotionEventType.LocalMinimum)
+            p *= 2f;
+
+        // Some bias towards start
+        if (e.type == EmotionEvent.EmotionEventType.Start)
+            p *= 1.25f;
+
+        if (e.chunkDelimitsSegment)
+            p *= 1.75f;
+
+        // TODO: check if the track is rythm or melody, etc!!
+        
+        return p;
+    }
+
+    /// <summary>
+    /// This method has two main responsibilities:
+    /// - Decide when to cut
+    /// - Decide what shot to take
+    /// It is tied to a specific event, so that the chaining of shots is possible
+    /// </summary>
+    protected ShotInformation TryFindCut(EmotionEvent e)
+    {
+        ShotInformation cut = new ShotInformation();
+        cut.valid = false;
+        cut.selectedCamera = cameras[0]; // TODO: for now...
+        cut.type = TransitionType.Cut; // TODO: for now...
+        cut.strategy = null;
+
+        CutRange searchRange = EvaluateCutRangeForEvent(e);
+        float minT = e.timestamp + searchRange.minCutTime;
+        float maxT = e.timestamp + searchRange.maxCutTime;
+
+        List<EmotionEventGroup> searchEvents = ProceduralEngine.Instance.EventDispatcher.GetFutureEventGroups(minT, maxT);
+        searchEvents = searchEvents.OrderBy(x => x.GetPriority()).ToList();
+
+        // TODO: Add some bias based on proximity to current time?
+        EmotionEventGroup selectedGroup = ProceduralEngine.SelectRandomWeighted(searchEvents, x => x.GetPriority());
+
+        // We found a subset of interesting events, now we can pick something in here
+        if(selectedGroup != null && selectedGroup.events.Count > 0)
+        {
+            EmotionEvent selectedEvent = ProceduralEngine.SelectRandomWeighted(selectedGroup.events, x => GetEventPriority(x));
+            cut.valid = true;
+            cut.duration = selectedEvent.timestamp - e.timestamp;
+
+            float margin = emotionEngine.BeatDurationNormalized * 2f;
+            float fuzzyDuration = cut.duration + ProceduralEngine.RandomRange(-margin, margin);
+
+            if (fuzzyDuration > searchRange.minCutTime && fuzzyDuration < searchRange.maxCutTime)
+                cut.duration = fuzzyDuration;
+        }
+
+        return cut;
+    }
+
+    /// <summary>
+    /// This method doesn't say the specific cut, but it constraints
+    /// the time for searching interesting events. It is mostly
+    /// dependent on current emotion.
+    /// </summary>
+    public CutRange EvaluateCutRangeForEvent(EmotionEvent e)
+    {
+        CutRange range = new CutRange();
+        EmotionSpectrum emotionAtEventTime = emotionEngine.GetSpectrum(e.timestamp);
+        CoreEmotion coreEmotion = EmotionEngine.FindMainEmotion(emotionAtEventTime);
+
+        // In seconds
+        switch (coreEmotion)
+        {
+            case CoreEmotion.Joy:
+                range.minCutTime = ProceduralEngine.RandomRange(1f, 2f);
+                range.maxCutTime = ProceduralEngine.RandomRange(7f, 8f);
+                break;
+            case CoreEmotion.Trust:
+                range.minCutTime = ProceduralEngine.RandomRange(2f, 5f);
+                range.maxCutTime = ProceduralEngine.RandomRange(7f, 10f);
+                break;
+            case CoreEmotion.Fear:
+                range.minCutTime = ProceduralEngine.RandomRange(1f, 2f);
+                range.maxCutTime = ProceduralEngine.RandomRange(4f, 6f);
+                break;
+            case CoreEmotion.Surprise:
+                range.minCutTime = ProceduralEngine.RandomRange(.25f, 1f);
+                range.maxCutTime = ProceduralEngine.RandomRange(2f, 4f);
+                break;
+            case CoreEmotion.Sadness:
+                range.minCutTime = ProceduralEngine.RandomRange(1f, 2f);
+                range.maxCutTime = ProceduralEngine.RandomRange(6f, 8f);
+                break;
+            case CoreEmotion.Disgust:
+                range.minCutTime = ProceduralEngine.RandomRange(1f, 2f);
+                range.maxCutTime = ProceduralEngine.RandomRange(3f, 4f);
+                break;
+            case CoreEmotion.Anger:
+                range.minCutTime = ProceduralEngine.RandomRange(.1f, 1f);
+                range.maxCutTime = ProceduralEngine.RandomRange(1f, 3f);
+                break;
+            case CoreEmotion.Anticipation:
+                range.minCutTime = ProceduralEngine.RandomRange(.2f, 1f);
+                range.maxCutTime = ProceduralEngine.RandomRange(3f, 4f);
+                break;
+        }
+
+        switch (e.type)
+        {
+            case EmotionEvent.EmotionEventType.Start:
+                // Longer cuts when showing for first time
+                range.minCutTime *= e.chunkDelimitsSegment ? 1f : .75f;
+                range.maxCutTime *= e.chunkDelimitsSegment ? 1f : .75f;
+                break;
+            case EmotionEvent.EmotionEventType.End:
+                // Longer cuts when something disappears for good
+                range.minCutTime *= e.chunkDelimitsSegment ? 1.5f : 1f;
+                range.maxCutTime *= e.chunkDelimitsSegment ? 1.5f : 1f;
+                break;
+            case EmotionEvent.EmotionEventType.LocalMaximum:
+                range.minCutTime *= 1f;
+                range.maxCutTime *= 1f;
+                break;
+            case EmotionEvent.EmotionEventType.LocalMinimum:
+                range.minCutTime *= 2f;
+                range.maxCutTime *= 2f;
+                break;
+        }
+
+        range.minCutTime = Mathf.Max(0.01f, range.minCutTime);
+        range.maxCutTime = Mathf.Max(0.02f, range.maxCutTime);
+
+        float tmp = range.minCutTime;
+        range.minCutTime = Mathf.Min(range.minCutTime, range.maxCutTime);
+        range.maxCutTime = Mathf.Max(tmp, range.maxCutTime);
+
+        // Normalize times
+        range.minCutTime /= ProceduralEngine.Instance.Duration;
+        range.maxCutTime /= ProceduralEngine.Instance.Duration;
+        return range;
+    }
+
+    protected void UpdateTransform()
+    {
+        float smoothTime = 0f;
+
+        switch (currentCut.type)
+        {
+            case TransitionType.Cut:
+                smoothTime = 0f;
+                break;
+            case TransitionType.Blend:
+                smoothTime = .5f;  // TODO: Procedural smooth time
+                break;
+        }
+
+        if (currentCamera)
+        {
+            smoothPosition.Target = currentCamera.EvaluateTargetPosition();
+            smoothRotation.Target = currentCamera.EvaluateTargetRotation();
+        }
+
+        smoothPosition.Update(smoothTime, Time.deltaTime);
+        smoothRotation.Update(smoothTime, Time.deltaTime);
+
+        this.transform.position = smoothPosition.Value;
+        this.transform.rotation = smoothRotation.Value;
+    }
+
+    public void UpdateCamera(float t)
+    {
+        UpdateTransform();
+
+        if (currentCutTime < currentCut.duration)
+        {
+            currentCutTime += Time.deltaTime;
+
+            if (!nextCut.valid)
+                nextCut = TryFindCut(currentCut.selectedNextEventTrigger);
+        }
+        else
+        {
+            if(nextCut.valid)
+                StartTransition(nextCut);
+        }
+    }
+
+    public void OnEventDispatch(EmotionEvent e)
+    {
+    }
+
+    public void OnEventGroupDispatch(EmotionEventGroup g)
+    {
+    }
+}

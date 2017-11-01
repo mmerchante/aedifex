@@ -5,6 +5,66 @@ using UnityEngine;
 public class EmotionEventGroup
 {
     public List<EmotionEvent> events = new List<EmotionEvent>();
+
+    /// <summary>
+    /// This method defines the importance of a group of events.
+    /// It is useful because we can make sure we make decisions closer to 
+    /// important changes.
+    /// TODO: Cache maybe?
+    /// </summary>
+    public float GetPriority()
+    {
+        float intensity = GetTotalIntensity();
+
+        int introducedElements = GetIntroducedElements();
+        float newElementsContribution = 1f + introducedElements * 2f; // Very important
+
+        int elementsChanged = GetElementsChanged();
+        float elementsChangedContribution = 1f + Mathf.Abs(elementsChanged) * .5f;
+
+        return intensity * newElementsContribution * elementsChangedContribution;
+    }
+
+    public float GetTotalIntensity()
+    {
+        float accum = 0f;
+
+        foreach (EmotionEvent e in events)
+            accum += e.intensity;
+
+        return accum;
+    }
+
+    public int GetIntroducedElements()
+    {
+        int accum = 0;
+
+        foreach (EmotionEvent e in events)
+            if (e.type == EmotionEvent.EmotionEventType.Start && e.chunkDelimitsSegment)
+                accum++;
+
+        return accum;
+    }
+
+    /// <summary>
+    /// Positive for new elements
+    /// Negative for lost elements
+    /// </summary>
+    public int GetElementsChanged()
+    {
+        int accum = 0;
+
+        foreach (EmotionEvent e in events)
+        {
+            if (e.type == EmotionEvent.EmotionEventType.Start)
+                accum++;
+
+            if (e.type == EmotionEvent.EmotionEventType.End)
+                accum--;
+        }
+
+        return accum;
+    }
 }
 
 public interface ProceduralEventListener
@@ -39,6 +99,12 @@ public class ProceduralEventDispatcher : MonoBehaviour
         GatherEvents();
     }
 
+    public void AddListener(ProceduralEventListener l )
+    {
+        this.listeners.Remove(l);
+        this.listeners.Add(l);
+    }
+
     public int GetGroupIndexForNormalizedTime(float t)
     {
         return Mathf.Clamp(Mathf.FloorToInt(t / (timeResolution / ProceduralEngine.Instance.Duration)), 0, eventGroups.Length - 1);
@@ -64,20 +130,25 @@ public class ProceduralEventDispatcher : MonoBehaviour
         }
     }
 
-    public List<EmotionEventGroup> GetFutureEventGroups(float timeOffsetNormalized)
+    public List<EmotionEventGroup> GetFutureEventGroups(float timeMin, float timeMax)
     {
         List<EmotionEventGroup> list = new List<EmotionEventGroup>();
 
-        int startGroup = GetGroupIndexForNormalizedTime(ProceduralEngine.Instance.CurrentTimeNormalized) + 1;
-        int endGroup = GetGroupIndexForNormalizedTime(ProceduralEngine.Instance.CurrentTimeNormalized + timeOffsetNormalized);
+        int startGroup = GetGroupIndexForNormalizedTime(timeMin) + 1;
+        int endGroup = GetGroupIndexForNormalizedTime(timeMax);
 
-        if(startGroup != endGroup && startGroup < endGroup)
+        if (startGroup != endGroup && startGroup < endGroup)
         {
             for (int i = startGroup; i <= endGroup; ++i)
                 list.Add(eventGroups[i]);
         }
 
         return list;
+    }
+
+    public List<EmotionEventGroup> GetFutureEventGroups(float timeOffsetNormalized)
+    {
+        return GetFutureEventGroups(ProceduralEngine.Instance.CurrentTimeNormalized, ProceduralEngine.Instance.CurrentTimeNormalized + timeOffsetNormalized);
     }
     
     public void UpdateEvents(float currentTimeNormalized)
@@ -99,7 +170,7 @@ public class ProceduralEventDispatcher : MonoBehaviour
                 foreach (EmotionEvent e in g.events)
                     currentQueue.Enqueue(e);
             
-                Debug.Log("Dispatched a group with " + g.events.Count + " events. Index: " + currentGroup);
+                //Debug.Log("Dispatched a group with " + g.events.Count + " events. Index: " + currentGroup);
             }
         }
         else
@@ -116,7 +187,7 @@ public class ProceduralEventDispatcher : MonoBehaviour
             foreach (ProceduralEventListener l in listeners)
                 l.OnEventDispatch(e);
 
-            Debug.Log("Dispatched event: " + e.ToString() + " at time " + currentTimeNormalized);
+            //Debug.Log("Dispatched event: " + e.ToString() + " at time " + currentTimeNormalized);
         }
     }
 }

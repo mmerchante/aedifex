@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
 {
@@ -16,6 +17,8 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
     public float CurrentTimeNormalized { get { return CurrentTime / musicTrack.length; } }
     public float Duration { get { return musicTrack.length; } }
     public bool Running { get; protected set; }
+
+    public System.Random RNG { get; protected set; }
 
     private Queue<EmotionEvent> eventQueue = new Queue<EmotionEvent>();
 
@@ -36,6 +39,7 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
     protected void RunSimulationInternal(DataContainer data)
     {
         this.EmotionEngine = new EmotionEngine();
+        this.RNG = new System.Random(14041956);
 
         if (data != null)
         {
@@ -79,5 +83,26 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
         // We need the time to be synchronized!
         CurrentTime = musicSource.time;
         EventDispatcher.UpdateEvents(CurrentTimeNormalized);
+    }
+
+    public static float RandomRange(float min, float max)
+    {
+        return Mathf.Lerp(min, max, (float) Instance.RNG.NextDouble());
+    }
+
+    public static T SelectRandomWeighted<T>(List<T> list, System.Func<T, float> func)
+    {
+        float sum = list.Sum(x => func(x));
+        float value = (float) Instance.RNG.NextDouble();
+
+        foreach(T t in list.OrderByDescending(func))
+        {
+            value -= func(t);
+
+            if (value <= 0f)
+                return t;
+        }
+
+        return default(T);
     }
 }

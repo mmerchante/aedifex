@@ -353,4 +353,25 @@ public class EmotionEngine
 
         return list;
     }
+
+    // Eh, this is a very simplistic way of approaching the problem
+    public static CoreEmotion FindMainEmotion(EmotionSpectrum e)
+    {
+        CoreEmotion maxEmotion = CoreEmotion.Anger;
+        float maxEmotionValue = 0f;
+        // TODO: Add some fuzziness by picking the best 3 emotions found, or something
+
+        foreach (CoreEmotion core in System.Enum.GetValues(typeof(CoreEmotion)))
+        {
+            float dot = new EmotionSpectrum(EmotionVector.GetCoreEmotion(core)).Dot(e);
+
+            if(dot > maxEmotionValue)
+            {
+                maxEmotion = core;
+                maxEmotionValue = dot;
+            }
+        }
+
+        return CoreEmotion.Joy;
+    }
 }

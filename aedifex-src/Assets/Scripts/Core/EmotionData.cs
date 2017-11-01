@@ -2,11 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CoreEmotion
+{
+    Joy = 0,
+    Trust = 1,
+    Fear = 2,
+    Surprise = 3,
+    Sadness = 4,
+    Disgust = 5,
+    Anger = 6,
+    Anticipation = 7
+}
+
 [System.Serializable]
 public class EmotionVector
 {
     public float angle;
     public float intensity;
+
+    public static EmotionVector GetCoreEmotion(CoreEmotion e)
+    {
+        float quarterPI = Mathf.PI / 4f;
+
+        switch (e)
+        {
+            case CoreEmotion.Joy:
+                return new EmotionVector(quarterPI * 2f, 1f);
+            case CoreEmotion.Trust:
+                return new EmotionVector(quarterPI * 1f, 1f);
+            case CoreEmotion.Fear:
+                return new EmotionVector(0f, 1f);
+            case CoreEmotion.Surprise:
+                return new EmotionVector(quarterPI * 7f, 1f);
+            case CoreEmotion.Sadness:
+                return new EmotionVector(quarterPI * 6f, 1f);
+            case CoreEmotion.Disgust:
+                return new EmotionVector(quarterPI * 5f, 1f);
+            case CoreEmotion.Anger:
+                return new EmotionVector(quarterPI * 4f, 1f);
+            case CoreEmotion.Anticipation:
+                return new EmotionVector(quarterPI * 3f, 1f);
+        }
+
+        return new EmotionVector(0f, 0f);
+    }
 
     public static Color GetColorForAngle(float angle)
     {
@@ -149,6 +188,19 @@ public class EmotionSpectrum
     // This is the evaluated result of the sum of a set of gaussians.
     public EmotionSpectrum(EmotionData gaussians)
     {
+        for (int i = 0; i < SAMPLE_COUNT; ++i)
+        {
+            float t = i / (float)SAMPLE_COUNT;
+            samples[i] = gaussians.Evaluate(t * 2f * Mathf.PI);
+        }
+    }
+
+    // This is the evaluated result of a single gaussian
+    public EmotionSpectrum(EmotionVector vector)
+    {
+        EmotionData gaussians = new EmotionData();
+        gaussians.AddVector(vector);
+
         for (int i = 0; i < SAMPLE_COUNT; ++i)
         {
             float t = i / (float)SAMPLE_COUNT;
