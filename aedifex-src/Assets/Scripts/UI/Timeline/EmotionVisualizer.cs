@@ -25,7 +25,7 @@ public class EmotionVisualizer : MonoBehaviour
     {
         this.timeline = timeline;
         engine = new EmotionEngine();
-        engine.Initialize(timeline.Duration, samples, container, 1024 * 10);
+        engine.Initialize(timeline.Duration, samples, container, 1024 * 4);
         engine.Precompute();
     }
 
@@ -37,7 +37,7 @@ public class EmotionVisualizer : MonoBehaviour
         if (engine != null)
         {
             EmotionSpectrum spectrum = engine.GetSpectrum(timeline.CurrentIndicatorNormalized);
-            currentSpectrum = EmotionSpectrum.Lerp(currentSpectrum, spectrum, .1f);
+            currentSpectrum = EmotionSpectrum.Lerp(currentSpectrum, spectrum, .3f);
 
             rect.GetWorldCorners(shapeCorners);
             DrawEmotionShape(new Rect(shapeCorners[0], shapeCorners[2] - shapeCorners[0]), Color.magenta, currentSpectrum);

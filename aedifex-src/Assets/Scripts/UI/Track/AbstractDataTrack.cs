@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public abstract class AbstractDataTrack<T> : AbstractTrack, IPointerClickHandler, IDragHandler
 {
@@ -49,7 +50,14 @@ public abstract class AbstractDataTrack<T> : AbstractTrack, IPointerClickHandler
             chunk.Initialize(timeline, this, lastData, timeline.GetTimelineRect(), position.x, width);
 
             if (chunks.Count > 0)
-                chunk.CopyFromChunk(chunks[chunks.Count - 1]);
+            {
+                AbstractTrackChunk<T> lastClosest = chunks.FindLast(x => x.Position < position.x);
+
+                if (lastClosest)
+                    chunk.CopyFromChunk(lastClosest);
+                else
+                    chunk.CopyFromChunk(chunks[chunks.Count - 1]);
+            }
 
             chunk.UpdateTrackChunk(zoom, offset);
             this.chunks.Add(chunk);

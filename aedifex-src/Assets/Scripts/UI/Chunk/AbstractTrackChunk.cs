@@ -215,7 +215,7 @@ public class AbstractTrackChunk<T> : MonoBehaviour, IDragHandler, IPointerDownHa
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Middle)
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
             track.RemoveChunk(this);
         }

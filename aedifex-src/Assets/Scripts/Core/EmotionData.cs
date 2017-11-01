@@ -145,7 +145,7 @@ public class EmotionData
         if (normalization == 0f)
             normalization = 1f;
 
-        return result / normalization;
+        return result;// / normalization;
     }
     
     public float Evaluate(float t)
@@ -162,7 +162,7 @@ public class EmotionData
         if (normalization == 0f)
             normalization = 1f;
 
-        return result / normalization;
+        return result;// / normalization;
     }
 
     public EmotionSpectrum GetSpectrum()
