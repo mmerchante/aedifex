@@ -55,6 +55,8 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
             this.EventDispatcher = gameObject.AddComponent<ProceduralEventDispatcher>();
             this.EventDispatcher.Initialize();
 
+            ProceduralCameraDirector.Instance.InitializeDirector(EmotionEngine);
+
             debugPanel.ShowPanel();
         }
     }
@@ -82,7 +84,12 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
 
         // We need the time to be synchronized!
         CurrentTime = musicSource.time;
+
+        if (CurrentTime >= 1f)
+            Running = false;
+
         EventDispatcher.UpdateEvents(CurrentTimeNormalized);
+        ProceduralCameraDirector.Instance.UpdateCamera(CurrentTimeNormalized);
     }
 
     public static float RandomRange(float min, float max)

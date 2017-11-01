@@ -17,10 +17,10 @@ public class EmotionEventGroup
         float intensity = GetTotalIntensity();
 
         int introducedElements = GetIntroducedElements();
-        float newElementsContribution = 1f + introducedElements * 2f; // Very important
+        float newElementsContribution = 1f + introducedElements * 4f; // Very important
 
         int elementsChanged = GetElementsChanged();
-        float elementsChangedContribution = 1f + Mathf.Abs(elementsChanged) * .5f;
+        float elementsChangedContribution = 1f + Mathf.Abs(elementsChanged) * 2f;
 
         return intensity * newElementsContribution * elementsChangedContribution;
     }
@@ -120,7 +120,6 @@ public class ProceduralEventDispatcher : MonoBehaviour
         while(queue.Count > 0)
         {
             EmotionEvent e = queue.Dequeue();
-
             int index = GetGroupIndexForNormalizedTime(e.timestamp);
 
             if (eventGroups[index] == null)
@@ -140,7 +139,8 @@ public class ProceduralEventDispatcher : MonoBehaviour
         if (startGroup != endGroup && startGroup < endGroup)
         {
             for (int i = startGroup; i <= endGroup; ++i)
-                list.Add(eventGroups[i]);
+                if(eventGroups[i] != null)
+                    list.Add(eventGroups[i]);
         }
 
         return list;

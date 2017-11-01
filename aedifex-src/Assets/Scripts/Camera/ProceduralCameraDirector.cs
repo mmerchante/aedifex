@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public interface ProceduralCameraStrategy
-{
-}
-
 /// <summary>
 /// The director will consume emotion events and choose the specific camera cut/blends and behaviours.
 /// Note that it cannot precompute all shots because the procedural scene may change.
@@ -48,25 +44,24 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         public ProceduralCameraStrategy strategy;
     }
 
-    public ProceduralCamera[] cameras;
-
     private ProceduralCamera currentCamera;
 
-    private ShotInformation currentCut;
-    private ShotInformation nextCut;
+    private ShotInformation currentShot;
+    private ShotInformation nextShot;
 
     private float currentCutTime = 0f;
-
-    private SmoothVector3 smoothPosition;
-    private SmoothQuaternion smoothRotation;
-
+    
     private EmotionEngine emotionEngine;
+
+    // The list of shots already made -- useful for reusing ideas to build coherency
+    private List<ShotInformation> history = new List<ShotInformation>();
 
     public void InitializeDirector(EmotionEngine engine)
     {
         this.emotionEngine = engine;
-        this.currentCut = new ShotInformation();
-        this.nextCut = new ShotInformation();
+        this.currentShot = new ShotInformation();
+        this.currentShot.valid = false;
+        this.nextShot = new ShotInformation();
 
         ProceduralEngine.Instance.EventDispatcher.AddListener(this);
     }
@@ -75,10 +70,12 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
     {
         if(cut.valid)
         {
-            this.currentCut = cut;
-            this.currentCamera = cut.selectedCamera;
+            this.history.Add(cut);
+            this.currentShot = cut;
             this.currentCutTime = 0f;
-            this.nextCut = new ShotInformation();
+            this.nextShot = new ShotInformation();
+            this.currentCamera = cut.selectedCamera;
+            this.currentCamera.InitializeCamera(currentShot.strategy);
         }
     }
 
@@ -96,9 +93,27 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         if (e.chunkDelimitsSegment)
             p *= 1.75f;
 
+        // Even if this is considered in intensity, we want to bias these cases
+        if (e.harmonicDifference > 0)
+            p *= 1 + e.harmonicDifference * .5f;
+
         // TODO: check if the track is rythm or melody, etc!!
         
         return p;
+    }
+
+    protected ProceduralCamera InstanceCamera()
+    {
+        GameObject go = new GameObject("ShotCamera-" + history.Count);
+        return go.AddComponent<ProceduralCamera>();
+    }
+
+    protected ProceduralCameraStrategy TryFindStrategy(EmotionEvent e)
+    {
+        // TODO: Build and compare different strategies
+        ProceduralCameraStrategy s = new ProceduralCameraStrategy();
+        s.Evaluate(e);
+        return s;
     }
 
     /// <summary>
@@ -109,17 +124,21 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
     /// </summary>
     protected ShotInformation TryFindCut(EmotionEvent e)
     {
-        ShotInformation cut = new ShotInformation();
-        cut.valid = false;
-        cut.selectedCamera = cameras[0]; // TODO: for now...
-        cut.type = TransitionType.Cut; // TODO: for now...
-        cut.strategy = null;
+        ShotInformation shot = new ShotInformation();
+        shot.valid = false;
+        shot.selectedCamera = null;
+        shot.type = TransitionType.Cut; // TODO: for now...
+        shot.strategy = null;
 
         CutRange searchRange = EvaluateCutRangeForEvent(e);
         float minT = e.timestamp + searchRange.minCutTime;
         float maxT = e.timestamp + searchRange.maxCutTime;
 
         List<EmotionEventGroup> searchEvents = ProceduralEngine.Instance.EventDispatcher.GetFutureEventGroups(minT, maxT);
+
+        if (searchEvents.Count == 0)
+            return shot;
+
         searchEvents = searchEvents.OrderBy(x => x.GetPriority()).ToList();
 
         // TODO: Add some bias based on proximity to current time?
@@ -129,17 +148,28 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         if(selectedGroup != null && selectedGroup.events.Count > 0)
         {
             EmotionEvent selectedEvent = ProceduralEngine.SelectRandomWeighted(selectedGroup.events, x => GetEventPriority(x));
-            cut.valid = true;
-            cut.duration = selectedEvent.timestamp - e.timestamp;
+            shot.duration = selectedEvent.timestamp - e.timestamp;
 
+            // Try cutting before, but not after
             float margin = emotionEngine.BeatDurationNormalized * 2f;
-            float fuzzyDuration = cut.duration + ProceduralEngine.RandomRange(-margin, margin);
+            float fuzzyDuration = shot.duration + ProceduralEngine.RandomRange(-margin, 0f);
 
             if (fuzzyDuration > searchRange.minCutTime && fuzzyDuration < searchRange.maxCutTime)
-                cut.duration = fuzzyDuration;
+                shot.duration = fuzzyDuration;
+
+            int cameraTries = 10;
+
+            for (int i = 0; i < cameraTries; ++i)
+                if(shot.strategy == null)
+                    shot.strategy = TryFindStrategy(selectedEvent);
+
+            shot.valid = shot.strategy != null;
         }
 
-        return cut;
+        if (shot.valid)
+            shot.selectedCamera = InstanceCamera();
+
+        return shot;
     }
 
     /// <summary>
@@ -169,12 +199,12 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
                 range.maxCutTime = ProceduralEngine.RandomRange(4f, 6f);
                 break;
             case CoreEmotion.Surprise:
-                range.minCutTime = ProceduralEngine.RandomRange(.25f, 1f);
-                range.maxCutTime = ProceduralEngine.RandomRange(2f, 4f);
+                range.minCutTime = ProceduralEngine.RandomRange(.25f, .5f);
+                range.maxCutTime = ProceduralEngine.RandomRange(1f, 2f);
                 break;
             case CoreEmotion.Sadness:
-                range.minCutTime = ProceduralEngine.RandomRange(1f, 2f);
-                range.maxCutTime = ProceduralEngine.RandomRange(6f, 8f);
+                range.minCutTime = ProceduralEngine.RandomRange(1f, 1.5f);
+                range.maxCutTime = ProceduralEngine.RandomRange(2f, 4f);
                 break;
             case CoreEmotion.Disgust:
                 range.minCutTime = ProceduralEngine.RandomRange(1f, 2f);
@@ -185,8 +215,8 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
                 range.maxCutTime = ProceduralEngine.RandomRange(1f, 3f);
                 break;
             case CoreEmotion.Anticipation:
-                range.minCutTime = ProceduralEngine.RandomRange(.2f, 1f);
-                range.maxCutTime = ProceduralEngine.RandomRange(3f, 4f);
+                range.minCutTime = ProceduralEngine.RandomRange(.2f, .4f);
+                range.maxCutTime = ProceduralEngine.RandomRange(1f, 3f);
                 break;
         }
 
@@ -227,51 +257,62 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
     protected void UpdateTransform()
     {
-        float smoothTime = 0f;
+        //float transitionTime = 0f;
 
-        switch (currentCut.type)
-        {
-            case TransitionType.Cut:
-                smoothTime = 0f;
-                break;
-            case TransitionType.Blend:
-                smoothTime = .5f;  // TODO: Procedural smooth time
-                break;
-        }
+        //switch (currentCut.type)
+        //{
+        //    case TransitionType.Cut:
+        //        transitionTime = 0f;
+        //        break;
+        //    case TransitionType.Blend:
+        //        transitionTime = .5f;  // TODO: Procedural smooth time
+        //        break;
+        //}
 
-        if (currentCamera)
-        {
-            smoothPosition.Target = currentCamera.EvaluateTargetPosition();
-            smoothRotation.Target = currentCamera.EvaluateTargetRotation();
-        }
+        this.transform.position = currentShot.selectedCamera.transform.position;
+        this.transform.rotation = currentShot.selectedCamera.transform.rotation;
 
-        smoothPosition.Update(smoothTime, Time.deltaTime);
-        smoothRotation.Update(smoothTime, Time.deltaTime);
+        //if (currentCamera)
+        //{
+        //    smoothPosition.Target = currentCamera.EvaluateTargetPosition();
+        //    smoothRotation.Target = currentCamera.EvaluateTargetRotation();
+        //}
 
-        this.transform.position = smoothPosition.Value;
-        this.transform.rotation = smoothRotation.Value;
+        //smoothPosition.Update(smoothTime, Time.deltaTime);
+        //smoothRotation.Update(smoothTime, Time.deltaTime);
+
+        //this.transform.position = smoothPosition.Value;
+        //this.transform.rotation = smoothRotation.Value;
     }
 
     public void UpdateCamera(float t)
     {
+        if (!currentShot.valid)
+            return;
+
         UpdateTransform();
 
-        if (currentCutTime < currentCut.duration)
+        if (currentCutTime < currentShot.duration)
         {
-            currentCutTime += Time.deltaTime;
+            // Normalized delta
+            currentCutTime += Time.deltaTime / ProceduralEngine.Instance.Duration;
 
-            if (!nextCut.valid)
-                nextCut = TryFindCut(currentCut.selectedNextEventTrigger);
+            if (!nextShot.valid)
+                nextShot = TryFindCut(currentShot.selectedNextEventTrigger);
         }
         else
         {
-            if(nextCut.valid)
-                StartTransition(nextCut);
+            if(nextShot.valid)
+                StartTransition(nextShot);
+            else
+                nextShot = TryFindCut(currentShot.selectedNextEventTrigger);
         }
     }
 
     public void OnEventDispatch(EmotionEvent e)
     {
+        if (!currentShot.valid)
+            StartTransition(TryFindCut(e));
     }
 
     public void OnEventGroupDispatch(EmotionEventGroup g)

@@ -29,6 +29,7 @@ public struct EmotionEvent
     public int trackIndex;
     public int chunkIndex;
     public bool chunkDelimitsSegment; // Is this chunk a start/end of a long segment? Useful for the emotional state machine
+    public int harmonicDifference;
 }
 
 public class EmotionEngine
@@ -144,6 +145,11 @@ public class EmotionEngine
         e.intensity = GetIntensityForChunkStartEvent(track, chunk, chunkIndex);
         e.associatedEmotion = new EmotionSpectrum(); // TODO: expectation/surprise
         e.chunkDelimitsSegment = IsChunkSegmentDelimiter(track, chunk, chunkIndex, e.type);
+        e.harmonicDifference = 0;
+
+        if (chunkIndex > 0)
+            e.harmonicDifference = Mathf.Abs(chunk.harmonySequenceNumber - track.chunks[chunkIndex - 1].harmonySequenceNumber);
+
         return e;
     }
 
@@ -157,6 +163,11 @@ public class EmotionEngine
         e.intensity = GetIntensityForChunkStartEvent(track, chunk, chunkIndex);
         e.associatedEmotion = new EmotionSpectrum(); // TODO: expectation/surprise 
         e.chunkDelimitsSegment = IsChunkSegmentDelimiter(track, chunk, chunkIndex, e.type);
+        e.harmonicDifference = 0;
+
+        if (chunkIndex > 0)
+            e.harmonicDifference = Mathf.Abs(chunk.harmonySequenceNumber - track.chunks[chunkIndex - 1].harmonySequenceNumber);
+
         return e;
     }
 
