@@ -35,7 +35,7 @@ public class ProceduralCameraStrategy
     protected virtual CompositionSettings ProposeComposition()
     {
         CompositionSettings c = new CompositionSettings();
-        c.screenTarget = Vector2.one * .5f; // The center
+        c.screenTarget = new Vector2(.1f, .9f); // The center
         c.deadZoneSize = 0f;
         return c;
     }

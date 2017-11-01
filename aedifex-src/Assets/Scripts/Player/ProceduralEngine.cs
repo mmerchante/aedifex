@@ -85,7 +85,7 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
         // We need the time to be synchronized!
         CurrentTime = musicSource.time;
 
-        if (CurrentTime >= 1f)
+        if (CurrentTimeNormalized >= 1f)
             Running = false;
 
         EventDispatcher.UpdateEvents(CurrentTimeNormalized);
