@@ -88,7 +88,8 @@ public class TrackChunkData
 [System.Serializable]
 public class TrackData
 {
-    public string trackId;
+    public int id; // 0 is invalid
+    public string trackName;
     public TrackType trackType;
     public TrackCategory category;
     public List<TrackChunkData> chunks = new List<TrackChunkData>();

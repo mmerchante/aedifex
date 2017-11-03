@@ -1,19 +1,22 @@
 {
     "tracks": [
         {
-            "trackId": "Waveform",
+            "id": 0,
+            "trackName": "Waveform",
             "trackType": 0,
             "category": 0,
             "chunks": []
         },
         {
-            "trackId": "Beat",
+            "id": 0,
+            "trackName": "Beat",
             "trackType": 0,
             "category": 0,
             "chunks": []
         },
         {
-            "trackId": "Violin Buildup",
+            "id": 1,
+            "trackName": "ViolinBuildup",
             "trackType": 2,
             "category": 3,
             "chunks": [
@@ -76,7 +79,8 @@
             ]
         },
         {
-            "trackId": "Piano Harmony",
+            "id": 2,
+            "trackName": "PianoHarmony",
             "trackType": 2,
             "category": 1,
             "chunks": [
@@ -196,7 +200,7 @@
                             }
                         ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -220,7 +224,7 @@
                             }
                         ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 1
                 },
@@ -252,7 +256,7 @@
                             }
                         ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": true,
                     "harmonySequenceNumber": 2
                 },
@@ -284,7 +288,7 @@
                             }
                         ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": true,
                     "harmonySequenceNumber": 3
                 },
@@ -955,7 +959,8 @@
             ]
         },
         {
-            "trackId": "Piano Keys",
+            "id": 3,
+            "trackName": "PianoKeys",
             "trackType": 2,
             "category": 2,
             "chunks": [
@@ -3650,7 +3655,8 @@
             ]
         },
         {
-            "trackId": "StringMelody1",
+            "id": 4,
+            "trackName": "StringMelody1",
             "trackType": 2,
             "category": 3,
             "chunks": [
@@ -5033,7 +5039,8 @@
             ]
         },
         {
-            "trackId": "Brass",
+            "id": 5,
+            "trackName": "Brass",
             "trackType": 2,
             "category": 3,
             "chunks": [
@@ -5192,7 +5199,8 @@
             ]
         },
         {
-            "trackId": "Low bass",
+            "id": 6,
+            "trackName": "LowBass",
             "trackType": 2,
             "category": 4,
             "chunks": [
@@ -5319,7 +5327,8 @@
             ]
         },
         {
-            "trackId": "Sincopated hits ",
+            "id": 7,
+            "trackName": "SincopatedBass",
             "trackType": 2,
             "category": 2,
             "chunks": [
@@ -5518,7 +5527,8 @@
             ]
         },
         {
-            "trackId": "Synth1",
+            "id": 8,
+            "trackName": "Synth1",
             "trackType": 2,
             "category": 4,
             "chunks": [
@@ -5885,7 +5895,8 @@
             ]
         },
         {
-            "trackId": "Vocals",
+            "id": 9,
+            "trackName": "Vocals",
             "trackType": 2,
             "category": 1,
             "chunks": [
@@ -6014,6 +6025,10 @@
                             {
                                 "angle": 0.8277177214622498,
                                 "intensity": 0.24141822755336762
+                            },
+                            {
+                                "angle": -1.3409675359725953,
+                                "intensity": 0.3023957908153534
                             }
                         ]
                     },
@@ -6026,6 +6041,10 @@
                             {
                                 "angle": 0.8277177214622498,
                                 "intensity": 0.24141822755336762
+                            },
+                            {
+                                "angle": -1.3409675359725953,
+                                "intensity": 0.3023957908153534
                             }
                         ]
                     },
@@ -6100,7 +6119,8 @@
             ]
         },
         {
-            "trackId": "HighPitchNoise",
+            "id": 10,
+            "trackName": "HighPitchNoise",
             "trackType": 2,
             "category": 4,
             "chunks": [
@@ -6299,7 +6319,8 @@
             ]
         },
         {
-            "trackId": "Bass harmony",
+            "id": 11,
+            "trackName": "BassHarmony",
             "trackType": 2,
             "category": 0,
             "chunks": [
@@ -6402,7 +6423,8 @@
             ]
         },
         {
-            "trackId": "StringMelody2",
+            "id": 12,
+            "trackName": "StringMelody2",
             "trackType": 2,
             "category": 1,
             "chunks": [
@@ -7297,7 +7319,8 @@
             ]
         },
         {
-            "trackId": "Violin staccato",
+            "id": 13,
+            "trackName": "Staccato",
             "trackType": 2,
             "category": 3,
             "chunks": [
@@ -8720,7 +8743,8 @@
             ]
         },
         {
-            "trackId": "Drums",
+            "id": 14,
+            "trackName": "Drums",
             "trackType": 2,
             "category": 2,
             "chunks": [
@@ -10047,7 +10071,8 @@
             ]
         },
         {
-            "trackId": "End Bass",
+            "id": 15,
+            "trackName": "EndBass",
             "trackType": 2,
             "category": 2,
             "chunks": [
@@ -10078,7 +10103,8 @@
             ]
         },
         {
-            "trackId": "AnticipationBass",
+            "id": 16,
+            "trackName": "AnticipationBass",
             "trackType": 2,
             "category": 3,
             "chunks": [
@@ -10157,7 +10183,8 @@
             ]
         },
         {
-            "trackId": "Strings 2",
+            "id": 17,
+            "trackName": "Strings2",
             "trackType": 2,
             "category": 3,
             "chunks": [

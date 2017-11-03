@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class ESMTriggerTrackBased : EmotionStateMachineTrigger
 {
+    public TrackCategory FilterByCategory = TrackCategory.None;
+
     public override bool Evaluate(EmotionStateMachineState source, EmotionStateMachineState target, EmotionStateMachineData data)
     {
         // TODO: We need to specify track information on runtime

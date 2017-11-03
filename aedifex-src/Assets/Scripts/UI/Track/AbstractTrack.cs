@@ -8,6 +8,7 @@ public class AbstractTrack : MonoBehaviour
     public string TrackName { get; set; }
     public Color TrackColor { get; protected set; }
     public TrackCategory TrackCategory { get; set; }
+    public int TrackId { get; protected set; }
 
     protected UITimeline timeline;
     protected RectTransform rect;
@@ -38,8 +39,9 @@ public class AbstractTrack : MonoBehaviour
     {
     }
 
-    public void Initialize(UITimeline timeline)
+    public void Initialize(UITimeline timeline, int id)
     {
+        this.TrackId = id;
         this.timeline = timeline;
         this.trackDuration = timeline.Duration;
         this.TrackColor = Random.ColorHSV(0f, 1f, 1f, 1f, .75f, 1f);
@@ -135,14 +137,19 @@ public class AbstractTrack : MonoBehaviour
     public virtual TrackData GetTrackData()
     {
         TrackData d = new TrackData();
-        d.trackId = TrackName;
+        d.trackName = TrackName;
         d.trackType = TrackType.None;
         d.category = TrackCategory;
+        d.id = TrackId;
         return d;
     }
 
     public virtual void LoadFromData(TrackData data)
     {
         TrackCategory = data.category;
+
+        // If id is valid
+        if(data.id > 0)
+            TrackId = data.id;
     }
 }

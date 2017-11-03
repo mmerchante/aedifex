@@ -158,7 +158,7 @@ public class UITimeline : MonoBehaviour
         timeSlider.Initialize(source.clip.length);
         trackEditor.Initialize(this, source.clip.length);
 
-        minimapTrack.Initialize(this);
+        minimapTrack.Initialize(this, 0);
         minimapTrack.InitializeWaveData(audioEngine.Samples, 1024 * 8, Color.white);
         trackEditor.InstantiateWaveformTrack(audioEngine.Samples, 1024, Color.yellow, "Waveform");
         trackEditor.InstantiateWaveformTrack(audioEngine.BeatSamples, 1, Color.red, "Beat");

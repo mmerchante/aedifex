@@ -44,7 +44,7 @@ public class TrackEditor : MonoBehaviour
 
         if(selectedTrack != null)
         {
-            selectedTrackNameLabel.text = selectedTrack.TrackName;
+            selectedTrackNameLabel.text = selectedTrack.TrackName + "-" + selectedTrack.TrackId;
             selectedTrack.TrackCategory = (TrackCategory)selectedTrackCategoryDropdown.value;
         }
     }
@@ -66,17 +66,27 @@ public class TrackEditor : MonoBehaviour
             track.UpdateTrack(zoom, offset, bpm, bpb);
     }
 
+    private int GetNextId()
+    {
+        int maxId = 0;
+
+        foreach (AbstractTrack t in tracks)
+            maxId = Mathf.Max(t.TrackId, maxId);
+
+        return maxId + 1;
+    }
+
     public EmotionTrack InstantiateEmotionTrack(string name = "Emotion Track")
     {
         EmotionTrack track = InstantiateTrack<EmotionTrack>(emotionTrackPrefab, name);
-        track.Initialize(timeline);
+        track.Initialize(timeline, GetNextId());
         return track;
     }
 
     public WaveformTrack InstantiateWaveformTrack(float[] samples, int downsample, Color trackColor, string name)
     {
         WaveformTrack track = InstantiateTrack<WaveformTrack>(waveformTrackPrefab, name);
-        track.Initialize(timeline);
+        track.Initialize(timeline, 0);
         track.InitializeWaveData(samples, downsample, trackColor);
         return track;
     }
@@ -117,7 +127,7 @@ public class TrackEditor : MonoBehaviour
         {
             if(t.trackType == TrackType.Emotion)
             {
-                EmotionTrack track = InstantiateEmotionTrack(t.trackId);
+                EmotionTrack track = InstantiateEmotionTrack(t.trackName);
                 track.LoadFromData(t);
             }
         }
