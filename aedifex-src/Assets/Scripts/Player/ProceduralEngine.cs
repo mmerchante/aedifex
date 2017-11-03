@@ -77,6 +77,19 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
 
     private float beatCounter = 0f;
 
+    public EmotionSpectrum GetCurrentEmotion()
+    {
+        if (Running)
+            return EmotionEngine.GetSpectrum(CurrentTimeNormalized);
+
+        return new EmotionSpectrum();
+    }
+
+    public EmotionSpectrum GetCurrentEmotion(TrackData track)
+    {
+        return new EmotionSpectrum();
+    }
+
     public void Update()
     {
         if (!Running)

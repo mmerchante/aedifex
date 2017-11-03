@@ -40,9 +40,9 @@ public class ProceduralCamera : MonoBehaviour
 
     public void Awake()
     {
-        PositionDampingTime = 1f;
-        RotationDampingTime = 1f;
-        SetNoiseParameters(.3f, 1f);
+        PositionDampingTime = .1f;
+        RotationDampingTime = .1f;
+        SetNoiseParameters(.01f, 1f);
     }
 
     public void InitializeCamera(ProceduralCameraStrategy strategy)
