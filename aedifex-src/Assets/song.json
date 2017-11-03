@@ -24,16 +24,48 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 2.4196550846099855,
-                                "intensity": 0.47078123688697817
+                                "angle": 2.3390049934387209,
+                                "intensity": 0.5484820008277893
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 2.4196550846099855,
-                                "intensity": 0.47078123688697817
+                                "angle": 2.3390049934387209,
+                                "intensity": 0.5484820008277893
+                            }
+                        ]
+                    },
+                    "intensityCurve": 1,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7289789915084839,
+                    "end": 0.788085401058197,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.3390049934387209,
+                                "intensity": 0.5484820008277893
+                            },
+                            {
+                                "angle": 1.1867027282714844,
+                                "intensity": 0.2876233458518982
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.3390049934387209,
+                                "intensity": 0.5484820008277893
+                            },
+                            {
+                                "angle": 1.1867027282714844,
+                                "intensity": 0.2876233458518982
                             }
                         ]
                     },
@@ -119,8 +151,8 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": -1.4833569526672364,
-                                "intensity": 0.19019891321659089
+                                "angle": -1.5553580522537232,
+                                "intensity": 0.35618141293525698
                             },
                             {
                                 "angle": 1.1775838136672974,
@@ -131,8 +163,8 @@
                     "endData": {
                         "vectors": [
                             {
-                                "angle": -1.4833569526672364,
-                                "intensity": 0.19019891321659089
+                                "angle": -1.5553580522537232,
+                                "intensity": 0.35618141293525698
                             },
                             {
                                 "angle": 1.1775838136672974,
@@ -161,38 +193,6 @@
                             {
                                 "angle": -1.5576156377792359,
                                 "intensity": 0.41728630661964419
-                            }
-                        ]
-                    },
-                    "intensityCurve": 0,
-                    "isVariation": false,
-                    "harmonySequenceNumber": 0
-                },
-                {
-                    "type": 1,
-                    "start": 0.5245693325996399,
-                    "end": 0.539345920085907,
-                    "startData": {
-                        "vectors": [
-                            {
-                                "angle": -1.557615876197815,
-                                "intensity": 0.41728630661964419
-                            },
-                            {
-                                "angle": -0.3609476685523987,
-                                "intensity": 0.5302116274833679
-                            }
-                        ]
-                    },
-                    "endData": {
-                        "vectors": [
-                            {
-                                "angle": -1.557615876197815,
-                                "intensity": 0.41728630661964419
-                            },
-                            {
-                                "angle": -0.3609476685523987,
-                                "intensity": 0.5302116274833679
                             }
                         ]
                     },
@@ -1345,7 +1345,7 @@
                 },
                 {
                     "type": 1,
-                    "start": 0.9457024931907654,
+                    "start": 0.9407769441604614,
                     "end": 0.9851067662239075,
                     "startData": {
                         "vectors": [
@@ -3290,7 +3290,7 @@
                 {
                     "type": 1,
                     "start": 0.8865960836410523,
-                    "end": 0.8890588283538818,
+                    "end": 0.8915216326713562,
                     "startData": {
                         "vectors": [
                             {
@@ -3314,7 +3314,7 @@
                 {
                     "type": 1,
                     "start": 0.8915216326713562,
-                    "end": 0.8939843773841858,
+                    "end": 0.8964471220970154,
                     "startData": {
                         "vectors": [
                             {
@@ -3338,7 +3338,7 @@
                 {
                     "type": 1,
                     "start": 0.8964471220970154,
-                    "end": 0.8989099264144898,
+                    "end": 0.9013726711273193,
                     "startData": {
                         "vectors": [
                             {
@@ -3362,7 +3362,7 @@
                 {
                     "type": 1,
                     "start": 0.9013726711273193,
-                    "end": 0.9038354754447937,
+                    "end": 0.9062982201576233,
                     "startData": {
                         "vectors": [
                             {
@@ -3386,7 +3386,7 @@
                 {
                     "type": 1,
                     "start": 0.9062982201576233,
-                    "end": 0.9087609648704529,
+                    "end": 0.9112237691879273,
                     "startData": {
                         "vectors": [
                             {
@@ -3410,7 +3410,7 @@
                 {
                     "type": 1,
                     "start": 0.9112237691879273,
-                    "end": 0.9136865139007568,
+                    "end": 0.9161492586135864,
                     "startData": {
                         "vectors": [
                             {
@@ -3434,7 +3434,7 @@
                 {
                     "type": 1,
                     "start": 0.9161492586135864,
-                    "end": 0.9186120629310608,
+                    "end": 0.9210748076438904,
                     "startData": {
                         "vectors": [
                             {
@@ -3458,7 +3458,7 @@
                 {
                     "type": 1,
                     "start": 0.9210748076438904,
-                    "end": 0.92353755235672,
+                    "end": 0.9260003566741943,
                     "startData": {
                         "vectors": [
                             {
@@ -3482,7 +3482,7 @@
                 {
                     "type": 1,
                     "start": 0.9260003566741943,
-                    "end": 0.9284631013870239,
+                    "end": 0.9309259057044983,
                     "startData": {
                         "vectors": [
                             {
@@ -3506,7 +3506,7 @@
                 {
                     "type": 1,
                     "start": 0.9309259057044983,
-                    "end": 0.9333886504173279,
+                    "end": 0.9358513951301575,
                     "startData": {
                         "vectors": [
                             {
@@ -3530,7 +3530,7 @@
                 {
                     "type": 1,
                     "start": 0.9358513951301575,
-                    "end": 0.9383141994476318,
+                    "end": 0.9407769441604614,
                     "startData": {
                         "vectors": [
                             {
@@ -3553,8 +3553,80 @@
                 },
                 {
                     "type": 1,
-                    "start": 0.9407769441604614,
-                    "end": 0.943239688873291,
+                    "start": 0.7979364991188049,
+                    "end": 0.8003992438316345,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.336461067199707,
+                                "intensity": 0.47778332233428957
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.336461067199707,
+                                "intensity": 0.47778332233428957
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.8028619885444641,
+                    "end": 0.8053247928619385,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.336461067199707,
+                                "intensity": 0.47778332233428957
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.336461067199707,
+                                "intensity": 0.47778332233428957
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.793010950088501,
+                    "end": 0.7954736948013306,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.336461067199707,
+                                "intensity": 0.47778332233428957
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.336461067199707,
+                                "intensity": 0.47778332233428957
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.788085401058197,
+                    "end": 0.7905481457710266,
                     "startData": {
                         "vectors": [
                             {
@@ -3578,7 +3650,7 @@
             ]
         },
         {
-            "trackId": "ViolinMelody",
+            "trackId": "StringMelody1",
             "trackType": 2,
             "category": 3,
             "chunks": [
@@ -3593,8 +3665,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -3605,8 +3677,360 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "intensityCurve": 1,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.1773192137479782,
+                    "end": 0.19702135026454926,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.19702135026454926,
+                    "end": 0.2167234867811203,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.2167234867811203,
+                    "end": 0.23642562329769135,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.23642562329769135,
+                    "end": 0.2561277449131012,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.2561277449131012,
+                    "end": 0.27582988142967226,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.2955320179462433,
+                    "end": 0.31523415446281435,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.3349362909793854,
+                    "end": 0.3546384274959564,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.3546384274959564,
+                    "end": 0.37434056401252749,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.37434056401252749,
+                    "end": 0.3940427005290985,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2775893211364748,
+                                "intensity": 0.5354661345481873
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2775893211364748,
+                                "intensity": 0.5354661345481873
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "intensityCurve": 1,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.31523415446281435,
+                    "end": 0.3349362909793854,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.27582988142967226,
+                    "end": 0.2955320179462433,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.212872266769409,
+                                "intensity": 0.4043944180011749
+                            },
+                            {
+                                "angle": 0.17268137633800507,
+                                "intensity": 0.19399644434452058
                             }
                         ]
                     },
@@ -3625,8 +4049,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -3637,12 +4061,12 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -3657,8 +4081,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -3669,12 +4093,12 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -3689,8 +4113,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -3701,12 +4125,12 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -3721,8 +4145,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -3733,12 +4157,12 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -3753,8 +4177,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -3765,12 +4189,12 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -3785,8 +4209,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -3797,12 +4221,12 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -3817,8 +4241,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -3829,12 +4253,12 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -3849,8 +4273,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -3861,12 +4285,12 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -3881,8 +4305,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -3893,19 +4317,19 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
                 {
                     "type": 1,
-                    "start": 0.1773192137479782,
-                    "end": 0.19702135026454926,
+                    "start": 0.5713618993759155,
+                    "end": 0.5812129974365234,
                     "startData": {
                         "vectors": [
                             {
@@ -3913,8 +4337,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -3925,19 +4349,19 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
                 {
                     "type": 1,
-                    "start": 0.19702135026454926,
-                    "end": 0.2167234867811203,
+                    "start": 0.5812129974365234,
+                    "end": 0.5910640358924866,
                     "startData": {
                         "vectors": [
                             {
@@ -3945,8 +4369,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -3957,19 +4381,19 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
                 {
                     "type": 1,
-                    "start": 0.2167234867811203,
-                    "end": 0.23642562329769135,
+                    "start": 0.5910640358924866,
+                    "end": 0.6009151339530945,
                     "startData": {
                         "vectors": [
                             {
@@ -3977,8 +4401,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -3989,19 +4413,19 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
                 {
                     "type": 1,
-                    "start": 0.23642562329769135,
-                    "end": 0.2561277449131012,
+                    "start": 0.6009151339530945,
+                    "end": 0.6107661724090576,
                     "startData": {
                         "vectors": [
                             {
@@ -4009,8 +4433,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -4021,19 +4445,19 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
                 {
                     "type": 1,
-                    "start": 0.2561277449131012,
-                    "end": 0.27582988142967226,
+                    "start": 0.6107661724090576,
+                    "end": 0.6206172704696655,
                     "startData": {
                         "vectors": [
                             {
@@ -4041,8 +4465,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -4053,19 +4477,19 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
                 {
                     "type": 1,
-                    "start": 0.2955320179462433,
-                    "end": 0.31523415446281435,
+                    "start": 0.6206172704696655,
+                    "end": 0.6304683089256287,
                     "startData": {
                         "vectors": [
                             {
@@ -4073,8 +4497,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -4085,19 +4509,19 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
                 {
                     "type": 1,
-                    "start": 0.3349362909793854,
-                    "end": 0.3546384274959564,
+                    "start": 0.6304683089256287,
+                    "end": 0.6403194069862366,
                     "startData": {
                         "vectors": [
                             {
@@ -4105,8 +4529,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -4117,19 +4541,19 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
                 {
                     "type": 1,
-                    "start": 0.3546384274959564,
-                    "end": 0.37434056401252749,
+                    "start": 0.6403194069862366,
+                    "end": 0.6501704454421997,
                     "startData": {
                         "vectors": [
                             {
@@ -4137,8 +4561,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -4149,19 +4573,19 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
                 {
                     "type": 1,
-                    "start": 0.37434056401252749,
-                    "end": 0.3940427005290985,
+                    "start": 0.6501704454421997,
+                    "end": 0.6600215435028076,
                     "startData": {
                         "vectors": [
                             {
@@ -4169,8 +4593,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -4181,19 +4605,19 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
                 {
                     "type": 1,
-                    "start": 0.31523415446281435,
-                    "end": 0.3349362909793854,
+                    "start": 0.6600215435028076,
+                    "end": 0.6698725819587708,
                     "startData": {
                         "vectors": [
                             {
@@ -4201,8 +4625,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -4213,19 +4637,19 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
                 {
                     "type": 1,
-                    "start": 0.27582988142967226,
-                    "end": 0.2955320179462433,
+                    "start": 0.6698725819587708,
+                    "end": 0.6797236800193787,
                     "startData": {
                         "vectors": [
                             {
@@ -4233,8 +4657,8 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
@@ -4245,25 +4669,377 @@
                                 "intensity": 0.48738420009613039
                             },
                             {
-                                "angle": 0.26341718435287478,
-                                "intensity": 0.15137989819049836
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.6797236800193787,
+                    "end": 0.6895747184753418,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "intensityCurve": 1,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.6895747184753418,
+                    "end": 0.6994258165359497,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "intensityCurve": 1,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.6994258165359497,
+                    "end": 0.7092768549919128,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "intensityCurve": 1,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7092768549919128,
+                    "end": 0.7191279530525208,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "intensityCurve": 1,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7191279530525208,
+                    "end": 0.7289789915084839,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "intensityCurve": 1,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7289789915084839,
+                    "end": 0.7388300895690918,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "intensityCurve": 1,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7388300895690918,
+                    "end": 0.7486811280250549,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "intensityCurve": 1,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7486811280250549,
+                    "end": 0.7585322260856628,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "intensityCurve": 1,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7585322260856628,
+                    "end": 0.768383264541626,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "intensityCurve": 1,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.768383264541626,
+                    "end": 0.7782343626022339,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "intensityCurve": 1,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 1
+                },
+                {
+                    "type": 1,
+                    "start": 0.7782343626022339,
+                    "end": 0.788085401058197,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.302137851715088,
+                                "intensity": 0.48738420009613039
+                            },
+                            {
+                                "angle": 1.2230288982391358,
+                                "intensity": 0.28364691138267519
+                            }
+                        ]
+                    },
+                    "intensityCurve": 1,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 1
                 }
             ]
         },
         {
             "trackId": "Brass",
             "trackType": 2,
-            "category": 0,
+            "category": 3,
             "chunks": [
                 {
                     "type": 1,
-                    "start": 0.4728512465953827,
+                    "start": 0.46300017833709719,
                     "end": 0.4827023148536682,
                     "startData": {
                         "vectors": [
@@ -4287,8 +5063,8 @@
                 },
                 {
                     "type": 1,
-                    "start": 0.5516597628593445,
-                    "end": 0.5615108609199524,
+                    "start": 0.5418087244033814,
+                    "end": 0.5516597628593445,
                     "startData": {
                         "vectors": [
                             {
@@ -4305,27 +5081,27 @@
                             }
                         ]
                     },
-                    "intensityCurve": 3,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
                 {
                     "type": 1,
                     "start": 0.6304683089256287,
-                    "end": 0.6403194069862366,
+                    "end": 0.6452448964118958,
                     "startData": {
                         "vectors": [
                             {
-                                "angle": -0.7976673245429993,
-                                "intensity": 0.5122982263565064
+                                "angle": 2.279740333557129,
+                                "intensity": 0.38059282302856448
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": -0.7976673245429993,
-                                "intensity": 0.5122982263565064
+                                "angle": 2.279740333557129,
+                                "intensity": 0.38059282302856448
                             }
                         ]
                     },
@@ -4336,20 +5112,20 @@
                 {
                     "type": 1,
                     "start": 0.7092768549919128,
-                    "end": 0.7191279530525208,
+                    "end": 0.7240534424781799,
                     "startData": {
                         "vectors": [
                             {
-                                "angle": -0.7976673245429993,
-                                "intensity": 0.5122982263565064
+                                "angle": 2.3519208431243898,
+                                "intensity": 0.3676987886428833
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": -0.7976673245429993,
-                                "intensity": 0.5122982263565064
+                                "angle": 2.3519208431243898,
+                                "intensity": 0.3676987886428833
                             }
                         ]
                     },
@@ -4360,12 +5136,16 @@
                 {
                     "type": 1,
                     "start": 0.788085401058197,
-                    "end": 0.7979364991188049,
+                    "end": 0.8028619885444641,
                     "startData": {
                         "vectors": [
                             {
                                 "angle": -0.7976673245429993,
                                 "intensity": 0.5122982263565064
+                            },
+                            {
+                                "angle": 2.3338356018066408,
+                                "intensity": 0.24597789347171784
                             }
                         ]
                     },
@@ -4374,30 +5154,34 @@
                             {
                                 "angle": -0.7976673245429993,
                                 "intensity": 0.5122982263565064
+                            },
+                            {
+                                "angle": 2.3338356018066408,
+                                "intensity": 0.24597789347171784
                             }
                         ]
                     },
-                    "intensityCurve": 3,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
                 {
                     "type": 1,
-                    "start": 0.5713618993759155,
+                    "start": 0.5615108609199524,
                     "end": 0.5812129974365234,
                     "startData": {
                         "vectors": [
                             {
-                                "angle": -0.7976673245429993,
-                                "intensity": 0.5122982263565064
+                                "angle": 2.266845941543579,
+                                "intensity": 0.3257833421230316
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": -0.7976673245429993,
-                                "intensity": 0.5122982263565064
+                                "angle": 2.266845941543579,
+                                "intensity": 0.3257833421230316
                             }
                         ]
                     },
@@ -4408,9 +5192,9 @@
             ]
         },
         {
-            "trackId": "Low base",
+            "trackId": "Low bass",
             "trackType": 2,
-            "category": 0,
+            "category": 4,
             "chunks": [
                 {
                     "type": 1,
@@ -4443,16 +5227,16 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 2.30448317527771,
-                                "intensity": 0.3408900201320648
+                                "angle": 2.304481267929077,
+                                "intensity": 0.34088945388793948
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 2.30448317527771,
-                                "intensity": 0.3408900201320648
+                                "angle": 2.304481267929077,
+                                "intensity": 0.34088945388793948
                             }
                         ]
                     },
@@ -4467,16 +5251,16 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 1.9471431970596314,
-                                "intensity": 0.535207211971283
+                                "angle": 2.1395764350891115,
+                                "intensity": 0.4786674380302429
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 1.9471431970596314,
-                                "intensity": 0.535207211971283
+                                "angle": 2.1395764350891115,
+                                "intensity": 0.4786674380302429
                             }
                         ]
                     },
@@ -4491,16 +5275,16 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 1.9471442699432374,
-                                "intensity": 0.5352074503898621
+                                "angle": 2.140350818634033,
+                                "intensity": 0.4986954629421234
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 1.9471442699432374,
-                                "intensity": 0.5352074503898621
+                                "angle": 2.140350818634033,
+                                "intensity": 0.4986954629421234
                             }
                         ]
                     },
@@ -4515,16 +5299,16 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 1.9471462965011597,
-                                "intensity": 0.5352079272270203
+                                "angle": 2.155792713165283,
+                                "intensity": 0.49707290530204775
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 1.9471462965011597,
-                                "intensity": 0.5352079272270203
+                                "angle": 2.155792713165283,
+                                "intensity": 0.49707290530204775
                             }
                         ]
                     },
@@ -4535,9 +5319,9 @@
             ]
         },
         {
-            "trackId": "Sincopated bass 1",
+            "trackId": "Sincopated hits ",
             "trackType": 2,
-            "category": 0,
+            "category": 2,
             "chunks": [
                 {
                     "type": 1,
@@ -4546,16 +5330,16 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": -0.7506036758422852,
-                                "intensity": 0.2525363266468048
+                                "angle": -0.8312212228775024,
+                                "intensity": 0.3903340995311737
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": -0.7506036758422852,
-                                "intensity": 0.2525363266468048
+                                "angle": -0.8312212228775024,
+                                "intensity": 0.3903340995311737
                             }
                         ]
                     },
@@ -4570,16 +5354,16 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": -0.7203169465065002,
-                                "intensity": 0.26871421933174136
+                                "angle": 2.337320327758789,
+                                "intensity": 0.3015221357345581
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": -0.7203169465065002,
-                                "intensity": 0.26871421933174136
+                                "angle": 2.337320327758789,
+                                "intensity": 0.3015221357345581
                             }
                         ]
                     },
@@ -4594,16 +5378,16 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": -0.7941634058952332,
-                                "intensity": 0.24149096012115479
+                                "angle": 2.337320327758789,
+                                "intensity": 0.3015221357345581
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": -0.7941634058952332,
-                                "intensity": 0.24149096012115479
+                                "angle": 2.337320327758789,
+                                "intensity": 0.3015221357345581
                             }
                         ]
                     },
@@ -4618,16 +5402,16 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": -0.674774706363678,
-                                "intensity": 0.2837265729904175
+                                "angle": 2.337320327758789,
+                                "intensity": 0.3015221357345581
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": -0.674774706363678,
-                                "intensity": 0.2837265729904175
+                                "angle": 2.337320327758789,
+                                "intensity": 0.3015221357345581
                             }
                         ]
                     },
@@ -4642,16 +5426,16 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": -0.6747760772705078,
-                                "intensity": 0.2837260961532593
+                                "angle": 2.337320327758789,
+                                "intensity": 0.3015221357345581
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": -0.6747760772705078,
-                                "intensity": 0.2837260961532593
+                                "angle": 2.337320327758789,
+                                "intensity": 0.3015221357345581
                             }
                         ]
                     },
@@ -4666,16 +5450,16 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 2.420722723007202,
-                                "intensity": 0.48898637294769289
+                                "angle": 2.241164207458496,
+                                "intensity": 0.426064133644104
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 2.420722723007202,
-                                "intensity": 0.48898637294769289
+                                "angle": 2.241164207458496,
+                                "intensity": 0.426064133644104
                             }
                         ]
                     },
@@ -4690,16 +5474,16 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": -0.674774706363678,
-                                "intensity": 0.2837265729904175
+                                "angle": 2.337320327758789,
+                                "intensity": 0.3015221357345581
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": -0.674774706363678,
-                                "intensity": 0.2837265729904175
+                                "angle": 2.337320327758789,
+                                "intensity": 0.3015221357345581
                             }
                         ]
                     },
@@ -4714,16 +5498,16 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": -0.674774706363678,
-                                "intensity": 0.2837265729904175
+                                "angle": 2.337320327758789,
+                                "intensity": 0.3015221357345581
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": -0.674774706363678,
-                                "intensity": 0.2837265729904175
+                                "angle": 2.337320327758789,
+                                "intensity": 0.3015221357345581
                             }
                         ]
                     },
@@ -4734,9 +5518,9 @@
             ]
         },
         {
-            "trackId": "Synth 1",
+            "trackId": "Synth1",
             "trackType": 2,
-            "category": 0,
+            "category": 4,
             "chunks": [
                 {
                     "type": 1,
@@ -4745,20 +5529,20 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 2.319088935852051,
-                                "intensity": 0.24936836957931519
+                                "angle": -0.7288544774055481,
+                                "intensity": 0.37536659836769106
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 2.319088935852051,
-                                "intensity": 0.24936836957931519
+                                "angle": -0.7288544774055481,
+                                "intensity": 0.37536659836769106
                             }
                         ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -4769,20 +5553,20 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 2.3190906047821047,
-                                "intensity": 0.2493687868118286
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 2.3190906047821047,
-                                "intensity": 0.2493687868118286
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -4793,20 +5577,20 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 2.3190906047821047,
-                                "intensity": 0.2493687868118286
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 2.3190906047821047,
-                                "intensity": 0.2493687868118286
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -4817,20 +5601,20 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 2.3190906047821047,
-                                "intensity": 0.2493687868118286
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 2.3190906047821047,
-                                "intensity": 0.2493687868118286
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -4841,20 +5625,20 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 2.3190925121307375,
-                                "intensity": 0.24936920404434205
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 2.3190925121307375,
-                                "intensity": 0.24936920404434205
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -4865,20 +5649,20 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 2.3190925121307375,
-                                "intensity": 0.24936920404434205
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 2.3190925121307375,
-                                "intensity": 0.24936920404434205
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -4889,20 +5673,20 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 2.3190925121307375,
-                                "intensity": 0.24936920404434205
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 2.3190925121307375,
-                                "intensity": 0.24936920404434205
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -4913,20 +5697,20 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 2.319094181060791,
-                                "intensity": 0.24936960637569428
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 2.319094181060791,
-                                "intensity": 0.24936960637569428
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -4937,20 +5721,20 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 2.319094181060791,
-                                "intensity": 0.24936960637569428
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 2.319094181060791,
-                                "intensity": 0.24936960637569428
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -4961,20 +5745,20 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 2.319094181060791,
-                                "intensity": 0.24936960637569428
+                                "angle": 2.326364040374756,
+                                "intensity": 0.4418832063674927
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 2.319094181060791,
-                                "intensity": 0.24936960637569428
+                                "angle": 2.326364040374756,
+                                "intensity": 0.4418832063674927
                             }
                         ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -4985,24 +5769,16 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 0.02886032685637474,
-                                "intensity": 0.26857253909111025
-                            },
-                            {
-                                "angle": 2.2386510372161867,
-                                "intensity": 0.1881801187992096
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 0.02886032685637474,
-                                "intensity": 0.26857253909111025
-                            },
-                            {
-                                "angle": 2.2386510372161867,
-                                "intensity": 0.1881801187992096
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             }
                         ]
                     },
@@ -5017,24 +5793,24 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 0.028860589489340783,
-                                "intensity": 0.26857009530067446
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             },
                             {
-                                "angle": 2.2386560440063478,
-                                "intensity": 0.18818087875843049
+                                "angle": 0.12283514440059662,
+                                "intensity": 0.1813666820526123
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 0.028860589489340783,
-                                "intensity": 0.26857009530067446
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             },
                             {
-                                "angle": 2.2386560440063478,
-                                "intensity": 0.18818087875843049
+                                "angle": 0.12283514440059662,
+                                "intensity": 0.1813666820526123
                             }
                         ]
                     },
@@ -5049,24 +5825,24 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 0.028860703110694886,
-                                "intensity": 0.26857227087020876
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             },
                             {
-                                "angle": 2.238656759262085,
-                                "intensity": 0.18818096816539765
+                                "angle": 0.054294340312480929,
+                                "intensity": 0.10237322002649307
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 0.028860703110694886,
-                                "intensity": 0.26857227087020876
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             },
                             {
-                                "angle": 2.238656759262085,
-                                "intensity": 0.18818096816539765
+                                "angle": 0.054294340312480929,
+                                "intensity": 0.10237322002649307
                             }
                         ]
                     },
@@ -5081,24 +5857,24 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 0.028860703110694886,
-                                "intensity": 0.26857227087020876
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             },
                             {
-                                "angle": 2.238656759262085,
-                                "intensity": 0.18818096816539765
+                                "angle": -0.6491930484771729,
+                                "intensity": 0.1562243103981018
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 0.028860703110694886,
-                                "intensity": 0.26857227087020876
+                                "angle": 2.319087266921997,
+                                "intensity": 0.2493681013584137
                             },
                             {
-                                "angle": 2.238656759262085,
-                                "intensity": 0.18818096816539765
+                                "angle": -0.6491930484771729,
+                                "intensity": 0.1562243103981018
                             }
                         ]
                     },
@@ -5111,7 +5887,7 @@
         {
             "trackId": "Vocals",
             "trackType": 2,
-            "category": 0,
+            "category": 1,
             "chunks": [
                 {
                     "type": 1,
@@ -5152,16 +5928,16 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": -1.2406926155090333,
-                                "intensity": 0.24550509452819825
+                                "angle": -1.4313496351242066,
+                                "intensity": 0.49258702993392947
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": -1.2406926155090333,
-                                "intensity": 0.24550509452819825
+                                "angle": -1.4313496351242066,
+                                "intensity": 0.49258702993392947
                             }
                         ]
                     },
@@ -5208,16 +5984,16 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 1.0921564102172852,
-                                "intensity": 0.5607682466506958
+                                "angle": 1.1556578874588013,
+                                "intensity": 0.5439534783363342
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 1.0921564102172852,
-                                "intensity": 0.5607682466506958
+                                "angle": 1.1556578874588013,
+                                "intensity": 0.5439534783363342
                             }
                         ]
                     },
@@ -5232,16 +6008,24 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 1.0667518377304078,
-                                "intensity": 0.45424148440361025
+                                "angle": 1.3887896537780762,
+                                "intensity": 0.5061100721359253
+                            },
+                            {
+                                "angle": 0.8277177214622498,
+                                "intensity": 0.24141822755336762
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 1.0667518377304078,
-                                "intensity": 0.45424148440361025
+                                "angle": 1.3887896537780762,
+                                "intensity": 0.5061100721359253
+                            },
+                            {
+                                "angle": 0.8277177214622498,
+                                "intensity": 0.24141822755336762
                             }
                         ]
                     },
@@ -5309,7 +6093,7 @@
                             }
                         ]
                     },
-                    "intensityCurve": 2,
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 1
                 }
@@ -5318,7 +6102,7 @@
         {
             "trackId": "HighPitchNoise",
             "trackType": 2,
-            "category": 0,
+            "category": 4,
             "chunks": [
                 {
                     "type": 1,
@@ -5521,13 +6305,23 @@
             "chunks": [
                 {
                     "type": 1,
-                    "start": 0.5516597628593445,
-                    "end": 0.6304683089256287,
+                    "start": 0.4728512465953827,
+                    "end": 0.5516597628593445,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 1.7210102081298829,
+                                "intensity": 0.2078966498374939
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 1.7210102081298829,
+                                "intensity": 0.2078966498374939
+                            }
+                        ]
                     },
                     "intensityCurve": 0,
                     "isVariation": false,
@@ -5535,22 +6329,80 @@
                 },
                 {
                     "type": 1,
-                    "start": 0.4728512465953827,
-                    "end": 0.5516597628593445,
+                    "start": 0.5516597628593445,
+                    "end": 0.6304683089256287,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.348444700241089,
+                                "intensity": 0.20271040499210359
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.348444700241089,
+                                "intensity": 0.20271040499210359
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 1
+                },
+                {
+                    "type": 1,
+                    "start": 0.6304683089256287,
+                    "end": 0.7092768549919128,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 1.7585606575012208,
+                                "intensity": 0.22619788348674775
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 1.7585606575012208,
+                                "intensity": 0.22619788348674775
+                            }
+                        ]
                     },
                     "intensityCurve": 0,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7092768549919128,
+                    "end": 0.788085401058197,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.27722430229187,
+                                "intensity": 0.21910063922405244
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.27722430229187,
+                                "intensity": 0.21910063922405244
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 1
                 }
             ]
         },
         {
-            "trackId": "ViolinHarmony",
+            "trackId": "StringMelody2",
             "trackType": 2,
             "category": 1,
             "chunks": [
@@ -5585,16 +6437,16 @@
                     "startData": {
                         "vectors": [
                             {
-                                "angle": 2.2091305255889894,
-                                "intensity": 0.10926555842161179
+                                "angle": 2.2091307640075685,
+                                "intensity": 0.10926564782857895
                             }
                         ]
                     },
                     "endData": {
                         "vectors": [
                             {
-                                "angle": 2.2091305255889894,
-                                "intensity": 0.10926555842161179
+                                "angle": 2.2091307640075685,
+                                "intensity": 0.10926564782857895
                             }
                         ]
                     },
@@ -6105,6 +6957,158 @@
                     "startData": {
                         "vectors": [
                             {
+                                "angle": 0.7140247821807861,
+                                "intensity": 0.2697266638278961
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 0.7140247821807861,
+                                "intensity": 0.2697266638278961
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.3940427005290985,
+                    "end": 0.42852142453193667,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 0.7140247821807861,
+                                "intensity": 0.2697266638278961
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 0.7140247821807861,
+                                "intensity": 0.2697266638278961
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.42852142453193667,
+                    "end": 0.4334469735622406,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 1.1576567888259888,
+                                "intensity": 0.2171292006969452
+                            },
+                            {
+                                "angle": -0.6345067620277405,
+                                "intensity": 0.2717888653278351
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 1.1576567888259888,
+                                "intensity": 0.2171292006969452
+                            },
+                            {
+                                "angle": -0.6345067620277405,
+                                "intensity": 0.2717888653278351
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 1
+                },
+                {
+                    "type": 1,
+                    "start": 0.4334469735622406,
+                    "end": 0.45314911007881167,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 1.308841347694397,
+                                "intensity": 0.3151683509349823
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 1.308841347694397,
+                                "intensity": 0.3151683509349823
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 2
+                },
+                {
+                    "type": 1,
+                    "start": 0.4580746293067932,
+                    "end": 0.46300017833709719,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 1.389250636100769,
+                                "intensity": 0.29820623993873598
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 1.389250636100769,
+                                "intensity": 0.29820623993873598
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 3
+                },
+                {
+                    "type": 1,
+                    "start": 0.45314911007881167,
+                    "end": 0.4580746293067932,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 1.3319131135940552,
+                                "intensity": 0.2275448739528656
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 1.3319131135940552,
+                                "intensity": 0.2275448739528656
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 3
+                },
+                {
+                    "type": 1,
+                    "start": 0.46300017833709719,
+                    "end": 0.46792569756507876,
+                    "startData": {
+                        "vectors": [
+                            {
                                 "angle": 1.8933042287826539,
                                 "intensity": 0.3033917248249054
                             }
@@ -6119,6 +7123,174 @@
                         ]
                     },
                     "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 3
+                },
+                {
+                    "type": 1,
+                    "start": 0.46792569756507876,
+                    "end": 0.4728512465953827,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.0684142112731935,
+                                "intensity": 0.35275331139564516
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.0684142112731935,
+                                "intensity": 0.35275331139564516
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 3
+                },
+                {
+                    "type": 1,
+                    "start": 0.7289789915084839,
+                    "end": 0.7486811280250549,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 0.995578408241272,
+                                "intensity": 0.3032112121582031
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 0.995578408241272,
+                                "intensity": 0.3032112121582031
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": true,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7486811280250549,
+                    "end": 0.768383264541626,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 1.308841347694397,
+                                "intensity": 0.3151683509349823
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 1.308841347694397,
+                                "intensity": 0.3151683509349823
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 2
+                },
+                {
+                    "type": 1,
+                    "start": 0.768383264541626,
+                    "end": 0.7733088135719299,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 1.3319131135940552,
+                                "intensity": 0.2275448739528656
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 1.3319131135940552,
+                                "intensity": 0.2275448739528656
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 3
+                },
+                {
+                    "type": 1,
+                    "start": 0.7733088135719299,
+                    "end": 0.7782343626022339,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 1.389250636100769,
+                                "intensity": 0.29820623993873598
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 1.389250636100769,
+                                "intensity": 0.29820623993873598
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 3
+                },
+                {
+                    "type": 1,
+                    "start": 0.7782343626022339,
+                    "end": 0.7831598520278931,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 1.8933042287826539,
+                                "intensity": 0.3033917248249054
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 1.8933042287826539,
+                                "intensity": 0.3033917248249054
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 3
+                },
+                {
+                    "type": 1,
+                    "start": 0.7831598520278931,
+                    "end": 0.788085401058197,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 1.8933042287826539,
+                                "intensity": 0.3033917248249054
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 1.8933042287826539,
+                                "intensity": 0.3033917248249054
+                            }
+                        ]
+                    },
+                    "intensityCurve": 1,
                     "isVariation": false,
                     "harmonySequenceNumber": 3
                 }
@@ -7550,19 +8722,29 @@
         {
             "trackId": "Drums",
             "trackType": 2,
-            "category": 0,
+            "category": 2,
             "chunks": [
                 {
                     "type": 1,
                     "start": 0.4728512465953827,
                     "end": 0.47531402111053469,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7571,12 +8753,22 @@
                     "start": 0.48023954033851626,
                     "end": 0.4827023148536682,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7585,12 +8777,22 @@
                     "start": 0.4876278340816498,
                     "end": 0.49009060859680178,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7599,12 +8801,22 @@
                     "start": 0.4950161576271057,
                     "end": 0.4974789023399353,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7613,12 +8825,22 @@
                     "start": 0.5122554898262024,
                     "end": 0.5147182941436768,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7627,12 +8849,22 @@
                     "start": 0.5196437835693359,
                     "end": 0.5221065878868103,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7641,12 +8873,22 @@
                     "start": 0.5270321369171143,
                     "end": 0.5294948816299439,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7655,13 +8897,23 @@
                     "start": 0.5418087244033814,
                     "end": 0.5516597628593445,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.3721837997436525,
+                                "intensity": 0.6388351917266846
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.3721837997436525,
+                                "intensity": 0.6388351917266846
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
-                    "isVariation": false,
+                    "intensityCurve": 1,
+                    "isVariation": true,
                     "harmonySequenceNumber": 0
                 },
                 {
@@ -7669,12 +8921,22 @@
                     "start": 0.5516597628593445,
                     "end": 0.5541225671768189,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7683,12 +8945,22 @@
                     "start": 0.5024044513702393,
                     "end": 0.5048671960830689,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7697,12 +8969,22 @@
                     "start": 0.5073300004005432,
                     "end": 0.5097927451133728,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7711,12 +8993,22 @@
                     "start": 0.5319576263427734,
                     "end": 0.5344204306602478,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7725,12 +9017,22 @@
                     "start": 0.5344204306602478,
                     "end": 0.5368831753730774,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7739,12 +9041,22 @@
                     "start": 0.559048056602478,
                     "end": 0.5615108609199524,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7753,12 +9065,22 @@
                     "start": 0.5664364099502564,
                     "end": 0.5688991546630859,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7767,12 +9089,22 @@
                     "start": 0.5738247036933899,
                     "end": 0.5762874484062195,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7781,12 +9113,22 @@
                     "start": 0.5812129974365234,
                     "end": 0.583675742149353,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7795,12 +9137,22 @@
                     "start": 0.5861385464668274,
                     "end": 0.588601291179657,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7809,12 +9161,22 @@
                     "start": 0.5910640358924866,
                     "end": 0.5935268402099609,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7823,12 +9185,22 @@
                     "start": 0.5984523296356201,
                     "end": 0.6009151339530945,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7837,12 +9209,22 @@
                     "start": 0.6058406829833984,
                     "end": 0.608303427696228,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7851,12 +9233,22 @@
                     "start": 0.6107661724090576,
                     "end": 0.613228976726532,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7865,12 +9257,22 @@
                     "start": 0.613228976726532,
                     "end": 0.6156917214393616,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7879,13 +9281,23 @@
                     "start": 0.6206172704696655,
                     "end": 0.6304683089256287,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.3246870040893556,
+                                "intensity": 0.5486732721328735
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.3246870040893556,
+                                "intensity": 0.5486732721328735
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
-                    "isVariation": false,
+                    "intensityCurve": 1,
+                    "isVariation": true,
                     "harmonySequenceNumber": 0
                 },
                 {
@@ -7893,12 +9305,22 @@
                     "start": 0.6304683089256287,
                     "end": 0.632931113243103,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7907,12 +9329,22 @@
                     "start": 0.6353938579559326,
                     "end": 0.6378566026687622,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7921,12 +9353,22 @@
                     "start": 0.6378566026687622,
                     "end": 0.6403194069862366,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7935,12 +9377,22 @@
                     "start": 0.6403194069862366,
                     "end": 0.6427821516990662,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7949,12 +9401,22 @@
                     "start": 0.6501704454421997,
                     "end": 0.6526332497596741,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7963,12 +9425,22 @@
                     "start": 0.6526332497596741,
                     "end": 0.6550959944725037,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7977,12 +9449,22 @@
                     "start": 0.6452448964118958,
                     "end": 0.6477077007293701,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -7991,12 +9473,22 @@
                     "start": 0.6600215435028076,
                     "end": 0.6624842882156372,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -8005,12 +9497,22 @@
                     "start": 0.6649470329284668,
                     "end": 0.6674098372459412,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -8019,12 +9521,22 @@
                     "start": 0.6698725819587708,
                     "end": 0.6723353862762451,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -8033,12 +9545,22 @@
                     "start": 0.6747981309890747,
                     "end": 0.6772608757019043,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -8047,12 +9569,22 @@
                     "start": 0.6797236800193787,
                     "end": 0.6821864247322083,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -8061,12 +9593,22 @@
                     "start": 0.6846491694450378,
                     "end": 0.6871119737625122,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -8075,12 +9617,22 @@
                     "start": 0.6895747184753418,
                     "end": 0.6920375227928162,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -8089,13 +9641,23 @@
                     "start": 0.6994258165359497,
                     "end": 0.7092768549919128,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.3848297595977785,
+                                "intensity": 0.6311555504798889
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.3848297595977785,
+                                "intensity": 0.6311555504798889
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
-                    "isVariation": false,
+                    "intensityCurve": 1,
+                    "isVariation": true,
                     "harmonySequenceNumber": 0
                 },
                 {
@@ -8103,12 +9665,22 @@
                     "start": 0.7092768549919128,
                     "end": 0.7117396593093872,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -8117,12 +9689,358 @@
                     "start": 0.788085401058197,
                     "end": 0.7905481457710266,
                     "startData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
                     "endData": {
-                        "vectors": []
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
                     },
-                    "intensityCurve": 0,
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7142024040222168,
+                    "end": 0.7166651487350464,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7166651487350464,
+                    "end": 0.7191279530525208,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7191279530525208,
+                    "end": 0.7215906977653503,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.768383264541626,
+                    "end": 0.788085401058197,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.3350718021392824,
+                                "intensity": 0.4463629126548767
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.3350718021392824,
+                                "intensity": 0.4463629126548767
+                            }
+                        ]
+                    },
+                    "intensityCurve": 1,
+                    "isVariation": true,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7240534424781799,
+                    "end": 0.7265162467956543,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7289789915084839,
+                    "end": 0.7314417362213135,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7314417362213135,
+                    "end": 0.7339045405387878,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.743755578994751,
+                    "end": 0.7462183833122253,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7486811280250549,
+                    "end": 0.7511438727378845,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7388300895690918,
+                    "end": 0.7412928342819214,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7536066770553589,
+                    "end": 0.7560694217681885,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.763457715511322,
+                    "end": 0.7659205198287964,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.7585322260856628,
+                    "end": 0.7609949707984924,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.6920375227928162,
+                    "end": 0.6945002675056458,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2739078998565676,
+                                "intensity": 0.3058769404888153
+                            }
+                        ]
+                    },
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 }
@@ -8131,7 +10049,7 @@
         {
             "trackId": "End Bass",
             "trackType": 2,
-            "category": 0,
+            "category": 2,
             "chunks": [
                 {
                     "type": 1,
@@ -8162,7 +10080,7 @@
         {
             "trackId": "AnticipationBass",
             "trackType": 2,
-            "category": 0,
+            "category": 3,
             "chunks": [
                 {
                     "type": 1,
@@ -8187,6 +10105,253 @@
                     "intensityCurve": 3,
                     "isVariation": false,
                     "harmonySequenceNumber": 1
+                },
+                {
+                    "type": 1,
+                    "start": 0.45314911007881167,
+                    "end": 0.4728512465953827,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.4105827808380129,
+                                "intensity": 0.5492130517959595
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.4105827808380129,
+                                "intensity": 0.5492130517959595
+                            }
+                        ]
+                    },
+                    "intensityCurve": 3,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 1
+                },
+                {
+                    "type": 1,
+                    "start": 0.7782343626022339,
+                    "end": 0.7979364991188049,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.4105827808380129,
+                                "intensity": 0.5492130517959595
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.4105827808380129,
+                                "intensity": 0.5492130517959595
+                            }
+                        ]
+                    },
+                    "intensityCurve": 3,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 1
+                }
+            ]
+        },
+        {
+            "trackId": "Strings 2",
+            "trackType": 2,
+            "category": 3,
+            "chunks": [
+                {
+                    "type": 1,
+                    "start": 0.23642562329769135,
+                    "end": 0.2561277449131012,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2589428424835207,
+                                "intensity": 0.2589249908924103
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2589428424835207,
+                                "intensity": 0.2589249908924103
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.2561277449131012,
+                    "end": 0.27582988142967226,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2589428424835207,
+                                "intensity": 0.2589249908924103
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2589428424835207,
+                                "intensity": 0.2589249908924103
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.27582988142967226,
+                    "end": 0.2955320179462433,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2589428424835207,
+                                "intensity": 0.2589249908924103
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2589428424835207,
+                                "intensity": 0.2589249908924103
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.2955320179462433,
+                    "end": 0.31523415446281435,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2589428424835207,
+                                "intensity": 0.2589249908924103
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2589428424835207,
+                                "intensity": 0.2589249908924103
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.31523415446281435,
+                    "end": 0.3349362909793854,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2589428424835207,
+                                "intensity": 0.2589249908924103
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2589428424835207,
+                                "intensity": 0.2589249908924103
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.3349362909793854,
+                    "end": 0.3546384274959564,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2589428424835207,
+                                "intensity": 0.2589249908924103
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2589428424835207,
+                                "intensity": 0.2589249908924103
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.3546384274959564,
+                    "end": 0.37434056401252749,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2589428424835207,
+                                "intensity": 0.2589249908924103
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.2589428424835207,
+                                "intensity": 0.2589249908924103
+                            }
+                        ]
+                    },
+                    "intensityCurve": 0,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
+                },
+                {
+                    "type": 1,
+                    "start": 0.37434056401252749,
+                    "end": 0.3940427005290985,
+                    "startData": {
+                        "vectors": [
+                            {
+                                "angle": 2.3417038917541506,
+                                "intensity": 0.37952089309692385
+                            }
+                        ]
+                    },
+                    "endData": {
+                        "vectors": [
+                            {
+                                "angle": 2.3417038917541506,
+                                "intensity": 0.37952089309692385
+                            }
+                        ]
+                    },
+                    "intensityCurve": 1,
+                    "isVariation": false,
+                    "harmonySequenceNumber": 0
                 }
             ]
         }
