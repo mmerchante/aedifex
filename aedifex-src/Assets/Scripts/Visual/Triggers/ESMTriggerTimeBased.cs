@@ -8,9 +8,10 @@ using UnityEngine;
 public class ESMTriggerTimeBased : EmotionStateMachineTrigger
 {
     public float minTime = 1f;
+    public float globalTimeNormalized = 0f;
 
     public override bool Evaluate(EmotionStateMachineState source, EmotionStateMachineState target, EmotionStateMachineData data)
     {
-        return source.StateTime > minTime;
+        return source.StateTime >= minTime || ProceduralEngine.Instance.CurrentTimeNormalized > globalTimeNormalized;
     }
 }
