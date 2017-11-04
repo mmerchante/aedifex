@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 8
   m_Fog: 1
-  m_FogColor: {r: 0.5058824, g: 0.31764707, b: 0.13725491, a: 1}
+  m_FogColor: {r: 0.13725488, g: 0.33809328, b: 0.5058824, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
   m_LinearFogStart: 100
@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 853263141}
   - component: {fileID: 853263139}
   - component: {fileID: 853263138}
+  - component: {fileID: 853263140}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -144,6 +145,18 @@ Behaviour:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 853263137}
   m_Enabled: 1
+--- !u!114 &853263140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 853263137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: bd547129aef2f8449a1780550e10c501, type: 2}
 --- !u!20 &853263141
 Camera:
   m_ObjectHideFlags: 0
@@ -217,7 +230,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.92140245, b: 0.6764706, a: 1}
+  m_Color: {r: 0.6764706, g: 0.8795131, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
