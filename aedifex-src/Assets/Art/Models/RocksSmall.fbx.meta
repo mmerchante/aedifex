@@ -1,0 +1,141 @@
+fileFormatVersion: 2
+guid: 91af338f2f51b0b47ad948237642062f
+timeCreated: 1509768803
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Rocks1
+    100002: Rocks2
+    100004: Rocks2_1
+    100006: Rocks2_2
+    100008: Rocks3
+    100010: Rocks3_1
+    100012: Rocks3_2
+    100014: Rocks_Decimated
+    100016: //RootNode
+    400000: Rocks1
+    400002: Rocks2
+    400004: Rocks2_1
+    400006: Rocks2_2
+    400008: Rocks3
+    400010: Rocks3_1
+    400012: Rocks3_2
+    400014: Rocks_Decimated
+    400016: //RootNode
+    2300000: Rocks1
+    2300002: Rocks2
+    2300004: Rocks2_1
+    2300006: Rocks2_2
+    2300008: Rocks3
+    2300010: Rocks3_1
+    2300012: Rocks3_2
+    2300014: Rocks_Decimated
+    3300000: Rocks1
+    3300002: Rocks2
+    3300004: Rocks2_1
+    3300006: Rocks2_2
+    3300008: Rocks3
+    3300010: Rocks3_1
+    3300012: Rocks3_2
+    3300014: Rocks_Decimated
+    4300000: Rocks_Decimated
+    4300002: Rocks3_1
+    4300004: Rocks3_2
+    4300006: Rocks3
+    4300008: Rocks2
+    4300010: Rocks2_1
+    4300012: Rocks2_2
+    4300014: Rocks1
+    6400000: Rocks1
+    6400002: Rocks2
+    6400004: Rocks2_1
+    6400006: Rocks2_2
+    6400008: Rocks3
+    6400010: Rocks3_1
+    6400012: Rocks3_2
+    6400014: Rocks_Decimated
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material
+    second: {fileID: 2100000, guid: 350988d99dcb80c4d8b7dfc744d9f0e3, type: 2}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

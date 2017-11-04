@@ -143,7 +143,9 @@ public class ItemReferenceInspector : Editor
     {
         GUILayout.BeginVertical("Item Reference", "Window", GUILayout.MinHeight(75f));
 
+        itemRef.instanceCount = EditorGUILayout.IntField("Instance count", itemRef.instanceCount);
         itemRef.procedural = EditorGUILayout.Toggle("Procedural", itemRef.procedural);
+
         itemRef.probability = EditorGUILayout.Slider("Probability", itemRef.probability, 0f, 1f);
         itemRef.maxChildDepth = EditorGUILayout.IntSlider("Max depth", itemRef.maxChildDepth, 0, ItemFactory.ITEM_TREE_MAX_DEPTH);
         itemRef.viewTree = EditorGUILayout.Toggle("View Tree", itemRef.viewTree);

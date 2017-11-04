@@ -25,6 +25,7 @@ public struct ItemReferenceData
 	public ItemReferenceController metadata;
     public float probability;
     public bool procedural;
+    public int instanceCount;
     public bool uniformScale;
     public ItemAnchorPlane anchorPlane;
     public Bounds availableProceduralVolume;
@@ -155,6 +156,7 @@ public class ItemFactory : MonoBehaviorSingleton<ItemFactory>
                         itemReferenceData.maxChildDepth = itemReference.maxChildDepth;
                         itemReferenceData.probability = itemReference.probability;
                         itemReferenceData.procedural = itemReference.procedural;
+                        itemReferenceData.instanceCount = itemReference.instanceCount;
 
                         itemReferenceData.uniformScale = itemReference.uniformScale;
                         itemReferenceData.anchorPlane = itemReference.anchorPlane;
@@ -424,46 +426,52 @@ public class ItemFactory : MonoBehaviorSingleton<ItemFactory>
 			{
 				ItemReferenceData itemReference = parentItemData.references[layoutOffset + i];
 
-				int childItemIndex = -1;
+                // Add as many children as possible
+                int childCount = Mathf.Max(1, itemReference.instanceCount);
 
-				// First define the item to instantiate
-				if (itemReference.procedural)
-				{
-					if (itemReference.availableItemIndicesByTag.Length > 0)
-					{
-						// Reference is a random item, find it!
-						int randomIndex = rnd.Next(itemReference.availableItemIndicesByTag.Length); // TODO: weighted random by volume
-						childItemIndex = itemReference.availableItemIndicesByTag[randomIndex];
-					}
-				}
-				else
-				{
-					// Reference is a specific item; just instance it
-					if ((float) rnd.NextDouble() < itemReference.metadata.GetProbability())
-						childItemIndex = itemReference.itemIndex;
-				}
+                for(int j = 0; j < childCount; ++j)
+                {
+                    int childItemIndex = -1;
 
-				// Then just build it
-				if(childItemIndex >= 0)
-				{
-					Matrix4x4 childLocalMatrix = GetRandomTransformation(ref itemReference, ref itemDataArray[childItemIndex], rnd);
-					ItemData childItemData = itemDataArray[childItemIndex];
+				    // First define the item to instantiate
+				    if (itemReference.procedural)
+				    {
+					    if (itemReference.availableItemIndicesByTag.Length > 0)
+					    {
+						    // Reference is a random item, find it!
+						    int randomIndex = rnd.Next(itemReference.availableItemIndicesByTag.Length); // TODO: weighted random by volume
+						    childItemIndex = itemReference.availableItemIndicesByTag[randomIndex];
+					    }
+				    }
+				    else
+				    {
+					    // Reference is a specific item; just instance it
+					    if ((float) rnd.NextDouble() < itemReference.metadata.GetProbability())
+						    childItemIndex = itemReference.itemIndex;
+				    }
 
-					if(ShouldCullObject(ref childItemData, viewDirection, childLocalMatrix))
-						continue;
+				    // Then just build it
+				    if(childItemIndex >= 0)
+				    {
+					    Matrix4x4 childLocalMatrix = GetRandomTransformation(ref itemReference, ref itemDataArray[childItemIndex], rnd);
+					    ItemData childItemData = itemDataArray[childItemIndex];
+
+					    if(ShouldCullObject(ref childItemData, viewDirection, childLocalMatrix))
+						    continue;
 					
-					GameObject itemInstance = GameObject.Instantiate(itemPrefabs[childItemIndex].gameObject);
-					itemInstance.name = parentItemData.itemId;
-					itemInstance.transform.parent = parentTransform;
-					itemInstance.transform.localPosition = ExtractTranslationFromMatrix(ref childLocalMatrix);
-					itemInstance.transform.localRotation = ExtractRotationFromMatrix(ref childLocalMatrix);
-					itemInstance.transform.localScale = ExtractScaleFromMatrix(childLocalMatrix);
+					    GameObject itemInstance = GameObject.Instantiate(itemPrefabs[childItemIndex].gameObject);
+					    itemInstance.name = itemDataArray[childItemIndex].itemId;
+					    itemInstance.transform.parent = parentTransform;
+					    itemInstance.transform.localPosition = ExtractTranslationFromMatrix(ref childLocalMatrix);
+					    itemInstance.transform.localRotation = ExtractRotationFromMatrix(ref childLocalMatrix);
+					    itemInstance.transform.localScale = ExtractScaleFromMatrix(childLocalMatrix);
 
-					CleanDynamicItem(itemInstance);
+					    CleanDynamicItem(itemInstance);
 
-					BuildDynamicItem(viewDirection, rnd, childItemIndex, itemInstance.transform, depth + 1, Mathf.Min(maxDepth, depth + itemReference.maxChildDepth));
-				}
-			}
+					    BuildDynamicItem(viewDirection, rnd, childItemIndex, itemInstance.transform, depth + 1, Mathf.Min(maxDepth, depth + itemReference.maxChildDepth));
+                    }
+                }
+            }
 		}
 	}
 
@@ -523,8 +531,10 @@ public class ItemFactory : MonoBehaviorSingleton<ItemFactory>
     {
         Matrix4x4 matrix = itemReference.transform;
 
-        if(itemReference.randomOrientation)
+        if (itemReference.randomOrientation)
             matrix *= GetRandomOrientationMatrix(rnd, itemReference.anchorPlane);
+        
+        Vector3 randPositionAmplitude = itemReference.randomPositionAmplitude;
 
         if (itemReference.procedural)
         {
@@ -532,9 +542,13 @@ public class ItemFactory : MonoBehaviorSingleton<ItemFactory>
             Vector3 itemAnchorPosition = GetAnchorPosition(itemData.anchorPlane, itemData.itemBounds);
 
             matrix *= Matrix4x4.TRS(refAnchorPosition - itemAnchorPosition, Quaternion.identity, Vector3.one);
+
+            // Add random amplitude based on the possible volume
+            Vector3 anchorDirection = GetAnchorDirection(itemReference.anchorPlane);
+            randPositionAmplitude += Vector3.Scale(itemReference.availableProceduralVolume.size, Vector3.one - MathUtils.Abs(anchorDirection));
         }
 
-        Vector3 position = GetRandomPositionOffset(itemReference.randomPositionAmplitude, rnd);
+        Vector3 position = GetRandomPositionOffset(randPositionAmplitude, rnd);
         Quaternion rotation = Quaternion.Euler(GetRandomRotationOffset(itemReference.randomRotationAmplitude, rnd));
         Vector3 scale = GetRandomScaleOffset(itemReference.randomScaleAmplitude, itemReference.uniformScale, rnd);
 

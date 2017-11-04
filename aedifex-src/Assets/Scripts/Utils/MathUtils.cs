@@ -39,6 +39,11 @@ public class MathUtils
         return smoothedRotation;
     }
 
+    public static Vector3 Abs(Vector3 v)
+    {
+        return new Vector3(Mathf.Abs(v.x), Mathf.Abs(v.y), Mathf.Abs(v.z));
+    }
+
     public static Vector2 SmoothDamp(Vector2 fromVector, Vector2 toVector, ref Vector2 velocity, float smoothTime, float deltaTime)
     {
         if (deltaTime <= 0.001f)

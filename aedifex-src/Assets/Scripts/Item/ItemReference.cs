@@ -25,6 +25,8 @@ public class ItemReference : MonoBehaviour
 
     public bool procedural = false; // If true, the item to instantiate depends on the parent item tag
 
+    public int instanceCount = 1; // If procedural, amount of random items to place
+
     // Available volume for instancing stuff
     public Bounds availableProceduralVolume = new Bounds(Vector3.zero, Vector3.one);
 
@@ -316,7 +318,7 @@ public class ItemReference : MonoBehaviour
         		foreach(MeshTransform m  in cachedMeshes)
         		{
                     m.material.SetPass(0);
-                    Graphics.DrawMeshNow(m.mesh, transform.localToWorldMatrix * m.matrix * previzRandomMatrix, 0);
+                    Graphics.DrawMeshNow(m.mesh, transform.localToWorldMatrix * previzRandomMatrix * m.matrix, 0);
         		}
             }
         }

@@ -1,0 +1,614 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1633359961803376}
+  m_IsPrefabParent: 1
+--- !u!1 &1025523719725700
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4632589914221614}
+  - component: {fileID: 114036064902413410}
+  m_Layer: 0
+  m_Name: RockLarge3 (Rock, 1.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1038710891983212
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4955172425806110}
+  - component: {fileID: 114012133984983858}
+  m_Layer: 0
+  m_Name: RockLarge3 (Rock, 1.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1168931300562676
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4309209488944400}
+  - component: {fileID: 114082844865556402}
+  m_Layer: 0
+  m_Name: RockLarge4 (Rock, 1.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1385074639652546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4583581561807948}
+  - component: {fileID: 114242991719957552}
+  m_Layer: 0
+  m_Name: Layout-0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1400965291842428
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4899692730173100}
+  - component: {fileID: 114020718470279724}
+  m_Layer: 0
+  m_Name: RockLarge1 (Rock, 1.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1445277947894472
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4142691910616486}
+  - component: {fileID: 114933094328673280}
+  m_Layer: 0
+  m_Name: RockLarge8 (Rock, 1.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1506824349442558
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4278143175427480}
+  - component: {fileID: 114857481763032596}
+  m_Layer: 0
+  m_Name: RockLarge7 (Rock, 1.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1633359961803376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4474000572661154}
+  - component: {fileID: 114270931602623224}
+  m_Layer: 0
+  m_Name: RockThrone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1768120209619284
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4195300452153384}
+  - component: {fileID: 114907821679999964}
+  m_Layer: 0
+  m_Name: RockLarge8 (Rock, 1.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1832342478468290
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4421378876878276}
+  - component: {fileID: 114967550942897790}
+  m_Layer: 0
+  m_Name: RockLarge1 (Rock, 1.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1887022673356420
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4057777304980150}
+  - component: {fileID: 114202729688847326}
+  m_Layer: 0
+  m_Name: RockLarge1 (Rock, 1.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4057777304980150
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1887022673356420}
+  m_LocalRotation: {x: 0.018727275, y: -0.038257312, z: -0.21717328, w: 0.9752033}
+  m_LocalPosition: {x: 0.11, y: 0, z: 1.52}
+  m_LocalScale: {x: 1.182472, y: 1.1824727, z: 1.1824726}
+  m_Children: []
+  m_Father: {fileID: 4583581561807948}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 1.141, y: -4.748, z: -25.157001}
+--- !u!4 &4142691910616486
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1445277947894472}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4583581561807948}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4195300452153384
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1768120209619284}
+  m_LocalRotation: {x: -0.19153467, y: -0.049306687, z: -0.18586011, w: 0.9624652}
+  m_LocalPosition: {x: -0.39, y: 0, z: -1.1}
+  m_LocalScale: {x: 0.53684133, y: 0.53684145, z: 0.53684145}
+  m_Children: []
+  m_Father: {fileID: 4583581561807948}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -22.769001, y: -1.4740001, z: -21.563002}
+--- !u!4 &4278143175427480
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1506824349442558}
+  m_LocalRotation: {x: -0.05880188, y: -0.7075503, z: 0.1953437, w: 0.6765765}
+  m_LocalPosition: {x: -0.52, y: 0.05, z: 2}
+  m_LocalScale: {x: 0.5368399, y: 0.53683996, z: 0.5368399}
+  m_Children: []
+  m_Father: {fileID: 4583581561807948}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 11.354, y: -90.477005, z: 20.761002}
+--- !u!4 &4309209488944400
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1168931300562676}
+  m_LocalRotation: {x: 0.12036739, y: 0.615884, z: -0.15573078, w: 0.76285416}
+  m_LocalPosition: {x: 1.03, y: -1.12, z: -0.81}
+  m_LocalScale: {x: 0.3738554, y: 0.37385532, z: 0.37385547}
+  m_Children: []
+  m_Father: {fileID: 4583581561807948}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 22.053001, y: 76.75201, z: -5.531}
+--- !u!4 &4421378876878276
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1832342478468290}
+  m_LocalRotation: {x: -0.34352064, y: 0.29383963, z: 0.16292, w: 0.8769886}
+  m_LocalPosition: {x: 1.59, y: -1.09, z: 0.33}
+  m_LocalScale: {x: 1.1824698, y: 1.18247, z: 1.18247}
+  m_Children: []
+  m_Father: {fileID: 4583581561807948}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: -44.288002, y: 34.306, z: 6.729}
+--- !u!4 &4474000572661154
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1633359961803376}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4583581561807948}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4583581561807948
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1385074639652546}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4142691910616486}
+  - {fileID: 4195300452153384}
+  - {fileID: 4057777304980150}
+  - {fileID: 4899692730173100}
+  - {fileID: 4421378876878276}
+  - {fileID: 4278143175427480}
+  - {fileID: 4955172425806110}
+  - {fileID: 4632589914221614}
+  - {fileID: 4309209488944400}
+  m_Father: {fileID: 4474000572661154}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4632589914221614
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1025523719725700}
+  m_LocalRotation: {x: 0.023907416, y: 0.62708044, z: -0.036172852, w: 0.77774686}
+  m_LocalPosition: {x: 1.93, y: -0.08, z: 1.11}
+  m_LocalScale: {x: 1.7219204, y: 1.72192, z: 1.7219203}
+  m_Children: []
+  m_Father: {fileID: 4583581561807948}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 4.735, y: 77.694, z: -1.511}
+--- !u!4 &4899692730173100
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1400965291842428}
+  m_LocalRotation: {x: -0.18184267, y: 0.23614027, z: -0.11706179, w: 0.94734764}
+  m_LocalPosition: {x: -0.07, y: 0, z: -1.27}
+  m_LocalScale: {x: 1.18247, y: 1.18247, z: 1.18247}
+  m_Children: []
+  m_Father: {fileID: 4583581561807948}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: -16.813002, y: 30.788002, z: -18.749}
+--- !u!4 &4955172425806110
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1038710891983212}
+  m_LocalRotation: {x: 0.008877304, y: 0.4898004, z: -0.05298211, w: 0.870178}
+  m_LocalPosition: {x: 1.27, y: -0.08, z: -2.13}
+  m_LocalScale: {x: 1.7219223, y: 1.7219225, z: 1.721923}
+  m_Children: []
+  m_Father: {fileID: 4583581561807948}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 3.8620002, y: 58.586002, z: -4.801}
+--- !u!114 &114012133984983858
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1038710891983212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: RockLarge3
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 1
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 1
+  viewTree: 0
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 0, y: 0, z: 0}
+  randomRotationAmplitude: {x: 18.69, y: -47.53, z: 15.84}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 1
+--- !u!114 &114020718470279724
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1400965291842428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: RockLarge1
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 1
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 1
+  viewTree: 0
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 0, y: 0, z: 0}
+  randomRotationAmplitude: {x: 18.69, y: -47.53, z: 15.84}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 1
+--- !u!114 &114036064902413410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1025523719725700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: RockLarge3
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 1
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 1
+  viewTree: 0
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 0, y: 0, z: 0}
+  randomRotationAmplitude: {x: 18.69, y: -47.53, z: 15.84}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 1
+--- !u!114 &114082844865556402
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1168931300562676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: RockLarge4
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 3
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 1
+  viewTree: 0
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 5.6, y: 0, z: 4.75}
+  randomRotationAmplitude: {x: 18.69, y: 45, z: 15.84}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 1
+--- !u!114 &114202729688847326
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1887022673356420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: RockLarge1
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 1
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 0
+  viewTree: 0
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 0, y: 0, z: 0}
+  randomRotationAmplitude: {x: 0, y: 0, z: 0}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 1
+--- !u!114 &114242991719957552
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1385074639652546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a0637cd925340a684959120d9be87b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualize: 1
+  visualizeAllRandom: 0
+  weight: 1
+  layoutId: 0
+--- !u!114 &114270931602623224
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1633359961803376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fbba4d098e9e4ffe8072612d6afa11c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: RockThrone
+  itemTag: 
+  anchorPlane: 4
+--- !u!114 &114857481763032596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1506824349442558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: RockLarge7
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 1
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 1
+  viewTree: 0
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 0, y: 0, z: 0}
+  randomRotationAmplitude: {x: 0, y: 22.03, z: -9.62}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 1
+--- !u!114 &114907821679999964
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1768120209619284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: RockLarge8
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 1
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 1
+  viewTree: 0
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 0, y: 0, z: 0}
+  randomRotationAmplitude: {x: 0, y: 22.03, z: -9.62}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 1
+--- !u!114 &114933094328673280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1445277947894472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: RockLarge8
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 1
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 0
+  viewTree: 0
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 0, y: 0, z: 0}
+  randomRotationAmplitude: {x: 0, y: 0, z: 0}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 1
+--- !u!114 &114967550942897790
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1832342478468290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: RockLarge1
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 1
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 1
+  viewTree: 0
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 0, y: 0, z: 0}
+  randomRotationAmplitude: {x: 18.69, y: -47.53, z: 15.84}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 1
