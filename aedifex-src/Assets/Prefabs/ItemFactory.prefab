@@ -59,3 +59,13 @@ MonoBehaviour:
     - Root
   - id: Root
     parentTags: []
+  - id: Architecture
+    parentTags: []
+  - id: Weapon
+    parentTags:
+    - WeaponWasteland
+  - id: WeaponWasteland
+    parentTags: []
+  - id: Armor
+    parentTags:
+    - WeaponWasteland

@@ -29,9 +29,9 @@ MonoBehaviour:
     m_Settings:
       excludeSkybox: 1
   antialiasing:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
-      method: 0
+      method: 1
       fxaaSettings:
         preset: 2
       taaSettings:
@@ -42,10 +42,10 @@ MonoBehaviour:
   ambientOcclusion:
     m_Enabled: 1
     m_Settings:
-      intensity: 3.52
-      radius: 2.95
+      intensity: 2.1
+      radius: 1.92
       sampleCount: 16
-      downsampling: 1
+      downsampling: 0
       forceForwardCompatibility: 0
       ambientOnly: 0
       highPrecision: 0
@@ -54,26 +54,26 @@ MonoBehaviour:
     m_Settings:
       reflection:
         blendType: 0
-        reflectionQuality: 2
-        maxDistance: 80
+        reflectionQuality: 0
+        maxDistance: 300
         iterationCount: 256
-        stepSize: 3
-        widthModifier: 0.5
+        stepSize: 10
+        widthModifier: 1.3
         reflectionBlur: 1
         reflectBackfaces: 0
       intensity:
-        reflectionMultiplier: 1
-        fadeDistance: 100
-        fresnelFade: 1
+        reflectionMultiplier: 1.2
+        fadeDistance: 0
+        fresnelFade: 0.83
         fresnelFadePower: 1
       screenEdgeMask:
-        intensity: 0.03
+        intensity: 0.08
   depthOfField:
     m_Enabled: 1
     m_Settings:
-      focusDistance: 46.27
-      aperture: 0.1
-      focalLength: 52
+      focusDistance: 13.09
+      aperture: 1.2
+      focalLength: 87
       useCameraFov: 0
       kernelSize: 1
   motionBlur:
@@ -83,31 +83,31 @@ MonoBehaviour:
       sampleCount: 10
       frameBlending: 0.2
   eyeAdaptation:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       lowPercent: 45
       highPercent: 95
       minLuminance: -5
-      maxLuminance: 1
+      maxLuminance: -3.18
       keyValue: 0.25
       dynamicKeyValue: 1
       adaptationType: 0
       speedUp: 2
       speedDown: 1
-      logMin: -7
-      logMax: 3
+      logMin: -8
+      logMax: 4
   bloom:
     m_Enabled: 1
     m_Settings:
       bloom:
-        intensity: 0.5
-        threshold: 1.1
+        intensity: 0.64
+        threshold: 1.75
         softKnee: 0.57
-        radius: 5.2
-        antiFlicker: 0
+        radius: 6
+        antiFlicker: 1
       lensDirt:
         texture: {fileID: 2800000, guid: 3884f7a2d04ffe8409ad9200b275896f, type: 3}
-        intensity: 9.8
+        intensity: 4.1
   colorGrading:
     m_Enabled: 1
     m_Settings:
@@ -121,7 +121,7 @@ MonoBehaviour:
         neutralWhiteClip: 10
       basic:
         postExposure: 0
-        temperature: 13
+        temperature: 23
         tint: 0
         hueShift: 0
         saturation: 1
@@ -281,7 +281,7 @@ MonoBehaviour:
       lut: {fileID: 0}
       contribution: 1
   chromaticAberration:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       spectralTexture: {fileID: 0}
       intensity: 0.1

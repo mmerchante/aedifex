@@ -268,7 +268,7 @@ public class ItemReference : MonoBehaviour
         }
 
         bool previzRandom = (visualizeRandomness && Selection.activeGameObject == this.gameObject) || layoutViz;
-        int previzInstances = previzRandom ? 15 : 1;
+        int previzInstances = previzRandom ? (instanceCount > 1 ? instanceCount : 15) : 1;
         System.Random rnd = new System.Random(itemId.GetHashCode());
 
         if(procedural)

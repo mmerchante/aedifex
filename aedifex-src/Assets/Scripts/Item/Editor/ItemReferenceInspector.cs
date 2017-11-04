@@ -174,7 +174,22 @@ public class ItemReferenceInspector : Editor
         GUILayout.EndVertical();
     }
 
-	private void ItemShowPreview()
+    private static Dictionary<string, Texture2D> previewMap = new Dictionary<string, Texture2D>();
+
+    private Texture2D GetPreviewForItem(string id, GameObject go)
+    {
+        if (previewMap.ContainsKey(id))
+            return previewMap[id];
+
+        Texture2D preview = AssetPreview.GetAssetPreview(go as Object);
+
+        if (preview != null)
+            previewMap[id] = preview;
+
+        return preview;
+    }
+
+    private void ItemShowPreview()
 	{	
 		ItemReference itemRef = (ItemReference)target;
 
@@ -191,10 +206,10 @@ public class ItemReferenceInspector : Editor
 			GUILayout.FlexibleSpace();
 			GUILayout.BeginVertical();
 
-			Texture2D preview = AssetPreview.GetAssetPreview(item.gameObject as Object);
+            Texture2D preview = GetPreviewForItem(itemRef.itemId, item.gameObject);
 
-			if(preview)
-				GUILayout.Label(preview, GUILayout.MaxHeight(preview.height), GUILayout.MaxWidth(preview.width));
+            if (preview)
+                GUILayout.Label(preview, GUILayout.MaxHeight(preview.height), GUILayout.MaxWidth(preview.width));
 			
 			GUILayout.EndVertical();
 			GUILayout.FlexibleSpace();
@@ -226,7 +241,7 @@ public class ItemReferenceInspector : Editor
 					GUILayout.BeginHorizontal("Box");
 
 					GUI.backgroundColor = Color.white;
-					Texture2D preview = AssetPreview.GetAssetPreview(item.gameObject as Object);
+                    Texture2D preview = GetPreviewForItem(item.itemId, item.gameObject);
 
                     bool buttonPressed = false;
 

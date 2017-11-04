@@ -1,0 +1,416 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1382034892299014}
+  m_IsPrefabParent: 1
+--- !u!1 &1231720890941586
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4408555131491306}
+  - component: {fileID: 114594948880894350}
+  m_Layer: 0
+  m_Name: Arrow (None, 1.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1334793190784742
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4791535973714132}
+  - component: {fileID: 114316070370574848}
+  m_Layer: 0
+  m_Name: ArmorKnee (Armor, 0.3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1382034892299014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4622193931667756}
+  - component: {fileID: 114936034162849596}
+  m_Layer: 0
+  m_Name: ArmorChest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1474171263948272
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4301899780512290}
+  - component: {fileID: 114951665583137186}
+  m_Layer: 0
+  m_Name: ArmorShoulder (Armor, 0.6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1625761320286244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4201660800505342}
+  - component: {fileID: 114450711633889990}
+  m_Layer: 0
+  m_Name: Layout-0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1901134589371218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4632354648655776}
+  - component: {fileID: 33395079824565002}
+  - component: {fileID: 23253213522585962}
+  - component: {fileID: 64417211470565794}
+  m_Layer: 0
+  m_Name: ArmorChest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1957612794051252
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4780727948296916}
+  - component: {fileID: 114643786817345912}
+  m_Layer: 0
+  m_Name: ArmorShoulder (Armor, 0.6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4201660800505342
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1625761320286244}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4791535973714132}
+  - {fileID: 4301899780512290}
+  - {fileID: 4780727948296916}
+  - {fileID: 4408555131491306}
+  m_Father: {fileID: 4622193931667756}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4301899780512290
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1474171263948272}
+  m_LocalRotation: {x: -0, y: 0.2969978, z: -0, w: 0.9548782}
+  m_LocalPosition: {x: 0.76, y: 1.31, z: -2.54}
+  m_LocalScale: {x: 2.8258524, y: 2.8258514, z: 2.8258514}
+  m_Children: []
+  m_Father: {fileID: 4201660800505342}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 34.555, z: 0}
+--- !u!4 &4408555131491306
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231720890941586}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.78, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4201660800505342}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4622193931667756
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1382034892299014}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4632354648655776}
+  - {fileID: 4201660800505342}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4632354648655776
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1901134589371218}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_Children: []
+  m_Father: {fileID: 4622193931667756}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4780727948296916
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1957612794051252}
+  m_LocalRotation: {x: 0.041916475, y: -0.33547032, z: 0.07586803, w: 0.9380548}
+  m_LocalPosition: {x: 0.73, y: 1.31, z: 4.03}
+  m_LocalScale: {x: 2.82585, y: 2.82585, z: -2.82585}
+  m_Children: []
+  m_Father: {fileID: 4201660800505342}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 7.4430003, y: -38.926003, z: 6.6140003}
+--- !u!4 &4791535973714132
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1334793190784742}
+  m_LocalRotation: {x: -0, y: 0.6535098, z: -0, w: 0.7569181}
+  m_LocalPosition: {x: -5.43, y: 0, z: 2.27}
+  m_LocalScale: {x: 3.4543698, y: 3.454371, z: 3.454371}
+  m_Children: []
+  m_Father: {fileID: 4201660800505342}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 81.614006, z: 0}
+--- !u!23 &23253213522585962
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1901134589371218}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: d0ab27f491628c241a2d0b7aa58ca9c9, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &33395079824565002
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1901134589371218}
+  m_Mesh: {fileID: 4300006, guid: e766db3e77f5d6b4bbe4d05786453dd2, type: 3}
+--- !u!64 &64417211470565794
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1901134589371218}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300006, guid: e766db3e77f5d6b4bbe4d05786453dd2, type: 3}
+--- !u!114 &114316070370574848
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1334793190784742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: ArmorKnee
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 1
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 1
+  viewTree: 0
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 0.41, y: 0, z: 0}
+  randomRotationAmplitude: {x: 0, y: 180, z: 0}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 0.27
+--- !u!114 &114450711633889990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1625761320286244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a0637cd925340a684959120d9be87b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualize: 1
+  visualizeAllRandom: 0
+  weight: 1
+  layoutId: 0
+--- !u!114 &114594948880894350
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231720890941586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: Arrow
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 4
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 1
+  viewTree: 0
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 1.55, y: 0, z: 0.94}
+  randomRotationAmplitude: {x: 40.74, y: 0, z: 33.8}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 1
+--- !u!114 &114643786817345912
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1957612794051252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: ArmorShoulder
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 1
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 1
+  viewTree: 0
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 0.18, y: 0, z: 0.09}
+  randomRotationAmplitude: {x: 5, y: 5, z: 5}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 0.6
+--- !u!114 &114936034162849596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1382034892299014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fbba4d098e9e4ffe8072612d6afa11c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: ArmorChest
+  itemTag: Armor
+  anchorPlane: 4
+--- !u!114 &114951665583137186
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1474171263948272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: ArmorShoulder
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 1
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 1
+  viewTree: 0
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 0.4, y: 0, z: 0.26}
+  randomRotationAmplitude: {x: 5, y: 5, z: 5}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 0.6

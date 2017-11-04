@@ -59,6 +59,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1264368463397636
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4885189699341260}
+  - component: {fileID: 114991364874710870}
+  m_Layer: 0
+  m_Name: Arrow (None, 1.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1385074639652546
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,6 +102,22 @@ GameObject:
   - component: {fileID: 114020718470279724}
   m_Layer: 0
   m_Name: RockLarge1 (Rock, 1.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1429958131225736
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4245804619490662}
+  - component: {fileID: 114501424291351806}
+  m_Layer: 0
+  m_Name: Arrow (None, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -226,13 +258,26 @@ Transform:
   m_Father: {fileID: 4583581561807948}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -22.769001, y: -1.4740001, z: -21.563002}
+--- !u!4 &4245804619490662
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1429958131225736}
+  m_LocalRotation: {x: -0.08639311, y: -0.029527085, z: -0.29622358, w: 0.95074505}
+  m_LocalPosition: {x: -1.018, y: 1.88, z: -0.056}
+  m_LocalScale: {x: 0.46400973, y: 0.46400958, z: 0.46400958}
+  m_Children: []
+  m_Father: {fileID: 4583581561807948}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: -10.473001, y: -0.289, z: -34.584003}
 --- !u!4 &4278143175427480
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1506824349442558}
-  m_LocalRotation: {x: -0.05880188, y: -0.7075503, z: 0.1953437, w: 0.6765765}
+  m_LocalRotation: {x: -0.058801875, y: -0.7075503, z: 0.19534369, w: 0.6765765}
   m_LocalPosition: {x: -0.52, y: 0.05, z: 2}
   m_LocalScale: {x: 0.5368399, y: 0.53683996, z: 0.5368399}
   m_Children: []
@@ -298,6 +343,8 @@ Transform:
   - {fileID: 4955172425806110}
   - {fileID: 4632589914221614}
   - {fileID: 4309209488944400}
+  - {fileID: 4245804619490662}
+  - {fileID: 4885189699341260}
   m_Father: {fileID: 4474000572661154}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -314,6 +361,19 @@ Transform:
   m_Father: {fileID: 4583581561807948}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 4.735, y: 77.694, z: -1.511}
+--- !u!4 &4885189699341260
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1264368463397636}
+  m_LocalRotation: {x: -0.08639311, y: -0.029527085, z: -0.29622358, w: 0.95074505}
+  m_LocalPosition: {x: 2.349, y: -0.701, z: 0.441}
+  m_LocalScale: {x: 0.46401012, y: 0.46401012, z: 0.46401}
+  m_Children: []
+  m_Father: {fileID: 4583581561807948}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: -10.473001, y: -0.289, z: -34.584003}
 --- !u!4 &4899692730173100
 Transform:
   m_ObjectHideFlags: 1
@@ -504,6 +564,33 @@ MonoBehaviour:
   itemId: RockThrone
   itemTag: 
   anchorPlane: 4
+--- !u!114 &114501424291351806
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1429958131225736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: Arrow
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 50
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 1
+  viewTree: 0
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 3.77, y: 0.28, z: 2}
+  randomRotationAmplitude: {x: 45, y: 0, z: 45}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 1
 --- !u!114 &114857481763032596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -609,6 +696,33 @@ MonoBehaviour:
   randomSnappedOrientation: 0
   randomPositionAmplitude: {x: 0, y: 0, z: 0}
   randomRotationAmplitude: {x: 18.69, y: -47.53, z: 15.84}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 1
+--- !u!114 &114991364874710870
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1264368463397636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: Arrow
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 50
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 1
+  viewTree: 0
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 3.77, y: 0.28, z: 2}
+  randomRotationAmplitude: {x: 45, y: 0, z: 45}
   randomScaleAmplitude: {x: 0, y: 0, z: 0}
   uniformScale: 1
   probability: 1

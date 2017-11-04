@@ -20,31 +20,36 @@ public class EmotionVector
     public float angle;
     public float intensity;
 
-    public static EmotionVector GetCoreEmotion(CoreEmotion e)
+    public static float GetAngleForCoreEmotion(CoreEmotion e)
     {
         float quarterPI = Mathf.PI / 4f;
 
         switch (e)
         {
             case CoreEmotion.Joy:
-                return new EmotionVector(quarterPI * 2f, 1f);
+                return quarterPI * 2f;
             case CoreEmotion.Trust:
-                return new EmotionVector(quarterPI * 1f, 1f);
+                return quarterPI * 1f;
             case CoreEmotion.Fear:
-                return new EmotionVector(0f, 1f);
+                return 0f;
             case CoreEmotion.Surprise:
-                return new EmotionVector(quarterPI * 7f, 1f);
+                return quarterPI * 7f;
             case CoreEmotion.Sadness:
-                return new EmotionVector(quarterPI * 6f, 1f);
+                return quarterPI * 6f;
             case CoreEmotion.Disgust:
-                return new EmotionVector(quarterPI * 5f, 1f);
+                return quarterPI * 5f;
             case CoreEmotion.Anger:
-                return new EmotionVector(quarterPI * 4f, 1f);
+                return quarterPI * 4f;
             case CoreEmotion.Anticipation:
-                return new EmotionVector(quarterPI * 3f, 1f);
+                return quarterPI * 3f;
         }
 
-        return new EmotionVector(0f, 0f);
+        return 0f;
+    }
+
+    public static EmotionVector GetCoreEmotion(CoreEmotion e)
+    {
+        return new EmotionVector(GetAngleForCoreEmotion(e), 1f);
     }
 
     public static Color GetColorForAngle(float angle)

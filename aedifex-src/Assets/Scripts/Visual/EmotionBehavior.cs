@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 /// <summary>
 /// Base class for emotionally aware components. 
@@ -17,6 +18,13 @@ public class EmotionBehavior : MonoBehaviour
     public float TrackEmotionIncidence { get; protected set; } // The dot product of the affinity with the associated track, if any
 
     private EmotionSpectrum internalSpectrum = null;
+    private List<InterestPoint> interestPoints = new List<InterestPoint>();
+
+    public void Awake()
+    {
+        this.interestPoints = new List<InterestPoint>(GetComponentsInChildren<InterestPoint>());
+        this.interestPoints = this.interestPoints.OrderByDescending(x => x.importance).ToList();
+    }
 
     public void Update()
     {
@@ -27,6 +35,11 @@ public class EmotionBehavior : MonoBehaviour
         GlobalEmotionIncidence = globalEmotion.Dot(internalSpectrum);
 
         // TODO: per track incidence
+    }
+
+    public List<InterestPoint> GetAllInterestPoints()
+    {
+        return interestPoints;
     }
 
     protected virtual void OnUpdate()
