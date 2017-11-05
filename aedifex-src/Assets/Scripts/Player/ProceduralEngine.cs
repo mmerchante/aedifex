@@ -6,6 +6,7 @@ using System.Linq;
 public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
 {
     public DebugPanel debugPanel;
+    public string sceneRootId;
 
     private AudioSource musicSource;
     private AudioClip musicTrack;
@@ -58,6 +59,8 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
             ProceduralCameraDirector.Instance.InitializeDirector(EmotionEngine);
 
             debugPanel.ShowPanel();
+
+            ItemFactory.Instance.BuildItem(Quaternion.identity, Vector3.forward, Vector3.forward, sceneRootId);
         }
     }
 
@@ -113,7 +116,7 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
     public static T SelectRandomWeighted<T>(List<T> list, System.Func<T, float> func)
     {
         float sum = list.Sum(x => func(x));
-        float value = (float) Instance.RNG.NextDouble();
+        float value = (float) Instance.RNG.NextDouble() * sum;
 
         foreach(T t in list.OrderByDescending(func))
         {

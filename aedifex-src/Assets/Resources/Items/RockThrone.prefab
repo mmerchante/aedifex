@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4632589914221614}
   - component: {fileID: 114036064902413410}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RockLarge3 (Rock, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4955172425806110}
   - component: {fileID: 114012133984983858}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RockLarge3 (Rock, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4309209488944400}
   - component: {fileID: 114082844865556402}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RockLarge4 (Rock, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4885189699341260}
   - component: {fileID: 114991364874710870}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Arrow (None, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4583581561807948}
   - component: {fileID: 114242991719957552}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Layout-0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4899692730173100}
   - component: {fileID: 114020718470279724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RockLarge1 (Rock, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4245804619490662}
   - component: {fileID: 114501424291351806}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Arrow (None, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4142691910616486}
   - component: {fileID: 114933094328673280}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RockLarge8 (Rock, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4278143175427480}
   - component: {fileID: 114857481763032596}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RockLarge7 (Rock, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4474000572661154}
   - component: {fileID: 114270931602623224}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RockThrone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4195300452153384}
   - component: {fileID: 114907821679999964}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RockLarge8 (Rock, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4945326862120442}
   - component: {fileID: 114735630957146232}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Angel (, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4421378876878276}
   - component: {fileID: 114967550942897790}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RockLarge1 (Rock, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4057777304980150}
   - component: {fileID: 114202729688847326}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RockLarge1 (Rock, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

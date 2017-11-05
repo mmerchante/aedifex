@@ -11,11 +11,24 @@ public class InterestPoint : MonoBehaviour
     public CoreEmotion primaryAffinity = CoreEmotion.Joy;
     public float size = 1f;
 
+    public bool IsSelected { get; set; }
+
     [Range (0f, 1f)]
     public float directionality = 0f; // How directional this object in its forward axis
 
     [Range(0f, 1f)]
     public float emotionalImpact = 0f; // How much the primary affinity affects the interest
+
+    public void Awake()
+    {
+        ProceduralCameraDirector.Instance.RegisterInterestPoint(this);
+    }
+
+    public void OnDestroy()
+    {
+        if(ProceduralCameraDirector.IsAvailable())
+            ProceduralCameraDirector.Instance.DeregisterInterestPoint(this);
+    }
 
     private void OnDrawGizmos()
     {
@@ -29,12 +42,16 @@ public class InterestPoint : MonoBehaviour
         Gizmos.DrawLine(p - u, p + u);
         Gizmos.DrawLine(p - r, p + r);
 
-        Gizmos.color = Color.yellow * .75f;
+        Gizmos.color = IsSelected ? Color.magenta : (Color.yellow * .75f);
         Gizmos.DrawWireSphere(p, size * transform.lossyScale.x);
     }
 
     public float EvaluateInterest()
     {
+        // If this GO is inactive just ignore this IP
+        if (!gameObject.activeInHierarchy)
+            return 0f;
+
         // TODO: ideas:
         // - Is it being lit right now? Or in shadow?
         //      - If it is reflective/specular, where would be a good place to look at it from?

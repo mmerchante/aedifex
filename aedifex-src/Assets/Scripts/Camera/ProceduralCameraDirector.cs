@@ -56,6 +56,8 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
     // The list of shots already made -- useful for reusing ideas to build coherency
     private List<ShotInformation> history = new List<ShotInformation>();
 
+    private List<InterestPoint> interestPoints = new List<InterestPoint>();
+
     public void InitializeDirector(EmotionEngine engine)
     {
         this.emotionEngine = engine;
@@ -77,6 +79,38 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             this.currentCamera = cut.selectedCamera;
             this.currentCamera.InitializeCamera(currentShot.strategy);
         }
+    }
+    
+    public void RegisterInterestPoint(InterestPoint p)
+    {
+        this.interestPoints.Add(p);
+    }
+
+    public void DeregisterInterestPoint(InterestPoint p)
+    {
+        this.interestPoints.Remove(p);
+    }
+
+    // TODO: Implement spatial data structure for search
+    public List<InterestPoint> GetInterestPoints()
+    {
+        return interestPoints;
+    }
+
+    public InterestPoint GetRandomInterestPoint()
+    {
+        float sum = interestPoints.Sum(x => x.EvaluateInterest());
+        float value = (float)ProceduralEngine.Instance.RNG.NextDouble() * sum;
+
+        foreach (InterestPoint ip in interestPoints)
+        {
+            value -= ip.EvaluateInterest();
+
+            if (value <= 0f)
+                return ip;
+        }
+
+        return null;
     }
 
     protected float GetEventPriority(EmotionEvent e)
@@ -154,8 +188,9 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             float margin = emotionEngine.BeatDurationNormalized * 2f;
             float fuzzyDuration = shot.duration + ProceduralEngine.RandomRange(-margin, 0f);
 
-            if (fuzzyDuration > searchRange.minCutTime && fuzzyDuration < searchRange.maxCutTime)
-                shot.duration = fuzzyDuration;
+            // No fuzzy duration for now...
+            //if (fuzzyDuration > searchRange.minCutTime && fuzzyDuration < searchRange.maxCutTime)
+            //    shot.duration = fuzzyDuration;
 
             int cameraTries = 10;
 
@@ -285,10 +320,17 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         //this.transform.rotation = smoothRotation.Value;
     }
 
+    private void UpdateInterestPoints()
+    {
+        this.interestPoints = interestPoints.OrderByDescending(x => x.EvaluateInterest()).ToList();
+    }
+
     public void UpdateCamera(float t)
     {
         if (!currentShot.valid)
             return;
+
+        UpdateInterestPoints();
 
         UpdateTransform();
 
