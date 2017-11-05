@@ -187,6 +187,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1828783312124140
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4945326862120442}
+  - component: {fileID: 114735630957146232}
+  m_Layer: 0
+  m_Name: Angel (, 1.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1832342478468290
 GameObject:
   m_ObjectHideFlags: 1
@@ -277,7 +293,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1506824349442558}
-  m_LocalRotation: {x: -0.058801875, y: -0.7075503, z: 0.19534369, w: 0.6765765}
+  m_LocalRotation: {x: -0.05880188, y: -0.70755035, z: 0.1953437, w: 0.67657655}
   m_LocalPosition: {x: -0.52, y: 0.05, z: 2}
   m_LocalScale: {x: 0.5368399, y: 0.53683996, z: 0.5368399}
   m_Children: []
@@ -345,6 +361,7 @@ Transform:
   - {fileID: 4309209488944400}
   - {fileID: 4245804619490662}
   - {fileID: 4885189699341260}
+  - {fileID: 4945326862120442}
   m_Father: {fileID: 4474000572661154}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -387,6 +404,19 @@ Transform:
   m_Father: {fileID: 4583581561807948}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -16.813002, y: 30.788002, z: -18.749}
+--- !u!4 &4945326862120442
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1828783312124140}
+  m_LocalRotation: {x: 0.095475994, y: 0.72664654, z: -0.10316673, w: 0.67247736}
+  m_LocalPosition: {x: -2.51, y: 3.579, z: 0.2}
+  m_LocalScale: {x: 0.6170161, y: 0.6170161, z: 0.6170161}
+  m_Children: []
+  m_Father: {fileID: 4583581561807948}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 16.161001, y: 94.434006, z: 0}
 --- !u!4 &4955172425806110
 Transform:
   m_ObjectHideFlags: 1
@@ -588,6 +618,33 @@ MonoBehaviour:
   randomSnappedOrientation: 0
   randomPositionAmplitude: {x: 3.77, y: 0.28, z: 2}
   randomRotationAmplitude: {x: 45, y: 0, z: 45}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 1
+--- !u!114 &114735630957146232
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1828783312124140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: Angel
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 1
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 0
+  viewTree: 0
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 0, y: 0, z: 0}
+  randomRotationAmplitude: {x: 0, y: 0, z: 0}
   randomScaleAmplitude: {x: 0, y: 0, z: 0}
   uniformScale: 1
   probability: 1
