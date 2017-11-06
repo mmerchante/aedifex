@@ -810,22 +810,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1942198897973398
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4155384464760028}
-  - component: {fileID: 114225087994387098}
-  m_Layer: 0
-  m_Name: ArchArtifact (Architecture, 0.7)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1986801886622732
 GameObject:
   m_ObjectHideFlags: 1
@@ -908,7 +892,7 @@ Transform:
   m_LocalScale: {x: 2.8543065, y: 2.8543062, z: 2.8543062}
   m_Children: []
   m_Father: {fileID: 4928623336181972}
-  m_RootOrder: 40
+  m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: 3.5130002, y: -19.678001, z: 0}
 --- !u!4 &4141942955754770
 Transform:
@@ -936,19 +920,6 @@ Transform:
   m_Father: {fileID: 4928623336181972}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4155384464760028
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1942198897973398}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.5, y: 43.1, z: 48.9}
-  m_LocalScale: {x: 4.46483, y: 4.46483, z: 4.46483}
-  m_Children: []
-  m_Father: {fileID: 4928623336181972}
-  m_RootOrder: 38
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4178338355628938
 Transform:
   m_ObjectHideFlags: 1
@@ -960,7 +931,7 @@ Transform:
   m_LocalScale: {x: 2.21739, y: 2.21739, z: 2.21739}
   m_Children: []
   m_Father: {fileID: 4928623336181972}
-  m_RootOrder: 39
+  m_RootOrder: 38
   m_LocalEulerAnglesHint: {x: 0, y: -19.678001, z: 0}
 --- !u!4 &4178467659235096
 Transform:
@@ -1501,7 +1472,6 @@ Transform:
   - {fileID: 4099263038175150}
   - {fileID: 4185283013010942}
   - {fileID: 4413630159554698}
-  - {fileID: 4155384464760028}
   - {fileID: 4178338355628938}
   - {fileID: 4132108033811336}
   m_Father: {fileID: 4595540701580244}
@@ -2295,33 +2265,6 @@ MonoBehaviour:
   randomScaleAmplitude: {x: 0, y: 0.29, z: 0}
   uniformScale: 1
   probability: 1
---- !u!114 &114225087994387098
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1942198897973398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: ArchArtifact
-  maxChildDepth: 5
-  procedural: 0
-  instanceCount: 1
-  availableProceduralVolume:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
-  anchorPlane: 4
-  visualizeRandomness: 1
-  viewTree: 0
-  randomSnappedOrientation: 0
-  randomPositionAmplitude: {x: 0, y: 0, z: 0}
-  randomRotationAmplitude: {x: 0, y: 0, z: 2}
-  randomScaleAmplitude: {x: 0, y: 0, z: 0}
-  uniformScale: 1
-  probability: 0.66
 --- !u!114 &114273920595678320
 MonoBehaviour:
   m_ObjectHideFlags: 1

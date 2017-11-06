@@ -77,7 +77,6 @@ public class ProceduralCameraStrategy
                     return points;
                 }
 
-                Debug.Log("BURIED!");
             }
         }
 

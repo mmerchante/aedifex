@@ -55,12 +55,15 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
 
             this.EventDispatcher = gameObject.AddComponent<ProceduralEventDispatcher>();
             this.EventDispatcher.Initialize();
-
-            ProceduralCameraDirector.Instance.InitializeDirector(EmotionEngine);
-
             debugPanel.ShowPanel();
 
+            // Director must be alive before the scene is built
+            ProceduralCameraDirector.Instance.InitializeDirector(EmotionEngine);
+
             ItemFactory.Instance.BuildItem(Quaternion.identity, Vector3.forward, Vector3.forward, sceneRootId);
+
+            // ... and update the spatial grid after that
+            ProceduralCameraDirector.Instance.InitializeGrid();
         }
     }
 

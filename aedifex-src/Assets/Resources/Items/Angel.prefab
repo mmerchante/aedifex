@@ -808,7 +808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24d84ebab211654387b94bf182da589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  importance: 4
+  importance: 30
   primaryAffinity: 4
   size: 0.74
   directionality: 0
@@ -824,7 +824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24d84ebab211654387b94bf182da589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  importance: 4
+  importance: 30
   primaryAffinity: 4
   size: 0.5
   directionality: 0
@@ -840,7 +840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24d84ebab211654387b94bf182da589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  importance: 10
+  importance: 50
   primaryAffinity: 4
   size: 0.71
   directionality: 0
@@ -870,7 +870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24d84ebab211654387b94bf182da589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  importance: 2
+  importance: 30
   primaryAffinity: 4
   size: 2.95
   directionality: 0

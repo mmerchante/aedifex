@@ -44,6 +44,8 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         public ProceduralCameraStrategy strategy;
     }
 
+    public UnityEngine.PostProcessing.PostProcessingProfile prof;
+
     private ProceduralCamera currentCamera;
 
     private ShotInformation currentShot;
@@ -56,6 +58,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
     // The list of shots already made -- useful for reusing ideas to build coherency
     private List<ShotInformation> history = new List<ShotInformation>();
 
+    private InterestPointGrid grid;
     private List<InterestPoint> interestPoints = new List<InterestPoint>();
 
     public void InitializeDirector(EmotionEngine engine)
@@ -64,6 +67,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         this.currentShot = new ShotInformation();
         this.currentShot.valid = false;
         this.nextShot = new ShotInformation();
+        this.grid = GetComponent<InterestPointGrid>();
 
         ProceduralEngine.Instance.EventDispatcher.AddListener(this);
     }
@@ -80,15 +84,40 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             this.currentCamera.InitializeCamera(currentShot.strategy);
         }
     }
-    
+
+    public InterestPointGrid GetGrid()
+    {
+        return grid;
+    }
+
+    public void InitializeGrid()
+    {
+        // After the level was loaded
+        foreach(InterestPoint p in interestPoints)
+            grid.AddInterestPoint(p);
+
+        for(int i = 0; i < interestPoints.Count; i++)
+        {
+            float sum = grid.GetImportanceSumForPosition(interestPoints[i].transform.position);
+
+            if(sum > 1000f)
+            {
+                Debug.Log(sum + ", " + interestPoints[i].transform.position);
+                Debug.Log(grid.GetIndicesForPosition(interestPoints[i].transform.position));
+            }
+        }
+    }
+
     public void RegisterInterestPoint(InterestPoint p)
     {
-        this.interestPoints.Add(p);
+        if(grid.ContainsPoint(p.transform.position))
+            this.interestPoints.Add(p);
     }
 
     public void DeregisterInterestPoint(InterestPoint p)
     {
         this.interestPoints.Remove(p);
+        this.grid.RemoveInterestPoint(p);
     }
 
     // TODO: Implement spatial data structure for search
@@ -99,12 +128,12 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
     public InterestPoint GetRandomInterestPoint()
     {
-        float sum = interestPoints.Sum(x => x.EvaluateInterest());
+        float sum = interestPoints.Sum(x => x.EvaluateHeuristic(true));
         float value = (float)ProceduralEngine.Instance.RNG.NextDouble() * sum;
 
         foreach (InterestPoint ip in interestPoints)
         {
-            value -= ip.EvaluateInterest();
+            value -= ip.EvaluateHeuristic(true);
 
             if (value <= 0f)
                 return ip;
@@ -322,7 +351,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
     private void UpdateInterestPoints()
     {
-        this.interestPoints = interestPoints.OrderByDescending(x => x.EvaluateInterest()).ToList();
+        this.interestPoints = interestPoints.OrderByDescending(x => x.EvaluateHeuristic(true)).ToList();
     }
 
     public void UpdateCamera(float t)
@@ -331,7 +360,6 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             return;
 
         UpdateInterestPoints();
-
         UpdateTransform();
 
         if (currentCutTime < currentShot.duration)

@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 20822691276379022}
   - component: {fileID: 81057723824479238}
   - component: {fileID: 114347902656514624}
+  - component: {fileID: 114908031039211584}
+  - component: {fileID: 114984965441757320}
   m_Layer: 0
   m_Name: CameraDirector
   m_TagString: MainCamera
@@ -50,7 +52,7 @@ Camera:
   m_GameObject: {fileID: 1911650111250578}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19117647, g: 0.19117647, b: 0.19117647, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -60,19 +62,19 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 40
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: -1
+  m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -95,3 +97,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcdba7382b106774a9f0930bd8d33408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prof: {fileID: 0}
+--- !u!114 &114908031039211584
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1911650111250578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: bd547129aef2f8449a1780550e10c501, type: 2}
+--- !u!114 &114984965441757320
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1911650111250578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4a09a57682ecc40a5640b90e799153, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolution: 64
+  bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 256, y: 256, z: 256}
