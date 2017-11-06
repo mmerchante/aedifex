@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// A grid based spatial data structure that lets the user find interest points
-/// fast, either by position or by frustum.
+/// A grid based spatial data structure that lets the user find interest points 
+/// fast based on position, while also accumulating importance on each cluster
 /// </summary>
 public class InterestPointGrid : MonoBehaviour
 {
@@ -31,10 +31,6 @@ public class InterestPointGrid : MonoBehaviour
         grid = new Cell[resolution * resolution * resolution];
         cellSize = bounds.size / resolution;
         inverseCellSize = new Vector3(1f / cellSize.x, 1f / cellSize.y, 1f / cellSize.z);
-
-        Debug.Log(cellSize);
-        Debug.Log(inverseCellSize);
-        Debug.Log(bounds);
     }
 
     public bool ContainsPoint(Vector3 p)
@@ -76,9 +72,9 @@ public class InterestPointGrid : MonoBehaviour
         // Translate to [0, resolution] first
         Vector3 localP = Vector3.Scale(p - bounds.min, inverseCellSize);
 
-        int x = Mathf.Clamp(Mathf.RoundToInt(localP.x), 0, resolution - 1);
-        int y = Mathf.Clamp(Mathf.RoundToInt(localP.y), 0, resolution - 1);
-        int z = Mathf.Clamp(Mathf.RoundToInt(localP.z), 0, resolution - 1);
+        int x = Mathf.Clamp(Mathf.FloorToInt(localP.x), 0, resolution - 1);
+        int y = Mathf.Clamp(Mathf.FloorToInt(localP.y), 0, resolution - 1);
+        int z = Mathf.Clamp(Mathf.FloorToInt(localP.z), 0, resolution - 1);
 
         return GetFlatIndexForIndices(x, y, z);
     }
@@ -121,19 +117,17 @@ public class InterestPointGrid : MonoBehaviour
                 for(int x = 0; x < resolution; x++)
                 {
                     float normalizedImportance = grid[GetFlatIndexForIndices(x, y, z)].importanceSum / totalImportanceSum;
-                    Gizmos.color = Color.green * normalizedImportance * resolution * 10f;
-                    Gizmos.DrawWireCube(Vector3.Scale(cellSize, new Vector3(x - resolution / 2, y - resolution / 2, z - resolution / 2)), cellSize * .99f);
+
+                    if (normalizedImportance > 0.0001f)
+                    {
+                        Gizmos.color = Color.green * normalizedImportance * resolution * 10f;
+                        Gizmos.DrawWireCube(bounds.center + Vector3.Scale(cellSize, new Vector3(x - resolution / 2, y - resolution / 2, z - resolution / 2)), cellSize * .99f);
+                    }
                 }
             }
         }
     }
-
-    public List<InterestPoint> GetInterestPointsInFrustum(Matrix4x4 viewProj, Matrix4x4 invViewProj)
-    {
-        List<InterestPoint> result = new List<InterestPoint>();
-        return result;
-    }
-
+    
     public void AddInterestPoint(InterestPoint p)
     {
         RemoveInterestPoint(p);

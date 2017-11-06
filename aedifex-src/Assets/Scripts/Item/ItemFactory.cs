@@ -356,13 +356,13 @@ public class ItemFactory : MonoBehaviorSingleton<ItemFactory>
 		return itemRoot;
     }
 
-    public void OnGUI()
-    {
-        GUILayout.Label("Item factory construction time: " + initMillis.ToString("0.00") + "ms");
+    //public void OnGUI()
+    //{
+    //    GUILayout.Label("Item factory construction time: " + initMillis.ToString("0.00") + "ms");
 
-        if (buildMillis > 0f)
-            GUILayout.Label("Item build time: " + buildMillis.ToString("0.00") + "ms");
-    }
+    //    if (buildMillis > 0f)
+    //        GUILayout.Label("Item build time: " + buildMillis.ToString("0.00") + "ms");
+    //}
 
 	/// <summary>
 	/// Remove all item-related scripts to a dynamic element

@@ -102,20 +102,9 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             else
                 toRemove.Add(p);
         }
-
+        
         foreach (InterestPoint p in toRemove)
             interestPoints.Remove(p);
-
-        for(int i = 0; i < interestPoints.Count; i++)
-        {
-            float sum = grid.GetImportanceSumForPosition(interestPoints[i].transform.position);
-
-            if(sum > 1000f)
-            {
-                Debug.Log(sum + ", " + interestPoints[i].transform.position);
-                Debug.Log(grid.GetIndicesForPosition(interestPoints[i].transform.position));
-            }
-        }
     }
 
     public void RegisterInterestPoint(InterestPoint p)
@@ -133,6 +122,30 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
     public List<InterestPoint> GetInterestPoints()
     {
         return interestPoints;
+    }
+
+    // For now, we iterate over all interest points, because we don't have many.
+    // In the future, implement this in the grid (ref: Dynamic Scene Visibility Culling using a Regular Grid)
+    public List<InterestPoint> GetInterestPointsOnFrustum(Matrix4x4 viewProj, out float accumulatedImportance)
+    {
+        List<InterestPoint> result = new List<InterestPoint>();
+        accumulatedImportance = 0f;
+
+        foreach (InterestPoint p in interestPoints)
+        {
+            Vector4 ndc = viewProj * new Vector4(p.transform.position.x, p.transform.position.y, p.transform.position.z, 1f);
+            ndc /= ndc.w;
+            ndc.x = ndc.x * .5f + .5f;
+            ndc.y = ndc.y * .5f + .5f;
+
+            if (ndc.x >= 0f && ndc.x <= 1f && ndc.y >= 0f && ndc.y <= 1f && ndc.z >= 0f && ndc.z <= 1f)
+            {
+                result.Add(p);
+                accumulatedImportance += p.importance;
+            }
+        }
+
+        return result;
     }
 
     public InterestPoint GetRandomInterestPoint()

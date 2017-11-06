@@ -49,7 +49,7 @@ public class InterestPoint : MonoBehaviour
 
     public Bounds GetBounds()
     {
-        return new Bounds(transform.position, transform.lossyScale * size);
+        return new Bounds(transform.position, transform.lossyScale * size * 2f);
     }
 
     /// <summary>

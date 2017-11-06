@@ -776,11 +776,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114984965441757320, guid: eac822fdafc7aed43a9a17541d1202d9,
-        type: 2}
-      propertyPath: resolution
-      value: 32
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eac822fdafc7aed43a9a17541d1202d9, type: 2}
   m_IsPrefabParent: 0
@@ -1300,7 +1295,7 @@ Prefab:
     - target: {fileID: 224996024422003198, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 116.5
+      value: 101.76275
       objectReference: {fileID: 0}
     - target: {fileID: 224645400721784466, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}

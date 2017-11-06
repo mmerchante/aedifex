@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4a09a57682ecc40a5640b90e799153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resolution: 64
+  resolution: 20
   bounds:
-    m_Center: {x: 0, y: 0, z: 0}
+    m_Center: {x: 0, y: 128, z: 0}
     m_Extent: {x: 256, y: 256, z: 256}
