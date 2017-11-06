@@ -92,9 +92,19 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
     public void InitializeGrid()
     {
+        List<InterestPoint> toRemove = new List<InterestPoint>();
+
         // After the level was loaded
-        foreach(InterestPoint p in interestPoints)
-            grid.AddInterestPoint(p);
+        foreach (InterestPoint p in interestPoints)
+        {
+            if (grid.ContainsPoint(p.transform.position))
+                grid.AddInterestPoint(p);
+            else
+                toRemove.Add(p);
+        }
+
+        foreach (InterestPoint p in toRemove)
+            interestPoints.Remove(p);
 
         for(int i = 0; i < interestPoints.Count; i++)
         {
@@ -110,8 +120,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
     public void RegisterInterestPoint(InterestPoint p)
     {
-        if(grid.ContainsPoint(p.transform.position))
-            this.interestPoints.Add(p);
+        this.interestPoints.Add(p);
     }
 
     public void DeregisterInterestPoint(InterestPoint p)
