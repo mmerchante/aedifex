@@ -113,15 +113,30 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
 
     public static float RandomRange(float min, float max)
     {
-        return Mathf.Lerp(min, max, (float) Instance.RNG.NextDouble());
+        return Mathf.Lerp(min, max, (float)Instance.RNG.NextDouble());
     }
 
     public static T SelectRandomWeighted<T>(List<T> list, System.Func<T, float> func)
     {
         float sum = list.Sum(x => func(x));
-        float value = (float) Instance.RNG.NextDouble() * sum;
+        float value = (float)Instance.RNG.NextDouble() * sum;
 
-        foreach(T t in list.OrderByDescending(func))
+        foreach (T t in list)
+        {
+            value -= func(t);
+
+            if (value <= 0f)
+                return t;
+        }
+
+        return default(T);
+    }
+
+    public static T SelectRandomWeighted<T>(List<T> list, System.Func<T, float> func, float sum)
+    {
+        float value = (float)Instance.RNG.NextDouble() * sum;
+
+        foreach (T t in list)
         {
             value -= func(t);
 

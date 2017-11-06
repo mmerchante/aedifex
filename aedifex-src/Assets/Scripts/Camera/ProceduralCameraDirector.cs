@@ -118,7 +118,6 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         this.grid.RemoveInterestPoint(p);
     }
 
-    // TODO: Implement spatial data structure for search
     public List<InterestPoint> GetInterestPoints()
     {
         return interestPoints;
@@ -148,7 +147,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         return result;
     }
 
-    public InterestPoint GetRandomInterestPoint()
+    public InterestPoint SampleInterestPoint()
     {
         float sum = interestPoints.Sum(x => x.EvaluateHeuristic(true));
         float value = (float)ProceduralEngine.Instance.RNG.NextDouble() * sum;
@@ -195,10 +194,67 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
     protected ProceduralCameraStrategy TryFindStrategy(EmotionEvent e)
     {
-        // TODO: Build and compare different strategies
-        ProceduralCameraStrategy s = new ProceduralCameraStrategy();
-        s.Evaluate(e);
-        return s;
+        int samples = 32;
+        InterestPoint point = FindInterestPoint();
+        List<KeyValuePair<ProceduralCameraStrategy, float>> strategies = new List<KeyValuePair<ProceduralCameraStrategy, float>>();
+
+        float totalWeight = 0f;
+        
+        for(int i = 0; i < samples; ++i)
+        {
+            ProceduralCameraStrategy s = new ProceduralCameraStrategy();
+
+            // If the strategy failed finding a proposal, ignore it
+            if (!s.Propose(e, point))
+                continue;
+
+            Matrix4x4 viewProj = s.GetViewProjection();
+
+            float frustumWeightAccum = 0f;
+            List<InterestPoint> frustumPoints = GetInterestPointsOnFrustum(viewProj, out frustumWeightAccum);
+
+            float weight = s.Evaluate(e, frustumPoints, frustumWeightAccum);
+            totalWeight += weight;
+
+            strategies.Add(new KeyValuePair<ProceduralCameraStrategy, float>(s, weight));
+        }
+                
+        return ProceduralEngine.SelectRandomWeighted(strategies, x => x.Value, totalWeight).Key;
+    }
+
+    protected virtual InterestPoint FindInterestPoint()
+    {
+        int tries = 16;
+
+        for (int i = 0; i < tries; ++i)
+        {
+            InterestPoint p = SampleInterestPoint();
+
+            // Make sure our interest point is not buried under the floor
+            if (p)
+            {
+                Vector3 lowestPossiblePoint = p.transform.position - Vector3.up * p.size * p.transform.lossyScale.y * 2f;
+                Vector3 skyPoint = lowestPossiblePoint;
+                skyPoint.y = grid.bounds.size.y + grid.bounds.center.y;
+
+                Ray ray = new Ray(skyPoint, -Vector3.up);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, Vector3.Distance(skyPoint, lowestPossiblePoint), 1 << LayerMask.NameToLayer("Floor")))
+                {
+                    //Debug.DrawLine(skyPoint, hit.point, Color.red, 60f);
+                }
+                else
+                {
+                    //Debug.DrawLine(skyPoint + Vector3.right, lowestPossiblePoint + Vector3.right, Color.cyan, 60f);
+                    return p;
+                }
+            }
+        }
+
+        Debug.LogError("Could not find interest point!");
+
+        return null;
     }
 
     /// <summary>
@@ -236,19 +292,18 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             shot.duration = selectedEvent.timestamp - e.timestamp;
 
             // Try cutting before, but not after
-            float margin = emotionEngine.BeatDurationNormalized * 2f;
-            float fuzzyDuration = shot.duration + ProceduralEngine.RandomRange(-margin, 0f);
+            float margin = emotionEngine.BeatDurationNormalized * .5f;
+            float fuzzyDuration = shot.duration - ProceduralEngine.RandomRange(0f, margin);
 
-            // No fuzzy duration for now...
-            //if (fuzzyDuration > searchRange.minCutTime && fuzzyDuration < searchRange.maxCutTime)
-            //    shot.duration = fuzzyDuration;
+            if (fuzzyDuration > searchRange.minCutTime && fuzzyDuration < searchRange.maxCutTime)
+                shot.duration = fuzzyDuration;
 
             int cameraTries = 10;
 
             for (int i = 0; i < cameraTries; ++i)
                 if(shot.strategy == null)
                     shot.strategy = TryFindStrategy(selectedEvent);
-
+            
             shot.valid = shot.strategy != null;
         }
 

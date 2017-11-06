@@ -7,6 +7,7 @@ public struct CompositionSettings
 {
     public Vector2 screenTarget;
     public float deadZoneSize;
+    public float fieldOfView;
 }
 
 /// <summary>
@@ -29,7 +30,6 @@ public class ProceduralCamera : MonoBehaviour
     protected SmoothVector3 smoothPosition = new SmoothVector3(Vector3.zero);
     protected SmoothQuaternion smoothRotation = new SmoothQuaternion(Quaternion.identity);
 
-    private List<InterestPoint> interestPoints = new List<InterestPoint>();
     private LowFrequencyRandom lowFreqRandom = new LowFrequencyRandom(1f);
     private SmoothVector3 smoothPositionNoise = new SmoothVector3(Vector3.zero);
     private SmoothQuaternion smoothRotationNoise = new SmoothQuaternion(Quaternion.identity);
@@ -51,7 +51,6 @@ public class ProceduralCamera : MonoBehaviour
 
         this.CompositionSettings = strategy.Composition;
         this.startPosition = strategy.CameraPosition;
-        this.interestPoints = strategy.InterestPoints;
 
         UpdateTransform();
     }
@@ -61,11 +60,6 @@ public class ProceduralCamera : MonoBehaviour
         this.NoiseAmplitude = amplitude;
         this.NoiseFrequency = noiseFrequency;
         this.lowFreqRandom = new LowFrequencyRandom(noiseFrequency);
-    }
-
-    public void AddInterestPoint(InterestPoint p)
-    {
-        this.interestPoints.Add(p);
     }
 
     public void LateUpdate()
@@ -115,60 +109,11 @@ public class ProceduralCamera : MonoBehaviour
 
     protected Vector3 EvaluateTargetPosition()
     {
-        return startPosition;
+        return strategy.CameraPosition;
     }
 
     protected Quaternion EvaluateTargetRotation()
     {
-        if (interestPoints.Count > 0)
-            return GetViewDirectionForInterestPoint(interestPoints[0]);
-
-        return Quaternion.identity;
-    }
-
-    protected Quaternion GetViewDirectionForInterestPoint(InterestPoint p)
-    {
-        Vector3 pos = transform.position;
-        Vector3 target = p.transform.position;
-
-        Vector3 dir = (target - pos).normalized;
-        Quaternion lookAt = Quaternion.LookRotation(-dir, Vector3.up);
-
-        float farClip = 500f;
-
-        float aspect = Screen.width / Screen.height;
-        Matrix4x4 viewMatrix = Matrix4x4.TRS(pos, lookAt, Vector3.one).inverse;
-        Matrix4x4 projMatrix = Matrix4x4.Perspective(EvaluateTargetFieldOfView(), aspect, .01f, farClip);
-
-        Matrix4x4 viewProj = projMatrix * viewMatrix;
-
-        Vector4 ndcPos = viewProj * new Vector4(target.x, target.y, target.z, 1f);
-        ndcPos /= ndcPos.w;
-
-        Vector2 screenPos = new Vector2(ndcPos.x * .5f + .5f, ndcPos.y * .5f + .5f);
-        Vector2 screenDifference = CompositionSettings.screenTarget - screenPos;
-
-        // If the object is outside our screen target, force look at it
-        if (screenDifference.magnitude > CompositionSettings.deadZoneSize)
-        {
-            // If the object is _very_ far, first try to get to look at it
-            if (screenDifference.magnitude > 1f)
-                return lookAt;
-
-            Vector2 screenTarget = CompositionSettings.screenTarget * 2f - Vector2.one;
-
-            float distance = Mathf.Clamp01(Vector3.Distance(pos, target) / farClip);
-            Matrix4x4 invViewProj = viewProj.inverse;
-            Vector4 targetNdcPos = new Vector4(screenTarget.x, screenTarget.y, distance, 1f) * farClip;
-
-            Vector4 vsPos = invViewProj * targetNdcPos;
-            vsPos /= vsPos.w;
-
-            Vector3 newTargetPosition = new Vector3(vsPos.x, vsPos.y, vsPos.z);
-            dir = (newTargetPosition - pos).normalized;
-            return Quaternion.LookRotation(dir, Vector3.up);
-        }
-
-        return transform.rotation;
-    }
+        return strategy.CameraRotation;
+    }   
 }

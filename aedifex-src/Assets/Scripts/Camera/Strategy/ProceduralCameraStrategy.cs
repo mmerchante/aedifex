@@ -8,29 +8,56 @@ using UnityEngine;
 /// </summary>
 public class ProceduralCameraStrategy
 {
-    public List<InterestPoint> InterestPoints { get; protected set; }
     public Vector3 CameraPosition { get; protected set; }
+    public Quaternion CameraRotation { get; protected set; }
     public CompositionSettings Composition { get; protected set; }
 
+    protected float FrustumImportance { get; set; }
+
+    protected InterestPoint mainInterestPoint;
+    
     public virtual void UpdateStrategy(ProceduralCamera camera)
     {
         // Here, derived classes can play with the interest points or the camera
-        foreach (InterestPoint p in InterestPoints)
-            p.IsSelected = true;
+        mainInterestPoint.IsSelected = true;
+
+        CameraRotation = GetViewDirectionForInterestPoint(mainInterestPoint, Composition);
+    }
+
+    public Matrix4x4 GetViewProjection()
+    {
+        float aspect = Screen.width / Screen.height;
+        Matrix4x4 viewMatrix = Matrix4x4.TRS(CameraPosition, CameraRotation, Vector3.one).inverse;
+        Matrix4x4 projMatrix = Matrix4x4.Perspective(Composition.fieldOfView, aspect, .01f, 500f);
+        return projMatrix * viewMatrix;
+    }
+
+    /// <summary>
+    /// Tries to find an interesting shot, returns false if it failed
+    /// and should not be considered for evaluation
+    /// </summary>
+    public virtual bool Propose(EmotionEvent e, InterestPoint p)
+    {
+        this.mainInterestPoint = p;
+
+        if (!FindCameraPosition())
+            return false;
+
+        Composition = ProposeComposition();
+        CameraRotation = GetViewDirectionForInterestPoint(p, Composition);
+
+        return true;
     }
 
     /// <summary>
     /// Returns a score based on specific logic. Can/should use emotion affinities to choose
     /// </summary>
-    public float Evaluate(EmotionEvent e)
+    public float Evaluate(EmotionEvent e, List<InterestPoint> frustumPoints, float frustumImportanceAccumulation)
     {
-        InterestPoints = FindInterestPoints();
-        
-        if (InterestPoints.Count == 0 || !FindCameraPosition())
-            return 0f;
-
-        Composition = ProposeComposition();
-        return 1f;
+        int threshold = 32;
+        float avgImportance = frustumImportanceAccumulation / frustumPoints.Count;
+        int maxCount = Mathf.Min(threshold, frustumPoints.Count);
+        return 1f + Mathf.Lerp(0f, frustumImportanceAccumulation * maxCount, FrustumImportance);
     }
 
     protected virtual CompositionSettings ProposeComposition()
@@ -38,64 +65,69 @@ public class ProceduralCameraStrategy
         CompositionSettings c = new CompositionSettings();
         c.screenTarget = new Vector2(.5f, .5f); // The center
         c.deadZoneSize = 0f;
+        c.fieldOfView = 45; // TODO: Find a fov that adjusts to the interest point's size
         return c;
     }
 
-    protected virtual List<InterestPoint> FindInterestPoints()
+    protected Quaternion GetViewDirectionForInterestPoint(InterestPoint p, CompositionSettings composition)
     {
-        List<InterestPoint> points = new List<InterestPoint>();
+        Vector3 cameraPosition = CameraPosition;
+        Vector3 target = p.transform.position;
 
-        int tries = 10;
+        Vector3 dir = (target - cameraPosition).normalized;
+        Quaternion lookAt = Quaternion.LookRotation(dir, Vector3.up);
 
-        for(int i = 0; i < tries;++i)
-        {
-            InterestPoint p = ProceduralCameraDirector.Instance.GetRandomInterestPoint();
+        //float farClip = 500f;
 
-            // Make sure our interest point is not buried under the floor
-            // TODO: should we do just V3.up?
-            if (p)
-            {
-                Vector3 lowestPossiblePoint = p.transform.position - Vector3.up * p.size * p.transform.lossyScale.y;
+        //float aspect = Screen.width / Screen.height;
+        //Matrix4x4 viewMatrix = Matrix4x4.TRS(cameraPosition, lookAt, Vector3.one).inverse;
+        //Matrix4x4 projMatrix = Matrix4x4.Perspective(composition.fieldOfView, aspect, .01f, farClip);
 
-                Vector3 skyPoint = lowestPossiblePoint;
-                skyPoint.y = 200f;
+        //Matrix4x4 viewProj = projMatrix * viewMatrix;
 
-                Ray ray = new Ray(skyPoint, -Vector3.up);
-                RaycastHit hit;
+        //Vector4 ndcPos = viewProj * new Vector4(target.x, target.y, target.z, 1f);
+        //ndcPos /= ndcPos.w;
 
-                if (Physics.Raycast(ray, out hit, 1000f, 1 << LayerMask.NameToLayer("Floor")))
-                {
-                    if(Vector3.Distance(skyPoint, lowestPossiblePoint) < hit.distance)
-                    {
-                        points.Add(p);
-                        return points;
-                    }
-                }
-                else
-                {
-                    points.Add(p);
-                    return points;
-                }
+        //Vector2 screenPos = new Vector2(ndcPos.x * .5f + .5f, ndcPos.y * .5f + .5f);
+        //Vector2 screenDifference = composition.screenTarget - screenPos;
 
-            }
-        }
+        //// If the object is outside our screen target, force look at it
+        //if (screenDifference.magnitude > composition.deadZoneSize)
+        //{
+        //    // If the object is _very_ far, first try to get to look at it
+        //    if (screenDifference.magnitude > 1f)
+        //        return lookAt;
 
-        return points;
+        //    Vector2 screenTarget = composition.screenTarget * 2f - Vector2.one;
+
+        //    float distance = Mathf.Clamp01(Vector3.Distance(cameraPosition, target) / farClip);
+        //    Matrix4x4 invViewProj = viewProj.inverse;
+        //    Vector4 targetNdcPos = new Vector4(screenTarget.x, screenTarget.y, distance, 1f) * farClip;
+
+        //    Vector4 vsPos = invViewProj * targetNdcPos;
+        //    vsPos /= vsPos.w;
+
+        //    Vector3 newTargetPosition = new Vector3(vsPos.x, vsPos.y, vsPos.z);
+        //    dir = (newTargetPosition - cameraPosition).normalized;
+        //    return Quaternion.LookRotation(dir, Vector3.up);
+        //}
+
+        return lookAt;
     }
 
     protected virtual bool FindCameraPosition()
     {
-        Vector3 p = InterestPoints[0].transform.position;
+        Vector3 p = mainInterestPoint.transform.position;
 
-        float minDistance = 10f; // TODO: temp
-        float maxDistance = 100f;
-        int tries = 50;
+        float minDistance = 5f; // TODO: temp
+        float maxDistance = 30f;
+        int maxTries = 32;
 
-        for(int i = 0; i < tries; ++i)
+        for(int i = 0; i < maxTries; ++i)
         {
-            Vector3 startPoint = p + Vector3.Scale(Random.onUnitSphere * InterestPoints[0].size, InterestPoints[0].transform.lossyScale);
+            Vector3 startPoint = p + Vector3.Scale(Random.onUnitSphere * mainInterestPoint.size, mainInterestPoint.transform.lossyScale);
 
-            Ray ray = new Ray(startPoint, Random.onUnitSphere);
+            Ray ray = new Ray(startPoint, Random.onUnitSphere.normalized);
             RaycastHit hit;
             bool intersect = Physics.Raycast(ray, out hit, maxDistance);
 
@@ -103,9 +135,10 @@ public class ProceduralCameraStrategy
 
             if(intersect)
             {
-                if(hit.distance > minDistance && hit.distance < maxDistance)
+                if(hit.distance > minDistance)
                 {
-                    CameraPosition = ray.origin + ray.direction * ProceduralEngine.RandomRange(minDistance, hit.distance);
+                    float d = Mathf.Clamp(hit.distance * .75f, minDistance, maxDistance);
+                    CameraPosition = ray.origin + ray.direction * ProceduralEngine.RandomRange(minDistance, d);
                     firstPass = true;
                 }
             }
@@ -123,7 +156,7 @@ public class ProceduralCameraStrategy
 
                 if (intersect)
                 {
-                    if ((hit.point - startPoint).magnitude > (CameraPosition - startPoint).magnitude)
+                    if (hit.distance > (CameraPosition - startPoint).magnitude)
                         return true;
                 }
                 else
@@ -133,9 +166,7 @@ public class ProceduralCameraStrategy
                 }
             }
         }
-
-        Debug.Log("Failed to find a camera position!");
-
+        
         return false;
     }
 }
