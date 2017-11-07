@@ -101,6 +101,7 @@ public class ItemFactory : MonoBehaviorSingleton<ItemFactory>
                 itemData.itemId = item.itemId;
                 itemData.itemTag = item.itemTag;
                 itemData.anchorPlane = item.anchorPlane;
+                itemData.itemBounds = item.CalculateBoundsLocalSpace(0); // Important to calculate only the base level
 
                 itemDataArray[i] = itemData;
             }
@@ -465,6 +466,11 @@ public class ItemFactory : MonoBehaviorSingleton<ItemFactory>
 					    itemInstance.transform.localPosition = ExtractTranslationFromMatrix(ref childLocalMatrix);
 					    itemInstance.transform.localRotation = ExtractRotationFromMatrix(ref childLocalMatrix);
 					    itemInstance.transform.localScale = ExtractScaleFromMatrix(childLocalMatrix);
+
+                        InterestPoint[] interestPoints = itemInstance.GetComponentsInChildren<InterestPoint>();
+
+                        foreach (InterestPoint p in interestPoints)
+                            p.AssociateItemBounds(itemInstance.transform, itemDataArray[childItemIndex].itemBounds);
 
 					    CleanDynamicItem(itemInstance);
 

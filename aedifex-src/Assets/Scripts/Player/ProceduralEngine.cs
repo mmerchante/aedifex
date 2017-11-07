@@ -98,6 +98,8 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
 
     public void Update()
     {
+        Application.targetFrameRate = 24;
+
         if (!Running)
             return;
 

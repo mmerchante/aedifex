@@ -108,7 +108,6 @@ public class Item : MonoBehaviour
     public Bounds CalculateBoundsLocalSpace(int depth = ItemFactory.ITEM_TREE_MAX_DEPTH)
     {
         Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>(true);
-        ItemReference[] references = gameObject.GetComponentsInChildren<ItemReference>(true);
 
         // An item origin IS ALWAYS contained in its bounds
         Bounds bounds = new Bounds(Vector3.zero, Vector3.one * .0001f);
@@ -123,6 +122,8 @@ public class Item : MonoBehaviour
         // Because we are traversing a possibly infinite tree, we must be careful with the recursion...
         if (depth > 0)
         {
+            ItemReference[] references = gameObject.GetComponentsInChildren<ItemReference>(true);
+
             for (int i = 0; i < references.Length; i++)
                 bounds.Encapsulate(MathUtils.TransformBounds(ref worldToLocalMatrix, references[i].CalculateBoundsWorldSpace(depth - 1)));
         }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.PostProcessing;
+
 
 /// <summary>
 /// The director will consume emotion events and choose the specific camera cut/blends and behaviours.
@@ -43,9 +45,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         // The camera behaviour, which knows about interest points etc.
         public ProceduralCameraStrategy strategy;
     }
-
-    public UnityEngine.PostProcessing.PostProcessingProfile prof;
-
+    
     private ProceduralCamera currentCamera;
 
     private ShotInformation currentShot;
@@ -74,6 +74,9 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
     protected void StartTransition(ShotInformation cut)
     {
+        if (currentShot.valid)
+            currentShot.strategy.StopStrategy();
+
         if(cut.valid)
         {
             this.history.Add(cut);
@@ -81,7 +84,8 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             this.currentCutTime = 0f;
             this.nextShot = new ShotInformation();
             this.currentCamera = cut.selectedCamera;
-            this.currentCamera.InitializeCamera(currentShot.strategy);
+            this.currentCamera.InitializeCamera(currentShot.strategy, GetComponent<PostProcessingBehaviour>().profile);
+            this.currentShot.strategy.StartStrategy();
         }
     }
 
@@ -192,7 +196,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         return go.AddComponent<ProceduralCamera>();
     }
 
-    protected ProceduralCameraStrategy TryFindStrategy(EmotionEvent e)
+    protected ProceduralCameraStrategy TryFindStrategy(EmotionEvent e, float shotDuration)
     {
         int samples = 32;
         InterestPoint point = FindInterestPoint();
@@ -202,10 +206,10 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         
         for(int i = 0; i < samples; ++i)
         {
-            ProceduralCameraStrategy s = new ProceduralCameraStrategy();
+            ProceduralCameraStrategy s = new DollyCameraStrategy();
 
             // If the strategy failed finding a proposal, ignore it
-            if (!s.Propose(e, point))
+            if (!s.Propose(e, point, shotDuration))
                 continue;
 
             Matrix4x4 viewProj = s.GetViewProjection();
@@ -302,7 +306,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
             for (int i = 0; i < cameraTries; ++i)
                 if(shot.strategy == null)
-                    shot.strategy = TryFindStrategy(selectedEvent);
+                    shot.strategy = TryFindStrategy(selectedEvent, shot.duration * ProceduralEngine.Instance.Duration);
             
             shot.valid = shot.strategy != null;
         }

@@ -13,15 +13,63 @@ public class ProceduralCameraStrategy
     public CompositionSettings Composition { get; protected set; }
 
     protected float FrustumImportance { get; set; }
-
     protected InterestPoint mainInterestPoint;
-    
-    public virtual void UpdateStrategy(ProceduralCamera camera)
+
+    protected Vector3 initialPosition;
+    protected Quaternion initialRotation;
+
+    protected float cameraTime;
+    protected float shotDuration;
+
+    protected float CameraTimeNormalized { get { return cameraTime / shotDuration; } }
+
+    public void StartStrategy()
     {
-        // Here, derived classes can play with the interest points or the camera
+        this.cameraTime = 0f;
+        this.initialPosition = CameraPosition;
+        this.initialRotation = CameraRotation;
         mainInterestPoint.IsSelected = true;
 
-        CameraRotation = GetViewDirectionForInterestPoint(mainInterestPoint, Composition);
+        OnStart();
+    }
+
+    protected virtual void OnStart()
+    {
+    }
+
+    public void StopStrategy()
+    {
+        mainInterestPoint.IsSelected = false;
+        OnStop();
+    }
+
+    protected virtual void OnStop()
+    {
+    }
+
+    public void UpdateStrategy(ProceduralCamera camera)
+    {
+        cameraTime += Time.deltaTime;
+        OnUpdateStrategy();
+    }
+
+    protected virtual void OnUpdateStrategy()
+    {
+    }
+
+    public float GetFocalDistance()
+    {
+        return Vector3.Distance(CameraPosition, mainInterestPoint.transform.position);
+    }
+
+    public Matrix4x4 GetInvViewMatrix()
+    {
+        return Matrix4x4.TRS(CameraPosition, CameraRotation, Vector3.one);
+    }
+
+    public Matrix4x4 GetViewMatrix()
+    {
+        return Matrix4x4.TRS(CameraPosition, CameraRotation, Vector3.one).inverse;
     }
 
     public Matrix4x4 GetViewProjection()
@@ -36,11 +84,13 @@ public class ProceduralCameraStrategy
     /// Tries to find an interesting shot, returns false if it failed
     /// and should not be considered for evaluation
     /// </summary>
-    public virtual bool Propose(EmotionEvent e, InterestPoint p)
+    public virtual bool Propose(EmotionEvent e, InterestPoint p, float shotDuration)
     {
+        this.shotDuration = shotDuration;
         this.mainInterestPoint = p;
+        this.FrustumImportance = .25f;
 
-        if (!FindCameraPosition())
+        if (!FindCameraPosition(3f, 65f))
             return false;
 
         Composition = ProposeComposition();
@@ -52,9 +102,9 @@ public class ProceduralCameraStrategy
     /// <summary>
     /// Returns a score based on specific logic. Can/should use emotion affinities to choose
     /// </summary>
-    public float Evaluate(EmotionEvent e, List<InterestPoint> frustumPoints, float frustumImportanceAccumulation)
+    public virtual float Evaluate(EmotionEvent e, List<InterestPoint> frustumPoints, float frustumImportanceAccumulation)
     {
-        int threshold = 32;
+        int threshold = 15;
         float avgImportance = frustumImportanceAccumulation / frustumPoints.Count;
         int maxCount = Mathf.Min(threshold, frustumPoints.Count);
         return 1f + Mathf.Lerp(0f, frustumImportanceAccumulation * maxCount, FrustumImportance);
@@ -65,6 +115,7 @@ public class ProceduralCameraStrategy
         CompositionSettings c = new CompositionSettings();
         c.screenTarget = new Vector2(.5f, .5f); // The center
         c.deadZoneSize = 0f;
+
         c.fieldOfView = 45; // TODO: Find a fov that adjusts to the interest point's size
         return c;
     }
@@ -115,12 +166,10 @@ public class ProceduralCameraStrategy
         return lookAt;
     }
 
-    protected virtual bool FindCameraPosition()
+    protected virtual bool FindCameraPosition(float minDistance, float maxDistance)
     {
         Vector3 p = mainInterestPoint.transform.position;
-
-        float minDistance = 5f; // TODO: temp
-        float maxDistance = 30f;
+        
         int maxTries = 32;
 
         for(int i = 0; i < maxTries; ++i)

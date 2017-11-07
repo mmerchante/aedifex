@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
 // Very simple for now, we can overdesign it later
 public struct CompositionSettings
@@ -17,6 +18,7 @@ public struct CompositionSettings
 /// </summary>
 public class ProceduralCamera : MonoBehaviour
 {
+
     public CompositionSettings CompositionSettings { get; protected set; }
 
     public float DutchAngle { get; set; }
@@ -37,6 +39,7 @@ public class ProceduralCamera : MonoBehaviour
     private ProceduralCameraStrategy strategy;
 
     private Vector3 startPosition = Vector3.zero;
+    private PostProcessingProfile postProfile;
 
     public void Awake()
     {
@@ -45,14 +48,15 @@ public class ProceduralCamera : MonoBehaviour
         SetNoiseParameters(0f, 1f);
     }
 
-    public void InitializeCamera(ProceduralCameraStrategy strategy)
+    public void InitializeCamera(ProceduralCameraStrategy strategy, PostProcessingProfile postProfile)
     {
+        this.postProfile = postProfile;
         this.strategy = strategy;
 
         this.CompositionSettings = strategy.Composition;
         this.startPosition = strategy.CameraPosition;
 
-        UpdateTransform();
+        UpdateTransform(true);
     }
 
     public void SetNoiseParameters(float amplitude, float noiseFrequency)
@@ -68,22 +72,38 @@ public class ProceduralCamera : MonoBehaviour
         {
             strategy.UpdateStrategy(this);
             UpdateTransform();
+
+            DepthOfFieldModel dof = postProfile.depthOfField;
+            DepthOfFieldModel.Settings s = dof.settings;
+            s.focusDistance = EvaluateTargetFocalDistance();
+            dof.settings = s;
+            postProfile.depthOfField = dof;
         }
     }
 
-    protected void UpdateTransform()
+    protected void UpdateTransform(bool force = false)
     {
         lowFreqRandom.Update(Time.deltaTime);
 
-        smoothPosition.Target = EvaluateTargetPosition();
-        smoothRotation.Target = EvaluateTargetRotation();
-        smoothPositionNoise.Target = lowFreqRandom.GetInsideSphere() * NoiseAmplitude;
-        smoothRotationNoise.Target = Quaternion.Slerp(Quaternion.identity, lowFreqRandom.GetRotation(), NoiseAmplitude);
+        if (force)
+        {
+            smoothPosition.Value = EvaluateTargetPosition();
+            smoothRotation.Value = EvaluateTargetRotation();
+            smoothPositionNoise.Value = lowFreqRandom.GetInsideSphere() * NoiseAmplitude;
+            smoothRotationNoise.Value = Quaternion.Slerp(Quaternion.identity, lowFreqRandom.GetRotation(), NoiseAmplitude);
+        }
+        else
+        {
+            smoothPosition.Target = EvaluateTargetPosition();
+            smoothRotation.Target = EvaluateTargetRotation();
+            smoothPositionNoise.Target = lowFreqRandom.GetInsideSphere() * NoiseAmplitude;
+            smoothRotationNoise.Target = Quaternion.Slerp(Quaternion.identity, lowFreqRandom.GetRotation(), NoiseAmplitude);
 
-        smoothPosition.Update(PositionDampingTime, Time.deltaTime);
-        smoothRotation.Update(RotationDampingTime, Time.deltaTime);
-        smoothPositionNoise.Update(NoiseFrequency, Time.deltaTime);
-        smoothRotationNoise.Update(NoiseFrequency, Time.deltaTime);
+            smoothPosition.Update(PositionDampingTime, Time.deltaTime);
+            smoothRotation.Update(RotationDampingTime, Time.deltaTime);
+            smoothPositionNoise.Update(NoiseFrequency, Time.deltaTime);
+            smoothRotationNoise.Update(NoiseFrequency, Time.deltaTime);
+        }
 
         // Noise goes over everything else
         this.transform.position = smoothPosition.Value + smoothPositionNoise.Value;
@@ -99,7 +119,7 @@ public class ProceduralCamera : MonoBehaviour
     // For DoF
     public float EvaluateTargetFocalDistance()
     {
-        return 1f;
+        return strategy.GetFocalDistance();
     }
 
     public float EvaluateTargetFieldOfView()

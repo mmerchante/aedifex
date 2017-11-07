@@ -168,7 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   importance: 0
-  primaryAffinity: 0
   size: 0.54
+  primaryAffinity: 0
+  associatedMesh: {fileID: 23078507739491314}
   directionality: 1
   emotionalImpact: 0

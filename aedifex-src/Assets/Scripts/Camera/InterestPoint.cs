@@ -8,10 +8,9 @@ using UnityEngine;
 public class InterestPoint : MonoBehaviour
 {
     public int importance = 1; // Larger -> better
-    public CoreEmotion primaryAffinity = CoreEmotion.Joy;
     public float size = 1f;
 
-    public bool IsSelected { get; set; }
+    public CoreEmotion primaryAffinity = CoreEmotion.Joy;
 
     [Range (0f, 1f)]
     public float directionality = 0f; // How directional this object in its forward axis
@@ -19,10 +18,21 @@ public class InterestPoint : MonoBehaviour
     [Range(0f, 1f)]
     public float emotionalImpact = 0f; // How much the primary affinity affects the interest
 
+    public bool IsSelected { get; set; }
+
+    private Bounds associatedItemBounds;
+    private Transform associatedItemRoot;
+    
     public void Awake()
     {
         if (ProceduralCameraDirector.IsAvailable())
             ProceduralCameraDirector.Instance.RegisterInterestPoint(this);
+    }
+
+    public void AssociateItemBounds(Transform itemRoot, Bounds b)
+    {
+        this.associatedItemBounds = b;
+        this.associatedItemRoot = itemRoot;
     }
 
     public void OnDestroy()
@@ -38,13 +48,20 @@ public class InterestPoint : MonoBehaviour
         Vector3 u = transform.up * .5f;
         Vector3 r = transform.right * .5f;
 
-        //Gizmos.color = Color.Lerp(Color.yellow, EmotionVector.GetColorForAngle(EmotionVector.GetAngleForCoreEmotion(primaryAffinity)), emotionalImpact);
-        //Gizmos.DrawLine(p - f, p + f * (1f + directionality));
-        //Gizmos.DrawLine(p - u, p + u);
-        //Gizmos.DrawLine(p - r, p + r);
+        Gizmos.color = Color.Lerp(Color.yellow, EmotionVector.GetColorForAngle(EmotionVector.GetAngleForCoreEmotion(primaryAffinity)), emotionalImpact);
+        Gizmos.DrawLine(p - f, p + f * (1f + directionality));
+        Gizmos.DrawLine(p - u, p + u);
+        Gizmos.DrawLine(p - r, p + r);
 
         Gizmos.color = IsSelected ? Color.magenta : (Color.yellow * .75f);
         Gizmos.DrawWireSphere(p, size * transform.lossyScale.x);
+
+        //if (associatedItemRoot)
+        //{
+        //    Gizmos.color = Color.red;
+        //    Gizmos.matrix = associatedItemRoot.localToWorldMatrix;
+        //    Gizmos.DrawWireCube(associatedItemBounds.center, associatedItemBounds.size);
+        //}
     }
 
     public Bounds GetBounds()

@@ -345,8 +345,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   importance: 1
-  primaryAffinity: 4
   size: 2.66
+  primaryAffinity: 4
   directionality: 0
   emotionalImpact: 0
 --- !u!114 &114169875681512868
@@ -360,9 +360,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24d84ebab211654387b94bf182da589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  importance: 1
-  primaryAffinity: 4
+  importance: 15
   size: 4.2
+  primaryAffinity: 4
   directionality: 0
   emotionalImpact: 0
 --- !u!114 &114265607501372822
@@ -390,9 +390,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24d84ebab211654387b94bf182da589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  importance: 1
-  primaryAffinity: 4
+  importance: 5
   size: 2.66
+  primaryAffinity: 4
   directionality: 0
   emotionalImpact: 0
 --- !u!114 &114862724799893684
@@ -406,8 +406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24d84ebab211654387b94bf182da589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  importance: 1
-  primaryAffinity: 4
+  importance: 10
   size: 2.66
+  primaryAffinity: 4
   directionality: 0
   emotionalImpact: 0

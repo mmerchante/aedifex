@@ -228,8 +228,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   importance: 1
-  primaryAffinity: 6
   size: 1
+  primaryAffinity: 6
   directionality: 0
   emotionalImpact: 0.71
 --- !u!114 &114538349200593560
@@ -244,8 +244,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   importance: 1
-  primaryAffinity: 6
   size: 1
+  primaryAffinity: 6
   directionality: 0
   emotionalImpact: 0.71
 --- !u!114 &114570215575558144

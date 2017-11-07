@@ -10,6 +10,8 @@ public class InterestPointGrid : MonoBehaviour
 {
     public int resolution = 64;
     public Bounds bounds = new Bounds(Vector3.zero, Vector3.one * 1024f);
+
+    public bool enableGizmos = false;
     
     // TODO: For now, I won't optimize this much...
     // ideally this should be a very flat structure with a hard max per cell
@@ -104,6 +106,9 @@ public class InterestPointGrid : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!enableGizmos)
+            return;
+
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireCube(bounds.center, bounds.size);
 
