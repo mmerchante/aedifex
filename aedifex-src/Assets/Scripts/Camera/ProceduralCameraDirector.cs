@@ -85,7 +85,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             this.nextShot = new ShotInformation();
             this.currentCamera = cut.selectedCamera;
             this.currentCamera.InitializeCamera(currentShot.strategy, GetComponent<PostProcessingBehaviour>().profile);
-            this.currentShot.strategy.StartStrategy();
+            this.currentShot.strategy.StartStrategy(currentCamera);
         }
     }
 

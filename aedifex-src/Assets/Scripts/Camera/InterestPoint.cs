@@ -20,8 +20,8 @@ public class InterestPoint : MonoBehaviour
 
     public bool IsSelected { get; set; }
 
-    private Bounds associatedItemBounds;
-    private Transform associatedItemRoot;
+    public Bounds AssociatedItemBounds { get; protected set; }
+    public Transform AssociatedItemRoot { get; protected set; }
     
     public void Awake()
     {
@@ -31,8 +31,8 @@ public class InterestPoint : MonoBehaviour
 
     public void AssociateItemBounds(Transform itemRoot, Bounds b)
     {
-        this.associatedItemBounds = b;
-        this.associatedItemRoot = itemRoot;
+        this.AssociatedItemBounds = b;
+        this.AssociatedItemRoot = itemRoot;
     }
 
     public void OnDestroy()
@@ -68,6 +68,7 @@ public class InterestPoint : MonoBehaviour
     {
         return new Bounds(transform.position, transform.lossyScale * size * 2f);
     }
+    
 
     /// <summary>
     /// This heuristic is useful for two cases:

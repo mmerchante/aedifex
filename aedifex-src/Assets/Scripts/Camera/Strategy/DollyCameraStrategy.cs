@@ -12,7 +12,26 @@ public class DollyCameraStrategy : ProceduralCameraStrategy
 
     protected override void OnStart()
     {
-        movementDirection = mainInterestAxis;
+        camera.RotationDampingTime = .1f;
+        camera.PositionDampingTime = .05f;
+
+        Vector3 boundsAxis = mainInterestPoint.AssociatedItemBounds.size.normalized;
+
+        List<KeyValuePair<Vector3, float>> possibleDirections = new List<KeyValuePair<Vector3, float>>();
+
+        // Chance of following the frustum average
+        possibleDirections.Add(new KeyValuePair<Vector3, float>(mainInterestAxis, .5f));
+
+        // Chance of picking a dolly direction based on the item boundaries
+        possibleDirections.Add(new KeyValuePair<Vector3, float>(mainInterestPoint.transform.right * boundsAxis.x, boundsAxis.x));
+        possibleDirections.Add(new KeyValuePair<Vector3, float>(mainInterestPoint.transform.up * boundsAxis.y, boundsAxis.y));
+        possibleDirections.Add(new KeyValuePair<Vector3, float>(mainInterestPoint.transform.forward * boundsAxis.z, boundsAxis.z));
+
+        // Chance of doing a dolly in/out
+        float inOutDirection = (ProceduralEngine.RandomRange(0f, 1f) > .5f ? 1f : -1f); // TODO: Associate with emotions
+        possibleDirections.Add(new KeyValuePair<Vector3, float>(GetForward() * inOutDirection, .5f));
+
+        movementDirection = ProceduralEngine.SelectRandomWeighted(possibleDirections, x => x.Value).Key.normalized;
         keepAttention = ProceduralEngine.RandomRange(0f, 1f) > .5f; // TODO: associate this with the rotation smoothness/lag, and with emotions (e.g. sadness lags, expectation keeps)
     }
 
@@ -32,7 +51,7 @@ public class DollyCameraStrategy : ProceduralCameraStrategy
         vsAvg.z = 0f;
         vsAvg = vsAvg.normalized;
 
-        Matrix4x4 invViewMatrix = GetInvViewMatrix();
+        Matrix4x4 invViewMatrix = GetCameraToWorldMatrix();
         mainInterestAxis = invViewMatrix.MultiplyVector(vsAvg);
 
         return base.Evaluate(e, frustumPoints, frustumImportanceAccumulation);
@@ -40,15 +59,19 @@ public class DollyCameraStrategy : ProceduralCameraStrategy
 
     public override bool Propose(EmotionEvent e, InterestPoint p, float shotDuration)
     {
-        speed = 0f;// ProceduralEngine.Instance.EmotionEngine.GetSpectrum(e.timestamp).GetTotalEnergy() * 50f;
+        speed = ProceduralEngine.Instance.EmotionEngine.GetSpectrum(e.timestamp).GetTotalEnergy() * 50f;
         return base.Propose(e, p, shotDuration);
     }
 
     protected override void OnUpdateStrategy()
     {
+        EmotionSpectrum currentEmotion = ProceduralEngine.Instance.GetCurrentEmotion();
+        float expectation = currentEmotion.Dot(new EmotionSpectrum(EmotionVector.GetCoreEmotion(CoreEmotion.Anticipation)));
+        
+        camera.SetNoiseParameters(Mathf.Clamp(expectation * .5f, 0f, .2f), .7f);
         CameraPosition = initialPosition + movementDirection * speed * CameraTimeNormalized;
 
-        //if (keepAttention)
+        if (keepAttention)
             CameraRotation = GetViewDirectionForInterestPoint(mainInterestPoint, Composition);
     }
 }

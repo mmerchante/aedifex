@@ -21,10 +21,13 @@ public class ProceduralCameraStrategy
     protected float cameraTime;
     protected float shotDuration;
 
+    protected ProceduralCamera camera;
+
     protected float CameraTimeNormalized { get { return cameraTime / shotDuration; } }
 
-    public void StartStrategy()
+    public void StartStrategy(ProceduralCamera camera)
     {
+        this.camera = camera;
         this.cameraTime = 0f;
         this.initialPosition = CameraPosition;
         this.initialRotation = CameraRotation;
@@ -47,7 +50,7 @@ public class ProceduralCameraStrategy
     {
     }
 
-    public void UpdateStrategy(ProceduralCamera camera)
+    public void UpdateStrategy()
     {
         cameraTime += Time.deltaTime;
         OnUpdateStrategy();
@@ -62,9 +65,24 @@ public class ProceduralCameraStrategy
         return Vector3.Distance(CameraPosition, mainInterestPoint.transform.position);
     }
 
-    public Matrix4x4 GetInvViewMatrix()
+    public Matrix4x4 GetCameraToWorldMatrix()
     {
         return Matrix4x4.TRS(CameraPosition, CameraRotation, Vector3.one);
+    }
+
+    public Vector3 GetForward()
+    {
+        return GetCameraToWorldMatrix().MultiplyVector(Vector3.forward);
+    }
+
+    public Vector3 GetUp()
+    {
+        return GetCameraToWorldMatrix().MultiplyVector(Vector3.up);
+    }
+
+    public Vector3 GetRight()
+    {
+        return GetCameraToWorldMatrix().MultiplyVector(Vector3.right);
     }
 
     public Matrix4x4 GetViewMatrix()
@@ -121,7 +139,11 @@ public class ProceduralCameraStrategy
     protected virtual CompositionSettings ProposeComposition()
     {
         CompositionSettings c = new CompositionSettings();
-        c.screenTarget = new Vector2(.5f, .5f); // The center
+
+        // Random rule of thirds. TODO: based on item's biggest axis, align on X or Y
+        int column = Mathf.RoundToInt(ProceduralEngine.RandomRange(1f, 3f));
+
+        c.screenTarget = new Vector2(column * .25f, .5f); // The center
         c.deadZoneSize = 0.01f;
         c.fieldOfView = 45; // TODO: Find a fov that adjusts to the interest point's size
         return c;

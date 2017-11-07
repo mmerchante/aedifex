@@ -70,7 +70,7 @@ public class ProceduralCamera : MonoBehaviour
     {
         if (strategy != null)
         {
-            strategy.UpdateStrategy(this);
+            strategy.UpdateStrategy();
             UpdateTransform();
 
             DepthOfFieldModel dof = postProfile.depthOfField;

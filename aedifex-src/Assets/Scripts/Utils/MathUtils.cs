@@ -20,7 +20,7 @@ public class MathUtils
 
 		return new Vector3(tmp * Mathf.Cos(theta), cosPhi, tmp * Mathf.Sin(theta));
 	}
-
+    
     public static Quaternion SmoothDamp(Quaternion fromQuat, Quaternion toQuat, ref Vector3 velocity, float smoothTime, float deltaTime)
     {
         if (deltaTime <= 0.001f)
