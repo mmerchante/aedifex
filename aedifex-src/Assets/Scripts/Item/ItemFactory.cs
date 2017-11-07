@@ -210,7 +210,7 @@ public class ItemFactory : MonoBehaviorSingleton<ItemFactory>
                 }
             }
 
-            initMillis = (Time.realtimeSinceStartup - time) * 1000f;
+            //initMillis = (Time.realtimeSinceStartup - time) * 1000f;
         }
 	}
 
@@ -304,8 +304,8 @@ public class ItemFactory : MonoBehaviorSingleton<ItemFactory>
         return itemIndices;
     }
 
-    private float buildMillis = 0f;
-    private float initMillis = 0f;
+    //private float buildMillis = 0f;
+    //private float initMillis = 0f;
     private List<Bounds> transformedBoundsGizmosReferences = new List<Bounds>();
     private List<Bounds> transformedBoundsGizmosItems = new List<Bounds>();
     
@@ -342,7 +342,7 @@ public class ItemFactory : MonoBehaviorSingleton<ItemFactory>
             BuildRootDynamicItem(dynamicRoot, viewDirection, rnd, itemIndex, Matrix4x4.identity, 0, ITEM_TREE_MAX_DEPTH - 1);
         }
 
-        buildMillis += (Time.realtimeSinceStartup - time) * 1000f;
+        //buildMillis += (Time.realtimeSinceStartup - time) * 1000f;
 
 		Renderer[] renderers = itemGO.GetComponentsInChildren<Renderer>();
 

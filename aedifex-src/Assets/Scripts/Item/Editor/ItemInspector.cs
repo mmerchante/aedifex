@@ -10,8 +10,6 @@ public class ItemInspector : Editor
     private string[] tagNames;
     private ItemLayout currentItemLayout;
 
-    private bool aoFoldout = false;
-
     private GUIStyle titleStyle;
 
     public void OnEnable()

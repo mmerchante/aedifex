@@ -47,7 +47,7 @@ public class ItemReferenceInspector : Editor
 		// Load item type at least, to simplify search :)
 		if(firstTime)
 		{
-			Item instance = GetItemById(item.itemId);
+			//Item instance = GetItemById(item.itemId);
             //typeFilter = instance ? instance.type : ItemType.Decoration;
 			firstTime = false;
 		}

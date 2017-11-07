@@ -11,6 +11,7 @@ public class EmotionChunkEditor : TrackChunkEditor<EmotionData>, IPointerClickHa
 
     public Toggle variantToggle;
     public InputField harmonySequenceInputField;
+    public InputField intensityInputField;
     public Dropdown curveDropdown;
     public RectTransform curveContainer;
 
@@ -57,6 +58,7 @@ public class EmotionChunkEditor : TrackChunkEditor<EmotionData>, IPointerClickHa
         variantToggle.isOn = Chunk.IsVariation;
         harmonySequenceInputField.text = Chunk.HarmonySequenceNumber.ToString();
         curveDropdown.value = (int) Chunk.IntensityCurveType;
+        intensityInputField.text = Chunk.Data.intensityMultiplier.ToString();
 
         ClearAllHandles();
 
@@ -73,6 +75,12 @@ public class EmotionChunkEditor : TrackChunkEditor<EmotionData>, IPointerClickHa
 
         Chunk.IsVariation = variantToggle.isOn;
         Chunk.IntensityCurveType = (IntensityCurve) curveDropdown.value;
+
+        float intensity = -1f;
+        float.TryParse(intensityInputField.text, out intensity);
+
+        if(intensity >= 0f)
+            Chunk.Data.intensityMultiplier = intensity;
 
         int harmony = -1;
         int.TryParse(harmonySequenceInputField.text, out harmony);
@@ -152,7 +160,7 @@ public class EmotionChunkEditor : TrackChunkEditor<EmotionData>, IPointerClickHa
         {
             float t = i / (float)subdivisions;
             float angle = t * Mathf.PI * 2f;
-            float r = Chunk.Data.Evaluate(angle) * width + innerRadius;
+            float r = Chunk.Data.Evaluate(angle, true) * width + innerRadius;
 
             GL.Color(EmotionVector.GetColorForAngle(angle));
             

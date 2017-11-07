@@ -20,7 +20,7 @@ public class TrackChunkEditor<T> : MonoBehaviour, ITrackChunkEditor<T>
 
     protected RectTransform rect;
 
-    private Vector3[] corners = new Vector3[4];
+    //private Vector3[] corners = new Vector3[4];
 
     private AbstractTrackChunk<T> ClipboardChunk = null;
 

@@ -24,6 +24,11 @@ public class EmotionBehavior : MonoBehaviour
     {
         this.interestPoints = new List<InterestPoint>(GetComponentsInChildren<InterestPoint>());
         this.interestPoints = this.interestPoints.OrderByDescending(x => x.importance).ToList();
+        OnAwake();
+    }
+
+    protected virtual void OnAwake()
+    {
     }
 
     public void Update()

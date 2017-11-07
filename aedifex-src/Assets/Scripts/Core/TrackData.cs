@@ -9,6 +9,7 @@ public enum TrackCategory
     Rythm = 2,          // Rythmic tracks are good for camera cuts
     Support = 3,        // Harmonic progressions, etc.
     Misc = 4,           // Noises, specific events, etc
+    Structure = 5,      // Useful for easily knowing if the song is going up or down
 }
 
 public enum IntensityCurve

@@ -100,6 +100,7 @@ public class EmotionVector
 public class EmotionData
 {
     public List<EmotionVector> vectors = new List<EmotionVector>();
+    public float intensityMultiplier = 1f;
 
     public EmotionData()
     {
@@ -124,36 +125,8 @@ public class EmotionData
     {
         this.vectors.Remove(v);
     }
-
-    // TODO: Think about the integral instead...
-    public float GetIntensity()
-    {
-        float result = 0f; // TODO: what about a min intensity?
-
-        foreach (EmotionVector v in vectors)
-            result += v.intensity;
-
-        return result;
-    }
-
-    public float EvaluateDerivative(float t)
-    {
-        float result = 0f;
-        float normalization = 0f;
-
-        foreach (EmotionVector v in vectors)
-        {
-            normalization += v.intensity;
-            result += v.EvaluateDerivative(t);
-        }
-
-        if (normalization == 0f)
-            normalization = 1f;
-
-        return result;// / normalization;
-    }
     
-    public float Evaluate(float t)
+    public float Evaluate(float t, bool normalize = false)
     {
         float result = 0f;
         float normalization = 0f;
@@ -167,7 +140,10 @@ public class EmotionData
         if (normalization == 0f)
             normalization = 1f;
 
-        return result;// / normalization;
+        if(normalize)
+            return result / normalization;
+
+        return result * intensityMultiplier;// / normalization;
     }
 
     public EmotionSpectrum GetSpectrum()

@@ -30,6 +30,11 @@ public struct EmotionEvent
     public int chunkIndex;
     public bool chunkDelimitsSegment; // Is this chunk a start/end of a long segment? Useful for the emotional state machine
     public int harmonicDifference;
+
+    public override string ToString()
+    {
+        return "Event [" + type.ToString() + " | " + intensity + " | " + trackIndex + "]";
+    }
 }
 
 public class EmotionEngine
@@ -42,7 +47,11 @@ public class EmotionEngine
     private EmotionSpectrum[] emotionalSignal = null;
     private EmotionSpectrum[] emotionalDerivativeSignal = null;
 
+    private EmotionSpectrum[] smoothEmotionSignal = null;
+
+    // Public for the UI
     public float[] TotalEnergySignal { get; set; }
+    public float[] SmoothEnergySignal { get; set; }
 
     private float TotalDuration { get; set; }
     public float BeatDuration { get; protected set; }
@@ -50,6 +59,9 @@ public class EmotionEngine
 
     public float BeatDurationNormalized { get; protected set; }
     public float MeasureDurationNormalized { get; protected set; }
+
+    public float MaxEnergy { get; protected set; }
+    public float MinEnergy { get; protected set; }
 
     private int downsampleRate = 1;
 
@@ -74,6 +86,30 @@ public class EmotionEngine
         return emotionalSignal[index];
     }
 
+    public EmotionSpectrum GetSmoothSpectrum(float normalizedT)
+    {
+        int index = Mathf.Clamp((int)(normalizedT * smoothEmotionSignal.Length), 0, smoothEmotionSignal.Length - 1);
+        return smoothEmotionSignal[index];
+    }
+
+    public EmotionSpectrum GetSpectrumDerivative(float normalizedT)
+    {
+        int index = Mathf.Clamp((int)(normalizedT * emotionalDerivativeSignal.Length), 0, emotionalDerivativeSignal.Length - 1);
+        return emotionalDerivativeSignal[index];
+    }
+
+    public float GetTotalEnergy(float normalizedT)
+    {
+        int index = Mathf.Clamp((int)(normalizedT * TotalEnergySignal.Length), 0, TotalEnergySignal.Length - 1);
+        return TotalEnergySignal[index];
+    }
+
+    public float GetSmoothEnergy(float normalizedT)
+    {
+        int index = Mathf.Clamp((int)(normalizedT * SmoothEnergySignal.Length), 0, SmoothEnergySignal.Length - 1);
+        return SmoothEnergySignal[index];
+    }
+
     protected void PreloadChunks()
     {
         foreach (TrackData track in container.tracks)
@@ -85,23 +121,42 @@ public class EmotionEngine
     // I'm not worrying about performance right now
     public void Precompute()
     {
-        // TODO:
-        // - Find recurring patterns
-        // - Find max/mins
-        // - Find overall average emotion
-        // - Find conflict/dissonance
-        // - Associate tracks with visual elements (is this responsibility of this class? NO)
-
         PreloadChunks();
         PreAccumulateEvents();
         CacheEmotionSignal();
         PostAccumulateEvents();
         PrecomputeExtremes();
-
-        //Debug.Log("Found " + events.Count + " events");
+        FilterSignal();
 
         // Order events by timestamp
         events = events.OrderBy(x => x.timestamp).ToList();
+    }
+    
+    /// <summary>
+    /// Smooth the emotion signal a bit so we can find smooth features
+    /// </summary>
+    protected void FilterSignal()
+    {
+        int samples = emotionalSignal.Length;
+        float window = BeatDurationNormalized * 4f;
+        int sampleWindow = (int) (window * samples);
+        int halfWindow = sampleWindow / 2;
+
+        smoothEmotionSignal = new EmotionSpectrum[samples];
+        SmoothEnergySignal = new float[samples];
+
+        for(int x = 0; x < samples; ++x)
+        {
+            EmotionSpectrum avg = new EmotionSpectrum();
+
+            // No time for gaussian ;)
+            for (int dx = -halfWindow; dx <= halfWindow; ++dx)
+                if (x + dx >= 0 && x + dx < samples)
+                    avg += emotionalSignal[x + dx];
+
+            smoothEmotionSignal[x] = avg / sampleWindow;
+            SmoothEnergySignal[x] = smoothEmotionSignal[x].GetTotalEnergy();
+        }
     }
 
     public Queue<EmotionEvent> BuildEventQueue()
@@ -126,11 +181,18 @@ public class EmotionEngine
             {
                 TrackChunkData chunk = track.chunks[c];
 
-                EmotionEvent startEvent = GetEventFromChunkStart(track, chunk, t, c);
-                EmotionEvent endEvent = GetEventFromChunkEnd(track, chunk, t, c);
+                if (track.category == TrackCategory.Structure)
+                {
 
-                foundEvents.Add(startEvent);
-                foundEvents.Add(endEvent);
+                }
+                else
+                {
+                    EmotionEvent startEvent = GetEventFromChunkStart(track, chunk, t, c);
+                    EmotionEvent endEvent = GetEventFromChunkEnd(track, chunk, t, c);
+
+                    foundEvents.Add(startEvent);
+                    foundEvents.Add(endEvent);
+                }
             }
         }
 
@@ -151,7 +213,7 @@ public class EmotionEngine
 
         if (chunkIndex > 0)
             e.harmonicDifference = Mathf.Abs(chunk.harmonySequenceNumber - track.chunks[chunkIndex - 1].harmonySequenceNumber);
-
+         
         return e;
     }
 
@@ -305,19 +367,18 @@ public class EmotionEngine
 
     protected void PrecomputeExtremes()
     {
-        int sampleCount = audioSignal.Length / downsampleRate; // We don't need very high precision
-
-        float dt = 1f / (float) sampleCount;
-
         float minTime = 0f;
         float maxTime = 0f;
         float min = float.MaxValue;
         float max = 0f;
 
-        for(int i = 0; i < sampleCount; ++i)
+        int samples = TotalEnergySignal.Length;
+        float dt = 1f / (float) samples;
+
+        for(int i = 0; i < samples; ++i)
         {
             float t = i * dt;
-            float intensity = emotionalSignal[i].GetTotalEnergy();// TODO: * (1f + signalContribution);
+            float intensity = TotalEnergySignal[i];
 
             if (intensity < min)
             {
@@ -331,10 +392,14 @@ public class EmotionEngine
                 maxTime = t;
             }
         }
+
+        MinEnergy = min;
+        MaxEnergy = max;
     }
 
     protected void PrecomputeNewEvents()
     {
+        // TODO: conflict
     }
     
     public EmotionSpectrum Compute(float normalizedTime)
@@ -388,6 +453,6 @@ public class EmotionEngine
             }
         }
 
-        return CoreEmotion.Joy;
+        return maxEmotion;
     }
 }

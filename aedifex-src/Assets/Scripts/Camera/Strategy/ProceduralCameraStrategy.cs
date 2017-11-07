@@ -133,7 +133,7 @@ public class ProceduralCameraStrategy
         int threshold = 15;
         float avgImportance = frustumImportanceAccumulation / frustumPoints.Count;
         int maxCount = Mathf.Min(threshold, frustumPoints.Count);
-        return 1f + Mathf.Lerp(0f, frustumImportanceAccumulation * maxCount, FrustumImportance);
+        return 1f + Mathf.Lerp(0f, avgImportance * maxCount, FrustumImportance);
     }
 
     protected virtual CompositionSettings ProposeComposition()

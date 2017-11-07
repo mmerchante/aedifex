@@ -19,15 +19,12 @@ public class TrackEditor : MonoBehaviour
     public RectTransform headerContainer;
 
     private List<AbstractTrack> tracks = new List<AbstractTrack>();
-    private RectTransform rect;
-    private float duration;
 
     private UITimeline timeline;
     private AbstractTrack selectedTrack;
 
     public void Awake()
     {
-        this.rect = GetComponent<RectTransform>();
         this.addTrackButton.onClick.AddListener(OnAddTrackButtonClicked);
 
         List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();
@@ -57,7 +54,6 @@ public class TrackEditor : MonoBehaviour
     public void Initialize(UITimeline timeline, float baseDuration)
     {
         this.timeline = timeline;
-        this.duration = baseDuration;
     }
 
     public void UpdateTracks(float zoom, float offset, int bpm, int bpb)

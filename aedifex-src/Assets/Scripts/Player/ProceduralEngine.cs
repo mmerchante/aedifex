@@ -21,7 +21,6 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
 
     public System.Random RNG { get; protected set; }
 
-    private Queue<EmotionEvent> eventQueue = new Queue<EmotionEvent>();
 
     protected override void Initialize()
     {
@@ -51,7 +50,6 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
 
             EmotionEngine.Initialize(musicTrack.length, audioSignal, data, 1024);
             EmotionEngine.Precompute();
-            eventQueue = EmotionEngine.BuildEventQueue();
 
             this.EventDispatcher = gameObject.AddComponent<ProceduralEventDispatcher>();
             this.EventDispatcher.Initialize();
@@ -80,8 +78,6 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
         DataContainer container = JsonUtility.FromJson<DataContainer>(json);
         RunSimulationInternal(container);
     }
-
-    private float beatCounter = 0f;
 
     public EmotionSpectrum GetCurrentEmotion()
     {

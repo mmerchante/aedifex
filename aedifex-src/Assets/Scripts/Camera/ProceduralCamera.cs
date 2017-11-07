@@ -38,7 +38,6 @@ public class ProceduralCamera : MonoBehaviour
 
     private ProceduralCameraStrategy strategy;
 
-    private Vector3 startPosition = Vector3.zero;
     private PostProcessingProfile postProfile;
 
     public void Awake()
@@ -54,7 +53,6 @@ public class ProceduralCamera : MonoBehaviour
         this.strategy = strategy;
 
         this.CompositionSettings = strategy.Composition;
-        this.startPosition = strategy.CameraPosition;
 
         UpdateTransform(true);
     }

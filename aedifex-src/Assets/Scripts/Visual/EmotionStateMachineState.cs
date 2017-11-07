@@ -23,7 +23,7 @@ public class EmotionStateMachineState : EmotionBehavior
     public float StateTime { get; protected set; }
     protected float transitionDuration = 0f;
 
-    public void Awake()
+    protected override void OnAwake()
     {
         StateTime = 0f;
         SwitchToState(State.Disabled);
