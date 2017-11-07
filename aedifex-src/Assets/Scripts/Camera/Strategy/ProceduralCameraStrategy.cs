@@ -74,9 +74,17 @@ public class ProceduralCameraStrategy
 
     public Matrix4x4 GetViewProjection()
     {
-        float aspect = Screen.width / Screen.height;
+        float aspect = Screen.width / (float)Screen.height;
         Matrix4x4 viewMatrix = Matrix4x4.TRS(CameraPosition, CameraRotation, Vector3.one).inverse;
-        Matrix4x4 projMatrix = Matrix4x4.Perspective(Composition.fieldOfView, aspect, .01f, 500f);
+        Matrix4x4 projMatrix = Matrix4x4.Perspective(Composition.fieldOfView, aspect, .01f, 1500f);
+        return projMatrix * viewMatrix;
+    }
+
+    public Matrix4x4 GetViewProjection(Vector3 position, Quaternion rotation)
+    {
+        float aspect = Screen.width / (float)Screen.height;
+        Matrix4x4 viewMatrix = Matrix4x4.TRS(position, rotation, Vector3.one).inverse;
+        Matrix4x4 projMatrix = Matrix4x4.Perspective(Composition.fieldOfView, aspect, .01f, 1500f);
         return projMatrix * viewMatrix;
     }
 
@@ -114,55 +122,40 @@ public class ProceduralCameraStrategy
     {
         CompositionSettings c = new CompositionSettings();
         c.screenTarget = new Vector2(.5f, .5f); // The center
-        c.deadZoneSize = 0f;
-
+        c.deadZoneSize = 0.01f;
         c.fieldOfView = 45; // TODO: Find a fov that adjusts to the interest point's size
         return c;
+    }
+
+    public Vector3 GetViewportPosition(Vector3 cameraPosition, Quaternion cameraRotation, Vector3 p)
+    {
+        Vector4 ndcPos = GetViewProjection(cameraPosition, cameraRotation) * new Vector4(p.x, p.y, p.z, 1f);
+        ndcPos /= ndcPos.w;
+        return new Vector3(ndcPos.x * .5f + .5f, ndcPos.y * .5f + .5f, ndcPos.z);
     }
 
     protected Quaternion GetViewDirectionForInterestPoint(InterestPoint p, CompositionSettings composition)
     {
         Vector3 cameraPosition = CameraPosition;
         Vector3 target = p.transform.position;
-
+        
         Vector3 dir = (target - cameraPosition).normalized;
         Quaternion lookAt = Quaternion.LookRotation(dir, Vector3.up);
+        
+        float farClip = 1500f;
+        Vector2 screenTarget = composition.screenTarget * 2f - Vector2.one;
 
-        //float farClip = 500f;
+        float distance = Mathf.Clamp01(Vector3.Distance(cameraPosition, target) / farClip);
+        Matrix4x4 invViewProj = GetViewProjection(cameraPosition, lookAt).inverse;
+        Vector4 targetNdcPos = new Vector4(screenTarget.x, screenTarget.y, -distance, 1f) * farClip;
 
-        //float aspect = Screen.width / Screen.height;
-        //Matrix4x4 viewMatrix = Matrix4x4.TRS(cameraPosition, lookAt, Vector3.one).inverse;
-        //Matrix4x4 projMatrix = Matrix4x4.Perspective(composition.fieldOfView, aspect, .01f, farClip);
+        Vector4 vsPos = invViewProj * targetNdcPos;
+        vsPos /= vsPos.w;
 
-        //Matrix4x4 viewProj = projMatrix * viewMatrix;
-
-        //Vector4 ndcPos = viewProj * new Vector4(target.x, target.y, target.z, 1f);
-        //ndcPos /= ndcPos.w;
-
-        //Vector2 screenPos = new Vector2(ndcPos.x * .5f + .5f, ndcPos.y * .5f + .5f);
-        //Vector2 screenDifference = composition.screenTarget - screenPos;
-
-        //// If the object is outside our screen target, force look at it
-        //if (screenDifference.magnitude > composition.deadZoneSize)
-        //{
-        //    // If the object is _very_ far, first try to get to look at it
-        //    if (screenDifference.magnitude > 1f)
-        //        return lookAt;
-
-        //    Vector2 screenTarget = composition.screenTarget * 2f - Vector2.one;
-
-        //    float distance = Mathf.Clamp01(Vector3.Distance(cameraPosition, target) / farClip);
-        //    Matrix4x4 invViewProj = viewProj.inverse;
-        //    Vector4 targetNdcPos = new Vector4(screenTarget.x, screenTarget.y, distance, 1f) * farClip;
-
-        //    Vector4 vsPos = invViewProj * targetNdcPos;
-        //    vsPos /= vsPos.w;
-
-        //    Vector3 newTargetPosition = new Vector3(vsPos.x, vsPos.y, vsPos.z);
-        //    dir = (newTargetPosition - cameraPosition).normalized;
-        //    return Quaternion.LookRotation(dir, Vector3.up);
-        //}
-
+        Vector3 newTargetPosition = new Vector3(vsPos.x, vsPos.y, vsPos.z);
+        Vector3 newDir = (newTargetPosition - cameraPosition).normalized;
+        lookAt = Quaternion.LookRotation(-newDir, Vector3.up);
+        
         return lookAt;
     }
 

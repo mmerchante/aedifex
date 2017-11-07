@@ -88,6 +88,8 @@ public class UITimeline : MonoBehaviour
         DataContainer container = SerializeAllTimeline();
         // This is expensive, TODO: update on another thread :)
         emotionVisualizer.Initialize(this, audioEngine.Samples, container);
+
+        trackEditor.InstantiateWaveformTrack(emotionVisualizer.GetEmotionEngine().TotalEnergySignal, 1, Color.blue, "Energy");
     }
 
     public void Load()

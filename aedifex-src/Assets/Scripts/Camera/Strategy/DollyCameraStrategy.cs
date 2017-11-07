@@ -40,7 +40,7 @@ public class DollyCameraStrategy : ProceduralCameraStrategy
 
     public override bool Propose(EmotionEvent e, InterestPoint p, float shotDuration)
     {
-        speed = ProceduralEngine.Instance.EmotionEngine.GetSpectrum(e.timestamp).GetTotalEnergy() * 50f;
+        speed = 0f;// ProceduralEngine.Instance.EmotionEngine.GetSpectrum(e.timestamp).GetTotalEnergy() * 50f;
         return base.Propose(e, p, shotDuration);
     }
 
@@ -48,7 +48,7 @@ public class DollyCameraStrategy : ProceduralCameraStrategy
     {
         CameraPosition = initialPosition + movementDirection * speed * CameraTimeNormalized;
 
-        if (keepAttention)
+        //if (keepAttention)
             CameraRotation = GetViewDirectionForInterestPoint(mainInterestPoint, Composition);
     }
 }

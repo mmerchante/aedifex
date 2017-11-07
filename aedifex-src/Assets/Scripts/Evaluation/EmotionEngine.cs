@@ -42,6 +42,8 @@ public class EmotionEngine
     private EmotionSpectrum[] emotionalSignal = null;
     private EmotionSpectrum[] emotionalDerivativeSignal = null;
 
+    public float[] TotalEnergySignal { get; set; }
+
     private float TotalDuration { get; set; }
     public float BeatDuration { get; protected set; }
     public float MeasureDuration { get; protected set; }
@@ -96,7 +98,7 @@ public class EmotionEngine
         PostAccumulateEvents();
         PrecomputeExtremes();
 
-        Debug.Log("Found " + events.Count + " events");
+        //Debug.Log("Found " + events.Count + " events");
 
         // Order events by timestamp
         events = events.OrderBy(x => x.timestamp).ToList();
@@ -285,16 +287,19 @@ public class EmotionEngine
 
         this.emotionalSignal = new EmotionSpectrum[sampleCount];
         this.emotionalDerivativeSignal = new EmotionSpectrum[sampleCount];
+        this.TotalEnergySignal = new float[sampleCount];
 
         float dt = 1f / (float)sampleCount;
         for (int i = 0; i < sampleCount; ++i)
         {
             emotionalSignal[i] = Compute(i * dt);
+            TotalEnergySignal[i] = emotionalSignal[i].GetTotalEnergy();
 
             if (i == 0)
                 emotionalDerivativeSignal[i] = new EmotionSpectrum();
             else
                 emotionalDerivativeSignal[i] = (emotionalSignal[i] - emotionalSignal[i - 1]) / dt;
+
         }
     }
 

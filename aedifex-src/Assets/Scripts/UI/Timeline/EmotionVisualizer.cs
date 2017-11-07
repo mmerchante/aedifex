@@ -29,6 +29,11 @@ public class EmotionVisualizer : MonoBehaviour
         engine.Precompute();
     }
 
+    public EmotionEngine GetEmotionEngine()
+    {
+        return engine;
+    }
+
     public void OnGUI()
     {
         if (Event.current.type != EventType.Repaint)
