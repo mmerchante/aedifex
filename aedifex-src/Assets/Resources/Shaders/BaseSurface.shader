@@ -4,7 +4,8 @@
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
         _DissolveTex ("Dissolve tex", 2D) = "white" {}
     	_Dissolve ("Dissolve", Range(0,1)) = 0.0
-        _DissolveGlow ("Glow", Range(0,5)) = 0.0
+        _DissolveGlow ("Glow", Range(0,15)) = 0.0
+    	_DissolveGlowSize ("GlowSize", Range(0,1)) = 0.0
         _DissolveColor ("Dissolve Color", Color) = (1,1,1,1)
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
@@ -32,6 +33,7 @@
         float _Dissolve;
         float _DissolveGlow;
         float4 _DissolveColor;
+		float _DissolveGlowSize;
 
 		UNITY_INSTANCING_CBUFFER_START(Props)
 		UNITY_INSTANCING_CBUFFER_END
@@ -48,7 +50,7 @@
             a = tex2D (_DissolveTex, dissolveUV * 2.0 + a * .5 + _Time.xx * 4.0).r;
 			o.Alpha = smoothstep(_Dissolve - .15, _Dissolve, a);
 
-			float glow = 1.0 - smoothstep(_Dissolve - .15, _Dissolve, a);
+			float glow = 1.0 - smoothstep(_Dissolve - .15, _Dissolve+ _DissolveGlowSize, a);
             o.Emission = _DissolveColor * _DissolveGlow * glow * 2.0;
 		}
 		ENDCG

@@ -479,6 +479,7 @@ MonoBehaviour:
   preserveOriginalRotation: 1
   local: 1
   realtime: 1
+  random: 0
 --- !u!114 &114247240303502240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -495,6 +496,7 @@ MonoBehaviour:
   preserveOriginalRotation: 1
   local: 1
   realtime: 1
+  random: 0
 --- !u!114 &114461323679516276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -511,6 +513,7 @@ MonoBehaviour:
   preserveOriginalRotation: 1
   local: 1
   realtime: 1
+  random: 0
 --- !u!114 &114475754300188250
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -522,9 +525,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24d84ebab211654387b94bf182da589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  importance: 1
-  primaryAffinity: 0
+  importance: 1500
   size: 3.5
+  primaryAffinity: 0
   directionality: 0
   emotionalImpact: 0
 --- !u!114 &114912550616642148

@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4810865363162904}
   - component: {fileID: 114948000979202928}
   m_Layer: 0
-  m_Name: Column1 (, 1.0)
+  m_Name: ArchRuins3 (Architecture, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,6 +54,22 @@ GameObject:
   - component: {fileID: 114382874980527648}
   m_Layer: 0
   m_Name: Child (Root, 1.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1129206384723932
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4863167050560256}
+  - component: {fileID: 114951783206873866}
+  m_Layer: 0
+  m_Name: ArchRuins1 (Architecture, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,6 +118,22 @@ GameObject:
   - component: {fileID: 114085160213366782}
   m_Layer: 0
   m_Name: RockLarge8 (Rock, 1.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1206948765577302
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4416528679625586}
+  - component: {fileID: 114782428562956638}
+  m_Layer: 0
+  m_Name: ArchRuins1 (Architecture, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,6 +312,22 @@ GameObject:
   m_Component:
   - component: {fileID: 4375718375588598}
   - component: {fileID: 114975868779547238}
+  m_Layer: 0
+  m_Name: Column1 (, 1.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1333189374793816
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4846468951976702}
+  - component: {fileID: 114109453255592836}
   m_Layer: 0
   m_Name: Column1 (, 1.0)
   m_TagString: Untagged
@@ -678,6 +726,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1672406877654708
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4102181029712154}
+  - component: {fileID: 114660656947920592}
+  m_Layer: 0
+  m_Name: ArchDecoration (Architecture, 1.0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1702379700603762
 GameObject:
   m_ObjectHideFlags: 1
@@ -900,6 +964,19 @@ Transform:
   m_Father: {fileID: 4928623336181972}
   m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: -120.549, z: -2.815}
+--- !u!4 &4102181029712154
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1672406877654708}
+  m_LocalRotation: {x: -0, y: -0.9998898, z: -0, w: -0.014848855}
+  m_LocalPosition: {x: -102.4, y: 14.4, z: 52.2}
+  m_LocalScale: {x: 3.864151, y: 3.8641498, z: 3.864151}
+  m_Children: []
+  m_Father: {fileID: 4928623336181972}
+  m_RootOrder: 42
+  m_LocalEulerAnglesHint: {x: 0, y: -181.702, z: 0}
 --- !u!4 &4115157787427298
 Transform:
   m_ObjectHideFlags: 1
@@ -1108,6 +1185,19 @@ Transform:
   m_Father: {fileID: 4928623336181972}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 19.697, y: 48.321003, z: -0.031000001}
+--- !u!4 &4416528679625586
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1206948765577302}
+  m_LocalRotation: {x: -0, y: -0.8688405, z: -0, w: 0.49509215}
+  m_LocalPosition: {x: 56.6, y: 14.4, z: 185.6}
+  m_LocalScale: {x: 3.8641517, y: 3.8641498, z: 3.8641517}
+  m_Children: []
+  m_Father: {fileID: 4928623336181972}
+  m_RootOrder: 44
+  m_LocalEulerAnglesHint: {x: 0, y: -120.648, z: 0}
 --- !u!4 &4448907051436200
 Transform:
   m_ObjectHideFlags: 1
@@ -1454,6 +1544,19 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1034875949047078}
+  m_LocalRotation: {x: -0, y: -0.97280145, z: -0, w: -0.23164071}
+  m_LocalPosition: {x: 152.6, y: 14.4, z: 135.6}
+  m_LocalScale: {x: 3.864151, y: 3.8641498, z: 3.864151}
+  m_Children: []
+  m_Father: {fileID: 4928623336181972}
+  m_RootOrder: 45
+  m_LocalEulerAnglesHint: {x: 0, y: -206.78699, z: 0}
+--- !u!4 &4846468951976702
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1333189374793816}
   m_LocalRotation: {x: -0, y: -0.868409, z: -0, w: 0.49584866}
   m_LocalPosition: {x: 63.9, y: -0.2, z: 20.7}
   m_LocalScale: {x: 3.864151, y: 3.8641496, z: 3.864151}
@@ -1461,6 +1564,19 @@ Transform:
   m_Father: {fileID: 4928623336181972}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: -120.549, z: 0}
+--- !u!4 &4863167050560256
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1129206384723932}
+  m_LocalRotation: {x: -0, y: -0.9998898, z: -0, w: -0.014848855}
+  m_LocalPosition: {x: 157.4, y: 14.4, z: 25.3}
+  m_LocalScale: {x: 3.8641517, y: 3.8641498, z: 3.8641517}
+  m_Children: []
+  m_Father: {fileID: 4928623336181972}
+  m_RootOrder: 43
+  m_LocalEulerAnglesHint: {x: 0, y: -181.702, z: 0}
 --- !u!4 &4871408060996524
 Transform:
   m_ObjectHideFlags: 1
@@ -1516,7 +1632,7 @@ Transform:
   - {fileID: 4704474940084318}
   - {fileID: 4498129222305786}
   - {fileID: 4449536982684364}
-  - {fileID: 4810865363162904}
+  - {fileID: 4846468951976702}
   - {fileID: 4613070694598836}
   - {fileID: 4375718375588598}
   - {fileID: 4188965174413218}
@@ -1534,6 +1650,10 @@ Transform:
   - {fileID: 4132108033811336}
   - {fileID: 4549665749353774}
   - {fileID: 4498701204288106}
+  - {fileID: 4102181029712154}
+  - {fileID: 4863167050560256}
+  - {fileID: 4416528679625586}
+  - {fileID: 4810865363162904}
   m_Father: {fileID: 4595540701580244}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2163,6 +2283,33 @@ MonoBehaviour:
   randomScaleAmplitude: {x: 0, y: 0.29, z: 0}
   uniformScale: 1
   probability: 1
+--- !u!114 &114109453255592836
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1333189374793816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: Column1
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 1
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 0
+  viewTree: 0
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 0, y: 0, z: 0}
+  randomRotationAmplitude: {x: 0, y: 45, z: 0}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 1
 --- !u!114 &114130019085456910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2718,6 +2865,33 @@ MonoBehaviour:
   randomScaleAmplitude: {x: 3, y: 3, z: 3}
   uniformScale: 1
   probability: 1
+--- !u!114 &114660656947920592
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1672406877654708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: ArchDecoration
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 1
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 1
+  viewTree: 1
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 0.5, y: 0, z: 8.21}
+  randomRotationAmplitude: {x: 0, y: 47.39, z: 0}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
+  uniformScale: 1
+  probability: 1
 --- !u!114 &114666663064535506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2851,6 +3025,33 @@ MonoBehaviour:
   randomPositionAmplitude: {x: 1.99, y: 0, z: 2.16}
   randomRotationAmplitude: {x: 13.26, y: 138.7, z: 11.55}
   randomScaleAmplitude: {x: 0, y: 0.29, z: 0}
+  uniformScale: 1
+  probability: 1
+--- !u!114 &114782428562956638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1206948765577302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: ArchRuins1
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 4
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 1
+  viewTree: 1
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 4.45, y: 0, z: 14.48}
+  randomRotationAmplitude: {x: 5, y: 90, z: 5}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
   uniformScale: 1
   probability: 1
 --- !u!114 &114816336448788586
@@ -3094,19 +3295,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: Column1
+  itemId: ArchRuins3
   maxChildDepth: 5
   procedural: 0
-  instanceCount: 1
+  instanceCount: 4
   availableProceduralVolume:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0.5}
   anchorPlane: 4
-  visualizeRandomness: 0
-  viewTree: 0
+  visualizeRandomness: 1
+  viewTree: 1
   randomSnappedOrientation: 0
-  randomPositionAmplitude: {x: 0, y: 0, z: 0}
-  randomRotationAmplitude: {x: 0, y: 45, z: 0}
+  randomPositionAmplitude: {x: 4.45, y: 0, z: 14.48}
+  randomRotationAmplitude: {x: 5, y: 90, z: 5}
   randomScaleAmplitude: {x: 0, y: 0, z: 0}
   uniformScale: 1
   probability: 1
@@ -3135,6 +3336,33 @@ MonoBehaviour:
   randomPositionAmplitude: {x: 0, y: 0, z: 0}
   randomRotationAmplitude: {x: 0, y: 180, z: 0}
   randomScaleAmplitude: {x: 1, y: 1, z: 1}
+  uniformScale: 1
+  probability: 1
+--- !u!114 &114951783206873866
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1129206384723932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: ArchRuins1
+  maxChildDepth: 5
+  procedural: 0
+  instanceCount: 4
+  availableProceduralVolume:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+  anchorPlane: 4
+  visualizeRandomness: 1
+  viewTree: 1
+  randomSnappedOrientation: 0
+  randomPositionAmplitude: {x: 4.45, y: 0, z: 14.48}
+  randomRotationAmplitude: {x: 5, y: 90, z: 5}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
   uniformScale: 1
   probability: 1
 --- !u!114 &114975868779547238
