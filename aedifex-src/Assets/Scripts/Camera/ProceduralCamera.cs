@@ -51,7 +51,6 @@ public class ProceduralCamera : MonoBehaviour
     {
         this.postProfile = postProfile;
         this.strategy = strategy;
-
         this.CompositionSettings = strategy.Composition;
 
         UpdateTransform(true);

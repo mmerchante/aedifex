@@ -44,6 +44,10 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
         // The camera behaviour, which knows about interest points etc.
         public ProceduralCameraStrategy strategy;
+
+        public List<KeyValuePair<ProceduralCameraStrategy, float>> sampledStrategies;
+
+        public InterestPoint interestPoint;
     }
     
     private ProceduralCamera currentCamera;
@@ -64,26 +68,52 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
     public void InitializeDirector(EmotionEngine engine)
     {
         this.emotionEngine = engine;
-        this.currentShot = new ShotInformation();
-        this.currentShot.valid = false;
         this.nextShot = new ShotInformation();
         this.grid = GetComponent<InterestPointGrid>();
 
         ProceduralEngine.Instance.EventDispatcher.AddListener(this);
+
+        this.currentShot = new ShotInformation();
+        this.currentShot.valid = false;
     }
 
-    protected void StartTransition(ShotInformation cut)
+    public void StartFirstShot()
     {
-        if (currentShot.valid)
+        EmotionEvent firstEvent = ProceduralEngine.Instance.EventDispatcher.GetFutureEventGroups(ProceduralEngine.Instance.EmotionEngine.BeatDurationNormalized)[0].events[0];
+        this.currentShot = new ShotInformation();
+        this.currentShot.valid = false;
+
+        int tries = 16;
+
+        for (int i = 0; i < tries; ++i)
+        {
+            if (!currentShot.valid)
+                currentShot = TryFindCut(firstEvent);
+            else
+                CompleteShot(ref currentShot);
+        }
+
+        StartTransition(currentShot);
+    }
+
+    protected void StartTransition(ShotInformation shot)
+    {
+        if (currentShot.valid && currentShot.strategy != null)
             currentShot.strategy.StopStrategy();
 
-        if(cut.valid)
+        if(shot.valid)
         {
-            this.history.Add(cut);
-            this.currentShot = cut;
-            this.currentCutTime = 0f;
+            // Select the strategy when starting the transition
+            shot.strategy = ProceduralEngine.SelectRandomWeighted(shot.sampledStrategies, x => x.Value).Key;
+            shot.selectedCamera = InstanceCamera();
+
+            this.history.Add(shot);
             this.nextShot = new ShotInformation();
-            this.currentCamera = cut.selectedCamera;
+            this.nextShot.sampledStrategies = new List<KeyValuePair<ProceduralCameraStrategy, float>>();
+            this.currentCutTime = 0f;
+
+            this.currentShot = shot;
+            this.currentCamera = shot.selectedCamera;
             this.currentCamera.InitializeCamera(currentShot.strategy, GetComponent<PostProcessingBehaviour>().profile);
             this.currentShot.strategy.StartStrategy(currentCamera);
         }
@@ -192,7 +222,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
     public void OnGUI()
     {
-        //if(emotionEngine != null)
+        //if (emotionEngine != null)
         //    GUILayout.Label(emotionEngine.GetCurrentStructure(ProceduralEngine.Instance.CurrentTimeNormalized).ToString());
     }
 
@@ -202,14 +232,10 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         return go.AddComponent<ProceduralCamera>();
     }
 
-    protected ProceduralCameraStrategy TryFindStrategy(EmotionEvent e, float shotDuration)
+    protected void SampleStrategies(List<KeyValuePair<ProceduralCameraStrategy, float>> strategies, InterestPoint point, EmotionEvent e, float shotDuration)
     {
-        int samples = 32;
-        InterestPoint point = FindInterestPoint();
-        List<KeyValuePair<ProceduralCameraStrategy, float>> strategies = new List<KeyValuePair<ProceduralCameraStrategy, float>>();
+        int samples = 8;
 
-        float totalWeight = 0f;
-        
         for(int i = 0; i < samples; ++i)
         {
             ProceduralCameraStrategy s = new DollyCameraStrategy();
@@ -224,12 +250,8 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             List<InterestPoint> frustumPoints = GetInterestPointsOnFrustum(viewProj, out frustumWeightAccum);
 
             float weight = s.Evaluate(e, frustumPoints, frustumWeightAccum);
-            totalWeight += weight;
-
             strategies.Add(new KeyValuePair<ProceduralCameraStrategy, float>(s, weight));
         }
-                
-        return ProceduralEngine.SelectRandomWeighted(strategies, x => x.Value, totalWeight).Key;
     }
 
     protected virtual InterestPoint FindInterestPoint()
@@ -262,9 +284,18 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             }
         }
 
-        Debug.LogError("Could not find interest point!");
-
         return null;
+    }
+    
+    protected void CompleteShot(ref ShotInformation shot)
+    {
+        if (!shot.valid)
+            return;
+
+        if (shot.interestPoint == null)
+            shot.interestPoint = FindInterestPoint();
+        else
+            SampleStrategies(shot.sampledStrategies, shot.interestPoint, shot.selectedNextEventTrigger, shot.duration * ProceduralEngine.Instance.Duration);
     }
 
     /// <summary>
@@ -280,6 +311,8 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         shot.selectedCamera = null;
         shot.type = TransitionType.Cut; // TODO: for now...
         shot.strategy = null;
+        shot.interestPoint = null;
+        shot.sampledStrategies = new List<KeyValuePair<ProceduralCameraStrategy, float>>();
 
         CutRange searchRange = EvaluateCutRangeForEvent(e);
         float minT = e.timestamp + searchRange.minCutTime;
@@ -307,19 +340,10 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
             if (fuzzyDuration > searchRange.minCutTime && fuzzyDuration < searchRange.maxCutTime)
                 shot.duration = fuzzyDuration;
-
-            int cameraTries = 10;
-
-            for (int i = 0; i < cameraTries; ++i)
-                if(shot.strategy == null)
-                    shot.strategy = TryFindStrategy(selectedEvent, shot.duration * ProceduralEngine.Instance.Duration);
             
-            shot.valid = shot.strategy != null;
+            shot.valid = true;
         }
-
-        if (shot.valid)
-            shot.selectedCamera = InstanceCamera();
-
+        
         return shot;
     }
 
@@ -350,8 +374,8 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
                 range.maxCutTime = ProceduralEngine.RandomRange(4f, 6f);
                 break;
             case CoreEmotion.Surprise:
-                range.minCutTime = ProceduralEngine.RandomRange(.25f, .5f);
-                range.maxCutTime = ProceduralEngine.RandomRange(1f, 2f);
+                range.minCutTime = ProceduralEngine.RandomRange(.5f, 1.5f);
+                range.maxCutTime = ProceduralEngine.RandomRange(1.5f, 2f);
                 break;
             case CoreEmotion.Sadness:
                 range.minCutTime = ProceduralEngine.RandomRange(1f, 1.5f);
@@ -366,8 +390,8 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
                 range.maxCutTime = ProceduralEngine.RandomRange(1f, 3f);
                 break;
             case CoreEmotion.Anticipation:
-                range.minCutTime = ProceduralEngine.RandomRange(.2f, .4f);
-                range.maxCutTime = ProceduralEngine.RandomRange(1f, 3f);
+                range.minCutTime = ProceduralEngine.RandomRange(.5f, 1f);
+                range.maxCutTime = ProceduralEngine.RandomRange(2f, 4f);
                 break;
         }
 
@@ -420,8 +444,11 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         //        break;
         //}
 
-        this.transform.position = currentShot.selectedCamera.transform.position;
-        this.transform.rotation = currentShot.selectedCamera.transform.rotation;
+        if (currentShot.valid)
+        {
+            this.transform.position = currentShot.selectedCamera.transform.position;
+            this.transform.rotation = currentShot.selectedCamera.transform.rotation;
+        }
 
         //if (currentCamera)
         //{
@@ -449,27 +476,34 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         UpdateInterestPoints();
         UpdateTransform();
 
+        CompleteShot(ref nextShot);
+
         if (currentCutTime < currentShot.duration)
         {
             // Normalized delta
             currentCutTime += Time.deltaTime / ProceduralEngine.Instance.Duration;
 
             if (!nextShot.valid)
+            {
                 nextShot = TryFindCut(currentShot.selectedNextEventTrigger);
+                CompleteShot(ref nextShot);
+            }
         }
         else
         {
-            if(nextShot.valid)
+            if (nextShot.valid)
                 StartTransition(nextShot);
             else
-                nextShot = TryFindCut(currentShot.selectedNextEventTrigger);
+            {
+                // Couldnt sample an interesting shot, just repeat the last one
+                StartTransition(currentShot);
+                Debug.Log("Failed finding a shot; repeating...");
+            }
         }
     }
 
     public void OnEventDispatch(EmotionEvent e)
     {
-        if (!currentShot.valid)
-            StartTransition(TryFindCut(e));
     }
 
     public void OnEventGroupDispatch(EmotionEventGroup g)

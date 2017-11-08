@@ -131,7 +131,7 @@ public class ProceduralCameraStrategy
     public virtual float Evaluate(EmotionEvent e, List<InterestPoint> frustumPoints, float frustumImportanceAccumulation)
     {
         int threshold = 15;
-        float avgImportance = frustumImportanceAccumulation / frustumPoints.Count;
+        float avgImportance = frustumImportanceAccumulation / (frustumPoints.Count + 1);
         int maxCount = Mathf.Min(threshold, frustumPoints.Count);
         return 1f + Mathf.Lerp(0f, avgImportance * maxCount, FrustumImportance);
     }
@@ -185,7 +185,7 @@ public class ProceduralCameraStrategy
     {
         Vector3 p = mainInterestPoint.transform.position;
         
-        int maxTries = 32;
+        int maxTries = 8;
 
         for(int i = 0; i < maxTries; ++i)
         {

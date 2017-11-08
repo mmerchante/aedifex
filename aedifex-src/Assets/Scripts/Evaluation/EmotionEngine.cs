@@ -260,7 +260,7 @@ public class EmotionEngine
         e.type = EmotionEvent.EmotionEventType.End;
         e.timestamp = chunk.end;
         e.intensity = GetIntensityForChunkEndEvent(track, chunk, chunkIndex);
-        e.associatedEmotion = new EmotionSpectrum(); // TODO: expectation/surprise
+        e.associatedEmotion = chunk.startData.GetSpectrum(); // TODO: expectation/surprise
         e.chunkDelimitsSegment = IsChunkSegmentDelimiter(track, chunk, chunkIndex, e.type);
         e.harmonicDifference = 0;
 
@@ -278,7 +278,7 @@ public class EmotionEngine
         e.type = EmotionEvent.EmotionEventType.Start;
         e.timestamp = chunk.start;
         e.intensity = GetIntensityForChunkStartEvent(track, chunk, chunkIndex);
-        e.associatedEmotion = new EmotionSpectrum(); // TODO: expectation/surprise 
+        e.associatedEmotion = chunk.startData.GetSpectrum(); // TODO: expectation/surprise 
         e.chunkDelimitsSegment = IsChunkSegmentDelimiter(track, chunk, chunkIndex, e.type);
         e.harmonicDifference = 0;
 

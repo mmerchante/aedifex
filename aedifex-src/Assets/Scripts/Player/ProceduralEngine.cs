@@ -62,6 +62,7 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
 
             // ... and update the spatial grid after that
             ProceduralCameraDirector.Instance.InitializeGrid();
+            ProceduralCameraDirector.Instance.StartFirstShot();
         }
     }
 

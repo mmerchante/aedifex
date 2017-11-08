@@ -59,7 +59,7 @@ public class DollyCameraStrategy : ProceduralCameraStrategy
 
     public override bool Propose(EmotionEvent e, InterestPoint p, float shotDuration)
     {
-        speed = ProceduralEngine.Instance.EmotionEngine.GetSpectrum(e.timestamp).GetTotalEnergy() * 50f;
+        speed = ProceduralEngine.Instance.EmotionEngine.GetSpectrum(e.timestamp).GetTotalEnergy() * 2f;
         return base.Propose(e, p, shotDuration);
     }
 
