@@ -185,14 +185,14 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         return result;
     }
 
-    public InterestPoint SampleInterestPoint()
+    public InterestPoint SampleInterestPoint(EmotionSpectrum currentEmotion)
     {
-        float sum = interestPoints.Sum(x => x.EvaluateHeuristic(true));
+        float sum = interestPoints.Sum(x => x.EvaluateHeuristic(currentEmotion, true));
         float value = (float)ProceduralEngine.Instance.RNG.NextDouble() * sum;
 
         foreach (InterestPoint ip in interestPoints)
         {
-            value -= ip.EvaluateHeuristic(true);
+            value -= ip.EvaluateHeuristic(currentEmotion, true);
 
             if (value <= 0f)
                 return ip;
@@ -283,13 +283,13 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         }
     }
 
-    protected virtual InterestPoint FindInterestPoint()
+    protected virtual InterestPoint FindInterestPoint(EmotionSpectrum globalEmotion)
     {
         int tries = 16;
 
         for (int i = 0; i < tries; ++i)
         {
-            InterestPoint p = SampleInterestPoint();
+            InterestPoint p = SampleInterestPoint(globalEmotion);
 
             // Make sure our interest point is not buried under the floor
             if (p)
@@ -322,7 +322,10 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             return;
 
         if (shot.interestPoint == null)
-            shot.interestPoint = FindInterestPoint();
+        {
+            EmotionSpectrum emotionAtShotStart = emotionEngine.GetSmoothSpectrum(shot.startEvent.timestamp);
+            shot.interestPoint = FindInterestPoint(emotionAtShotStart);
+        }
         else
             SampleStrategies(shot.sampledStrategies, shot.interestPoint, shot.startEvent, shot.duration * ProceduralEngine.Instance.Duration);
     }

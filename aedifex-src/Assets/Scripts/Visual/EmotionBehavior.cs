@@ -23,7 +23,7 @@ public class EmotionBehavior : MonoBehaviour
     public void Awake()
     {
         this.interestPoints = new List<InterestPoint>(GetComponentsInChildren<InterestPoint>());
-        this.interestPoints = this.interestPoints.OrderByDescending(x => x.importance).ToList();
+        //this.interestPoints = this.interestPoints.OrderByDescending(x => x.importance).ToList();
         OnAwake();
     }
 
@@ -38,8 +38,16 @@ public class EmotionBehavior : MonoBehaviour
 
         EmotionSpectrum globalEmotion = ProceduralEngine.Instance.GetCurrentEmotion();
         GlobalEmotionIncidence = globalEmotion.Dot(internalSpectrum);
+        
+        TrackData track = ProceduralEngine.Instance.EmotionEngine.GetTrackById(TrackId);
 
-        // TODO: per track incidence
+        if(track != null)
+        {
+            // TODO: per track incidence
+            //TrackEmotionIncidence = procedural
+        }
+
+        OnUpdate();
     }
 
     public List<InterestPoint> GetAllInterestPoints()

@@ -169,6 +169,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   importance: 1
   size: 0.54
-  primaryAffinity: 0
-  directionality: 1
-  emotionalImpact: 0
+  primaryAffinity: 4
+  directionality: 0
+  emotionalImpact: 0.07

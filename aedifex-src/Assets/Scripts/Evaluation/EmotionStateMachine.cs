@@ -19,11 +19,12 @@ public class EmotionStateMachine : MonoBehaviour, ProceduralEventListener
 
     public void Awake()
     {
-        EmotionStateMachineTransition[] transitions = GetComponents<EmotionStateMachineTransition>();
+        EmotionStateMachineTransition[] transitions = GetComponentsInChildren<EmotionStateMachineTransition>();
 
         // Default state is empty
         transitionMap[defaultBehaviour] = new List<EmotionStateMachineTransition>();
         defaultBehaviour.ForceShow();
+        currentState = defaultBehaviour;
 
         foreach (EmotionStateMachineTransition t in transitions)
         {
@@ -43,7 +44,6 @@ public class EmotionStateMachine : MonoBehaviour, ProceduralEventListener
     private void EvaluateTransitions(EmotionStateMachineData data)
     {
         List<EmotionStateMachineTransition> transitions = transitionMap[currentState];
-
         foreach (EmotionStateMachineTransition t in transitions)
         {
             if (t.Evaluate(data))

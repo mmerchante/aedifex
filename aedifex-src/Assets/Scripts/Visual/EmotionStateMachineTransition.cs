@@ -29,7 +29,7 @@ public class EmotionStateMachineTransition : MonoBehaviour
 
     public bool Evaluate(EmotionStateMachineData data)
     {
-        bool canTrigger = false;
+        bool canTrigger = true;
 
         foreach (EmotionStateMachineTrigger t in triggers)
             canTrigger = canTrigger && t.Evaluate(sourceBehaviour, targetBehaviour, data);

@@ -130,7 +130,10 @@ public class EmotionEngine
 
     public TrackData GetTrackById(int id)
     {
-        return trackMap[id];
+        if(trackMap.ContainsKey(id))
+            return trackMap[id];
+
+        return null;
     }
 
     protected void PreloadChunks()

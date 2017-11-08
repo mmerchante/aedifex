@@ -15,7 +15,6 @@ public class InterestPoint : MonoBehaviour
     [Range (0f, 1f)]
     public float directionality = 0f; // How directional this object in its forward axis
 
-    [Range(0f, 1f)]
     public float emotionalImpact = 0f; // How much the primary affinity affects the interest
 
     public bool IsSelected { get; set; }
@@ -24,11 +23,14 @@ public class InterestPoint : MonoBehaviour
     public Transform AssociatedItemRoot { get; protected set; }
 
     private static bool DirectorNotAvailable = false;
+    private EmotionSpectrum internalSpectrum;
     
     public void Awake()
     {
         if (DirectorNotAvailable)
             return;
+        
+        internalSpectrum = new EmotionSpectrum(EmotionVector.GetCoreEmotion(primaryAffinity));
 
         if (ProceduralCameraDirector.IsAvailable())
             ProceduralCameraDirector.Instance.RegisterInterestPoint(this);
@@ -50,7 +52,7 @@ public class InterestPoint : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (IsSelected)
+        if (IsSelected || !Application.isPlaying)
         {
             Vector3 p = transform.position;
             Vector3 f = transform.forward * .5f;
@@ -62,23 +64,22 @@ public class InterestPoint : MonoBehaviour
             Gizmos.DrawLine(p - u, p + u);
             Gizmos.DrawLine(p - r, p + r);
 
-            Gizmos.color = Color.magenta;
+            Gizmos.color = IsSelected ? Color.magenta : Color.yellow;
             Gizmos.DrawWireSphere(p, size * transform.lossyScale.x);
-        }
 
-        //if (associatedItemRoot)
-        //{
-        //    Gizmos.color = Color.red;
-        //    Gizmos.matrix = associatedItemRoot.localToWorldMatrix;
-        //    Gizmos.DrawWireCube(associatedItemBounds.center, associatedItemBounds.size);
-        //}
+            if (AssociatedItemRoot)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.matrix = AssociatedItemRoot.localToWorldMatrix;
+                Gizmos.DrawWireCube(AssociatedItemBounds.center, AssociatedItemBounds.size);
+            }
+        }
     }
 
     public Bounds GetBounds()
     {
         return new Bounds(transform.position, transform.lossyScale * size * 2f);
     }
-    
 
     /// <summary>
     /// This heuristic is useful for two cases:
@@ -88,9 +89,10 @@ public class InterestPoint : MonoBehaviour
     /// sample points in solution space and make stochastic decisions.
     /// Note: this heuristic must be deterministic!
     /// </summary>
-    public float EvaluateHeuristic(bool primaryInterest = false)
+    public float EvaluateHeuristic(EmotionSpectrum currentEmotion, bool primaryInterest = false)
     {
         // If this GO is inactive just ignore this IP
+        // This is useful for state machines
         if (!gameObject.activeInHierarchy)
             return 0f;
 
@@ -103,12 +105,13 @@ public class InterestPoint : MonoBehaviour
             // Interesting: while being on an important place is good, we must not make unimportant elements important.
             // Thus we need to be careful with this multiplier
             heuristic += .35f * ProceduralCameraDirector.Instance.GetGrid().GetAverageImportanceForPosition(transform.position);
+            
+            heuristic += emotionalImpact * currentEmotion.Dot(internalSpectrum);
         }
 
         // TODO: ideas:
         // - Is it being lit right now? Or in shadow?
         //      - If it is reflective/specular, where would be a good place to look at it from?
-        // - Is the associated emotion state enabled?
         // - Is it moving?
         return heuristic;
     }

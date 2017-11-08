@@ -26,12 +26,12 @@ public class EmotionStateMachineState : EmotionBehavior
     protected override void OnAwake()
     {
         StateTime = 0f;
-        SwitchToState(State.Disabled);
+        SwitchToState(State.Disabled, true);
     }
 
     public void ForceShow()
     {
-        SwitchToState(State.Enabled);
+        SwitchToState(State.Enabled, true);
     }
 
     public void Show(float transitionDuration)
@@ -46,12 +46,13 @@ public class EmotionStateMachineState : EmotionBehavior
         SwitchToState(State.OutroTransition);
     }
 
-    protected void SwitchToState(State s)
+    protected void SwitchToState(State s, bool force = false)
     {
-        if (CurrentState == s)
+        if (!force && CurrentState == s)
             return;
 
         StateTime = 0f;
+        Debug.Log("Switching to state " + s + ", " + gameObject.name, this);
 
         State prevState = CurrentState;
         this.CurrentState = s;
@@ -136,7 +137,7 @@ public class EmotionStateMachineState : EmotionBehavior
                 }
                 break;
         }
-
+        
         if (!switchedState)
             StateTime += Time.deltaTime;
     }
