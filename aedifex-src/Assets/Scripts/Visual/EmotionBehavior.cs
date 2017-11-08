@@ -12,7 +12,7 @@ public class EmotionBehavior : MonoBehaviour
 {
     // TODO: In the future, change this by an actual spectrum and add an inspector editor
     public CoreEmotion emotionAffinity = CoreEmotion.Joy;
-    public int TrackId = -1;
+    public int TrackId = -1; // For now, we hardcode it, in the future the inspector should load it :)
 
     public float GlobalEmotionIncidence { get; protected set; } // The dot product of the affinity with the current global emotion
     public float TrackEmotionIncidence { get; protected set; } // The dot product of the affinity with the associated track, if any
@@ -41,10 +41,10 @@ public class EmotionBehavior : MonoBehaviour
         
         TrackData track = ProceduralEngine.Instance.EmotionEngine.GetTrackById(TrackId);
 
-        if(track != null)
+        if (track != null)
         {
-            // TODO: per track incidence
-            //TrackEmotionIncidence = procedural
+            TrackEmotionIncidence = internalSpectrum.Dot(ProceduralEngine.Instance.EmotionEngine.EvaluateTrack(track, ProceduralEngine.Instance.CurrentTimeNormalized));
+            Debug.Log(TrackEmotionIncidence + ", " + track);
         }
 
         OnUpdate();

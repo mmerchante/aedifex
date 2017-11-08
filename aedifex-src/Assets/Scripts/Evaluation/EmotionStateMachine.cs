@@ -6,6 +6,7 @@ public struct EmotionStateMachineData
 {
     public EmotionEvent associatedEvent;
     public EmotionEventGroup associatedEventGroup;
+    public float timestamp;
 }
 
 public class EmotionStateMachine : MonoBehaviour, ProceduralEventListener
@@ -66,6 +67,7 @@ public class EmotionStateMachine : MonoBehaviour, ProceduralEventListener
             EmotionStateMachineData data = new EmotionStateMachineData();
             data.associatedEvent = new EmotionEvent();
             data.associatedEvent.type = EmotionEvent.EmotionEventType.None;
+            data.timestamp = ProceduralEngine.Instance.CurrentTimeNormalized;
 
             EvaluateTransitions(data);
         }
@@ -75,6 +77,7 @@ public class EmotionStateMachine : MonoBehaviour, ProceduralEventListener
     {
         EmotionStateMachineData data = new EmotionStateMachineData();
         data.associatedEvent = e;
+        data.timestamp = e.timestamp;
         EvaluateTransitions(data);
     }
 
@@ -82,6 +85,7 @@ public class EmotionStateMachine : MonoBehaviour, ProceduralEventListener
     {
         EmotionStateMachineData data = new EmotionStateMachineData();
         data.associatedEventGroup = g;
+        data.timestamp = ProceduralEngine.Instance.CurrentTimeNormalized;
         EvaluateTransitions(data);
     }
 }

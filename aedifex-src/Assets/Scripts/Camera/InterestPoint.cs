@@ -9,6 +9,7 @@ public class InterestPoint : MonoBehaviour
 {
     public int importance = 1; // Larger -> better
     public float size = 1f;
+    public bool secondary = false;
 
     public CoreEmotion primaryAffinity = CoreEmotion.Joy;
 

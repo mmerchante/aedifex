@@ -114,7 +114,7 @@ public class ProceduralCameraStrategy
     {
         this.shotDuration = shotDuration;
         this.mainInterestPoint = p;
-        this.FrustumImportance = .5f;
+        this.FrustumImportance = p.secondary ? 1f : .35f; // If the point is secondary, look towards more interesting stuff ;)
 
         if (!FindCameraPosition(10f, 45f))
             return false;
@@ -185,7 +185,7 @@ public class ProceduralCameraStrategy
     {
         Vector3 p = mainInterestPoint.transform.position;
         
-        int maxTries = 10;
+        int maxTries = 12;
 
         for(int i = 0; i < maxTries; ++i)
         {

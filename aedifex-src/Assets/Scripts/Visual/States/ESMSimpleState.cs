@@ -8,11 +8,13 @@ public class ESMSimpleState : EmotionStateMachineState
 
     protected override void OnDisabled(State prevState)
     {
-        container.SetActive(false);
+        if(container)
+            container.SetActive(false);
     }
 
     protected override void OnEnabled(State prevState)
     {
-        container.SetActive(true);
+        if(container)
+            container.SetActive(true);
     }
 }

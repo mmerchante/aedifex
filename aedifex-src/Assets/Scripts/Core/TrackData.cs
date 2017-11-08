@@ -97,7 +97,7 @@ public class TrackData
 
     public override string ToString()
     {
-        return trackName + "(" + category + ")";
+        return trackName + "(" + category + ", " + id + ")";
     }
 }
 

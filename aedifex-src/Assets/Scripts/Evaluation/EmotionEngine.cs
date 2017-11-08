@@ -521,13 +521,26 @@ public class EmotionEngine
         return StructureType.None;
     }
 
+    // This evaluation has no post process (TODO: in the future make a cache per track?)
+    public EmotionSpectrum EvaluateTrack(TrackData track, float normalizedTime)
+    {
+        EmotionSpectrum result = new EmotionSpectrum();
+
+        foreach (TrackChunkData chunk in track.chunks)
+            if (chunk.start <= normalizedTime && chunk.end >= normalizedTime)
+                result += chunk.Evaluate(normalizedTime);
+
+        return result;
+    }
+
     public EmotionSpectrum Compute(float normalizedTime)
     {
         List<TrackChunkData> chunks = GetChunksAtTime(normalizedTime);
         EmotionSpectrum result = new EmotionSpectrum();
 
         foreach (TrackChunkData chunk in chunks)
-            result += chunk.Evaluate(normalizedTime);
+            if (chunk.start <= normalizedTime && chunk.end >= normalizedTime)
+                result += chunk.Evaluate(normalizedTime);
 
         foreach (EmotionFilter f in filters)
             result = f.Filter(normalizedTime, result);

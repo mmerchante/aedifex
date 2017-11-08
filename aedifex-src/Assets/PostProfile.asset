@@ -71,9 +71,9 @@ MonoBehaviour:
   depthOfField:
     m_Enabled: 1
     m_Settings:
-      focusDistance: 22.800398
+      focusDistance: 38.545288
       aperture: 0.6
-      focalLength: 106
+      focalLength: 63
       useCameraFov: 0
       kernelSize: 2
   motionBlur:

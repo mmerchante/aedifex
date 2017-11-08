@@ -6,6 +6,7 @@ public class DesintegrateOverTime : MonoBehaviour
 {
     public Renderer meshRenderer;
     public float duration = 1f;
+    public AnimationCurve curve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
 
     private float currentTime = 0f;
 
@@ -20,6 +21,6 @@ public class DesintegrateOverTime : MonoBehaviour
     {
         currentTime += Time.deltaTime;
         float t = Mathf.Clamp01(currentTime / duration);
-        mat.SetFloat("_Dissolve", t);
+        mat.SetFloat("_Dissolve", curve.Evaluate(t));
     }
 }

@@ -263,7 +263,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
     protected void SampleStrategies(List<KeyValuePair<ProceduralCameraStrategy, float>> strategies, InterestPoint point, EmotionEvent e, float shotDuration)
     {
-        int samples = 8;
+        int samples = 4;
 
         for(int i = 0; i < samples; ++i)
         {
@@ -571,8 +571,11 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             if (!nextShot.valid)
             {
                 nextShot = TryFindCut(currentShot.selectedNextEventTrigger);
-                CompleteShot(ref nextShot);
                 nextShotTries++;
+            }
+            else
+            {
+                CompleteShot(ref nextShot);
             }
         }
         else
