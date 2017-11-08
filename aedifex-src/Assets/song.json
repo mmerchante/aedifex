@@ -6351,7 +6351,7 @@
                                 "intensity": 0.3391966223716736
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 3.0
                     },
                     "endData": {
                         "vectors": [
@@ -6364,9 +6364,9 @@
                                 "intensity": 0.3391966223716736
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 3.0
                     },
-                    "intensityCurve": 3,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 0
                 },
@@ -6411,7 +6411,7 @@
                                 "intensity": 0.28958040475845339
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 3.0
                     },
                     "endData": {
                         "vectors": [
@@ -6424,9 +6424,9 @@
                                 "intensity": 0.28958040475845339
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 3.0
                     },
-                    "intensityCurve": 3,
+                    "intensityCurve": 2,
                     "isVariation": false,
                     "harmonySequenceNumber": 1
                 },
@@ -6441,7 +6441,7 @@
                                 "intensity": 0.5439534783363342
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 4.0
                     },
                     "endData": {
                         "vectors": [
@@ -6450,7 +6450,7 @@
                                 "intensity": 0.5439534783363342
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 4.0
                     },
                     "intensityCurve": 1,
                     "isVariation": false,
@@ -6475,7 +6475,7 @@
                                 "intensity": 0.3023957908153534
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 3.0
                     },
                     "endData": {
                         "vectors": [
@@ -6492,7 +6492,7 @@
                                 "intensity": 0.3023957908153534
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 3.0
                     },
                     "intensityCurve": 3,
                     "isVariation": false,
@@ -6513,7 +6513,7 @@
                                 "intensity": 0.4896366000175476
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 3.0
                     },
                     "endData": {
                         "vectors": [
@@ -6526,7 +6526,7 @@
                                 "intensity": 0.4896366000175476
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 3.0
                     },
                     "intensityCurve": 1,
                     "isVariation": false,
@@ -6547,7 +6547,7 @@
                                 "intensity": 0.4896366000175476
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 4.0
                     },
                     "endData": {
                         "vectors": [
@@ -6560,7 +6560,7 @@
                                 "intensity": 0.4896366000175476
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 4.0
                     },
                     "intensityCurve": 1,
                     "isVariation": false,
@@ -11451,6 +11451,13 @@
                     "harmonySequenceNumber": 1
                 }
             ]
+        },
+        {
+            "id": 0,
+            "trackName": "Energy",
+            "trackType": 0,
+            "category": 0,
+            "chunks": []
         }
     ],
     "beatsPerMinute": 80,

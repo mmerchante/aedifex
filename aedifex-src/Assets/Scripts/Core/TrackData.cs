@@ -94,6 +94,11 @@ public class TrackData
     public TrackType trackType;
     public TrackCategory category;
     public List<TrackChunkData> chunks = new List<TrackChunkData>();
+
+    public override string ToString()
+    {
+        return trackName + "(" + category + ")";
+    }
 }
 
 [System.Serializable]

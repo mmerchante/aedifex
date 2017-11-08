@@ -220,8 +220,24 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         if (e.harmonicDifference > 0)
             p *= 1 + e.harmonicDifference * .5f;
 
-        // TODO: check if the track is rythm or melody, etc!!
-        
+        TrackData track = emotionEngine.GetTrackByIndex(e.trackIndex);
+
+        switch (track.category)
+        {
+            case TrackCategory.MainMelody:
+                p *= 5f;
+                break;
+            case TrackCategory.Rythm:
+                p *= 1.5f;
+                break;
+            case TrackCategory.Support:
+                break;
+            case TrackCategory.Misc:
+                break;
+            case TrackCategory.Structure:
+                break;
+        }
+
         return p;
     }
 
@@ -233,8 +249,8 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             GUILayout.Label("Seed: " + ProceduralEngine.Instance.Seed);
             GUILayout.Label("Structure: " + emotionEngine.GetCurrentStructure(ProceduralEngine.Instance.CurrentTimeNormalized).ToString());
             GUILayout.Label(currentShot.startEvent.ToString());// + " | " + EmotionEngine.FindMainEmotion(currentShot.selectedNextEventTrigger.associatedEmotion).ToString());
-
             GUILayout.Label(((currentShot.startEvent.timestamp - ProceduralEngine.Instance.CurrentTimeNormalized) * ProceduralEngine.Instance.Duration).ToString());
+            GUILayout.Label(emotionEngine.GetTrackByIndex(currentShot.startEvent.trackIndex).ToString());
             GUILayout.EndHorizontal();
         }
     }
@@ -414,7 +430,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
                 range.maxCutTime = ProceduralEngine.RandomRange(4f, 6f);
                 break;
             case CoreEmotion.Surprise:
-                range.minCutTime = ProceduralEngine.RandomRange(.5f, 1f);
+                range.minCutTime = ProceduralEngine.RandomRange(1f, 1.5f);
                 range.maxCutTime = ProceduralEngine.RandomRange(1.5f, 2f);
                 break;
             case CoreEmotion.Sadness:
@@ -426,11 +442,11 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
                 range.maxCutTime = ProceduralEngine.RandomRange(3f, 4f);
                 break;
             case CoreEmotion.Anger:
-                range.minCutTime = ProceduralEngine.RandomRange(.1f, 1f);
+                range.minCutTime = ProceduralEngine.RandomRange(.3f, 1f);
                 range.maxCutTime = ProceduralEngine.RandomRange(1f, 3f);
                 break;
             case CoreEmotion.Anticipation:
-                range.minCutTime = ProceduralEngine.RandomRange(.75f, 1.5f);
+                range.minCutTime = ProceduralEngine.RandomRange(1.5f, 2f);
                 range.maxCutTime = ProceduralEngine.RandomRange(3f, 4f);
                 break;
         }

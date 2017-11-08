@@ -76,6 +76,8 @@ public class EmotionEngine
 
     private int downsampleRate = 1;
 
+    private Dictionary<int, TrackData> trackMap = new Dictionary<int, TrackData>();
+
     public void Initialize(float totalDuration, float[] audioSignal, DataContainer container, int downsampleRate)
     {
         this.downsampleRate = downsampleRate;
@@ -121,10 +123,24 @@ public class EmotionEngine
         return SmoothEnergySignal[index];
     }
 
+    public TrackData GetTrackByIndex(int index)
+    {
+        return container.tracks[index];
+    }
+
+    public TrackData GetTrackById(int id)
+    {
+        return trackMap[id];
+    }
+
     protected void PreloadChunks()
     {
+        trackMap = new Dictionary<int, TrackData>();
+
         foreach (TrackData track in container.tracks)
         {
+            trackMap[track.id] = track;
+
             foreach (TrackChunkData chunk in track.chunks)
                 chunk.Preload();
             
