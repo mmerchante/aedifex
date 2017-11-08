@@ -114,9 +114,9 @@ public class ProceduralCameraStrategy
     {
         this.shotDuration = shotDuration;
         this.mainInterestPoint = p;
-        this.FrustumImportance = .25f;
+        this.FrustumImportance = .5f;
 
-        if (!FindCameraPosition(3f, 65f))
+        if (!FindCameraPosition(10f, 45f))
             return false;
 
         Composition = ProposeComposition();
@@ -185,14 +185,14 @@ public class ProceduralCameraStrategy
     {
         Vector3 p = mainInterestPoint.transform.position;
         
-        int maxTries = 8;
+        int maxTries = 10;
 
         for(int i = 0; i < maxTries; ++i)
         {
             Vector3 startPoint = p + Vector3.Scale(Random.onUnitSphere * mainInterestPoint.size, mainInterestPoint.transform.lossyScale);
 
             // If the interest point is very directional, consider that for the ray direction
-            Vector3 biasedDirection = (Random.onUnitSphere + mainInterestPoint.transform.forward * mainInterestPoint.directionality * 2f).normalized;
+            Vector3 biasedDirection = (Random.onUnitSphere + mainInterestPoint.transform.forward * mainInterestPoint.directionality * 6f).normalized;
 
             Ray ray = new Ray(startPoint, biasedDirection);
             RaycastHit hit;

@@ -22,11 +22,18 @@ public class InterestPoint : MonoBehaviour
 
     public Bounds AssociatedItemBounds { get; protected set; }
     public Transform AssociatedItemRoot { get; protected set; }
+
+    private static bool DirectorNotAvailable = false;
     
     public void Awake()
     {
+        if (DirectorNotAvailable)
+            return;
+
         if (ProceduralCameraDirector.IsAvailable())
             ProceduralCameraDirector.Instance.RegisterInterestPoint(this);
+        else
+            DirectorNotAvailable = true;
     }
 
     public void AssociateItemBounds(Transform itemRoot, Bounds b)
@@ -43,18 +50,21 @@ public class InterestPoint : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Vector3 p = transform.position;
-        Vector3 f = transform.forward * .5f;
-        Vector3 u = transform.up * .5f;
-        Vector3 r = transform.right * .5f;
+        if (IsSelected)
+        {
+            Vector3 p = transform.position;
+            Vector3 f = transform.forward * .5f;
+            Vector3 u = transform.up * .5f;
+            Vector3 r = transform.right * .5f;
 
-        Gizmos.color = Color.Lerp(Color.yellow, EmotionVector.GetColorForAngle(EmotionVector.GetAngleForCoreEmotion(primaryAffinity)), emotionalImpact);
-        Gizmos.DrawLine(p - f, p + f * (1f + directionality));
-        Gizmos.DrawLine(p - u, p + u);
-        Gizmos.DrawLine(p - r, p + r);
+            Gizmos.color = Color.Lerp(Color.yellow, EmotionVector.GetColorForAngle(EmotionVector.GetAngleForCoreEmotion(primaryAffinity)), emotionalImpact);
+            Gizmos.DrawLine(p - f, p + f * (1f + directionality));
+            Gizmos.DrawLine(p - u, p + u);
+            Gizmos.DrawLine(p - r, p + r);
 
-        Gizmos.color = IsSelected ? Color.magenta : (Color.yellow * .75f);
-        Gizmos.DrawWireSphere(p, size * transform.lossyScale.x);
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(p, size * transform.lossyScale.x);
+        }
 
         //if (associatedItemRoot)
         //{

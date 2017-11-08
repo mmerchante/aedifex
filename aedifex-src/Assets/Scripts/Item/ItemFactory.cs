@@ -552,13 +552,21 @@ public class ItemFactory : MonoBehaviorSingleton<ItemFactory>
             // Add random amplitude based on the possible volume
             Vector3 anchorDirection = GetAnchorDirection(itemReference.anchorPlane);
             randPositionAmplitude += Vector3.Scale(itemReference.availableProceduralVolume.size, Vector3.one - MathUtils.Abs(anchorDirection));
+
+            Vector3 position = GetRandomPositionOffset(randPositionAmplitude, rnd);
+            Quaternion rotation = Quaternion.Euler(GetRandomRotationOffset(itemReference.randomRotationAmplitude, rnd));
+            Vector3 scale = GetRandomScaleOffset(itemReference.randomScaleAmplitude, itemReference.uniformScale, rnd);
+
+            return matrix * Matrix4x4.TRS(position, rotation, scale);
         }
+        else
+        {
+            Vector3 position = GetRandomPositionOffset(randPositionAmplitude, rnd);
+            Quaternion rotation = Quaternion.Euler(GetRandomRotationOffset(itemReference.randomRotationAmplitude, rnd));
+            Vector3 scale = GetRandomScaleOffset(itemReference.randomScaleAmplitude, itemReference.uniformScale, rnd);
 
-        Vector3 position = GetRandomPositionOffset(randPositionAmplitude, rnd);
-        Quaternion rotation = Quaternion.Euler(GetRandomRotationOffset(itemReference.randomRotationAmplitude, rnd));
-        Vector3 scale = GetRandomScaleOffset(itemReference.randomScaleAmplitude, itemReference.uniformScale, rnd);
-
-        return matrix * Matrix4x4.TRS(position, rotation, scale);
+            return matrix * Matrix4x4.TRS(position, rotation, scale);
+        }
     }
     
     public static Vector3 GetRandomPositionOffset(Vector3 randomPositionAmplitude, System.Random rnd)

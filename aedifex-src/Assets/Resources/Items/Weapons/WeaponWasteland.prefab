@@ -129,7 +129,7 @@ MonoBehaviour:
   itemId: 
   maxChildDepth: 5
   procedural: 1
-  instanceCount: 400
+  instanceCount: 600
   availableProceduralVolume:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 50, y: 4, z: 50}
@@ -139,7 +139,7 @@ MonoBehaviour:
   randomSnappedOrientation: 0
   randomPositionAmplitude: {x: 0, y: 0, z: 0}
   randomRotationAmplitude: {x: 90, y: 90, z: 90}
-  randomScaleAmplitude: {x: 0.5, y: 0.5, z: 0.5}
+  randomScaleAmplitude: {x: 0, y: 0, z: 0}
   uniformScale: 1
   probability: 1
 --- !u!114 &114891077599778642
