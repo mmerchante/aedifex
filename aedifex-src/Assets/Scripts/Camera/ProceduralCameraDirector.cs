@@ -190,6 +190,12 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         return p;
     }
 
+    public void OnGUI()
+    {
+        //if(emotionEngine != null)
+        //    GUILayout.Label(emotionEngine.GetCurrentStructure(ProceduralEngine.Instance.CurrentTimeNormalized).ToString());
+    }
+
     protected ProceduralCamera InstanceCamera()
     {
         GameObject go = new GameObject("ShotCamera-" + history.Count);

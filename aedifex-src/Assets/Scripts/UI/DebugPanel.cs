@@ -13,6 +13,7 @@ public class DebugPanel : MonoBehaviour
     public void DebugText(string txt)
     {
         debugText.text = txt;
+        debugText.gameObject.SetActive(false);
     }
 
     public void Start()
