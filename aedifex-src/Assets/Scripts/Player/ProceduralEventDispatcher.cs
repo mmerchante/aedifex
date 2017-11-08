@@ -25,6 +25,28 @@ public class EmotionEventGroup
         return intensity * newElementsContribution * elementsChangedContribution;
     }
 
+    public EmotionEvent GetStructuralEvent()
+    {
+        foreach (EmotionEvent e in events)
+        {
+            if (e.type == EmotionEvent.EmotionEventType.LocalMaximum || e.type == EmotionEvent.EmotionEventType.LocalMinimum)
+                return e;
+        }
+
+        return new EmotionEvent();
+    }
+
+    public bool ContainsStructuralEvent()
+    {
+        foreach (EmotionEvent e in events)
+        {
+            if (e.type == EmotionEvent.EmotionEventType.LocalMaximum || e.type == EmotionEvent.EmotionEventType.LocalMinimum)
+                return true;
+        }
+
+        return false;
+    }
+
     public float GetTotalIntensity()
     {
         float accum = 0f;
@@ -139,13 +161,13 @@ public class ProceduralEventDispatcher : MonoBehaviour
         if (startGroup != endGroup && startGroup < endGroup)
         {
             for (int i = startGroup; i <= endGroup; ++i)
-                if(eventGroups[i] != null)
+                if(eventGroups[i] != null && eventGroups[i].events.Count > 0)
                     list.Add(eventGroups[i]);
         }
 
         return list;
     }
-
+    
     public List<EmotionEventGroup> GetFutureEventGroups(float timeOffsetNormalized)
     {
         return GetFutureEventGroups(ProceduralEngine.Instance.CurrentTimeNormalized, ProceduralEngine.Instance.CurrentTimeNormalized + timeOffsetNormalized);

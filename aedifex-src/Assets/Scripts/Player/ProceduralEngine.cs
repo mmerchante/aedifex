@@ -20,6 +20,7 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
     public bool Running { get; protected set; }
 
     public System.Random RNG { get; protected set; }
+    public int Seed { get; protected set; }
 
 
     protected override void Initialize()
@@ -39,7 +40,8 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
     protected void RunSimulationInternal(DataContainer data)
     {
         this.EmotionEngine = new EmotionEngine();
-        this.RNG = new System.Random(14041956);
+        this.Seed = 14041956 + System.DateTime.Now.Millisecond;
+        this.RNG = new System.Random(Seed);
 
         if (data != null)
         {
@@ -53,6 +55,7 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
 
             this.EventDispatcher = gameObject.AddComponent<ProceduralEventDispatcher>();
             this.EventDispatcher.Initialize();
+
             debugPanel.ShowPanel();
 
             // Director must be alive before the scene is built
@@ -117,6 +120,9 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
 
     public static T SelectRandomWeighted<T>(List<T> list, System.Func<T, float> func)
     {
+        if (list.Count == 0)
+            return default(T);
+
         float sum = list.Sum(x => func(x));
         float value = (float)Instance.RNG.NextDouble() * sum;
 
@@ -128,11 +134,14 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
                 return t;
         }
 
-        return default(T);
+        return list.Last();
     }
 
     public static T SelectRandomWeighted<T>(List<T> list, System.Func<T, float> func, float sum)
     {
+        if (list.Count == 0)
+            return default(T);
+
         float value = (float)Instance.RNG.NextDouble() * sum;
 
         foreach (T t in list)
@@ -143,6 +152,6 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
                 return t;
         }
 
-        return default(T);
+        return list.Last();
     }
 }

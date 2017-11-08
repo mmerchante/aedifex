@@ -191,7 +191,10 @@ public class ProceduralCameraStrategy
         {
             Vector3 startPoint = p + Vector3.Scale(Random.onUnitSphere * mainInterestPoint.size, mainInterestPoint.transform.lossyScale);
 
-            Ray ray = new Ray(startPoint, Random.onUnitSphere.normalized);
+            // If the interest point is very directional, consider that for the ray direction
+            Vector3 biasedDirection = (Random.onUnitSphere + mainInterestPoint.transform.forward * mainInterestPoint.directionality * 2f).normalized;
+
+            Ray ray = new Ray(startPoint, biasedDirection);
             RaycastHit hit;
             bool intersect = Physics.Raycast(ray, out hit, maxDistance);
 

@@ -33,6 +33,9 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         // TODO: think about using CutRange instead, assume the maxCut as ending but let the director cut before
         public float duration;
 
+        // The event that defines this shot and its camera
+        public EmotionEvent startEvent;
+
         // In current+duration time (+- some margin), this event is the one that will be used for the next shot
         public EmotionEvent selectedNextEventTrigger;
         
@@ -54,6 +57,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
     private ShotInformation currentShot;
     private ShotInformation nextShot;
+    private int nextShotTries;
 
     private float currentCutTime = 0f;
     
@@ -79,21 +83,20 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
     public void StartFirstShot()
     {
-        EmotionEvent firstEvent = ProceduralEngine.Instance.EventDispatcher.GetFutureEventGroups(ProceduralEngine.Instance.EmotionEngine.BeatDurationNormalized)[0].events[0];
-        this.currentShot = new ShotInformation();
-        this.currentShot.valid = false;
-
-        int tries = 16;
-
+        EmotionEvent firstEvent = emotionEngine.GetFirstEvent();
+        ShotInformation firstShot = new ShotInformation();
+        
+        int tries = 32;
+        
         for (int i = 0; i < tries; ++i)
         {
-            if (!currentShot.valid)
-                currentShot = TryFindCut(firstEvent);
+            if (!firstShot.valid)
+                firstShot = TryFindCut(firstEvent);
             else
-                CompleteShot(ref currentShot);
+                CompleteShot(ref firstShot);
         }
-
-        StartTransition(currentShot);
+        
+        StartTransition(firstShot);
     }
 
     protected void StartTransition(ShotInformation shot)
@@ -110,6 +113,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             this.history.Add(shot);
             this.nextShot = new ShotInformation();
             this.nextShot.sampledStrategies = new List<KeyValuePair<ProceduralCameraStrategy, float>>();
+            this.nextShotTries = 0;
             this.currentCutTime = 0f;
 
             this.currentShot = shot;
@@ -201,6 +205,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
     {
         float p = e.intensity;
 
+        // Dominate structural points
         if (e.type == EmotionEvent.EmotionEventType.LocalMaximum || e.type == EmotionEvent.EmotionEventType.LocalMinimum)
             p *= 2f;
 
@@ -222,8 +227,16 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
     public void OnGUI()
     {
-        //if (emotionEngine != null)
-        //    GUILayout.Label(emotionEngine.GetCurrentStructure(ProceduralEngine.Instance.CurrentTimeNormalized).ToString());
+        if (emotionEngine != null)
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Seed: " + ProceduralEngine.Instance.Seed);
+            GUILayout.Label("Structure: " + emotionEngine.GetCurrentStructure(ProceduralEngine.Instance.CurrentTimeNormalized).ToString());
+            GUILayout.Label(currentShot.startEvent.ToString());// + " | " + EmotionEngine.FindMainEmotion(currentShot.selectedNextEventTrigger.associatedEmotion).ToString());
+
+            GUILayout.Label(((currentShot.startEvent.timestamp - ProceduralEngine.Instance.CurrentTimeNormalized) * ProceduralEngine.Instance.Duration).ToString());
+            GUILayout.EndHorizontal();
+        }
     }
 
     protected ProceduralCamera InstanceCamera()
@@ -295,7 +308,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         if (shot.interestPoint == null)
             shot.interestPoint = FindInterestPoint();
         else
-            SampleStrategies(shot.sampledStrategies, shot.interestPoint, shot.selectedNextEventTrigger, shot.duration * ProceduralEngine.Instance.Duration);
+            SampleStrategies(shot.sampledStrategies, shot.interestPoint, shot.startEvent, shot.duration * ProceduralEngine.Instance.Duration);
     }
 
     /// <summary>
@@ -304,7 +317,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
     /// - Decide what shot to take
     /// It is tied to a specific event, so that the chaining of shots is possible
     /// </summary>
-    protected ShotInformation TryFindCut(EmotionEvent e)
+    protected ShotInformation TryFindCut(EmotionEvent startEvent)
     {
         ShotInformation shot = new ShotInformation();
         shot.valid = false;
@@ -313,37 +326,64 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         shot.strategy = null;
         shot.interestPoint = null;
         shot.sampledStrategies = new List<KeyValuePair<ProceduralCameraStrategy, float>>();
+        shot.startEvent = startEvent;
 
-        CutRange searchRange = EvaluateCutRangeForEvent(e);
-        float minT = e.timestamp + searchRange.minCutTime;
-        float maxT = e.timestamp + searchRange.maxCutTime;
+        // Make sure we don't lag
+        float timestamp = Mathf.Max(startEvent.timestamp, ProceduralEngine.Instance.CurrentTimeNormalized);
 
+        CutRange searchRange = EvaluateCutRangeForEvent(startEvent);
+        float minT = timestamp + searchRange.minCutTime;
+        float maxT = timestamp + searchRange.maxCutTime * (1f + nextShotTries *.1f); // Increase search range when it fails
+        
         List<EmotionEventGroup> searchEvents = ProceduralEngine.Instance.EventDispatcher.GetFutureEventGroups(minT, maxT);
 
         if (searchEvents.Count == 0)
+        {
+            Debug.Log("Could not find event groups... " + minT + ", "+ maxT);
             return shot;
+        }
 
-        searchEvents = searchEvents.OrderBy(x => x.GetPriority()).ToList();
+        EmotionEventGroup selectedGroup = null;
+        bool structural = false;
 
-        // TODO: Add some bias based on proximity to current time?
-        EmotionEventGroup selectedGroup = ProceduralEngine.SelectRandomWeighted(searchEvents, x => x.GetPriority());
+        foreach (EmotionEventGroup g in searchEvents)
+        {
+            if (g.ContainsStructuralEvent())
+            {
+                selectedGroup = g;
+                structural = true;
+            }
+        }
+
+        if (selectedGroup == null)
+            selectedGroup = ProceduralEngine.SelectRandomWeighted(searchEvents, x => x.GetPriority());
+
+        if(structural)
+            Debug.Log("Structural!");
 
         // We found a subset of interesting events, now we can pick something in here
-        if(selectedGroup != null && selectedGroup.events.Count > 0)
+        if (selectedGroup != null && selectedGroup.events.Count > 0)
         {
-            EmotionEvent selectedEvent = ProceduralEngine.SelectRandomWeighted(selectedGroup.events, x => GetEventPriority(x));
-            shot.duration = selectedEvent.timestamp - e.timestamp;
+            EmotionEvent selectedEvent;
+
+            if (structural)
+                selectedEvent = selectedGroup.GetStructuralEvent();
+            else
+                selectedEvent = ProceduralEngine.SelectRandomWeighted(selectedGroup.events, x => GetEventPriority(x));
+                                    
+            shot.duration = (selectedEvent.timestamp - timestamp);
+            shot.selectedNextEventTrigger = selectedEvent;
 
             // Try cutting before, but not after
-            float margin = emotionEngine.BeatDurationNormalized * .5f;
-            float fuzzyDuration = shot.duration - ProceduralEngine.RandomRange(0f, margin);
+            //float margin = emotionEngine.BeatDurationNormalized * .5f;
+            //float fuzzyDuration = shot.duration - ProceduralEngine.RandomRange(0f, margin);
 
-            if (fuzzyDuration > searchRange.minCutTime && fuzzyDuration < searchRange.maxCutTime)
-                shot.duration = fuzzyDuration;
-            
+            //if (fuzzyDuration > searchRange.minCutTime && fuzzyDuration < searchRange.maxCutTime)
+            //    shot.duration = fuzzyDuration;
+
             shot.valid = true;
         }
-        
+
         return shot;
     }
 
@@ -374,7 +414,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
                 range.maxCutTime = ProceduralEngine.RandomRange(4f, 6f);
                 break;
             case CoreEmotion.Surprise:
-                range.minCutTime = ProceduralEngine.RandomRange(.5f, 1.5f);
+                range.minCutTime = ProceduralEngine.RandomRange(.5f, 1f);
                 range.maxCutTime = ProceduralEngine.RandomRange(1.5f, 2f);
                 break;
             case CoreEmotion.Sadness:
@@ -390,8 +430,8 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
                 range.maxCutTime = ProceduralEngine.RandomRange(1f, 3f);
                 break;
             case CoreEmotion.Anticipation:
-                range.minCutTime = ProceduralEngine.RandomRange(.5f, 1f);
-                range.maxCutTime = ProceduralEngine.RandomRange(2f, 4f);
+                range.minCutTime = ProceduralEngine.RandomRange(.75f, 1.5f);
+                range.maxCutTime = ProceduralEngine.RandomRange(3f, 4f);
                 break;
         }
 
@@ -415,6 +455,32 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
                 range.minCutTime *= 2f;
                 range.maxCutTime *= 2f;
                 break;
+        }
+
+        TrackChunkData structureData = emotionEngine.GetCurrentStructureData(e.timestamp);
+
+        if (structureData != null)
+        {
+            // More intense -> shorter
+            float normalizedStructuralIntensity = Mathf.Pow(structureData.GetIntensity(e.timestamp), 2f);
+            range.minCutTime *= 1.35f - normalizedStructuralIntensity * .5f;
+            range.maxCutTime *= 1.35f - normalizedStructuralIntensity * .5f;
+
+            // TODO: decide if we need further modifications of cut time based on type.
+            // Intensity curve should cover most I think
+            StructureType currentStructure = emotionEngine.GetCurrentStructure(e.timestamp);
+
+            switch (currentStructure)
+            {
+                case StructureType.None:
+                    break;
+                case StructureType.Sustain:
+                    break;
+                case StructureType.Increasing:
+                    break;
+                case StructureType.Decreasing:
+                    break;
+            }
         }
 
         range.minCutTime = Mathf.Max(0.01f, range.minCutTime);
@@ -487,6 +553,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             {
                 nextShot = TryFindCut(currentShot.selectedNextEventTrigger);
                 CompleteShot(ref nextShot);
+                nextShotTries++;
             }
         }
         else

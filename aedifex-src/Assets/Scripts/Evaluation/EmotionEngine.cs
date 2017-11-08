@@ -88,7 +88,7 @@ public class EmotionEngine
         this.BeatDurationNormalized = BeatDuration / TotalDuration;
 
         this.MeasureDuration = BeatDuration * container.beatsPerMeasure;
-        this.MeasureDuration = MeasureDuration * TotalDuration;
+        this.MeasureDurationNormalized = MeasureDuration / TotalDuration;
     }
 
     public EmotionSpectrum GetSpectrum(float normalizedT)
@@ -127,7 +127,7 @@ public class EmotionEngine
         {
             foreach (TrackChunkData chunk in track.chunks)
                 chunk.Preload();
-
+            
             if (track.category == TrackCategory.Structure)
             {
                 if (structuralTrack != null)
@@ -180,6 +180,11 @@ public class EmotionEngine
         }
     }
 
+    public EmotionEvent GetFirstEvent()
+    {
+        return events[0];
+    }
+
     public Queue<EmotionEvent> BuildEventQueue()
     {
         return new Queue<EmotionEvent>(events);
@@ -202,7 +207,7 @@ public class EmotionEngine
             {
                 TrackChunkData chunk = track.chunks[c];
 
-                if (track.category == TrackCategory.Structure)
+                if (track == structuralTrack)
                 {
                     foundEvents.Add(GetEventFromStructuralTrack(track, chunk, t, c));
                 }
@@ -218,6 +223,10 @@ public class EmotionEngine
         }
 
         events.AddRange(foundEvents);
+        
+        foreach (EmotionEvent e in events)
+            if (float.IsNaN(e.intensity))
+                Debug.LogError("WHAAT" + e);
     }
 
     public EmotionEvent GetEventFromStructuralTrack(TrackData track, TrackChunkData chunk, int trackIndex, int chunkIndex)
@@ -232,7 +241,7 @@ public class EmotionEngine
         // We only care about the ending of this chunk (for now)
         e.timestamp = chunk.end;
         e.intensity = chunk.GetIntensity(chunk.end);
-
+        
         if (chunk.intensityCurve == IntensityCurve.LinearIncreasing)
         {
             // Buildup
@@ -281,7 +290,7 @@ public class EmotionEngine
         e.associatedEmotion = chunk.startData.GetSpectrum(); // TODO: expectation/surprise 
         e.chunkDelimitsSegment = IsChunkSegmentDelimiter(track, chunk, chunkIndex, e.type);
         e.harmonicDifference = 0;
-
+        
         if (chunkIndex > 0)
             e.harmonicDifference = Mathf.Abs(chunk.harmonySequenceNumber - track.chunks[chunkIndex - 1].harmonySequenceNumber);
 
@@ -350,7 +359,7 @@ public class EmotionEngine
 
         float timeDifference = chunk.start - previousChunk.end;
         float falloff = MeasureDurationNormalized * 2f;
-
+        
         // Basically, the closest the chunk, the more impact it will generate
         // TODO: maybe add nonlinear impact responses?
         float timeImpact = 1f - Mathf.Clamp01(timeDifference / falloff);
@@ -379,7 +388,7 @@ public class EmotionEngine
         // TODO in the future: do pattern matching to see if the specific arrangement of chunks changes or is stable,
         // by searching on a window of +-8 measures
         // A simple example: look for repetition in the past 8 measures, for every repeated chunk add some intensity (and also add expectation)
-
+        
         return intensity * variationContribution * timeImpactContribution * harmonicProgressionContribution * intensityDiffContribution;
     }
 
@@ -453,9 +462,23 @@ public class EmotionEngine
         // TODO: conflict
     }
 
+    public TrackChunkData GetCurrentStructureData(float normalizedTime)
+    {
+        if (structuralTrack == null)
+            return null;
+
+        foreach (TrackChunkData chunk in structuralTrack.chunks)
+        {
+            if (chunk.start <= normalizedTime && chunk.end >= normalizedTime)
+                return chunk;
+        }
+
+        return null;
+    }
+
     public StructureType GetCurrentStructure(float normalizedTime)
     {
-        if (structuralTrack != null)
+        if (structuralTrack == null)
             return StructureType.None;
 
         foreach (TrackChunkData chunk in structuralTrack.chunks)

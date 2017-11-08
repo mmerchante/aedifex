@@ -28,7 +28,7 @@ public class DollyCameraStrategy : ProceduralCameraStrategy
         possibleDirections.Add(new KeyValuePair<Vector3, float>(mainInterestPoint.transform.forward * boundsAxis.z, boundsAxis.z));
 
         // Chance of doing a dolly in/out
-        float inOutDirection = (ProceduralEngine.RandomRange(0f, 1f) > .5f ? 1f : -1f); // TODO: Associate with emotions
+        float inOutDirection = ProceduralEngine.Instance.EmotionEngine.GetCurrentStructure(ProceduralEngine.Instance.CurrentTimeNormalized) == StructureType.Decreasing ? -1f : 1f;
         possibleDirections.Add(new KeyValuePair<Vector3, float>(GetForward() * inOutDirection, .5f));
 
         movementDirection = ProceduralEngine.SelectRandomWeighted(possibleDirections, x => x.Value).Key.normalized;
