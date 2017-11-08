@@ -243,9 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24d84ebab211654387b94bf182da589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  importance: 0
-  primaryAffinity: 4
+  importance: 500
   size: 1.78
+  primaryAffinity: 4
   directionality: 1
   emotionalImpact: 0.67
 --- !u!114 &114887166749537772

@@ -89,8 +89,11 @@ public class InterestPoint : MonoBehaviour
         // If this is the primary interest point, we want to make sure it is 
         // close to other interesting places, so biasing the importance with a heatmap is useful.
         if (primaryInterest)
-            // TODO: should it be normalized, added, multiplied or what is best?
-            heuristic += ProceduralCameraDirector.Instance.GetGrid().GetImportanceSumForPosition(transform.position);
+        {
+            // Interesting: while being on an important place is good, we must not make unimportant elements important.
+            // Thus we need to be careful with this multiplier
+            heuristic += .35f * ProceduralCameraDirector.Instance.GetGrid().GetAverageImportanceForPosition(transform.position);
+        }
 
         // TODO: ideas:
         // - Is it being lit right now? Or in shadow?

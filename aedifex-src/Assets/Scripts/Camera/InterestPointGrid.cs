@@ -87,6 +87,16 @@ public class InterestPointGrid : MonoBehaviour
         return grid[index].importanceSum;
     }
 
+    public float GetAverageImportanceForPosition(Vector3 p)
+    {
+        int index = GetFlatIndexForPosition(p);
+
+        if(grid[index].points != null && grid[index].points.Count > 0)
+            return grid[index].importanceSum / grid[index].points.Count;
+
+        return 0f;
+    }
+
     public void RemoveInterestPoint(InterestPoint p)
     {
         if (indexMap.ContainsKey(p))

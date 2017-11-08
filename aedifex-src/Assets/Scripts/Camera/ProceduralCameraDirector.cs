@@ -198,7 +198,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
                 return ip;
         }
 
-        return null;
+        return interestPoints.Last();
     }
 
     protected float GetEventPriority(EmotionEvent e)
