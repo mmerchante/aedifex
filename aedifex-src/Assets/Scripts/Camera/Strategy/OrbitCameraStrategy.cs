@@ -13,36 +13,47 @@ public class OrbitCameraStrategy : ProceduralCameraStrategy
     
     protected override void OnStart()
     {
-        this.initialRadius = (initialPosition - mainInterestPoint.transform.position).magnitude;
-
-        Vector3 toTarget = (initialPosition - mainInterestPoint.transform.position).normalized;
-        initialAngle = Mathf.Atan2(toTarget.z, toTarget.x) + Mathf.PI;
         orbitAmplitude = Mathf.PI / 8f;
-
         endRadiusPercentage = ProceduralEngine.RandomRange(.8f, 1.2f); // A small zoom in/out
 
-        this.direction = ProceduralEngine.RandomRange(0f, 1f) > .5f ? 1f : -1f;
+        direction = ProceduralEngine.RandomRange(0f, 1f) > .5f ? 1f : -1f;
+
+        camera.RotationDampingTime = .5f;
+        camera.PositionDampingTime = .4f;
         camera.SetNoiseParameters(ProceduralEngine.RandomRange(0f, .2f), .75f);
+
+        OnUpdateStrategy();
     }
 
-    public override bool Propose(EmotionEvent e, InterestPoint p, float shotDuration)
-    {
-        return base.Propose(e, p, shotDuration);
-    }
-
-    public override float Evaluate(EmotionEvent e, List<InterestPoint> frustumPoints, float frustumImportanceAccumulation)
-    {
-        return base.Evaluate(e, frustumPoints, frustumImportanceAccumulation);
-    }
-    
-    protected override void OnUpdateStrategy()
+    protected Vector3 CalculatePosition()
     {
         float angle = initialAngle + orbitAmplitude * CameraTimeNormalized * direction;
 
         float r = Mathf.Lerp(initialRadius, initialRadius * endRadiusPercentage, CameraTimeNormalized);
         Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * r;
 
-        CameraPosition = mainInterestPoint.transform.position + offset;
+        return mainInterestPoint.transform.position + offset;
+    }
+
+    protected override bool FindCameraPosition()
+    {
+        bool ret = base.FindCameraPosition();
+
+        if(ret)
+        {
+            this.initialRadius = (CameraPosition - mainInterestPoint.transform.position).magnitude;
+            Vector3 toTarget = (initialPosition - mainInterestPoint.transform.position).normalized;
+            initialAngle = Mathf.Atan2(toTarget.z, toTarget.x) + Mathf.PI * .5f;
+
+            CameraPosition = CalculatePosition();
+        }
+
+        return ret;
+    }
+    
+    protected override void OnUpdateStrategy()
+    {
+        CameraPosition = CalculatePosition();
         CameraRotation = GetViewDirectionForInterestPoint(mainInterestPoint, Composition);
     }
 }

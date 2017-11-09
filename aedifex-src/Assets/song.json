@@ -6589,7 +6589,7 @@
                                 "intensity": 0.19266259670257569
                             }
                         ],
-                        "intensityMultiplier": 4.0
+                        "intensityMultiplier": 2.0
                     },
                     "endData": {
                         "vectors": [
@@ -6602,7 +6602,7 @@
                                 "intensity": 0.19266259670257569
                             }
                         ],
-                        "intensityMultiplier": 4.0
+                        "intensityMultiplier": 2.0
                     },
                     "intensityCurve": 3,
                     "isVariation": false,
@@ -6623,7 +6623,7 @@
                                 "intensity": 0.19266259670257569
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 2.0
                     },
                     "endData": {
                         "vectors": [
@@ -6636,7 +6636,7 @@
                                 "intensity": 0.19266259670257569
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 2.0
                     },
                     "intensityCurve": 3,
                     "isVariation": false,
@@ -6657,7 +6657,7 @@
                                 "intensity": 0.19266259670257569
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 2.0
                     },
                     "endData": {
                         "vectors": [
@@ -6670,7 +6670,7 @@
                                 "intensity": 0.19266259670257569
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 2.0
                     },
                     "intensityCurve": 3,
                     "isVariation": false,
@@ -6759,7 +6759,7 @@
                                 "intensity": 0.19266259670257569
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 2.0
                     },
                     "endData": {
                         "vectors": [
@@ -6772,7 +6772,7 @@
                                 "intensity": 0.19266259670257569
                             }
                         ],
-                        "intensityMultiplier": 1.0
+                        "intensityMultiplier": 2.0
                     },
                     "intensityCurve": 3,
                     "isVariation": false,
@@ -11359,27 +11359,6 @@
                     "harmonySequenceNumber": 1
                 }
             ]
-        },
-        {
-            "id": 0,
-            "trackName": "Energy",
-            "trackType": 0,
-            "category": 0,
-            "chunks": []
-        },
-        {
-            "id": 0,
-            "trackName": "Energy",
-            "trackType": 0,
-            "category": 0,
-            "chunks": []
-        },
-        {
-            "id": 0,
-            "trackName": "Energy",
-            "trackType": 0,
-            "category": 0,
-            "chunks": []
         }
     ],
     "beatsPerMinute": 80,

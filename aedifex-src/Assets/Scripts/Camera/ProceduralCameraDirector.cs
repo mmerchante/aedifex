@@ -251,11 +251,10 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             GUILayout.Label(currentShot.startEvent.ToString());// + " | " + EmotionEngine.FindMainEmotion(currentShot.selectedNextEventTrigger.associatedEmotion).ToString());
             GUILayout.Label(((currentShot.startEvent.timestamp - ProceduralEngine.Instance.CurrentTimeNormalized) * ProceduralEngine.Instance.Duration).ToString("0.00"));
             GUILayout.Label(emotionEngine.GetTrackByIndex(currentShot.startEvent.trackIndex).ToString());
-            GUILayout.EndHorizontal();
 
-            GUILayout.BeginHorizontal();
             if (currentShot.strategy != null)
                 GUILayout.Label("Camera: " + currentShot.strategy.GetType());
+
             GUILayout.EndHorizontal();
         }
     }
@@ -274,7 +273,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
         float overviewWeight = 0.2f;
         float dollyWeight = 2f + (1f - normalizedEnergy);
-        float orbitWeight = .5f + normalizedEnergy;
+        float orbitWeight = 1f + normalizedEnergy;
 
         TrackChunkData structureChunk = ProceduralEngine.Instance.EmotionEngine.GetCurrentStructureData(e.timestamp);
         StructureType structure = ProceduralEngine.Instance.EmotionEngine.GetStructureAtTime(e.timestamp);
