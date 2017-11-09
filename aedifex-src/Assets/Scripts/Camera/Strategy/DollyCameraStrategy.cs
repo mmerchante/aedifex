@@ -77,7 +77,6 @@ public class DollyCameraStrategy : ProceduralCameraStrategy
     protected override void OnUpdateStrategy()
     {
         EmotionSpectrum currentEmotion = ProceduralEngine.Instance.GetCurrentEmotion();
-        float expectation = currentEmotion.Dot(new EmotionSpectrum(EmotionVector.GetCoreEmotion(CoreEmotion.Anticipation)));
         
         CameraPosition = Vector3.Lerp(initialPosition, initialPosition + movementDirection * speed * shotDuration, CameraTimeNormalized);
 

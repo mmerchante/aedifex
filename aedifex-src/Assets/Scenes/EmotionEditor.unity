@@ -937,10 +937,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emotionAffinity: 2
   TrackId: -1
-  smooth: 1
+  smooth: 0
   minIntensity: 0
-  maxIntensity: 3
-  globalMultiplier: 0.045
+  maxIntensity: 1
+  globalMultiplier: 0.065
   trackMultiplier: 0
   colorGradient:
     serializedVersion: 2
@@ -989,7 +989,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  smoothTime: 0.1
+  smoothTime: 0.2
 --- !u!108 &1488875207
 Light:
   m_ObjectHideFlags: 0
@@ -1091,7 +1091,7 @@ GameObject:
   - component: {fileID: 1532682230}
   - component: {fileID: 1532682229}
   m_Layer: 0
-  m_Name: BounceLight (1)
+  m_Name: BounceLightAlt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1534,22 +1534,22 @@ Prefab:
     - target: {fileID: 224409439372171502, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -47.955
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224409439372171502, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224550682759705204, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -47.955
+      value: 47.955
       objectReference: {fileID: 0}
     - target: {fileID: 224550682759705204, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224996024422003198, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}
@@ -1584,7 +1584,7 @@ Prefab:
     - target: {fileID: 224693752482870578, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 126
+      value: -126
       objectReference: {fileID: 0}
     - target: {fileID: 224265781395243958, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}

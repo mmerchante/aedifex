@@ -456,7 +456,6 @@ public class EmotionEngine
 
         for(int i = 0; i < samples; ++i)
         {
-            float t = i * dt;
             float intensity = TotalEnergySignal[i];
 
             if (intensity < min)

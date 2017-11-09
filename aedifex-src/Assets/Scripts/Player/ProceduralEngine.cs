@@ -39,7 +39,7 @@ public class ProceduralEngine : MonoBehaviorSingleton<ProceduralEngine>
 
     protected void RunSimulationInternal(DataContainer data)
     {
-        Application.targetFrameRate = 24;
+        //Application.targetFrameRate = 30;
         this.EmotionEngine = new EmotionEngine();
         this.Seed = 14041956 + System.DateTime.Now.Millisecond;
         this.RNG = new System.Random(Seed);

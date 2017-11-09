@@ -102,6 +102,19 @@ public class Item : MonoBehaviour
         return bounds.center + direction * Mathf.Abs(Vector3.Dot(direction, bounds.extents));
     }
 
+    public void OnDrawGizmos()
+    {
+        Bounds b = CalculateBoundsLocalSpace();
+        
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(transform.position + b.center, b.size);
+
+        Gizmos.color = new Color(0f, 1f, 1f, .5f);
+        Gizmos.DrawCube(transform.position + GetAnchorPositionWorld(b), GetAnchorPlaneSize(b));
+    }
+
+#endif
+
     /// <summary>
     /// Calculates the bounding volume in local space, considering its child item references
     /// </summary>
@@ -116,7 +129,7 @@ public class Item : MonoBehaviour
 
         // It is important to inverse transform each bounds, because this item may be have an offseted transform...
         // TODO: Can be precalculated
-        for(int i = 0; i < renderers.Length; i++)
+        for (int i = 0; i < renderers.Length; i++)
             bounds.Encapsulate(MathUtils.TransformBounds(ref worldToLocalMatrix, renderers[i].bounds));
 
         // Because we are traversing a possibly infinite tree, we must be careful with the recursion...
@@ -131,16 +144,4 @@ public class Item : MonoBehaviour
         return bounds;
     }
 
-    public void OnDrawGizmos()
-    {
-        Bounds b = CalculateBoundsLocalSpace();
-        
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(transform.position + b.center, b.size);
-
-        Gizmos.color = new Color(0f, 1f, 1f, .5f);
-        Gizmos.DrawCube(transform.position + GetAnchorPositionWorld(b), GetAnchorPlaneSize(b));
-    }
-
-#endif
 }

@@ -86,7 +86,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         EmotionEvent firstEvent = emotionEngine.GetFirstEvent();
         ShotInformation firstShot = new ShotInformation();
         
-        int tries = 32;
+        int tries = 64;
         
         for (int i = 0; i < tries; ++i)
         {
@@ -94,6 +94,9 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
                 firstShot = TryFindCut(firstEvent);
             else
                 CompleteShot(ref firstShot);
+
+            // Emulate frames so the interest point reset works
+            frames++;
         }
         
         StartTransition(firstShot);
@@ -301,6 +304,8 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
     protected void SampleStrategies(List<KeyValuePair<ProceduralCameraStrategy, float>> strategies, InterestPoint point, EmotionEvent e, float shotDuration)
     {
+        //Debug.Log("Sampling strategies on frame " + frames);
+
         int samples = 4;
 
         for(int i = 0; i < samples; ++i)
@@ -319,6 +324,9 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             float weight = s.Evaluate(e, frustumPoints, frustumWeightAccum);
             strategies.Add(new KeyValuePair<ProceduralCameraStrategy, float>(s, weight));
         }
+
+        //if (strategies.Count == 0)
+        //    Debug.Log("Failed... ");
     }
 
     protected virtual InterestPoint FindInterestPoint(EmotionSpectrum globalEmotion, float normalizedTime)
@@ -358,6 +366,14 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
     {
         if (!shot.valid)
             return;
+
+        bool failedToFindInterestingStrategies = frames > 10 && shot.interestPoint != null && shot.sampledStrategies.Count == 0;
+
+        if (failedToFindInterestingStrategies)
+        {
+            shot.interestPoint = null;
+            frames = 0;
+        }
 
         if (shot.interestPoint == null)
         {
@@ -429,11 +445,11 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             shot.selectedNextEventTrigger = selectedEvent;
 
             // Try cutting before, but not after
-            //float margin = emotionEngine.BeatDurationNormalized * .5f;
-            //float fuzzyDuration = shot.duration - ProceduralEngine.RandomRange(0f, margin);
+            float margin = emotionEngine.BeatDurationNormalized * .5f;
+            float fuzzyDuration = shot.duration - ProceduralEngine.RandomRange(0f, margin);
 
-            //if (fuzzyDuration > searchRange.minCutTime && fuzzyDuration < searchRange.maxCutTime)
-            //    shot.duration = fuzzyDuration;
+            if (fuzzyDuration > searchRange.minCutTime && fuzzyDuration < searchRange.maxCutTime)
+                shot.duration = fuzzyDuration;
 
             shot.valid = true;
         }
@@ -562,6 +578,8 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             this.transform.rotation = currentShot.selectedCamera.transform.rotation;
         }
     }
+
+    private int frames = 0;
     
     public void UpdateCamera(float t)
     {
@@ -579,6 +597,9 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             {
                 nextShot = TryFindCut(currentShot.selectedNextEventTrigger);
                 nextShotTries++;
+
+                //if (nextShot.valid)
+                //    Debug.Log("Found shot at frame " + frames);
             }
             else
             {
@@ -587,6 +608,15 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         }
         else
         {
+            //Debug.Log(frames);
+            //Debug.Log(nextShot.interestPoint);
+            //Debug.Log(nextShot.sampledStrategies.Count);
+
+            //if (nextShot.sampledStrategies.Count == 0)
+            //    Debug.Log(nextShot.interestPoint, nextShot.interestPoint);
+
+            frames = 0;
+
             if (nextShot.valid)
                 StartTransition(nextShot);
             else
@@ -596,6 +626,8 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
                 Debug.Log("Failed finding a shot; repeating...");
             }
         }
+
+        frames++;
     }
 
     public void OnEventDispatch(EmotionEvent e)

@@ -1959,6 +1959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emotionAffinity: 1
   TrackId: 9
+  smooth: 0
   container: {fileID: 1028818347374808}
   behaviours:
   - {fileID: 114617889821896592}
@@ -2060,7 +2061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sourceBehaviour: {fileID: 114855232304974100}
   targetBehaviour: {fileID: 114244910848699858}
-  transitionDuration: 0.1
+  transitionDuration: 0.01
 --- !u!114 &114563428100147718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2116,12 +2117,18 @@ MonoBehaviour:
   - {fileID: 23129951236218998}
   - {fileID: 23855179024550992}
   - {fileID: 23602505700173082}
-  duration: 20
+  duration: 60
   curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.4449411
       value: 1.0026245
       inSlope: 0
       outSlope: 0
@@ -2179,6 +2186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emotionAffinity: 4
   TrackId: -1
+  smooth: 0
 --- !u!114 &114877313816254098
 MonoBehaviour:
   m_ObjectHideFlags: 1

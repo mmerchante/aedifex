@@ -397,7 +397,7 @@ public class ItemFactory : MonoBehaviorSingleton<ItemFactory>
 
 			// Build all children now
 			BuildDynamicItem(viewDirection, rnd, itemIndex, itemInstance.transform, depth, maxDepth);
-		}
+		}        
 	}
 
 	private void BuildDynamicItem(Vector3 viewDirection, System.Random rnd, int parentItemIndex, Transform parentTransform, int depth, int maxDepth)

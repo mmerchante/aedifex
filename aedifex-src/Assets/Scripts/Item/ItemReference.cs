@@ -375,28 +375,6 @@ public class ItemReference : MonoBehaviour
         return Mathf.Max(Mathf.Abs(v.x), Mathf.Max(Mathf.Abs(v.y), Mathf.Abs(v.z)));
     }
 
-    public Bounds CalculateBoundsWorldSpace(int depth)
-    {
-        Matrix4x4 localToWorldMatrix = transform.localToWorldMatrix;
-
-        if (procedural)
-            return MathUtils.TransformBounds(ref  localToWorldMatrix, availableProceduralVolume);
-
-        Item item = null;
-
-#if UNITY_EDITOR
-        if(!Application.isPlaying)
-            item = GetItemEditor();
-        else
-#endif
-            item = ItemFactory.Instance.GetItemPrefab(itemId);
-
-        if (item)
-            return MathUtils.TransformBounds(ref localToWorldMatrix, item.CalculateBoundsLocalSpace(depth));
-
-        return MathUtils.TransformBounds(ref localToWorldMatrix, new Bounds());
-    }
-
     public void Update()
     {
         if(Application.isEditor && !Application.isPlaying)
@@ -458,5 +436,28 @@ public class ItemReference : MonoBehaviour
         }
     }
 
-	#endif
+#endif
+
+    public Bounds CalculateBoundsWorldSpace(int depth)
+    {
+        Matrix4x4 localToWorldMatrix = transform.localToWorldMatrix;
+
+        if (procedural)
+            return MathUtils.TransformBounds(ref localToWorldMatrix, availableProceduralVolume);
+
+        Item item = null;
+
+#if UNITY_EDITOR
+        if (!Application.isPlaying)
+            item = GetItemEditor();
+        else
+#endif
+            item = ItemFactory.Instance.GetItemPrefab(itemId);
+
+        if (item)
+            return MathUtils.TransformBounds(ref localToWorldMatrix, item.CalculateBoundsLocalSpace(depth));
+
+        return MathUtils.TransformBounds(ref localToWorldMatrix, new Bounds());
+    }
+
 }

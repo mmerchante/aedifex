@@ -56,4 +56,12 @@ public class OrbitCameraStrategy : ProceduralCameraStrategy
         CameraPosition = CalculatePosition();
         CameraRotation = GetViewDirectionForInterestPoint(mainInterestPoint, Composition);
     }
+
+    protected override Vector3 GetCameraDirectionBias()
+    {
+        // Orbit a bit higher
+        Vector3 r = Random.onUnitSphere;
+        r.y = (r.y + .5f) * 2f;
+        return r;
+    }
 }
