@@ -269,8 +269,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1203664856740088}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -3.25878, y: 0.47000003, z: 2.33193}
-  m_LocalScale: {x: 0.25553057, y: 0.25553045, z: 0.25553057}
+  m_LocalPosition: {x: -1.8514, y: 0.24000001, z: 1.4873}
+  m_LocalScale: {x: 0.13210793, y: 0.13210785, z: 0.13210793}
   m_Children: []
   m_Father: {fileID: 4724146910435892}
   m_RootOrder: 6
@@ -282,8 +282,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1329354769414892}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -2.84368, y: 0.47000003, z: -1.86307}
-  m_LocalScale: {x: 0.25553057, y: 0.25553045, z: 0.25553057}
+  m_LocalPosition: {x: -1.6368, y: 0.24, z: -0.68154}
+  m_LocalScale: {x: 0.13210793, y: 0.13210785, z: 0.13210793}
   m_Children: []
   m_Father: {fileID: 4724146910435892}
   m_RootOrder: 9
@@ -308,8 +308,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1849014052502272}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 1.90472, y: 0.47000003, z: -2.23387}
-  m_LocalScale: {x: 0.25553057, y: 0.25553045, z: 0.25553057}
+  m_LocalPosition: {x: 0.8181, y: 0.24000001, z: -0.87324}
+  m_LocalScale: {x: 0.13210793, y: 0.13210785, z: 0.13210793}
   m_Children: []
   m_Father: {fileID: 4724146910435892}
   m_RootOrder: 8
@@ -344,8 +344,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1632068923886752}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.56882, y: 0.47000003, z: 3.40013}
-  m_LocalScale: {x: 0.25553057, y: 0.25553045, z: 0.25553057}
+  m_LocalPosition: {x: 1.1614, y: 0.24000001, z: 2.0395}
+  m_LocalScale: {x: 0.13210793, y: 0.13210785, z: 0.13210793}
   m_Children: []
   m_Father: {fileID: 4724146910435892}
   m_RootOrder: 7
@@ -594,7 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24d84ebab211654387b94bf182da589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  importance: 2000
+  importance: 1000
   size: 5.19
   secondary: 1
   primaryAffinity: 4
@@ -611,7 +611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24d84ebab211654387b94bf182da589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  importance: 2000
+  importance: 1000
   size: 5.19
   secondary: 1
   primaryAffinity: 4
@@ -662,7 +662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24d84ebab211654387b94bf182da589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  importance: 2000
+  importance: 1000
   size: 5.19
   secondary: 1
   primaryAffinity: 4
@@ -713,7 +713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24d84ebab211654387b94bf182da589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  importance: 2000
+  importance: 1000
   size: 5.19
   secondary: 1
   primaryAffinity: 4

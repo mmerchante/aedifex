@@ -247,7 +247,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         {
             GUILayout.BeginHorizontal();
             GUILayout.Label("Seed: " + ProceduralEngine.Instance.Seed);
-            GUILayout.Label("Structure: " + emotionEngine.GetCurrentStructure(ProceduralEngine.Instance.CurrentTimeNormalized).ToString());
+            GUILayout.Label("Structure: " + emotionEngine.GetStructureAtTime(ProceduralEngine.Instance.CurrentTimeNormalized).ToString());
             GUILayout.Label(currentShot.startEvent.ToString());// + " | " + EmotionEngine.FindMainEmotion(currentShot.selectedNextEventTrigger.associatedEmotion).ToString());
             GUILayout.Label(((currentShot.startEvent.timestamp - ProceduralEngine.Instance.CurrentTimeNormalized) * ProceduralEngine.Instance.Duration).ToString("0.00"));
             GUILayout.Label(emotionEngine.GetTrackByIndex(currentShot.startEvent.trackIndex).ToString());
@@ -266,13 +266,47 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         return go.AddComponent<ProceduralCamera>();
     }
 
+    protected ProceduralCameraStrategy BuildCameraStrategy(InterestPoint point, EmotionEvent e, float shotDuration)
+    {
+        List<KeyValuePair<ProceduralCameraStrategy, float>> strategies = new List<KeyValuePair<ProceduralCameraStrategy, float>>();
+
+        float normalizedEnergy = ProceduralEngine.Instance.EmotionEngine.GetSmoothEnergy(e.timestamp) / ProceduralEngine.Instance.EmotionEngine.MaxEnergy;
+
+        float overviewWeight = 0.2f;
+        float dollyWeight = 2f + (1f - normalizedEnergy);
+        float orbitWeight = .5f + normalizedEnergy;
+
+        TrackChunkData structureChunk = ProceduralEngine.Instance.EmotionEngine.GetCurrentStructureData(e.timestamp);
+        StructureType structure = ProceduralEngine.Instance.EmotionEngine.GetStructureAtTime(e.timestamp);
+        
+        switch (structure)
+        {
+            case StructureType.None:
+                break;
+            case StructureType.Sustain:
+                break;
+            case StructureType.Increasing:
+                overviewWeight += (1f - structureChunk.GetIntensity(e.timestamp)) * 100f;
+                break;
+            case StructureType.Decreasing:
+                overviewWeight += (1f - structureChunk.GetIntensity(e.timestamp)) * 100f;
+                break;
+        }
+
+        strategies.Add(new KeyValuePair<ProceduralCameraStrategy, float>(new OverviewCameraStrategy(), overviewWeight));
+        strategies.Add(new KeyValuePair<ProceduralCameraStrategy, float>(new DollyCameraStrategy(), dollyWeight));
+        strategies.Add(new KeyValuePair<ProceduralCameraStrategy, float>(new OrbitCameraStrategy(), orbitWeight));
+
+        return ProceduralEngine.SelectRandomWeighted(strategies, x => x.Value).Key;
+    }
+
     protected void SampleStrategies(List<KeyValuePair<ProceduralCameraStrategy, float>> strategies, InterestPoint point, EmotionEvent e, float shotDuration)
     {
         int samples = 4;
 
         for(int i = 0; i < samples; ++i)
         {
-            ProceduralCameraStrategy s = new OverviewCameraStrategy();
+            ProceduralCameraStrategy s = BuildCameraStrategy(point, e, shotDuration);
 
             // If the strategy failed finding a proposal, ignore it
             if (!s.Propose(e, point, shotDuration))
@@ -489,7 +523,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
             // TODO: decide if we need further modifications of cut time based on type.
             // Intensity curve should cover most I think
-            StructureType currentStructure = emotionEngine.GetCurrentStructure(e.timestamp);
+            StructureType currentStructure = emotionEngine.GetStructureAtTime(e.timestamp);
 
             switch (currentStructure)
             {

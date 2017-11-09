@@ -495,7 +495,7 @@ public class EmotionEngine
         return null;
     }
 
-    public StructureType GetCurrentStructure(float normalizedTime)
+    public StructureType GetStructureAtTime(float normalizedTime)
     {
         if (structuralTrack == null)
             return StructureType.None;

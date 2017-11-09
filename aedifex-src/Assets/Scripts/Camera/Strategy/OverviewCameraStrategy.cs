@@ -25,7 +25,7 @@ public class OverviewCameraStrategy : DollyCameraStrategy
     {
         float smoothEnergy = ProceduralEngine.Instance.EmotionEngine.GetSmoothEnergy(ProceduralEngine.Instance.CurrentTimeNormalized) / ProceduralEngine.Instance.EmotionEngine.MaxEnergy;
         float distMultiplier = 1f + smoothEnergy;
-        return FindCameraPosition(75f * distMultiplier, 100f * distMultiplier);
+        return FindCameraPosition(95f * distMultiplier, 140f * distMultiplier);
     }
 
     protected override Vector3 GetCameraDirectionBias()

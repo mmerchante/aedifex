@@ -17,7 +17,7 @@ public class DollyCameraStrategy : ProceduralCameraStrategy
         
         camera.RotationDampingTime = .1f + Mathf.Lerp(.4f, 0f, Mathf.Clamp01(expectation - 2f));
         camera.PositionDampingTime = .1f + Mathf.Lerp(.4f, 0f, Mathf.Clamp01(expectation - 2f));
-        camera.SetNoiseParameters(Mathf.Clamp(expectation - 1f, 0f, .5f), .35f);
+        camera.SetNoiseParameters(Mathf.Clamp(expectation * .4f, 0f, .25f), .75f);
 
         Vector3 boundsAxis = mainInterestPoint.AssociatedItemBounds.size.normalized;
 
@@ -32,7 +32,7 @@ public class DollyCameraStrategy : ProceduralCameraStrategy
         possibleDirections.Add(new KeyValuePair<Vector3, float>(mainInterestPoint.transform.forward * boundsAxis.z, boundsAxis.z));
 
         // Chance of doing a dolly in/out
-        float inOutDirection = ProceduralEngine.Instance.EmotionEngine.GetCurrentStructure(ProceduralEngine.Instance.CurrentTimeNormalized) == StructureType.Decreasing ? -1f : 1f;
+        float inOutDirection = ProceduralEngine.Instance.EmotionEngine.GetStructureAtTime(ProceduralEngine.Instance.CurrentTimeNormalized) == StructureType.Decreasing ? -1f : 1f;
         possibleDirections.Add(new KeyValuePair<Vector3, float>(GetForward() * inOutDirection, .5f));
 
         movementDirection = ProceduralEngine.SelectRandomWeighted(possibleDirections, x => x.Value).Key.normalized;

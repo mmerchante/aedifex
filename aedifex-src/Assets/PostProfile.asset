@@ -31,14 +31,14 @@ MonoBehaviour:
   antialiasing:
     m_Enabled: 1
     m_Settings:
-      method: 0
+      method: 1
       fxaaSettings:
         preset: 4
       taaSettings:
-        jitterSpread: 0.75
-        sharpen: 0.3
+        jitterSpread: 0.76
+        sharpen: 0.45
         stationaryBlending: 0.95
-        motionBlending: 0.85
+        motionBlending: 0.99
   ambientOcclusion:
     m_Enabled: 1
     m_Settings:
@@ -71,7 +71,7 @@ MonoBehaviour:
   depthOfField:
     m_Enabled: 1
     m_Settings:
-      focusDistance: 123.991486
+      focusDistance: 23.377962
       aperture: 2.8
       focalLength: 210
       useCameraFov: 0

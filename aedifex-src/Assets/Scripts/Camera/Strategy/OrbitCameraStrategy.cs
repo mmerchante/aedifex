@@ -22,6 +22,7 @@ public class OrbitCameraStrategy : ProceduralCameraStrategy
         endRadiusPercentage = ProceduralEngine.RandomRange(.8f, 1.2f); // A small zoom in/out
 
         this.direction = ProceduralEngine.RandomRange(0f, 1f) > .5f ? 1f : -1f;
+        camera.SetNoiseParameters(ProceduralEngine.RandomRange(0f, .2f), .75f);
     }
 
     public override bool Propose(EmotionEvent e, InterestPoint p, float shotDuration)
