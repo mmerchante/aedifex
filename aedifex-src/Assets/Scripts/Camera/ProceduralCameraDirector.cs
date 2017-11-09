@@ -286,17 +286,17 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             case StructureType.Sustain:
                 break;
             case StructureType.Increasing:
-                overviewWeight += (1f - structureChunk.GetIntensity(e.timestamp)) * 100f;
+                overviewWeight += (1f - structureChunk.GetIntensity(e.timestamp)) * 200f;
                 break;
             case StructureType.Decreasing:
-                overviewWeight += (1f - structureChunk.GetIntensity(e.timestamp)) * 100f;
+                overviewWeight += (1f - structureChunk.GetIntensity(e.timestamp)) * 200f;
                 break;
         }
 
         strategies.Add(new KeyValuePair<ProceduralCameraStrategy, float>(new OverviewCameraStrategy(), overviewWeight));
         strategies.Add(new KeyValuePair<ProceduralCameraStrategy, float>(new DollyCameraStrategy(), dollyWeight));
         strategies.Add(new KeyValuePair<ProceduralCameraStrategy, float>(new OrbitCameraStrategy(), orbitWeight));
-
+        
         return ProceduralEngine.SelectRandomWeighted(strategies, x => x.Value).Key;
     }
 

@@ -14,6 +14,8 @@ public class EmotionBehavior : MonoBehaviour
     public CoreEmotion emotionAffinity = CoreEmotion.Joy;
     public int TrackId = -1; // For now, we hardcode it, in the future the inspector should load it :)
 
+    public bool smooth = false;
+
     public float GlobalEmotionIncidence { get; protected set; } // The dot product of the affinity with the current global emotion
     public float TrackEmotionIncidence { get; protected set; } // The dot product of the affinity with the associated track, if any
 
@@ -33,7 +35,7 @@ public class EmotionBehavior : MonoBehaviour
 
     public float GetGlobalAffinityInTime(float nT)
     {
-        EmotionSpectrum globalEmotion = ProceduralEngine.Instance.EmotionEngine.GetSpectrum(nT);
+        EmotionSpectrum globalEmotion = smooth ? ProceduralEngine.Instance.EmotionEngine.GetSmoothSpectrum(nT) : ProceduralEngine.Instance.EmotionEngine.GetSpectrum(nT);
         return globalEmotion.Dot(internalSpectrum);
     }
 
@@ -48,11 +50,14 @@ public class EmotionBehavior : MonoBehaviour
     }
 
     public void Update()
-    {        
-        GlobalEmotionIncidence = GetGlobalAffinityInTime(ProceduralEngine.Instance.CurrentTimeNormalized);
-        TrackEmotionIncidence = GetTrackAffinityInTime(ProceduralEngine.Instance.CurrentTimeNormalized);
+    {
+        if (ProceduralEngine.Instance.Running)
+        {
+            GlobalEmotionIncidence = GetGlobalAffinityInTime(ProceduralEngine.Instance.CurrentTimeNormalized);
+            TrackEmotionIncidence = GetTrackAffinityInTime(ProceduralEngine.Instance.CurrentTimeNormalized);
 
-        OnUpdate();
+            OnUpdate();
+        }
     }
 
     public List<InterestPoint> GetAllInterestPoints()

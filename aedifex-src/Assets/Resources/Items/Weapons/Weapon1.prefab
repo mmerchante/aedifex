@@ -211,8 +211,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24d84ebab211654387b94bf182da589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  importance: 200
+  importance: 1000
   size: 1
+  secondary: 0
   primaryAffinity: 4
   directionality: 1
-  emotionalImpact: 0.743
+  emotionalImpact: 600

@@ -229,9 +229,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   importance: 200
   size: 1
+  secondary: 0
   primaryAffinity: 4
   directionality: 1
-  emotionalImpact: 0
+  emotionalImpact: 600
 --- !u!114 &114343477759014958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -245,9 +246,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   importance: 200
   size: 1
+  secondary: 0
   primaryAffinity: 4
   directionality: 1
-  emotionalImpact: 0
+  emotionalImpact: 600
 --- !u!114 &114570215575558144
 MonoBehaviour:
   m_ObjectHideFlags: 1

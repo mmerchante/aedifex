@@ -485,6 +485,7 @@ GameObject:
   m_Component:
   - component: {fileID: 976232397}
   - component: {fileID: 976232396}
+  - component: {fileID: 976232398}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -541,6 +542,72 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 33.368, y: -547.406, z: 10.246}
+--- !u!114 &976232398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 976232395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a6c750e964aa0944938980090cffd1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emotionAffinity: 0
+  TrackId: 9
+  smooth: 1
+  minIntensity: 2
+  maxIntensity: 2.5
+  globalMultiplier: 0.025
+  trackMultiplier: 0
+  colorGradient:
+    serializedVersion: 2
+    key0: {r: 0.2822232, g: 0.66176474, b: 0.66176474, a: 1}
+    key1: {r: 0.52156866, g: 0.62352943, b: 0.9176471, a: 1}
+    key2: {r: 0.3480753, g: 0.38998783, b: 0.5441177, a: 0}
+    key3: {r: 1, g: 0.6631846, b: 0.4044118, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 16577
+    ctime2: 38743
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
+  responseCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  smoothTime: 3
 --- !u!1 &985079111
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,7 +1284,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1956907359}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 557, y: 237, z: 0}
+  m_LocalPosition: {x: 601.5, y: 256, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1952979506}
@@ -1360,7 +1427,7 @@ Prefab:
     - target: {fileID: 224996024422003198, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 86.621
+      value: 101.384
       objectReference: {fileID: 0}
     - target: {fileID: 224645400721784466, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}
@@ -1380,12 +1447,12 @@ Prefab:
     - target: {fileID: 224693752482870578, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -557
+      value: -601.5
       objectReference: {fileID: 0}
     - target: {fileID: 224693752482870578, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 107
+      value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 224265781395243958, guid: e1884e9119c470249a730e4c246b27bf,
         type: 2}

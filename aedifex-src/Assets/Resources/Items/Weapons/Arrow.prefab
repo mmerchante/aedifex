@@ -172,4 +172,4 @@ MonoBehaviour:
   secondary: 1
   primaryAffinity: 4
   directionality: 0
-  emotionalImpact: 0.07
+  emotionalImpact: 10
