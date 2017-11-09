@@ -18,9 +18,6 @@ public struct CompositionSettings
 /// </summary>
 public class ProceduralCamera : MonoBehaviour
 {
-
-    public CompositionSettings CompositionSettings { get; protected set; }
-
     public float DutchAngle { get; set; }
 
     public float NoiseAmplitude { get; protected set; }
@@ -39,6 +36,7 @@ public class ProceduralCamera : MonoBehaviour
     private ProceduralCameraStrategy strategy;
 
     private PostProcessingProfile postProfile;
+    private float currentTime;
 
     public void Awake()
     {
@@ -51,9 +49,8 @@ public class ProceduralCamera : MonoBehaviour
     {
         this.postProfile = postProfile;
         this.strategy = strategy;
-        this.CompositionSettings = strategy.Composition;
 
-        UpdateTransform(true);
+        UpdateTransform();
     }
 
     public void SetNoiseParameters(float amplitude, float noiseFrequency)
@@ -63,7 +60,7 @@ public class ProceduralCamera : MonoBehaviour
         this.lowFreqRandom = new LowFrequencyRandom(noiseFrequency);
     }
 
-    public void LateUpdate()
+    public void Update()
     {
         if (strategy != null)
         {
@@ -82,29 +79,36 @@ public class ProceduralCamera : MonoBehaviour
     {
         lowFreqRandom.Update(Time.deltaTime);
 
+        smoothPosition.Target = EvaluateTargetPosition();
+        smoothRotation.Target = EvaluateTargetRotation();
+
+        smoothPositionNoise.Target = lowFreqRandom.GetInsideSphere() * NoiseAmplitude;
+        smoothRotationNoise.Target = Quaternion.Slerp(smoothRotationNoise.Value, lowFreqRandom.GetRotation(), NoiseAmplitude * .25f);
+
         if (force)
         {
             smoothPosition.Value = EvaluateTargetPosition();
             smoothRotation.Value = EvaluateTargetRotation();
-            smoothPositionNoise.Value = lowFreqRandom.GetInsideSphere() * NoiseAmplitude;
-            smoothRotationNoise.Value = Quaternion.Slerp(Quaternion.identity, lowFreqRandom.GetRotation(), NoiseAmplitude);
-        }
-        else
-        {
-            smoothPosition.Target = EvaluateTargetPosition();
-            smoothRotation.Target = EvaluateTargetRotation();
-            smoothPositionNoise.Target = lowFreqRandom.GetInsideSphere() * NoiseAmplitude;
-            smoothRotationNoise.Target = Quaternion.Slerp(Quaternion.identity, lowFreqRandom.GetRotation(), NoiseAmplitude);
 
-            smoothPosition.Update(PositionDampingTime, Time.deltaTime);
-            smoothRotation.Update(RotationDampingTime, Time.deltaTime);
-            smoothPositionNoise.Update(NoiseFrequency, Time.deltaTime);
-            smoothRotationNoise.Update(NoiseFrequency, Time.deltaTime);
+            smoothPositionNoise.Value = lowFreqRandom.GetInsideSphere() * NoiseAmplitude;
+            smoothRotationNoise.Value = Quaternion.Slerp(smoothRotationNoise.Value, lowFreqRandom.GetRotation(), NoiseAmplitude * .25f);
         }
+
+        // Smooth values take some time to get to speed, so lets keep the beginning linear
+        float warmup = Mathf.Clamp01(currentTime);
+
+        smoothPosition.Update(PositionDampingTime * warmup, Time.deltaTime);
+        smoothRotation.Update(RotationDampingTime * warmup, Time.deltaTime);
+
+        smoothPositionNoise.Update(NoiseFrequency * 5f * warmup, Time.deltaTime);
+        smoothRotationNoise.Update(NoiseFrequency * 5f * warmup, Time.deltaTime);
+
 
         // Noise goes over everything else
         this.transform.position = smoothPosition.Value + smoothPositionNoise.Value;
-        this.transform.rotation = smoothRotation.Value;// * smoothRotationNoise.Value;
+        this.transform.rotation = smoothRotation.Value * smoothRotationNoise.Value;
+
+        currentTime += Time.deltaTime;
     }
 
     // For DoF

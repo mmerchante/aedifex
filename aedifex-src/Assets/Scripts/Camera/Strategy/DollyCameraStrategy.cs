@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class DollyCameraStrategy : ProceduralCameraStrategy
 {
-    private Vector3 movementDirection;
+    protected Vector3 movementDirection;
     private Vector3 mainInterestAxis;
 
-    private float speed;
-    private bool keepAttention;
+    protected float speed;
+    protected bool keepAttention;
 
     protected override void OnStart()
     {
-        camera.RotationDampingTime = .1f;
-        camera.PositionDampingTime = .05f;
+        EmotionSpectrum currentEmotion = ProceduralEngine.Instance.GetCurrentEmotion();
+        float expectation = currentEmotion.Dot(new EmotionSpectrum(EmotionVector.GetCoreEmotion(CoreEmotion.Anticipation)));
+        
+        camera.RotationDampingTime = .1f + Mathf.Lerp(.4f, 0f, Mathf.Clamp01(expectation - 2f));
+        camera.PositionDampingTime = .1f + Mathf.Lerp(.4f, 0f, Mathf.Clamp01(expectation - 2f));
+        camera.SetNoiseParameters(Mathf.Clamp(expectation - 1f, 0f, .5f), .35f);
 
         Vector3 boundsAxis = mainInterestPoint.AssociatedItemBounds.size.normalized;
 
@@ -33,6 +37,13 @@ public class DollyCameraStrategy : ProceduralCameraStrategy
 
         movementDirection = ProceduralEngine.SelectRandomWeighted(possibleDirections, x => x.Value).Key.normalized;
         keepAttention = ProceduralEngine.RandomRange(0f, 1f) > .5f; // TODO: associate this with the rotation smoothness/lag, and with emotions (e.g. sadness lags, expectation keeps)
+    }
+
+    protected override bool FindCameraPosition()
+    {
+        float smoothEnergy = ProceduralEngine.Instance.EmotionEngine.GetSmoothEnergy(ProceduralEngine.Instance.CurrentTimeNormalized) / ProceduralEngine.Instance.EmotionEngine.MaxEnergy;
+        float distMultiplier = 1f + smoothEnergy;
+        return FindCameraPosition(15.5f * distMultiplier, 75f * distMultiplier);
     }
 
     public override float Evaluate(EmotionEvent e, List<InterestPoint> frustumPoints, float frustumImportanceAccumulation)
@@ -68,8 +79,7 @@ public class DollyCameraStrategy : ProceduralCameraStrategy
         EmotionSpectrum currentEmotion = ProceduralEngine.Instance.GetCurrentEmotion();
         float expectation = currentEmotion.Dot(new EmotionSpectrum(EmotionVector.GetCoreEmotion(CoreEmotion.Anticipation)));
         
-        camera.SetNoiseParameters(Mathf.Clamp(expectation * .5f, 0f, .2f), .7f);
-        CameraPosition = initialPosition + movementDirection * speed * CameraTimeNormalized;
+        CameraPosition = Vector3.Lerp(initialPosition, initialPosition + movementDirection * speed * shotDuration, CameraTimeNormalized);
 
         if (keepAttention)
             CameraRotation = GetViewDirectionForInterestPoint(mainInterestPoint, Composition);

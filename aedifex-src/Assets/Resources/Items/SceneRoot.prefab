@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4668254805976704}
   - component: {fileID: 114004307562525056}
   m_Layer: 0
-  m_Name: ArchRuins5 (Architecture, 0.7)
+  m_Name: ArchRuins5 (Architecture, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 4964471654456396}
   - component: {fileID: 114421155698942336}
   m_Layer: 0
-  m_Name: ArchRuins5 (Architecture, 0.7)
+  m_Name: ArchRuins5 (Architecture, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: 4584073274292344}
   - component: {fileID: 114557010663626136}
   m_Layer: 0
-  m_Name: ArchRuins5 (Architecture, 0.7)
+  m_Name: ArchRuins5 (Architecture, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -816,7 +816,7 @@ GameObject:
   - component: {fileID: 4354054989890664}
   - component: {fileID: 114606559555524716}
   m_Layer: 0
-  m_Name: ArchRuins5 (Architecture, 0.7)
+  m_Name: ArchRuins5 (Architecture, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -936,22 +936,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1764638440097344
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4928887188044836}
-  - component: {fileID: 114277196051998064}
-  m_Layer: 0
-  m_Name: ArchRuins6 (Architecture, 0.7)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1773117343378204
 GameObject:
   m_ObjectHideFlags: 1
@@ -962,7 +946,7 @@ GameObject:
   - component: {fileID: 4369908419695468}
   - component: {fileID: 114052692790786000}
   m_Layer: 0
-  m_Name: ArchRuins5 (Architecture, 0.7)
+  m_Name: ArchRuins5 (Architecture, 1.0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1974,23 +1958,9 @@ Transform:
   - {fileID: 4369908419695468}
   - {fileID: 4964471654456396}
   - {fileID: 4668254805976704}
-  - {fileID: 4928887188044836}
   m_Father: {fileID: 4595540701580244}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4928887188044836
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1764638440097344}
-  m_LocalRotation: {x: -0, y: 0.8307209, z: -0, w: 0.5566892}
-  m_LocalPosition: {x: 20.6, y: 57.4, z: 54.6}
-  m_LocalScale: {x: 9.115256, y: 9.115259, z: 9.115262}
-  m_Children: []
-  m_Father: {fileID: 4928623336181972}
-  m_RootOrder: 57
-  m_LocalEulerAnglesHint: {x: 0, y: 112.34601, z: 0}
 --- !u!4 &4953035758095166
 Transform:
   m_ObjectHideFlags: 1
@@ -2588,7 +2558,7 @@ MonoBehaviour:
   randomRotationAmplitude: {x: 0, y: 0, z: 0}
   randomScaleAmplitude: {x: 0, y: 0, z: 0}
   uniformScale: 1
-  probability: 0.7
+  probability: 1
 --- !u!114 &114047338013384418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2669,7 +2639,7 @@ MonoBehaviour:
   randomRotationAmplitude: {x: 0, y: 0, z: 0}
   randomScaleAmplitude: {x: 0, y: 0, z: 0}
   uniformScale: 1
-  probability: 0.7
+  probability: 1
 --- !u!114 &114085160213366782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3021,33 +2991,6 @@ MonoBehaviour:
   randomScaleAmplitude: {x: 0, y: 0.29, z: 0}
   uniformScale: 1
   probability: 1
---- !u!114 &114277196051998064
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1764638440097344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 524bff5ed89e34bc0b7c8815e88ae163, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: ArchRuins6
-  maxChildDepth: 5
-  procedural: 0
-  instanceCount: 1
-  availableProceduralVolume:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.5, y: 0.5, z: 0.5}
-  anchorPlane: 4
-  visualizeRandomness: 0
-  viewTree: 0
-  randomSnappedOrientation: 0
-  randomPositionAmplitude: {x: 0, y: 0, z: 0}
-  randomRotationAmplitude: {x: 0, y: 0, z: 0}
-  randomScaleAmplitude: {x: 0, y: 0, z: 0}
-  uniformScale: 1
-  probability: 0.7
 --- !u!114 &114290701731221812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3209,7 +3152,7 @@ MonoBehaviour:
   randomRotationAmplitude: {x: 0, y: 0, z: 0}
   randomScaleAmplitude: {x: 0, y: 0, z: 0}
   uniformScale: 1
-  probability: 0.7
+  probability: 1
 --- !u!114 &114423259818748498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3398,7 +3341,7 @@ MonoBehaviour:
   randomRotationAmplitude: {x: 0, y: 0, z: 0}
   randomScaleAmplitude: {x: 0, y: 0, z: 0}
   uniformScale: 1
-  probability: 0.7
+  probability: 1
 --- !u!114 &114573453656037992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3479,7 +3422,7 @@ MonoBehaviour:
   randomRotationAmplitude: {x: 0, y: 0, z: 0}
   randomScaleAmplitude: {x: 0, y: 0, z: 0}
   uniformScale: 1
-  probability: 0.7
+  probability: 1
 --- !u!114 &114618020448743890
 MonoBehaviour:
   m_ObjectHideFlags: 1

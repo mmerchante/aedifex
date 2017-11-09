@@ -116,7 +116,7 @@ public class ProceduralCameraStrategy
         this.mainInterestPoint = p;
         this.FrustumImportance = p.secondary ? 1f : .35f; // If the point is secondary, look towards more interesting stuff ;)
 
-        if (!FindCameraPosition(20f, 100f))
+        if (!FindCameraPosition())
             return false;
 
         Composition = ProposeComposition();
@@ -143,9 +143,9 @@ public class ProceduralCameraStrategy
         // Random rule of thirds. TODO: based on item's biggest axis, align on X or Y
         int column = Mathf.RoundToInt(ProceduralEngine.RandomRange(1f, 3f));
 
-        c.screenTarget = new Vector2(column * .25f, .5f); // The center
+        c.screenTarget = new Vector2(column * .25f + ProceduralEngine.RandomRange(-.05f, .05f), ProceduralEngine.RandomRange(.4f, .6f)); // TODO: use frustum main axis
         c.deadZoneSize = 0.01f;
-        c.fieldOfView = 45; // TODO: Find a fov that adjusts to the interest point's size
+        c.fieldOfView = ProceduralEngine.RandomRange(25f, 50f); // TODO: Find a fov that adjusts to the interest point's size
         return c;
     }
 
@@ -181,6 +181,18 @@ public class ProceduralCameraStrategy
         return lookAt;
     }
 
+    protected virtual bool FindCameraPosition()
+    {
+        float smoothEnergy = ProceduralEngine.Instance.EmotionEngine.GetSmoothEnergy(ProceduralEngine.Instance.CurrentTimeNormalized) / ProceduralEngine.Instance.EmotionEngine.MaxEnergy;
+        float distMultiplier = 1f + smoothEnergy;
+        return FindCameraPosition(7.5f * distMultiplier, 60f * distMultiplier);
+    }
+
+    protected virtual Vector3 GetCameraDirectionBias()
+    {
+        return Vector3.zero;
+    }
+
     protected virtual bool FindCameraPosition(float minDistance, float maxDistance)
     {
         Vector3 p = mainInterestPoint.transform.position;
@@ -189,10 +201,11 @@ public class ProceduralCameraStrategy
 
         for(int i = 0; i < maxTries; ++i)
         {
-            Vector3 startPoint = p + Vector3.Scale(Random.onUnitSphere * mainInterestPoint.size, mainInterestPoint.transform.lossyScale);
+            Vector3 pointScale = mainInterestPoint.transform.lossyScale * mainInterestPoint.size;
+            Vector3 startPoint = p + Vector3.Scale(Random.onUnitSphere, pointScale);
 
             // If the interest point is very directional, consider that for the ray direction
-            Vector3 biasedDirection = (Random.onUnitSphere + mainInterestPoint.transform.forward * mainInterestPoint.directionality * 6f).normalized;
+            Vector3 biasedDirection = (Random.onUnitSphere + mainInterestPoint.transform.forward * mainInterestPoint.directionality * 6f + GetCameraDirectionBias()).normalized;
 
             Ray ray = new Ray(startPoint, biasedDirection);
             RaycastHit hit;
@@ -205,7 +218,7 @@ public class ProceduralCameraStrategy
                 if(hit.distance > minDistance)
                 {
                     float d = Mathf.Clamp(hit.distance * .75f, minDistance, maxDistance);
-                    CameraPosition = ray.origin + ray.direction * ProceduralEngine.RandomRange(minDistance, d);
+                    CameraPosition = ray.origin + ray.direction * (ProceduralEngine.RandomRange(minDistance, d) + pointScale.magnitude * 2f); // Make sure we're outside the sphere
                     firstPass = true;
                 }
             }

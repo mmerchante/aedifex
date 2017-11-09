@@ -252,6 +252,11 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
             GUILayout.Label(((currentShot.startEvent.timestamp - ProceduralEngine.Instance.CurrentTimeNormalized) * ProceduralEngine.Instance.Duration).ToString("0.00"));
             GUILayout.Label(emotionEngine.GetTrackByIndex(currentShot.startEvent.trackIndex).ToString());
             GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            if (currentShot.strategy != null)
+                GUILayout.Label("Camera: " + currentShot.strategy.GetType());
+            GUILayout.EndHorizontal();
         }
     }
 
@@ -267,7 +272,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
         for(int i = 0; i < samples; ++i)
         {
-            ProceduralCameraStrategy s = new DollyCameraStrategy();
+            ProceduralCameraStrategy s = new OverviewCameraStrategy();
 
             // If the strategy failed finding a proposal, ignore it
             if (!s.Propose(e, point, shotDuration))
@@ -285,7 +290,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
     protected virtual InterestPoint FindInterestPoint(EmotionSpectrum globalEmotion, float normalizedTime)
     {
-        int tries = 8;
+        int tries = 4;
 
         for (int i = 0; i < tries; ++i)
         {
@@ -511,38 +516,18 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         range.maxCutTime /= ProceduralEngine.Instance.Duration;
         return range;
     }
+    public void LateUpdate()
+    {
+        UpdateTransform();
+    }
 
     protected void UpdateTransform()
     {
-        //float transitionTime = 0f;
-
-        //switch (currentCut.type)
-        //{
-        //    case TransitionType.Cut:
-        //        transitionTime = 0f;
-        //        break;
-        //    case TransitionType.Blend:
-        //        transitionTime = .5f;  // TODO: Procedural smooth time
-        //        break;
-        //}
-
         if (currentShot.valid)
         {
             this.transform.position = currentShot.selectedCamera.transform.position;
             this.transform.rotation = currentShot.selectedCamera.transform.rotation;
         }
-
-        //if (currentCamera)
-        //{
-        //    smoothPosition.Target = currentCamera.EvaluateTargetPosition();
-        //    smoothRotation.Target = currentCamera.EvaluateTargetRotation();
-        //}
-
-        //smoothPosition.Update(smoothTime, Time.deltaTime);
-        //smoothRotation.Update(smoothTime, Time.deltaTime);
-
-        //this.transform.position = smoothPosition.Value;
-        //this.transform.rotation = smoothRotation.Value;
     }
     
     public void UpdateCamera(float t)
@@ -578,8 +563,6 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
                 Debug.Log("Failed finding a shot; repeating...");
             }
         }
-
-        UpdateTransform();
     }
 
     public void OnEventDispatch(EmotionEvent e)

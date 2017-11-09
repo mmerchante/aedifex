@@ -101,6 +101,7 @@ public class InterestPoint : MonoBehaviour
             return 0f;
 
         float heuristic = importance;
+        heuristic += emotionalImpact * currentEmotion.Dot(internalSpectrum);
 
         // If this is the primary interest point, we want to make sure it is 
         // close to other interesting places, so biasing the importance with a heatmap is useful.
@@ -109,8 +110,6 @@ public class InterestPoint : MonoBehaviour
             // Interesting: while being on an important place is good, we must not make unimportant elements important.
             // Thus we need to be careful with this multiplier
             heuristic += .35f * ProceduralCameraDirector.Instance.GetGrid().GetAverageImportanceForPosition(transform.position);
-            
-            heuristic += emotionalImpact * currentEmotion.Dot(internalSpectrum);
 
             // This is somewhat of a hack. The correct idea is to
             // predict if this state is going to be triggered, but that is not trivial
@@ -125,6 +124,15 @@ public class InterestPoint : MonoBehaviour
             }
         }
 
+        // Let's try to favor small or big objects based on general flow
+        Vector3 worldScale = transform.lossyScale * size;
+        float worldSizeNormalized = Mathf.Min(worldScale.magnitude, 200f) / 200f;
+        float smoothEnergy = ProceduralEngine.Instance.EmotionEngine.GetSmoothEnergy(normalizedTime) / ProceduralEngine.Instance.EmotionEngine.MaxEnergy;
+
+        // We assume smoothEnergy to be the normalized size we favor
+        float sizeTargetOffset = Mathf.Abs(smoothEnergy - worldSizeNormalized) * 2f;
+        heuristic = Mathf.Lerp(heuristic * 2f, heuristic, sizeTargetOffset);
+        
         // TODO: ideas:
         // - Is it being lit right now? Or in shadow?
         //      - If it is reflective/specular, where would be a good place to look at it from?

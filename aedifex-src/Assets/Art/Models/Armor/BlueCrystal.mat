@@ -65,10 +65,12 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
+    - _Cutout: 0
     - _DetailNormalMapScale: 1
-    - _Dissolve: 0.54
-    - _DissolveGlow: 5.5
-    - _DissolveGlowSize: 0.12
+    - _Dissolve: 0.09
+    - _DissolveGlow: 5.4
+    - _DissolveGlowSize: 0.3
+    - _DissolveScale: 1.18
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.57
