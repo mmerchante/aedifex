@@ -9,13 +9,15 @@
         _DissolveColor ("Dissolve Color", Color) = (1,1,1,1)
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
+        _Cutout ("Cutout", Range(0,1)) = 0.0
+        _DissolveScale ("Dissolve Scale", Float) = 1.0
 	}
 	SubShader {
 		Tags { "RenderType"="Transparent" "Queue"="Transparent" }
 		LOD 200
 		
 		CGPROGRAM
-		#pragma surface surf Standard fullforwardshadows alpha:blend
+		#pragma surface surf Standard alphatest:_Cutout
 		#pragma target 5.0
 
 		sampler2D _MainTex;
@@ -34,6 +36,7 @@
         float _DissolveGlow;
         float4 _DissolveColor;
 		float _DissolveGlowSize;
+		float _DissolveScale;
 
 		UNITY_INSTANCING_CBUFFER_START(Props)
 		UNITY_INSTANCING_CBUFFER_END
@@ -44,7 +47,7 @@
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
 
-            float2 dissolveUV = (IN.worldPos.xz + IN.worldPos.yx) * .1;
+            float2 dissolveUV = (IN.worldPos.xz + IN.worldPos.yx) * .1 * _DissolveScale;
 
             float a = tex2D (_DissolveTex, dissolveUV * 4.0 + _Time.xx).r;
             a = tex2D (_DissolveTex, dissolveUV * 2.0 + a * .5 + _Time.xx * 4.0).r;

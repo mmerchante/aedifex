@@ -446,8 +446,8 @@ public class EmotionEngine
 
     protected void PrecomputeExtremes()
     {
-        float minTime = 0f;
-        float maxTime = 0f;
+        //float minTime = 0f;
+        //float maxTime = 0f;
         float min = float.MaxValue;
         float max = 0f;
 
@@ -462,13 +462,13 @@ public class EmotionEngine
             if (intensity < min)
             {
                 min = intensity;
-                minTime = t;
+                //minTime = t;
             }
 
             if(intensity > max)
             {
                 max = intensity;
-                maxTime = t;
+                //maxTime = t;
             }
         }
 

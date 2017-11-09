@@ -116,7 +116,7 @@ public class ProceduralCameraStrategy
         this.mainInterestPoint = p;
         this.FrustumImportance = p.secondary ? 1f : .35f; // If the point is secondary, look towards more interesting stuff ;)
 
-        if (!FindCameraPosition(10f, 45f))
+        if (!FindCameraPosition(20f, 100f))
             return false;
 
         Composition = ProposeComposition();

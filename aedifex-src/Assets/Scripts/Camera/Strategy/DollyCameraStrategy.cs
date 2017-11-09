@@ -44,7 +44,7 @@ public class DollyCameraStrategy : ProceduralCameraStrategy
         Matrix4x4 viewMatrix = GetViewMatrix();
 
         foreach(InterestPoint p in frustumPoints)
-            vsAvg += viewMatrix.MultiplyPoint(p.transform.position);
+            vsAvg += viewMatrix.MultiplyPoint(p.transform.position) * p.importance; // Guide it to most interesting things ;)
 
         // View space average, normalized, is essentially the direction
         // from the camera center to its ws avg
@@ -59,7 +59,7 @@ public class DollyCameraStrategy : ProceduralCameraStrategy
 
     public override bool Propose(EmotionEvent e, InterestPoint p, float shotDuration)
     {
-        speed = ProceduralEngine.Instance.EmotionEngine.GetSpectrum(e.timestamp).GetTotalEnergy() * 2f;
+        speed = ProceduralEngine.Instance.EmotionEngine.GetSmoothEnergy(e.timestamp) * 4f / shotDuration;
         return base.Propose(e, p, shotDuration);
     }
 

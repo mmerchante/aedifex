@@ -225,7 +225,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         switch (track.category)
         {
             case TrackCategory.MainMelody:
-                p *= 5f;
+                p *= 4f;
                 break;
             case TrackCategory.Rythm:
                 p *= 1.5f;
@@ -285,7 +285,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
     protected virtual InterestPoint FindInterestPoint(EmotionSpectrum globalEmotion, float normalizedTime)
     {
-        int tries = 16;
+        int tries = 8;
 
         for (int i = 0; i < tries; ++i)
         {
@@ -376,10 +376,7 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
 
         if (selectedGroup == null)
             selectedGroup = ProceduralEngine.SelectRandomWeighted(searchEvents, x => x.GetPriority());
-
-        if(structural)
-            Debug.Log("Structural!");
-
+        
         // We found a subset of interesting events, now we can pick something in here
         if (selectedGroup != null && selectedGroup.events.Count > 0)
         {
@@ -433,8 +430,8 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
                 range.maxCutTime = ProceduralEngine.RandomRange(4f, 6f);
                 break;
             case CoreEmotion.Surprise:
-                range.minCutTime = ProceduralEngine.RandomRange(1f, 1.5f);
-                range.maxCutTime = ProceduralEngine.RandomRange(1.5f, 2f);
+                range.minCutTime = ProceduralEngine.RandomRange(1.5f, 2f);
+                range.maxCutTime = ProceduralEngine.RandomRange(2f, 4f);
                 break;
             case CoreEmotion.Sadness:
                 range.minCutTime = ProceduralEngine.RandomRange(1f, 1.5f);
@@ -449,8 +446,8 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
                 range.maxCutTime = ProceduralEngine.RandomRange(1f, 3f);
                 break;
             case CoreEmotion.Anticipation:
-                range.minCutTime = ProceduralEngine.RandomRange(1.5f, 2f);
-                range.maxCutTime = ProceduralEngine.RandomRange(3f, 4f);
+                range.minCutTime = ProceduralEngine.RandomRange(2f,4f);
+                range.maxCutTime = ProceduralEngine.RandomRange(4f, 5f);
                 break;
         }
 
@@ -547,19 +544,11 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
         //this.transform.position = smoothPosition.Value;
         //this.transform.rotation = smoothRotation.Value;
     }
-
-    private void UpdateInterestPoints()
-    {
-        //this.interestPoints = interestPoints.OrderByDescending(x => x.EvaluateHeuristic(true)).ToList();
-    }
-
+    
     public void UpdateCamera(float t)
     {
         if (!currentShot.valid)
             return;
-
-        UpdateInterestPoints();
-        UpdateTransform();
 
         CompleteShot(ref nextShot);
 
@@ -589,6 +578,8 @@ public class ProceduralCameraDirector : MonoBehaviorSingleton<ProceduralCameraDi
                 Debug.Log("Failed finding a shot; repeating...");
             }
         }
+
+        UpdateTransform();
     }
 
     public void OnEventDispatch(EmotionEvent e)
