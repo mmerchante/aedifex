@@ -118,6 +118,9 @@ public class InterestPoint : MonoBehaviour
             {
                 float stateEmotionResponse = stateMachine.GetGlobalAffinityInTime(normalizedTime) + stateMachine.GetTrackAffinityInTime(normalizedTime);
                 heuristic += emotionalImpact * stateEmotionResponse;
+                
+                if (stateMachine.CurrentState == EmotionStateMachineState.State.Enabled)
+                    heuristic *= 2f;
             }
         }
 
