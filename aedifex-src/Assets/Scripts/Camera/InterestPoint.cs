@@ -15,7 +15,6 @@ public class InterestPoint : MonoBehaviour
 
     [Range (0f, 1f)]
     public float directionality = 0f; // How directional this object in its forward axis
-
     public float emotionalImpact = 0f; // How much the primary affinity affects the interest
 
     public bool IsSelected { get; set; }
@@ -25,6 +24,8 @@ public class InterestPoint : MonoBehaviour
 
     private static bool DirectorNotAvailable = false;
     private EmotionSpectrum internalSpectrum;
+
+    private EmotionStateMachineState stateMachine;
     
     public void Awake()
     {
@@ -37,6 +38,11 @@ public class InterestPoint : MonoBehaviour
             ProceduralCameraDirector.Instance.RegisterInterestPoint(this);
         else
             DirectorNotAvailable = true;
+    }
+
+    public void AssociateESMState(EmotionStateMachineState esm)
+    {
+        this.stateMachine = esm;
     }
 
     public void AssociateItemBounds(Transform itemRoot, Bounds b)
@@ -86,11 +92,8 @@ public class InterestPoint : MonoBehaviour
     /// This heuristic is useful for two cases:
     /// - Trying to find the main interest point
     /// - Trying to evaluate different views for the same interest point (shot heuristic)
-    /// Because it is really hard to explore the space of possibilities, this heuristic will let us
-    /// sample points in solution space and make stochastic decisions.
-    /// Note: this heuristic must be deterministic!
     /// </summary>
-    public float EvaluateHeuristic(EmotionSpectrum currentEmotion, bool primaryInterest = false)
+    public float EvaluateHeuristic(EmotionSpectrum currentEmotion, float normalizedTime, bool primaryInterest = false)
     {
         // If this GO is inactive just ignore this IP
         // This is useful for state machines
@@ -108,6 +111,14 @@ public class InterestPoint : MonoBehaviour
             heuristic += .35f * ProceduralCameraDirector.Instance.GetGrid().GetAverageImportanceForPosition(transform.position);
             
             heuristic += emotionalImpact * currentEmotion.Dot(internalSpectrum);
+
+            // This is somewhat of a hack. The correct idea is to
+            // predict if this state is going to be triggered, but that is not trivial
+            if(stateMachine != null)
+            {
+                float stateEmotionResponse = stateMachine.GetGlobalAffinityInTime(normalizedTime) + stateMachine.GetTrackAffinityInTime(normalizedTime);
+                heuristic += emotionalImpact * stateEmotionResponse;
+            }
         }
 
         // TODO: ideas:

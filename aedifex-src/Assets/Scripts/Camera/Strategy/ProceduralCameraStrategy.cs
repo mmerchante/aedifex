@@ -185,7 +185,7 @@ public class ProceduralCameraStrategy
     {
         Vector3 p = mainInterestPoint.transform.position;
         
-        int maxTries = 12;
+        int maxTries = 8;
 
         for(int i = 0; i < maxTries; ++i)
         {

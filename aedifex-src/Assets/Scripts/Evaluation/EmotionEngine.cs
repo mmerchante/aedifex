@@ -526,9 +526,22 @@ public class EmotionEngine
     {
         EmotionSpectrum result = new EmotionSpectrum();
 
-        foreach (TrackChunkData chunk in track.chunks)
+        int lastChunkIndex = 0;
+
+        for (int i = 0; i < track.chunks.Count; ++i)
+        {
+            TrackChunkData chunk = track.chunks[i];
+
             if (chunk.start <= normalizedTime && chunk.end >= normalizedTime)
+            {
                 result += chunk.Evaluate(normalizedTime);
+                lastChunkIndex = i;
+            }
+        }
+
+        // First chunk is super important!
+        if (lastChunkIndex == 0)
+            result *= 2f;
 
         return result;
     }

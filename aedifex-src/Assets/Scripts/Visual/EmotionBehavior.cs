@@ -18,12 +18,12 @@ public class EmotionBehavior : MonoBehaviour
     public float TrackEmotionIncidence { get; protected set; } // The dot product of the affinity with the associated track, if any
 
     private EmotionSpectrum internalSpectrum = null;
-    private List<InterestPoint> interestPoints = new List<InterestPoint>();
+    protected List<InterestPoint> interestPoints = new List<InterestPoint>();
 
     public void Awake()
     {
+        this.internalSpectrum = new EmotionSpectrum(EmotionVector.GetCoreEmotion(emotionAffinity));
         this.interestPoints = new List<InterestPoint>(GetComponentsInChildren<InterestPoint>());
-        //this.interestPoints = this.interestPoints.OrderByDescending(x => x.importance).ToList();
         OnAwake();
     }
 
@@ -31,21 +31,26 @@ public class EmotionBehavior : MonoBehaviour
     {
     }
 
-    public void Update()
+    public float GetGlobalAffinityInTime(float nT)
     {
-        if (internalSpectrum == null)
-            internalSpectrum = new EmotionSpectrum(EmotionVector.GetCoreEmotion(emotionAffinity));
+        EmotionSpectrum globalEmotion = ProceduralEngine.Instance.EmotionEngine.GetSpectrum(nT);
+        return globalEmotion.Dot(internalSpectrum);
+    }
 
-        EmotionSpectrum globalEmotion = ProceduralEngine.Instance.GetCurrentEmotion();
-        GlobalEmotionIncidence = globalEmotion.Dot(internalSpectrum);
-        
+    public float GetTrackAffinityInTime(float nT)
+    {
         TrackData track = ProceduralEngine.Instance.EmotionEngine.GetTrackById(TrackId);
 
         if (track != null)
-        {
-            TrackEmotionIncidence = internalSpectrum.Dot(ProceduralEngine.Instance.EmotionEngine.EvaluateTrack(track, ProceduralEngine.Instance.CurrentTimeNormalized));
-            Debug.Log(TrackEmotionIncidence + ", " + track);
-        }
+            return internalSpectrum.Dot(ProceduralEngine.Instance.EmotionEngine.EvaluateTrack(track, nT));
+
+        return 0f;
+    }
+
+    public void Update()
+    {        
+        GlobalEmotionIncidence = GetGlobalAffinityInTime(ProceduralEngine.Instance.CurrentTimeNormalized);
+        TrackEmotionIncidence = GetTrackAffinityInTime(ProceduralEngine.Instance.CurrentTimeNormalized);
 
         OnUpdate();
     }

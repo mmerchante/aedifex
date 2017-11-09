@@ -27,6 +27,9 @@ public class EmotionStateMachineState : EmotionBehavior
     {
         StateTime = 0f;
         SwitchToState(State.Disabled, true);
+
+        foreach (InterestPoint p in interestPoints)
+            p.AssociateESMState(this);
     }
 
     public void ForceShow()
